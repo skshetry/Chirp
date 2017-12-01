@@ -1,0 +1,9 @@
+# Local development dependencies go here
+-r common.txt
+
+django-debug-toolbar
+# improved REPL
+ipdb
+ipython
+coverage
+prospector

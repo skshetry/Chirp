@@ -1,0 +1,10 @@
+# Pro-tip: Try not to put anything here. Avoid dependencies in
+#	production that aren't in development.
+-r common.txt
+
+
+
+# WSGI Handler
+# ------------------------------------------------
+gevent
+gunicorn

@@ -1,0 +1,4 @@
+# Test dependencies go here.
+-r common.txt
+
+coverage==4.4.2

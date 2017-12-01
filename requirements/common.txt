@@ -1,0 +1,17 @@
+django
+
+# Configuration
+django-environ
+
+
+# Time zones support
+pytz
+
+# Python-PostgreSQL Database Adapter
+psycopg2
+
+# Images
+Pillow
+
+# Password storage
+argon2-cffi
