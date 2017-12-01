@@ -13,7 +13,7 @@ EMAIL_HOST = 'localhost'
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
                     default='django.core.mail.backends.console.EmailBackend')
 DATABASES={
-       'default': {  #moving to postgres
+    'default': {  #moving to postgres
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'chirp',
         'USER': 'skshetry',
