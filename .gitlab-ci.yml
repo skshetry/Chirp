@@ -46,5 +46,5 @@ test:
   variables:
     DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
   script:
-  - coverage run manage.py test --settings config.settings.testing
-  - coverage report --include="apps"
+  - coverage run --source='apps' manage.py test --settings config.settings.testing
+  - coverage report
