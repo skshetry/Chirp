@@ -103,7 +103,8 @@
             "args": [
                 "runserver",
                 "--noreload",
-                "--nothreading"
+                "--nothreading",
+                "--settings=config.settings.local"
             ],
             "env": {},
             "envFile": "${workspaceRoot}/.env",
