@@ -67,12 +67,12 @@ LOGGING = {
             'propagate': False,
         },
         'raven': {
-            'level': 'DEBUG',
+            'level': 'ERROR',
             'handlers': ['console', 'sentry'],
             'propagate': False,
         },
         'sentry.errors': {
-            'level': 'DEBUG',
+            'level': 'ERROR',
             'handlers': ['console', ],
             'propagate': False,
         },
