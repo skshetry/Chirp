@@ -48,3 +48,13 @@ test:
   script:
   - coverage run --source='apps' manage.py test --settings config.settings.testing
   - coverage report 
+
+staging:
+  type: deploy
+  script:
+  - apt-get update -qy
+  - apt-get install -y ruby ruby-dev rubygems-integration
+  - gem install dpl
+  - dpl --provider=heroku --app=projectchirp --api-key=$HEROKU_STAGING_API_KEY
+  only:
+  - master
