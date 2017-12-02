@@ -12,4 +12,5 @@ def test_view(request):
         [os.environ.get('DJANGO_ADMINS_EMAIL_ADDRESS',default='acb@pahcjsdjsdkskssdskdskdjskdjsdsdskdjskdksjkdksexample.com')],
         fail_silently=False,
     )
+    #email failing?
     return render(request, 'a.html')
