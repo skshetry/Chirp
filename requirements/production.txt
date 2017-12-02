@@ -8,4 +8,4 @@
 # ------------------------------------------------
 gevent
 gunicorn
-d
+django-backblazeb2-storage

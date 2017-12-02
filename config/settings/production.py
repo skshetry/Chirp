@@ -127,3 +127,9 @@ ADMIN_URL = env('DJANGO_ADMIN_URL', default=ADMIN_URL)
 
 # Your production stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
+BACKBLAZEB2_ACCOUNT_ID = env('DJANGO_BACKBLAZE_B2_ACCOUNT_ID')
+BACKBLAZEB2_APP_KEY = env('DJANGO_BACKBLAZE_B2_APP_KEY')
+BACKBLAZEB2_BUCKET_NAME = env('DJANGO_BACKBLAZE_B2_BUCKET_NAME')
+
+DEFAULT_FILE_STORAGE = 'b2_storage.storage.B2Storage'
+STATICFILES_STORAGE = 'b2_storage.storage.B2Storage'
