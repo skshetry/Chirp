@@ -24,13 +24,24 @@ from .common import *
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Raises ImproperlyConfigured exception if DJANGO_SECRET_KEY not in os.environ
 SECRET_KEY = env('DJANGO_SECRET_KEY')
+# raven sentry client
+# See https://docs.sentry.io/clients/python/integrations/django/
+INSTALLED_APPS += ['gunicorn', 'raven.contrib.django.raven_compat',]
+RAVEN_MIDDLEWARE = [
+    'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
+    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
+      ]
+MIDDLEWARE = RAVEN_MIDDLEWARE + MIDDLEWARE
+
+# Sentry Configuration
+SENTRY_DSN = env('DJANGO_SENTRY_DSN')
 SENTRY_CLIENT = env('DJANGO_SENTRY_CLIENT', default='raven.contrib.django.raven_compat.DjangoClient')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
     'root': {
         'level': 'WARNING',
-        'handlers': ['sentry'],
+        'handlers': ['sentry', ],
     },
     'formatters': {
         'verbose': {
@@ -40,9 +51,8 @@ LOGGING = {
     },
     'handlers': {
         'sentry': {
-            'level': 'ERROR', # To capture more than ERROR, change to WARNING, INFO, etc.
+            'level': 'ERROR',
             'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-            'tags': {'custom-tag': 'x'},
         },
         'console': {
             'level': 'DEBUG',
@@ -53,33 +63,33 @@ LOGGING = {
     'loggers': {
         'django.db.backends': {
             'level': 'ERROR',
-            'handlers': ['console'],
+            'handlers': ['console', ],
             'propagate': False,
         },
         'raven': {
             'level': 'DEBUG',
-            'handlers': ['console','sentry',],
+            'handlers': ['console', 'sentry'],
             'propagate': False,
         },
         'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console', ],
+            'propagate': False,
+        },
+        'django.security.DisallowedHost': {
             'level': 'ERROR',
-            'handlers': ['console','sentry',],
+            'handlers': ['console', 'sentry', ],
             'propagate': False,
         },
     },
+}
+RAVEN_CONFIG = {
+    'DSN': SENTRY_DSN,
 }
 
 # This ensures that Django will be able to detect a secure connection
 # properly on Heroku.
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-# raven sentry client
-# See https://docs.sentry.io/clients/python/integrations/django/
-INSTALLED_APPS += [ ]
-RAVEN_MIDDLEWARE = [
-    'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
-    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
-      ]
-MIDDLEWARE = RAVEN_MIDDLEWARE + MIDDLEWARE
 
 
 # SECURITY CONFIGURATION
@@ -108,14 +118,8 @@ X_FRAME_OPTIONS = 'DENY'
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['example.com', ])
 # END SITE CONFIGURATION
 
-INSTALLED_APPS += ['gunicorn', 'raven.contrib.django.raven_compat',]
 
-RAVEN_CONFIG = {
-    'dsn': env('DJANGO_SENTRY_DSN', default='nothing@sentry.io/123'),
-    # If you are using git, you can also automatically configure the
-    # release based on the git info.
-    'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
-}
+
 
 # STORAGE CONFIGURATION
 # ------------------------------------------------------------------------------

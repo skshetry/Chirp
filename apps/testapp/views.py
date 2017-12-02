@@ -4,7 +4,7 @@ from django.conf import settings
 import logging
 import os
 
-logger=logging.getLogger('sentry.errors')
+logger=logging.getLogger('raven')
 
 # Create your views here.
 def test_view(request):
