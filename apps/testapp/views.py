@@ -5,12 +5,6 @@ import os
 
 # Create your views here.
 def test_view(request):
-    send_mail(
-        'Subject here',
-        'Here is the message.',
-        'from@example.com',
-        [os.environ.get('DJANGO_ADMINS_EMAIL_ADDRESS',default='acb@pahcjsdjsdkskssdskdskdjskdjsdsdskdjskdksjkdksexample.com')],
-        fail_silently=False,
-    )
+    send_mail('Subject here','Here is the message.','from@example.com',[os.environ.get('DJANGO_ADMINS_EMAIL_ADDRESS',default='acb@pahcjsdjsdkskssdskdskdjskdjsdsdskdjskdksjkdksexample.com')],fail_silently=False,)
     #email failing?
     return render(request, 'a.html')

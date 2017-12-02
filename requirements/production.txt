@@ -9,3 +9,4 @@
 gevent
 gunicorn
 django-backblazeb2-storage
+django-sendgrid-v5
