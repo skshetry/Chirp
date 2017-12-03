@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 import logging
 import os
+from .models import Images, ImageUploadForm
 
 logger=logging.getLogger('raven')
 
@@ -12,3 +13,15 @@ def test_view(request):
     #email failing?
     logger.error("Error occured.")
     return render(request, 'a.html')
+
+def upload_view(request):
+    all_images = None
+    if request.method == 'GET':
+        imageuploadform = ImageUploadForm()
+        return render(request, 'b.html', {'form':imageuploadform, 'all_images':all_images})
+    elif request.method == 'POST':
+        imageuploadform = ImageUploadForm(request.POST, request.FILES)
+        if imageuploadform.is_valid:
+            imageuploadform.save()
+            all_images = Images.objects.all()
+    return render(request, 'b.html', {'form':imageuploadform, 'all_images':all_images})
