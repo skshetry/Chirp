@@ -15,5 +15,5 @@ Pillow
 
 # Password storage
 argon2-cffi
-django-debug-toolbar
+
 requests
