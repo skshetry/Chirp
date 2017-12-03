@@ -38,51 +38,42 @@ SENTRY_DSN = env('DJANGO_SENTRY_DSN')
 SENTRY_CLIENT = env('DJANGO_SENTRY_CLIENT', default='raven.contrib.django.raven_compat.DjangoClient')
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
-    'root': {
-        'level': 'WARNING',
-        'handlers': ['sentry', ],
-    },
+    'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s '
-                      '%(process)d %(thread)d %(message)s'
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
         },
     },
     'handlers': {
         'sentry': {
-            'level': 'ERROR',
+            'level': 'WARNING',
             'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
         },
         'console': {
-            'level': 'DEBUG',
+            'level': 'WARNING',
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
         }
     },
     'loggers': {
-        'django.db.backends': {
-            'level': 'ERROR',
-            'handlers': ['console', ],
-            'propagate': False,
+        'django': {
+            'handlers': ['sentry'],
+            'level': 'WARNING',
+            'propagate': True,
         },
         'raven': {
-            'level': 'ERROR',
-            'handlers': ['console', 'sentry'],
+            'level': 'WARNING',
+            'handlers': ['sentry'],
             'propagate': False,
         },
         'sentry.errors': {
-            'level': 'ERROR',
-            'handlers': ['console', ],
+            'level': 'WARNING',
+            'handlers': ['sentry'],
             'propagate': False,
         },
-        'django.security.DisallowedHost': {
-            'level': 'ERROR',
-            'handlers': ['console', 'sentry', ],
-            'propagate': False,
-        },
-    },
+    }
 }
+
 RAVEN_CONFIG = {
     'DSN': SENTRY_DSN,
 }
