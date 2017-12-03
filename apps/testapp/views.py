@@ -15,12 +15,11 @@ def test_view(request):
     return render(request, 'a.html')
 
 def upload_view(request):
-    all_images = None
+    all_images = all_images = Images.objects.all()
     if request.method == 'GET':
         imageuploadform = ImageUploadForm()
     elif request.method == 'POST':
         imageuploadform = ImageUploadForm(request.POST, request.FILES)
         if imageuploadform.is_valid:
             imageuploadform.save()
-            all_images = Images.objects.all()
     return render(request, 'b.html', {'form':imageuploadform, 'all_images':all_images})
