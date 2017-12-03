@@ -18,7 +18,6 @@ def upload_view(request):
     all_images = None
     if request.method == 'GET':
         imageuploadform = ImageUploadForm()
-        return render(request, 'b.html', {'form':imageuploadform, 'all_images':all_images})
     elif request.method == 'POST':
         imageuploadform = ImageUploadForm(request.POST, request.FILES)
         if imageuploadform.is_valid:
