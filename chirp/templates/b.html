@@ -1,0 +1,20 @@
+<html>
+    <head>
+{% load static %}
+<link rel="stylesheet" href="{%static 'css/a.css'%}">
+</head>
+    <body>
+        <form action="{% url 'upload_pic' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" name="upload">
+        </form>
+{% if all_images %}
+    {% for image in all_images %}
+        <p>
+            <img src="{{ image.file.url }}" />
+        </p>
+    {% endfor %}
+{% endif %}
+    </body>
+</html>
