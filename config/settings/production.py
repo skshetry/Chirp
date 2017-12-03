@@ -15,7 +15,7 @@ Production settings for test project.
 import logging
 import os
 import raven
-import b2_storage
+
 
 from .common import *
 
@@ -195,5 +195,5 @@ EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = env('DJANGO_SENDGRID_EMAIL_PASSWORD')
 
 
-DEFAULT_FILE_STORAGE = b2_storage.storage.B2Storage(bucket_name='chirpmedia')
-STATICFILES_STORAGE = 'b2_storage.storage.B2Storage'
+DEFAULT_FILE_STORAGE = 'config.storage.MediaStorage'
+STATICFILES_STORAGE = 'config.storage.StaticStorage'
