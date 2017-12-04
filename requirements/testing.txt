@@ -1,5 +1,9 @@
 # Test dependencies go here.
 -r common.txt
 
-coverage
-django-debug-toolbar
+#Coverage
+coverage==4.4.2
+
+#ddt
+django-debug-toolbar==1.9.1
+sqlparse==0.2.4

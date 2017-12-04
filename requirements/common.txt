@@ -1,19 +1,15 @@
-django
+Django==1.11.7
 
 # Configuration
-django-environ
-
+django-environ==0.4.4
+six==1.11.0
 
 # Time zones support
-pytz
+pytz==2017.3
 
 # Python-PostgreSQL Database Adapter
-psycopg2
+psycopg2==2.7.3.2
 
 # Images
-Pillow
-
-# Password storage
-argon2-cffi
-
-requests
+Pillow==4.3.0
+olefile==0.44

@@ -2,12 +2,35 @@
 #	production that aren't in development.
 -r common.txt
 
+# Password storage
+argon2-cffi==16.3.0
+cffi==1.11.2
+pycparser==2.18
 
+certifi==2017.11.5
+
+chardet==3.0.4
+cssselect==1.0.1
+d==0.2.2
+
+django-backblazeb2-storage==0.4
+django-sendgrid-v5==0.6.84
+sendgrid==5.3.0
+
+Pygments==2.2.0
+pyquery==1.3.0
+python-http-client==3.0.0
 
 # WSGI Handler
 # ------------------------------------------------
-gevent
-gunicorn
-django-backblazeb2-storage
-django-sendgrid-v5
-raven
+gevent==1.2.2
+greenlet==0.4.12
+gunicorn==19.7.1
+idna==2.6
+lxml==4.1.1
+Markdown==2.6.9
+
+raven==6.3.0
+
+requests==2.18.4
+urllib3==1.22
