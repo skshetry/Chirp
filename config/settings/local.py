@@ -1,5 +1,15 @@
 from .common import *
 
+
+# Operating System Environment variables have precedence over variables defined in the .env file,
+# that is to say variables from the .env files will only be used if not defined
+# as environment variables.
+env_file = str(ROOT_DIR.path('.env'))
+print('Loading : {}'.format(env_file))
+env.read_env(env_file)
+print('The .env file has been loaded. See local.py for more information')
+
+
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 
@@ -12,12 +22,13 @@ EMAIL_PORT = 1025
 EMAIL_HOST = 'localhost'
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
                     default='django.core.mail.backends.console.EmailBackend')
+
 DATABASES={
     'default': {  #moving to postgres
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'chirp',
-        'USER': 'skshetry',
-        'PASSWORD': 'saugat',
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '5432',
     },

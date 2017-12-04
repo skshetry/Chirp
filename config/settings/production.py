@@ -10,8 +10,6 @@ Production settings for test project.
 
 
 """
-
-
 import logging
 import os
 import raven
@@ -24,14 +22,18 @@ from .common import *
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Raises ImproperlyConfigured exception if DJANGO_SECRET_KEY not in os.environ
 SECRET_KEY = env('DJANGO_SECRET_KEY')
+
+
 # raven sentry client
 # See https://docs.sentry.io/clients/python/integrations/django/
 INSTALLED_APPS += ['gunicorn', 'raven.contrib.django.raven_compat',]
+
 RAVEN_MIDDLEWARE = [
     'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
       ]
 MIDDLEWARE = RAVEN_MIDDLEWARE + MIDDLEWARE
+
 
 # Sentry Configuration
 SENTRY_DSN = env('DJANGO_SENTRY_DSN')
@@ -106,24 +108,9 @@ X_FRAME_OPTIONS = 'DENY'
 # ------------------------------------------------------------------------------
 # Hosts/domain names that are valid for this site
 # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['example.com', ])
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')
 # END SITE CONFIGURATION
 
-
-
-
-# STORAGE CONFIGURATION
-# ------------------------------------------------------------------------------
-# Uploaded Media Files
-# ------------------------
-# See: http://django-storages.readthedocs.io/en/latest/index.html
-
-
-
-# Static Assets
-# ------------------------
-
-STATIC_URL = '/static/' 
 
 # EMAIL
 # ------------------------------------------------------------------------------
@@ -169,10 +156,6 @@ CACHES = {
     }
 }
 
-
-
-
-
 # Custom Admin URL, use {% url 'admin:index' %}
 ADMIN_URL = env('DJANGO_ADMIN_URL', default=ADMIN_URL)
 
@@ -180,7 +163,8 @@ ADMIN_URL = env('DJANGO_ADMIN_URL', default=ADMIN_URL)
 # ------------------------------------------------------------------------------
 BACKBLAZEB2_ACCOUNT_ID = env('DJANGO_BACKBLAZE_B2_ACCOUNT_ID')
 BACKBLAZEB2_APP_KEY = env('DJANGO_BACKBLAZE_B2_APP_KEY')
-BACKBLAZEB2_BUCKET_NAME = env('DJANGO_BACKBLAZE_B2_BUCKET_NAME')
+BACKBLAZEB2_BUCKET_NAME = env('DJANGO_BACKBLAZE_B2_BUCKET_NAME_STATIC')
+BACKBLAZEB2_BUCKET_NAME_MEDIA = env('DJANGO_BACKBLAZE_B2_BUCKET_NAME_MEDIA')
 
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = env('DJANGO_SENDGRID_EMAIL_PASSWORD')

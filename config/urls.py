@@ -20,7 +20,7 @@ from testapp import urls
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(settings.ADMIN_URL, admin.site.urls),
     url(r'^', include(urls)),
 ]
 

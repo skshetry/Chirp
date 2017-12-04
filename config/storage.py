@@ -1,10 +1,13 @@
 from b2_storage import storage
-import os
+from django.conf import settings
+
 
 class MediaStorage(storage.B2Storage):
     def __init__(self, *args, **kwargs):
-        bucket_name = os.environ.get('DJANGO_BACKBLAZE_B2_MEDIA')
-        super(MediaStorage, self).__init__(bucket_name=bucket_name, *args, **kwargs)
+        super(MediaStorage, self).__init__(
+            bucket_name=settings.BACKBLAZEB2_BUCKET_NAME_MEDIA,
+            *args, **kwargs)
+
 
 class StaticStorage(storage.B2Storage):
     pass

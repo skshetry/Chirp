@@ -16,23 +16,11 @@ import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 ROOT_DIR = environ.Path(__file__) - 3  # (Chirp/config/settings/base.py - 3 = Chirp/)
-APPS_DIR = ROOT_DIR.path('apps')
-PROJECT_DIR = ROOT_DIR.path('chirp')
+APPS_DIR = ROOT_DIR.path('apps')  # (Chirp/apps)
+PROJECT_DIR = ROOT_DIR.path('chirp')  # (Chirp/chirp)
 
 # Load operating system environment variables and then prepare to use them
 env = environ.Env()
-
-# .env file, should load only in development environment
-READ_DOT_ENV_FILE = env.bool('DJANGO_READ_DOT_ENV_FILE', default=False)
-
-if READ_DOT_ENV_FILE:
-    # Operating System Environment variables have precedence over variables defined in the .env file,
-    # that is to say variables from the .env files will only be used if not defined
-    # as environment variables.
-    env_file = str(ROOT_DIR.path('.env'))
-    print('Loading : {}'.format(env_file))
-    env.read_env(env_file)
-    print('The .env file has been loaded. See base.py for more information')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
