@@ -55,6 +55,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # Apps specific for this project go here.
     'testapp.apps.TestappConfig',
+    'errors.apps.ErrorsConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
