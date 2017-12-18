@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}{% endblock%}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="#css" />
+</head>
+
+
+<body background="{%static 'img/error_background.jpg'%}">
+    <div id="primary" class="content-area">
+        <div id="content" class="site-content" role="main">
+
+            <div class="page-wrapper">
+                <div class="page-content">
+
+                    <h2>
+                        This is somewhat embarrassing, isn’t it?
+                    </h2>
+                    {% block content %} {% endblock %}
+                    <p>
+                        Please return to the
+                        <a href="{% url 'Home' %}">HomePage</a>.
+
+                    </p>
+
+                </div>
+                <!-- .page-content -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
