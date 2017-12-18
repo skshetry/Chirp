@@ -1,5 +1,10 @@
 {
     "editor.renderWhitespace": "all",
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        80,
+        120
+    ],
     "editor.quickSuggestionsDelay": 100,
     "search.quickOpen.includeSymbols": true,
     "telemetry.enableCrashReporter": false,
@@ -7,6 +12,12 @@
     "python.linting.prospectorEnabled": true,
     "python.linting.flake8Enabled": false,
     "python.linting.pep8Enabled": true,
+    "python.linting.pylintPath": "/path/to/virtualenv/bin/pylint",
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint_django"
+    ],
+    "python.linting.pylintEnabled": true,
     "python.linting.pydocstyleEnabled": true,
     "python.linting.maxNumberOfProblems": 500,
     "python.unitTest.pyTestEnabled": false,
