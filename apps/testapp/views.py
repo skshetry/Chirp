@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.core.mail import send_mail
 from django.conf import settings
+from django.views.generic import TemplateView
+
 import logging
 import os
 from .models import Images, ImageUploadForm
@@ -23,3 +25,7 @@ def upload_view(request):
         if imageuploadform.is_valid:
             imageuploadform.save()
     return render(request, 'b.html', {'form':imageuploadform, 'all_images':all_images})
+
+
+class TestView(TemplateView):
+    template_name = 'base.html'
