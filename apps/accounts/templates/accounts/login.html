@@ -11,10 +11,11 @@
                 </ul>
             {% endif %}
             {% csrf_token %}
-            <label>Email</label>
+            {% comment %} <label>Email</label>
             <input class="form-control" name="username" placeholder="Email or Username" autocomplete="off" type="text" required>
             <label>Password</label>
-            <input class="form-control" name="password" placeholder="Password" autocomplete="off" type="password" required>
+            <input class="form-control" name="password" placeholder="Password" autocomplete="off" type="password" required> {% endcomment %}
+            {{ form.as_p }}
             <button class="btn btn-info btn-block btn-round">Login</button>
         </form>
         <div class="forgot">
