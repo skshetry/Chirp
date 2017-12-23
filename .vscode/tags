@@ -1,0 +1,619 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+0001_initial.py	../apps/testapp/migrations/0001_initial.py	1;"	kind:file	line:1
+ADMINS	../config/settings/common.py	/^ADMINS = [$/;"	kind:variable	line:181
+ADMIN_URL	../config/settings/common.py	/^ADMIN_URL = r'^admin\/'$/;"	kind:variable	line:252
+ADMIN_URL	../config/settings/production.py	/^ADMIN_URL = env('DJANGO_ADMIN_URL', default=ADMIN_URL)$/;"	kind:variable	line:160
+ALLOWED_HOSTS	../config/settings/common.py	/^ALLOWED_HOSTS = []$/;"	kind:variable	line:36
+ALLOWED_HOSTS	../config/settings/local.py	/^ALLOWED_HOSTS = INTERNAL_IPS$/;"	kind:variable	line:61
+ALLOWED_HOSTS	../config/settings/production.py	/^ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')$/;"	kind:variable	line:111
+APPS_DIR	../config/settings/common.py	/^APPS_DIR = ROOT_DIR.path('apps')  # (Chirp\/apps)$/;"	kind:variable	line:20
+AUTHENTICATION_BACKENDS	../config/settings/common.py	/^AUTHENTICATION_BACKENDS = [$/;"	kind:variable	line:219
+AUTH_PASSWORD_VALIDATORS	../config/settings/common.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	kind:variable	line:158
+AccountsConfig	../apps/accounts/apps.py	/^class AccountsConfig(AppConfig):$/;"	kind:class	line:4
+AppConfig	../apps/accounts/apps.py	/^from django.apps import AppConfig$/;"	kind:namespace	line:1
+AppConfig	../apps/errors/apps.py	/^from django.apps import AppConfig$/;"	kind:namespace	line:1
+AppConfig	../apps/testapp/apps.py	/^from django.apps import AppConfig$/;"	kind:namespace	line:1
+BACKBLAZEB2_ACCOUNT_ID	../config/settings/production.py	/^BACKBLAZEB2_ACCOUNT_ID = env('DJANGO_BACKBLAZE_B2_ACCOUNT_ID')$/;"	kind:variable	line:164
+BACKBLAZEB2_APP_KEY	../config/settings/production.py	/^BACKBLAZEB2_APP_KEY = env('DJANGO_BACKBLAZE_B2_APP_KEY')$/;"	kind:variable	line:165
+BACKBLAZEB2_BUCKET_NAME	../config/settings/production.py	/^BACKBLAZEB2_BUCKET_NAME = env('DJANGO_BACKBLAZE_B2_BUCKET_NAME_STATIC')$/;"	kind:variable	line:166
+BACKBLAZEB2_BUCKET_NAME_MEDIA	../config/settings/production.py	/^BACKBLAZEB2_BUCKET_NAME_MEDIA = env('DJANGO_BACKBLAZE_B2_BUCKET_NAME_MEDIA')$/;"	kind:variable	line:167
+BdfFontFile	../venv/bin/pilfont.py	/^from PIL import BdfFontFile$/;"	kind:namespace	line:19
+CACHES	../config/settings/local.py	/^CACHES = {$/;"	kind:variable	line:40
+CACHES	../config/settings/production.py	/^CACHES = {$/;"	kind:variable	line:147
+CACHES	../config/settings/testing.py	/^CACHES = {$/;"	kind:variable	line:34
+CSRF_COOKIE_HTTPONLY	../config/settings/production.py	/^CSRF_COOKIE_HTTPONLY = True$/;"	kind:variable	line:104
+CSRF_COOKIE_SECURE	../config/settings/production.py	/^CSRF_COOKIE_SECURE = True$/;"	kind:variable	line:103
+Client	../apps/accounts/tests.py	/^from django.test import TestCase, Client$/;"	kind:namespace	line:1
+DATABASES	../config/settings/common.py	/^DATABASES = {$/;"	kind:variable	line:137
+DATABASES	../config/settings/local.py	/^DATABASES = {$/;"	kind:variable	line:27
+DATABASES	../config/settings/testing.py	/^DATABASES = {$/;"	kind:variable	line:63
+DEBUG	../config/settings/common.py	/^DEBUG = env.bool('DJANGO_DEBUG', False)$/;"	kind:variable	line:33
+DEBUG	../config/settings/local.py	/^DEBUG = env.bool('DJANGO_DEBUG', default=True)$/;"	kind:variable	line:13
+DEBUG	../config/settings/testing.py	/^DEBUG = False$/;"	kind:variable	line:13
+DEBUG_TOOLBAR_CONFIG	../config/settings/local.py	/^DEBUG_TOOLBAR_CONFIG = {$/;"	kind:variable	line:63
+DEFAULT_FILE_STORAGE	../config/settings/production.py	/^DEFAULT_FILE_STORAGE = 'config.storage.MediaStorage'$/;"	kind:variable	line:173
+DEFAULT_FROM_EMAIL	../config/settings/production.py	/^DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',$/;"	kind:variable	line:117
+DJANGO_APPS	../config/settings/common.py	/^DJANGO_APPS = [$/;"	kind:variable	line:41
+DJANGO_MIDDLEWARE	../config/settings/common.py	/^DJANGO_MIDDLEWARE = [$/;"	kind:variable	line:69
+EMAIL_BACKEND	../config/settings/common.py	/^EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',$/;"	kind:variable	line:175
+EMAIL_BACKEND	../config/settings/local.py	/^EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',$/;"	kind:variable	line:24
+EMAIL_BACKEND	../config/settings/production.py	/^EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"$/;"	kind:variable	line:169
+EMAIL_BACKEND	../config/settings/testing.py	/^EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'$/;"	kind:variable	line:29
+EMAIL_HOST	../config/settings/local.py	/^EMAIL_HOST = 'localhost'$/;"	kind:variable	line:23
+EMAIL_HOST	../config/settings/testing.py	/^EMAIL_HOST = 'localhost'$/;"	kind:variable	line:24
+EMAIL_PORT	../config/settings/local.py	/^EMAIL_PORT = 1025$/;"	kind:variable	line:21
+EMAIL_PORT	../config/settings/testing.py	/^EMAIL_PORT = 1025$/;"	kind:variable	line:25
+EMAIL_SUBJECT_PREFIX	../config/settings/production.py	/^EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[test]')$/;"	kind:variable	line:119
+ERROR_BASE_TEMPLATE	../apps/errors/tests.py	/^    ERROR_BASE_TEMPLATE = 'error_base.html'$/;"	kind:variable	line:13
+ERROR_CODE	../apps/errors/tests.py	/^    ERROR_CODE = 400$/;"	kind:variable	line:60
+ERROR_CODE	../apps/errors/tests.py	/^    ERROR_CODE = 403$/;"	kind:variable	line:67
+ERROR_CODE	../apps/errors/tests.py	/^    ERROR_CODE = 404$/;"	kind:variable	line:46
+ERROR_CODE	../apps/errors/tests.py	/^    ERROR_CODE = 500$/;"	kind:variable	line:53
+ERROR_CODE	../apps/errors/tests.py	/^    ERROR_CODE = None$/;"	kind:variable	line:12
+ERROR_TEMPLATE_VIEW	../apps/errors/tests.py	/^    ERROR_TEMPLATE_VIEW = None$/;"	kind:variable	line:14
+ERROR_TEMPLATE_VIEW	../apps/errors/tests.py	/^    ERROR_TEMPLATE_VIEW = str(ERROR_CODE) + '.html'$/;"	kind:variable	line:47
+ERROR_TEMPLATE_VIEW	../apps/errors/tests.py	/^    ERROR_TEMPLATE_VIEW = str(ERROR_CODE) + '.html'$/;"	kind:variable	line:54
+ERROR_TEMPLATE_VIEW	../apps/errors/tests.py	/^    ERROR_TEMPLATE_VIEW = str(ERROR_CODE) + '.html'$/;"	kind:variable	line:61
+ERROR_TEMPLATE_VIEW	../apps/errors/tests.py	/^    ERROR_TEMPLATE_VIEW = str(ERROR_CODE) + '.html'$/;"	kind:variable	line:68
+Enhance	../venv/bin/enhancer.py	/^class Enhance(tkinter.Frame):$/;"	kind:class	line:23
+ErrorViewTestCase	../apps/errors/tests.py	/^class ErrorViewTestCase(object):$/;"	kind:class	line:9
+ErrorsConfig	../apps/errors/apps.py	/^class ErrorsConfig(AppConfig):$/;"	kind:class	line:4
+FirstTest	../apps/testapp/tests.py	/^class FirstTest(TestCase):$/;"	kind:class	line:4
+HOMEPAGE_LINK	../apps/errors/tests.py	/^    HOMEPAGE_LINK = reverse('Home')$/;"	kind:variable	line:15
+HTTPBadRequestTest	../apps/errors/tests.py	/^class HTTPBadRequestTest(ErrorViewTestCase, TestCase):$/;"	kind:class	line:57
+HTTPNotFoundTest	../apps/errors/tests.py	/^class HTTPNotFoundTest(ErrorViewTestCase, TestCase):$/;"	kind:class	line:43
+HTTPPermissonDeniedTest	../apps/errors/tests.py	/^class HTTPPermissonDeniedTest(ErrorViewTestCase, TestCase):$/;"	kind:class	line:64
+HTTPServerErrorTest	../apps/errors/tests.py	/^class HTTPServerErrorTest(ErrorViewTestCase, TestCase):$/;"	kind:class	line:50
+INSTALLED_APPS	../config/settings/common.py	/^INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS$/;"	kind:variable	line:64
+INTERNAL_IPS	../config/settings/local.py	/^INTERNAL_IPS = ['127.0.0.1', '10.0.2.2', 'localhost', '192.168.100.3', '0.0.0.0']$/;"	kind:variable	line:60
+Image	../venv/bin/enhancer.py	/^from PIL import Image, ImageTk, ImageEnhance$/;"	kind:namespace	line:17
+Image	../venv/bin/explode.py	/^from PIL import Image$/;"	kind:namespace	line:11
+Image	../venv/bin/gifmaker.py	/^from PIL import Image$/;"	kind:namespace	line:19
+Image	../venv/bin/painter.py	/^from PIL import Image, ImageTk$/;"	kind:namespace	line:19
+Image	../venv/bin/pilconvert.py	/^from PIL import Image$/;"	kind:namespace	line:22
+Image	../venv/bin/pildriver.py	/^from PIL import Image$/;"	kind:namespace	line:53
+Image	../venv/bin/pilfile.py	/^from PIL import Image$/;"	kind:namespace	line:27
+Image	../venv/bin/pilprint.py	/^from PIL import Image$/;"	kind:namespace	line:22
+Image	../venv/bin/player.py	/^from PIL import Image, ImageTk$/;"	kind:namespace	line:16
+Image	../venv/bin/thresholder.py	/^from PIL import Image, ImageTk$/;"	kind:namespace	line:17
+Image	../venv/bin/viewer.py	/^from PIL import Image, ImageTk$/;"	kind:namespace	line:16
+ImageChops	../venv/bin/pildriver.py	/^        from PIL import ImageChops$/;"	kind:namespace	line:356
+ImageChops	../venv/bin/pildriver.py	/^        from PIL import ImageChops$/;"	kind:namespace	line:364
+ImageChops	../venv/bin/pildriver.py	/^        from PIL import ImageChops$/;"	kind:namespace	line:374
+ImageChops	../venv/bin/pildriver.py	/^        from PIL import ImageChops$/;"	kind:namespace	line:384
+ImageChops	../venv/bin/pildriver.py	/^        from PIL import ImageChops$/;"	kind:namespace	line:394
+ImageChops	../venv/bin/pildriver.py	/^        from PIL import ImageChops$/;"	kind:namespace	line:404
+ImageChops	../venv/bin/pildriver.py	/^        from PIL import ImageChops$/;"	kind:namespace	line:414
+ImageChops	../venv/bin/pildriver.py	/^        from PIL import ImageChops$/;"	kind:namespace	line:426
+ImageEnhance	../venv/bin/enhancer.py	/^from PIL import Image, ImageTk, ImageEnhance$/;"	kind:namespace	line:17
+ImageEnhance	../venv/bin/pildriver.py	/^        from PIL import ImageEnhance$/;"	kind:namespace	line:440
+ImageEnhance	../venv/bin/pildriver.py	/^        from PIL import ImageEnhance$/;"	kind:namespace	line:451
+ImageEnhance	../venv/bin/pildriver.py	/^        from PIL import ImageEnhance$/;"	kind:namespace	line:462
+ImageEnhance	../venv/bin/pildriver.py	/^        from PIL import ImageEnhance$/;"	kind:namespace	line:473
+ImageFilter	../venv/bin/pildriver.py	/^        from PIL import ImageFilter$/;"	kind:namespace	line:210
+ImageTk	../venv/bin/enhancer.py	/^from PIL import Image, ImageTk, ImageEnhance$/;"	kind:namespace	line:17
+ImageTk	../venv/bin/painter.py	/^from PIL import Image, ImageTk$/;"	kind:namespace	line:19
+ImageTk	../venv/bin/player.py	/^from PIL import Image, ImageTk$/;"	kind:namespace	line:16
+ImageTk	../venv/bin/thresholder.py	/^from PIL import Image, ImageTk$/;"	kind:namespace	line:17
+ImageTk	../venv/bin/viewer.py	/^from PIL import Image, ImageTk$/;"	kind:namespace	line:16
+ImageUploadForm	../apps/testapp/models.py	/^class ImageUploadForm(ModelForm):$/;"	kind:class	line:9
+ImageUploadForm	../apps/testapp/views.py	/^from .models import Images, ImageUploadForm$/;"	kind:namespace	line:8
+Images	../apps/testapp/models.py	/^class Images(models.Model):$/;"	kind:class	line:5
+Images	../apps/testapp/views.py	/^from .models import Images, ImageUploadForm$/;"	kind:namespace	line:8
+Interval	../venv/bin/explode.py	/^class Interval(object):$/;"	kind:class	line:16
+LANGUAGE_CODE	../config/settings/common.py	/^LANGUAGE_CODE = 'en-us'$/;"	kind:variable	line:202
+LOCAL_APPS	../config/settings/common.py	/^LOCAL_APPS = [$/;"	kind:variable	line:56
+LOGGING	../config/settings/production.py	/^LOGGING = {$/;"	kind:variable	line:41
+LOGIN_REDIRECT_URL	../config/settings/common.py	/^LOGIN_REDIRECT_URL = 'upload_pic'/;"	kind:variable	line:254
+LoginTest	../apps/accounts/tests.py	/^class LoginTest(TestCase):$/;"	kind:class	line:5
+MANAGERS	../config/settings/common.py	/^MANAGERS = ADMINS$/;"	kind:variable	line:186
+MEDIA_ROOT	../config/settings/common.py	/^MEDIA_ROOT = str(PROJECT_DIR('media'))$/;"	kind:variable	line:246
+MEDIA_URL	../config/settings/common.py	/^MEDIA_URL = '\/media\/'$/;"	kind:variable	line:249
+MIDDLEWARE	../config/settings/common.py	/^MIDDLEWARE = DJANGO_MIDDLEWARE + THIRD_PARTY_MIDDLEWARE$/;"	kind:variable	line:83
+MIDDLEWARE	../config/settings/production.py	/^MIDDLEWARE = RAVEN_MIDDLEWARE + MIDDLEWARE$/;"	kind:variable	line:35
+MediaStorage	../config/storage.py	/^class MediaStorage(storage.B2Storage):$/;"	kind:class	line:5
+Meta	../apps/testapp/models.py	/^    class Meta:$/;"	kind:class	line:10
+Migration	../apps/testapp/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+ModelForm	../apps/testapp/models.py	/^from django.forms import ModelForm$/;"	kind:namespace	line:2
+PASSWORD_HASHERS	../config/settings/common.py	/^PASSWORD_HASHERS = [$/;"	kind:variable	line:146
+PASSWORD_HASHERS	../config/settings/testing.py	/^PASSWORD_HASHERS = [$/;"	kind:variable	line:49
+PILDriver	../venv/bin/pildriver.py	/^class PILDriver(object):$/;"	kind:class	line:56
+PROJECT_DIR	../config/settings/common.py	/^PROJECT_DIR = ROOT_DIR.path('chirp')  # (Chirp\/chirp)$/;"	kind:variable	line:21
+PSDraw	../venv/bin/pilprint.py	/^from PIL import PSDraw$/;"	kind:namespace	line:23
+PaintCanvas	../venv/bin/painter.py	/^class PaintCanvas(tkinter.Canvas):$/;"	kind:class	line:25
+PcfFontFile	../venv/bin/pilfont.py	/^from PIL import PcfFontFile$/;"	kind:namespace	line:20
+RAVEN_CONFIG	../config/settings/production.py	/^RAVEN_CONFIG = {$/;"	kind:variable	line:79
+RAVEN_MIDDLEWARE	../config/settings/production.py	/^RAVEN_MIDDLEWARE = [$/;"	kind:variable	line:31
+REDIS_LOCATION	../config/settings/production.py	/^REDIS_LOCATION = '{0}\/{1}'.format(env('REDIS_URL', default='redis:\/\/127.0.0.1:6379'), 0)$/;"	kind:variable	line:145
+ROOT_DIR	../config/settings/common.py	/^ROOT_DIR = environ.Path(__file__) - 3$/;"	kind:variable	line:19
+ROOT_URLCONF	../config/settings/common.py	/^ROOT_URLCONF = 'config.urls'$/;"	kind:variable	line:88
+RequestFactory	../apps/errors/tests.py	/^from django.test import TestCase, RequestFactory$/;"	kind:namespace	line:3
+SECRET_KEY	../config/settings/local.py	/^SECRET_KEY = env('DJANGO_SECRET_KEY',$/;"	kind:variable	line:16
+SECRET_KEY	../config/settings/production.py	/^SECRET_KEY = env('DJANGO_SECRET_KEY')$/;"	kind:variable	line:24
+SECRET_KEY	../config/settings/testing.py	/^SECRET_KEY = env('DJANGO_SECRET_KEY', default='CHANGEME!!!')$/;"	kind:variable	line:20
+SECURE_BROWSER_XSS_FILTER	../config/settings/production.py	/^SECURE_BROWSER_XSS_FILTER = True$/;"	kind:variable	line:99
+SECURE_CONTENT_TYPE_NOSNIFF	../config/settings/production.py	/^SECURE_CONTENT_TYPE_NOSNIFF = env.bool($/;"	kind:variable	line:97
+SECURE_HSTS_INCLUDE_SUBDOMAINS	../config/settings/production.py	/^SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool($/;"	kind:variable	line:95
+SECURE_HSTS_SECONDS	../config/settings/production.py	/^SECURE_HSTS_SECONDS = 60$/;"	kind:variable	line:94
+SECURE_PROXY_SSL_HEADER	../config/settings/production.py	/^SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')$/;"	kind:variable	line:85
+SECURE_SSL_REDIRECT	../config/settings/production.py	/^SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)$/;"	kind:variable	line:102
+SENDGRID_API_KEY	../config/settings/production.py	/^SENDGRID_API_KEY = env('DJANGO_SENDGRID_EMAIL_PASSWORD')$/;"	kind:variable	line:170
+SENTRY_CLIENT	../config/settings/production.py	/^SENTRY_CLIENT = env('DJANGO_SENTRY_CLIENT', default='raven.contrib.django.raven_compat.DjangoClient')$/;"	kind:variable	line:40
+SENTRY_DSN	../config/settings/production.py	/^SENTRY_DSN = env('DJANGO_SENTRY_DSN')$/;"	kind:variable	line:39
+SERVER_EMAIL	../config/settings/production.py	/^SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)$/;"	kind:variable	line:120
+SESSION_COOKIE_HTTPONLY	../config/settings/production.py	/^SESSION_COOKIE_HTTPONLY = True$/;"	kind:variable	line:101
+SESSION_COOKIE_SECURE	../config/settings/production.py	/^SESSION_COOKIE_SECURE = True$/;"	kind:variable	line:100
+SITE_ID	../config/settings/common.py	/^SITE_ID = 1$/;"	kind:variable	line:215
+STATICFILES_DIRS	../config/settings/common.py	/^STATICFILES_DIRS = [$/;"	kind:variable	line:233
+STATICFILES_FINDERS	../config/settings/common.py	/^STATICFILES_FINDERS = [$/;"	kind:variable	line:238
+STATICFILES_STORAGE	../config/settings/production.py	/^STATICFILES_STORAGE = 'config.storage.StaticStorage'$/;"	kind:variable	line:174
+STATIC_ROOT	../config/settings/common.py	/^STATIC_ROOT = str(PROJECT_DIR('staticfiles'))$/;"	kind:variable	line:227
+STATIC_URL	../config/settings/common.py	/^STATIC_URL = '\/static\/'$/;"	kind:variable	line:230
+Sentry	../config/wsgi.py	/^    from raven.contrib.django.raven_compat.middleware.wsgi import Sentry$/;"	kind:namespace	line:25
+StaticStorage	../config/storage.py	/^class StaticStorage(storage.B2Storage):$/;"	kind:class	line:12
+TEMPLATES	../config/settings/common.py	/^TEMPLATES = [$/;"	kind:variable	line:91
+TEST_RUNNER	../config/settings/local.py	/^TEST_RUNNER = 'django.test.runner.DiscoverRunner'$/;"	kind:variable	line:72
+TEST_RUNNER	../config/settings/testing.py	/^TEST_RUNNER = 'django.test.runner.DiscoverRunner'$/;"	kind:variable	line:43
+THIRD_PARTY_APPS	../config/settings/common.py	/^THIRD_PARTY_APPS = [$/;"	kind:variable	line:52
+THIRD_PARTY_MIDDLEWARE	../config/settings/common.py	/^THIRD_PARTY_MIDDLEWARE = [$/;"	kind:variable	line:79
+TIME_ZONE	../config/settings/common.py	/^TIME_ZONE = 'UTC'$/;"	kind:variable	line:199
+TemplateView	../apps/testapp/views.py	/^from django.views.generic import TemplateView$/;"	kind:namespace	line:4
+TestCase	../apps/accounts/tests.py	/^from django.test import TestCase, Client$/;"	kind:namespace	line:1
+TestCase	../apps/errors/tests.py	/^from django.test import TestCase, RequestFactory$/;"	kind:namespace	line:3
+TestCase	../apps/testapp/tests.py	/^from django.test import TestCase$/;"	kind:namespace	line:1
+TestView	../apps/testapp/urls.py	/^from .views import test_view, upload_view, TestView$/;"	kind:namespace	line:2
+TestView	../apps/testapp/views.py	/^class TestView(TemplateView):$/;"	kind:class	line:32
+TestappConfig	../apps/testapp/apps.py	/^class TestappConfig(AppConfig):$/;"	kind:class	line:4
+UI	../venv/bin/player.py	/^class UI(tkinter.Label):$/;"	kind:class	line:22
+UI	../venv/bin/thresholder.py	/^class UI(tkinter.Frame):$/;"	kind:class	line:23
+UI	../venv/bin/viewer.py	/^class UI(tkinter.Label):$/;"	kind:class	line:22
+USE_I18N	../config/settings/common.py	/^USE_I18N = True$/;"	kind:variable	line:206
+USE_L10N	../config/settings/common.py	/^USE_L10N = True$/;"	kind:variable	line:209
+USE_TZ	../config/settings/common.py	/^USE_TZ = True$/;"	kind:variable	line:212
+User	../apps/accounts/forms.py	/^from django.contrib.auth.models import User$/;"	kind:namespace	line:2
+UserAuthenticationForm	../apps/accounts/forms.py	/^class UserAuthenticationForm(forms.Form):$/;"	kind:class	line:6
+UserAuthenticationForm	../apps/accounts/views.py	/^from .forms import UserAuthenticationForm$/;"	kind:namespace	line:3
+VERSION	../venv/bin/pilfont.py	/^VERSION = "0.4"$/;"	kind:variable	line:22
+VERSION	../venv/bin/pilprint.py	/^VERSION = "pilprint 0.3\/2003-05-05"$/;"	kind:variable	line:20
+WSGI_APPLICATION	../config/settings/common.py	/^WSGI_APPLICATION = 'config.wsgi.application'$/;"	kind:variable	line:126
+X_FRAME_OPTIONS	../config/settings/production.py	/^X_FRAME_OPTIONS = 'DENY'$/;"	kind:variable	line:105
+__getitem__	../venv/bin/explode.py	/^    def __getitem__(self, index):$/;"	kind:member	line:44
+__init__	../config/storage.py	/^    def __init__(self, *args, **kwargs):$/;"	kind:member	line:6
+__init__	../venv/bin/enhancer.py	/^    def __init__(self, master, image, name, enhancer, lo, hi):$/;"	kind:member	line:24
+__init__	../venv/bin/explode.py	/^    def __init__(self, interval="0"):$/;"	kind:member	line:18
+__init__	../venv/bin/painter.py	/^    def __init__(self, master, image):$/;"	kind:member	line:26
+__init__	../venv/bin/player.py	/^    def __init__(self, master, im):$/;"	kind:member	line:24
+__init__	../venv/bin/thresholder.py	/^    def __init__(self, master, im, value=128):$/;"	kind:member	line:24
+__init__	../venv/bin/viewer.py	/^    def __init__(self, master, im):$/;"	kind:member	line:24
+__init__.py	../apps/__init__.py	1;"	kind:file	line:1
+__init__.py	../apps/accounts/__init__.py	1;"	kind:file	line:1
+__init__.py	../apps/accounts/migrations/__init__.py	1;"	kind:file	line:1
+__init__.py	../apps/errors/__init__.py	1;"	kind:file	line:1
+__init__.py	../apps/errors/migrations/__init__.py	1;"	kind:file	line:1
+__init__.py	../apps/testapp/__init__.py	1;"	kind:file	line:1
+__init__.py	../apps/testapp/migrations/__init__.py	1;"	kind:file	line:1
+__init__.py	../chirp/__init__.py	1;"	kind:file	line:1
+__init__.py	../config/__init__.py	1;"	kind:file	line:1
+__init__.py	../config/settings/__init__.py	1;"	kind:file	line:1
+_main	../venv/bin/pycodestyle	/^from pycodestyle import _main$/;"	kind:namespace	line:7
+accounts	../config/urls.py	/^import accounts$/;"	kind:namespace	line:20
+admin	../apps/accounts/admin.py	/^from django.contrib import admin$/;"	kind:namespace	line:1
+admin	../apps/errors/admin.py	/^from django.contrib import admin$/;"	kind:namespace	line:1
+admin	../apps/testapp/admin.py	/^from django.contrib import admin$/;"	kind:namespace	line:1
+admin	../config/urls.py	/^from django.contrib import admin$/;"	kind:namespace	line:17
+admin.py	../apps/accounts/admin.py	1;"	kind:file	line:1
+admin.py	../apps/errors/admin.py	1;"	kind:file	line:1
+admin.py	../apps/testapp/admin.py	1;"	kind:file	line:1
+app_path	../config/wsgi.py	/^app_path = os.path.dirname(os.path.abspath(__file__)).replace('\/config', '')$/;"	kind:variable	line:19
+application	../config/wsgi.py	/^    application = Sentry(application)$/;"	kind:variable	line:26
+application	../config/wsgi.py	/^application = get_wsgi_application()$/;"	kind:variable	line:22
+apps.py	../apps/accounts/apps.py	1;"	kind:file	line:1
+apps.py	../apps/errors/apps.py	1;"	kind:file	line:1
+apps.py	../apps/testapp/apps.py	1;"	kind:file	line:1
+assertTemplateUsed	../apps/errors/tests.py	/^    def assertTemplateUsed(self, response, template_name):$/;"	kind:member	line:29
+auth_views	../apps/accounts/urls.py	/^from django.contrib.auth import views as auth_views$/;"	kind:namespace	line:2
+authenticate	../apps/accounts/views.py	/^from django.contrib.auth import authenticate, login,logout$/;"	kind:namespace	line:2
+bad_request	../apps/errors/tests.py	/^from .views import server_error, not_found, permission_denied, bad_request$/;"	kind:namespace	line:6
+bad_request	../apps/errors/views.py	/^def bad_request(request):$/;"	kind:function	line:21
+clean	../apps/accounts/forms.py	/^    def clean(self, *args, **kwargs):$/;"	kind:member	line:10
+common.py	../config/settings/common.py	1;"	kind:file	line:1
+convert	../venv/bin/pilconvert.py	/^convert = None$/;"	kind:variable	line:53
+coverage	../venv/bin/coverage	1;"	kind:file	line:1
+coverage-3.6	../venv/bin/coverage-3.6	1;"	kind:file	line:1
+coverage3	../venv/bin/coverage3	1;"	kind:file	line:1
+current_path	../manage.py	/^    current_path = os.path.dirname(os.path.abspath(__file__))$/;"	kind:variable	line:23
+debug_toolbar	../config/urls.py	/^        import debug_toolbar$/;"	kind:namespace	line:30
+default	../config/settings/common.py	/^                    default='django.core.mail.backends.smtp.EmailBackend')$/;"	kind:variable	line:176
+default	../config/settings/local.py	/^                    default='django.core.mail.backends.console.EmailBackend')$/;"	kind:variable	line:25
+default	../config/settings/local.py	/^                 default='^I.%;h&Oc4xa;w8#zh~]Jf7tgb1-V!V\/t04YsT>UgMb2-&W|11')$/;"	kind:variable	line:17
+default	../config/settings/production.py	/^                         default='test <noreply@example.com>')$/;"	kind:variable	line:118
+dependencies	../apps/testapp/migrations/0001_initial.py	/^    dependencies = [$/;"	kind:variable	line:12
+description	../venv/bin/pilprint.py	/^def description(filepath, image):$/;"	kind:function	line:28
+detect-requirements	../venv/bin/detect-requirements	1;"	kind:file	line:1
+django	../manage.py	/^            import django$/;"	kind:namespace	line:14
+django-admin	../venv/bin/django-admin	1;"	kind:file	line:1
+django-admin.py	../venv/bin/django-admin.py	1;"	kind:file	line:1
+do_add	../venv/bin/pildriver.py	/^    def do_add(self):$/;"	kind:member	line:409
+do_blend	../venv/bin/pildriver.py	/^    def do_blend(self):$/;"	kind:member	line:132
+do_brightness	../venv/bin/pildriver.py	/^    def do_brightness(self):$/;"	kind:member	line:457
+do_clear	../venv/bin/pildriver.py	/^    def do_clear(self):$/;"	kind:member	line:81
+do_color	../venv/bin/pildriver.py	/^    def do_color(self):$/;"	kind:member	line:435
+do_composite	../venv/bin/pildriver.py	/^    def do_composite(self):$/;"	kind:member	line:142
+do_contrast	../venv/bin/pildriver.py	/^    def do_contrast(self):$/;"	kind:member	line:446
+do_convert	../venv/bin/pildriver.py	/^    def do_convert(self):$/;"	kind:member	line:166
+do_copy	../venv/bin/pildriver.py	/^    def do_copy(self):$/;"	kind:member	line:175
+do_crop	../venv/bin/pildriver.py	/^    def do_crop(self):$/;"	kind:member	line:182
+do_darker	../venv/bin/pildriver.py	/^    def do_darker(self):$/;"	kind:member	line:369
+do_difference	../venv/bin/pildriver.py	/^    def do_difference(self):$/;"	kind:member	line:379
+do_draft	../venv/bin/pildriver.py	/^    def do_draft(self):$/;"	kind:member	line:195
+do_dup	../venv/bin/pildriver.py	/^    def do_dup(self):$/;"	kind:member	line:95
+do_filter	../venv/bin/pildriver.py	/^    def do_filter(self):$/;"	kind:member	line:205
+do_format	../venv/bin/pildriver.py	/^    def do_format(self):$/;"	kind:member	line:326
+do_getbbox	../venv/bin/pildriver.py	/^    def do_getbbox(self):$/;"	kind:member	line:215
+do_getextrema	../venv/bin/pildriver.py	/^    def do_getextrema(self):$/;"	kind:member	line:226
+do_invert	../venv/bin/pildriver.py	/^    def do_invert(self):$/;"	kind:member	line:351
+do_lighter	../venv/bin/pildriver.py	/^    def do_lighter(self):$/;"	kind:member	line:359
+do_merge	../venv/bin/pildriver.py	/^    def do_merge(self):$/;"	kind:member	line:152
+do_mode	../venv/bin/pildriver.py	/^    def do_mode(self):$/;"	kind:member	line:333
+do_multiply	../venv/bin/pildriver.py	/^    def do_multiply(self):$/;"	kind:member	line:389
+do_new	../venv/bin/pildriver.py	/^    def do_new(self):$/;"	kind:member	line:115
+do_offset	../venv/bin/pildriver.py	/^    def do_offset(self):$/;"	kind:member	line:235
+do_open	../venv/bin/pildriver.py	/^    def do_open(self):$/;"	kind:member	line:125
+do_paste	../venv/bin/pildriver.py	/^    def do_paste(self):$/;"	kind:member	line:245
+do_pop	../venv/bin/pildriver.py	/^    def do_pop(self):$/;"	kind:member	line:88
+do_resize	../venv/bin/pildriver.py	/^    def do_resize(self):$/;"	kind:member	line:261
+do_rotate	../venv/bin/pildriver.py	/^    def do_rotate(self):$/;"	kind:member	line:271
+do_save	../venv/bin/pildriver.py	/^    def do_save(self):$/;"	kind:member	line:280
+do_save2	../venv/bin/pildriver.py	/^    def do_save2(self):$/;"	kind:member	line:289
+do_screen	../venv/bin/pildriver.py	/^    def do_screen(self):$/;"	kind:member	line:399
+do_sharpness	../venv/bin/pildriver.py	/^    def do_sharpness(self):$/;"	kind:member	line:468
+do_show	../venv/bin/pildriver.py	/^    def do_show(self):$/;"	kind:member	line:299
+do_size	../venv/bin/pildriver.py	/^    def do_size(self):$/;"	kind:member	line:340
+do_subtract	../venv/bin/pildriver.py	/^    def do_subtract(self):$/;"	kind:member	line:421
+do_swap	../venv/bin/pildriver.py	/^    def do_swap(self):$/;"	kind:member	line:106
+do_thumbnail	../venv/bin/pildriver.py	/^    def do_thumbnail(self):$/;"	kind:member	line:306
+do_transpose	../venv/bin/pildriver.py	/^    def do_transpose(self):$/;"	kind:member	line:315
+do_verbose	../venv/bin/pildriver.py	/^    def do_verbose(self):$/;"	kind:member	line:60
+dodgy	../venv/bin/dodgy	/^import dodgy.run$/;"	kind:namespace	line:3
+dodgy	../venv/bin/dodgy	1;"	kind:file	line:1
+driver	../venv/bin/pildriver.py	/^    driver = PILDriver()$/;"	kind:variable	line:506
+easy_install	../venv/bin/easy_install	1;"	kind:file	line:1
+easy_install-3.6	../venv/bin/easy_install-3.6	1;"	kind:file	line:1
+enhancer.py	../venv/bin/enhancer.py	1;"	kind:file	line:1
+env	../config/settings/common.py	/^env = environ.Env()$/;"	kind:variable	line:24
+env_file	../config/settings/local.py	/^env_file = str(ROOT_DIR.path('.env'))$/;"	kind:variable	line:7
+environ	../config/settings/common.py	/^import environ$/;"	kind:namespace	line:14
+epylint	../venv/bin/epylint	1;"	kind:file	line:1
+execute	../venv/bin/pildriver.py	/^    def execute(self, list):$/;"	kind:member	line:481
+execute_from_command_line	../manage.py	/^        from django.core.management import execute_from_command_line$/;"	kind:namespace	line:8
+execute_from_command_line	../venv/bin/django-admin	/^from django.core.management import execute_from_command_line$/;"	kind:namespace	line:7
+explode.py	../venv/bin/explode.py	1;"	kind:file	line:1
+factory	../apps/errors/tests.py	/^    factory = RequestFactory()$/;"	kind:variable	line:16
+fields	../apps/testapp/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:18
+fields	../apps/testapp/models.py	/^        fields = [ 'file' ]$/;"	kind:variable	line:12
+file	../apps/testapp/models.py	/^    file = models.ImageField(upload_to='profile_photos')$/;"	kind:variable	line:6
+filename	../venv/bin/player.py	/^    filename = sys.argv[1]$/;"	kind:variable	line:77
+filename	../venv/bin/viewer.py	/^    filename = sys.argv[1]$/;"	kind:variable	line:46
+files	../venv/bin/pilfont.py	/^    files = files + glob.glob(f)$/;"	kind:variable	line:35
+files	../venv/bin/pilfont.py	/^files = []$/;"	kind:variable	line:33
+forms	../apps/accounts/forms.py	/^from django import forms$/;"	kind:namespace	line:1
+forms.py	../apps/accounts/forms.py	1;"	kind:file	line:1
+fp	../venv/bin/pilfont.py	/^        fp = open(f, "rb")$/;"	kind:variable	line:43
+fp	../venv/bin/pilprint.py	/^            fp = p.stdin$/;"	kind:variable	line:83
+fp	../venv/bin/pilprint.py	/^            fp = sys.stdout$/;"	kind:variable	line:85
+frames	../venv/bin/explode.py	/^frames = Interval(",".join(sys.argv[3:]))$/;"	kind:variable	line:77
+get_wsgi_application	../config/wsgi.py	/^from django.core.wsgi import get_wsgi_application$/;"	kind:namespace	line:14
+getopt	../venv/bin/pilconvert.py	/^import getopt$/;"	kind:namespace	line:18
+getopt	../venv/bin/pilfile.py	/^import getopt$/;"	kind:namespace	line:22
+getopt	../venv/bin/pilprint.py	/^import getopt$/;"	kind:namespace	line:15
+gifmaker.py	../venv/bin/gifmaker.py	1;"	kind:file	line:1
+glob	../venv/bin/pilfile.py	/^import glob$/;"	kind:namespace	line:23
+glob	../venv/bin/pilfont.py	/^import glob$/;"	kind:namespace	line:15
+globfix	../venv/bin/pilfile.py	/^def globfix(files):$/;"	kind:function	line:68
+handler400	../config/urls.py	/^handler400 = 'apps.errors.views.bad_request'/;"	kind:variable	line:39
+handler403	../config/urls.py	/^handler403 = 'apps.errors.views.permission_denied'$/;"	kind:variable	line:38
+handler404	../config/urls.py	/^handler404 = 'apps.errors.views.not_found'$/;"	kind:variable	line:36
+handler500	../config/urls.py	/^handler500 = 'apps.errors.views.server_error'$/;"	kind:variable	line:37
+html	../venv/bin/explode.py	/^    html = 1$/;"	kind:variable	line:57
+html	../venv/bin/explode.py	/^    html = open(file+".html", "w")$/;"	kind:variable	line:92
+html	../venv/bin/explode.py	/^html = 0$/;"	kind:variable	line:54
+id	../venv/bin/pilfile.py	/^        id = sorted(Image.ID)$/;"	kind:variable	line:51
+im	../venv/bin/enhancer.py	/^im = Image.open(sys.argv[1])$/;"	kind:variable	line:55
+im	../venv/bin/explode.py	/^im = Image.open(infile)$/;"	kind:variable	line:88
+im	../venv/bin/gifmaker.py	/^    im = Image.open(sys.argv[1])$/;"	kind:variable	line:30
+im	../venv/bin/painter.py	/^    im = im.convert("RGB")$/;"	kind:variable	line:80
+im	../venv/bin/painter.py	/^im = Image.open(sys.argv[1])$/;"	kind:variable	line:77
+im	../venv/bin/pilconvert.py	/^        im = im.convert(convert)$/;"	kind:variable	line:92
+im	../venv/bin/pilconvert.py	/^    im = Image.open(argv[0])$/;"	kind:variable	line:89
+im	../venv/bin/pilfile.py	/^        im = Image.open(file)$/;"	kind:variable	line:82
+im	../venv/bin/pilprint.py	/^            im = im.convert("L")$/;"	kind:variable	line:79
+im	../venv/bin/pilprint.py	/^        im = Image.open(filepath)$/;"	kind:variable	line:73
+im	../venv/bin/thresholder.py	/^    im = im.convert("L")$/;"	kind:variable	line:74
+im	../venv/bin/thresholder.py	/^im = Image.open(sys.argv[1])$/;"	kind:variable	line:71
+im	../venv/bin/viewer.py	/^    im = Image.open(filename)$/;"	kind:variable	line:51
+include	../config/urls.py	/^from django.conf.urls import url,include$/;"	kind:namespace	line:16
+infile	../venv/bin/explode.py	/^infile = sys.argv[1]$/;"	kind:variable	line:74
+initial	../apps/testapp/migrations/0001_initial.py	/^    initial = True$/;"	kind:variable	line:10
+ipdb3	../venv/bin/ipdb3	1;"	kind:file	line:1
+iptest	../venv/bin/iptest	1;"	kind:file	line:1
+iptest3	../venv/bin/iptest3	1;"	kind:file	line:1
+ipython	../venv/bin/ipython	1;"	kind:file	line:1
+ipython3	../venv/bin/ipython3	1;"	kind:file	line:1
+isort	../venv/bin/isort	1;"	kind:file	line:1
+ix	../venv/bin/explode.py	/^ix = 1$/;"	kind:variable	line:86
+letter	../venv/bin/pilprint.py	/^letter = (1.0*72, 1.0*72, 7.5*72, 10.0*72)$/;"	kind:variable	line:25
+load_entry_point	../venv/bin/pipdeptree	/^from pkg_resources import load_entry_point$/;"	kind:namespace	line:6
+local.py	../config/settings/local.py	1;"	kind:file	line:1
+logger	../apps/testapp/__init__.py	/^logger = logging.getLogger(__name__)/;"	kind:variable	line:3
+logger	../apps/testapp/views.py	/^logger=logging.getLogger('raven')$/;"	kind:variable	line:11
+logging	../apps/testapp/__init__.py	/^import logging$/;"	kind:namespace	line:1
+logging	../apps/testapp/views.py	/^import logging$/;"	kind:namespace	line:6
+logging	../config/settings/production.py	/^import logging$/;"	kind:namespace	line:13
+logging	../venv/bin/pilfile.py	/^import logging$/;"	kind:namespace	line:24
+logging_level	../venv/bin/pilfile.py	/^        logging_level = "DEBUG"$/;"	kind:variable	line:63
+logging_level	../venv/bin/pilfile.py	/^logging_level = "WARNING"$/;"	kind:variable	line:46
+login	../apps/accounts/views.py	/^from django.contrib.auth import authenticate, login,logout$/;"	kind:namespace	line:2
+login_required	../apps/testapp/views.py	/^from django.contrib.auth.decorators import login_required$/;"	kind:namespace	line:9
+login_view	../apps/accounts/urls.py	/^from .views import login_view, logout_view$/;"	kind:namespace	line:3
+login_view	../apps/accounts/views.py	/^def login_view(request):$/;"	kind:function	line:8
+logout	../apps/accounts/views.py	/^from django.contrib.auth import authenticate, login,logout$/;"	kind:namespace	line:2
+logout_view	../apps/accounts/urls.py	/^from .views import login_view, logout_view$/;"	kind:namespace	line:3
+logout_view	../apps/accounts/views.py	/^def logout_view(request):$/;"	kind:function	line:22
+main	../venv/bin/coverage	/^from coverage.cmdline import main$/;"	kind:namespace	line:7
+main	../venv/bin/coverage-3.6	/^from coverage.cmdline import main$/;"	kind:namespace	line:7
+main	../venv/bin/coverage3	/^from coverage.cmdline import main$/;"	kind:namespace	line:7
+main	../venv/bin/easy_install	/^from setuptools.command.easy_install import main$/;"	kind:namespace	line:7
+main	../venv/bin/easy_install-3.6	/^from setuptools.command.easy_install import main$/;"	kind:namespace	line:7
+main	../venv/bin/ipdb3	/^from ipdb.__main__ import main$/;"	kind:namespace	line:7
+main	../venv/bin/iptest	/^from IPython.testing.iptestcontroller import main$/;"	kind:namespace	line:7
+main	../venv/bin/iptest3	/^from IPython.testing.iptestcontroller import main$/;"	kind:namespace	line:7
+main	../venv/bin/isort	/^from isort.main import main$/;"	kind:namespace	line:7
+main	../venv/bin/pip	/^from pip import main$/;"	kind:namespace	line:7
+main	../venv/bin/pip3	/^from pip import main$/;"	kind:namespace	line:7
+main	../venv/bin/pip3.6	/^from pip import main$/;"	kind:namespace	line:7
+main	../venv/bin/prospector	/^from prospector.run import main$/;"	kind:namespace	line:7
+main	../venv/bin/pydocstyle	/^from pydocstyle.cli import main$/;"	kind:namespace	line:7
+main	../venv/bin/pyflakes	/^from pyflakes.api import main$/;"	kind:namespace	line:7
+main	../venv/bin/pygmentize	/^from pygments.cmdline import main$/;"	kind:namespace	line:7
+main	../venv/bin/sqlformat	/^from sqlparse.__main__ import main$/;"	kind:namespace	line:7
+manage.py	../manage.py	1;"	kind:file	line:1
+management	../venv/bin/django-admin.py	/^from django.core import management$/;"	kind:namespace	line:2
+mark_safe	../apps/accounts/forms.py	/^from django.utils.safestring import mark_safe$/;"	kind:namespace	line:3
+mark_safe	../apps/accounts/views.py	/^from django.utils.safestring import mark_safe$/;"	kind:namespace	line:4
+migrations	../apps/testapp/migrations/0001_initial.py	/^from django.db import migrations, models$/;"	kind:namespace	line:5
+model	../apps/testapp/models.py	/^        model = Images$/;"	kind:variable	line:11
+models	../apps/accounts/models.py	/^from django.db import models$/;"	kind:namespace	line:1
+models	../apps/errors/models.py	/^from django.db import models$/;"	kind:namespace	line:1
+models	../apps/testapp/migrations/0001_initial.py	/^from django.db import migrations, models$/;"	kind:namespace	line:5
+models	../apps/testapp/models.py	/^from django.db import models$/;"	kind:namespace	line:1
+models.py	../apps/accounts/models.py	1;"	kind:file	line:1
+models.py	../apps/errors/models.py	1;"	kind:file	line:1
+models.py	../apps/testapp/models.py	1;"	kind:file	line:1
+monochrome	../venv/bin/pilprint.py	/^        monochrome = 0$/;"	kind:variable	line:62
+monochrome	../venv/bin/pilprint.py	/^monochrome = 1    # reduce file size for most common case$/;"	kind:variable	line:52
+name	../apps/accounts/apps.py	/^    name = 'accounts'$/;"	kind:variable	line:5
+name	../apps/errors/apps.py	/^    name = 'errors'$/;"	kind:variable	line:5
+name	../apps/testapp/apps.py	/^    name = 'testapp'$/;"	kind:variable	line:5
+name	../apps/testapp/migrations/0001_initial.py	/^            name='Images',$/;"	kind:variable	line:17
+next	../venv/bin/player.py	/^    def next(self):$/;"	kind:member	line:42
+noqa	../config/settings/testing.py	/^from .common import *  # noqa$/;"	kind:namespace	line:7
+not_found	../apps/errors/tests.py	/^from .views import server_error, not_found, permission_denied, bad_request$/;"	kind:namespace	line:6
+not_found	../apps/errors/views.py	/^def not_found(request):$/;"	kind:function	line:11
+operations	../apps/testapp/migrations/0001_initial.py	/^    operations = [$/;"	kind:variable	line:15
+options	../venv/bin/pilconvert.py	/^options = {}$/;"	kind:variable	line:55
+os	../apps/testapp/views.py	/^import os$/;"	kind:namespace	line:7
+os	../config/settings/common.py	/^import os$/;"	kind:namespace	line:13
+os	../config/settings/production.py	/^import os$/;"	kind:namespace	line:14
+os	../config/wsgi.py	/^import os$/;"	kind:namespace	line:10
+os	../manage.py	/^import os$/;"	kind:namespace	line:2
+os	../venv/bin/explode.py	/^import os$/;"	kind:namespace	line:12
+os	../venv/bin/pilprint.py	/^import os$/;"	kind:namespace	line:16
+outfile	../venv/bin/explode.py	/^    outfile = file + "%03d" + ext$/;"	kind:variable	line:84
+outfile	../venv/bin/explode.py	/^outfile = sys.argv[2]$/;"	kind:variable	line:75
+output_format	../venv/bin/pilconvert.py	/^output_format = None$/;"	kind:variable	line:52
+p	../venv/bin/pilfont.py	/^            p = BdfFontFile.BdfFontFile(fp)$/;"	kind:variable	line:49
+p	../venv/bin/pilfont.py	/^            p = PcfFontFile.PcfFontFile(fp)$/;"	kind:variable	line:46
+p	../venv/bin/pilprint.py	/^            p = subprocess.Popen(printerArgs, stdin=subprocess.PIPE)$/;"	kind:variable	line:82
+paint	../venv/bin/painter.py	/^    def paint(self, event):$/;"	kind:member	line:45
+painter.py	../venv/bin/painter.py	1;"	kind:file	line:1
+password	../apps/accounts/forms.py	/^    password = forms.CharField()$/;"	kind:variable	line:8
+permission_denied	../apps/errors/tests.py	/^from .views import server_error, not_found, permission_denied, bad_request$/;"	kind:namespace	line:6
+permission_denied	../apps/errors/views.py	/^def permission_denied(request):$/;"	kind:function	line:16
+pilconvert.py	../venv/bin/pilconvert.py	1;"	kind:file	line:1
+pildriver.py	../venv/bin/pildriver.py	1;"	kind:file	line:1
+pilfile.py	../venv/bin/pilfile.py	1;"	kind:file	line:1
+pilfont.py	../venv/bin/pilfont.py	1;"	kind:file	line:1
+pilprint.py	../venv/bin/pilprint.py	1;"	kind:file	line:1
+pip	../venv/bin/pip	1;"	kind:file	line:1
+pip3	../venv/bin/pip3	1;"	kind:file	line:1
+pip3.6	../venv/bin/pip3.6	1;"	kind:file	line:1
+pipdeptree	../venv/bin/pipdeptree	1;"	kind:file	line:1
+player.py	../venv/bin/player.py	1;"	kind:file	line:1
+print_function	../venv/bin/explode.py	/^from __future__ import print_function$/;"	kind:namespace	line:9
+print_function	../venv/bin/gifmaker.py	/^from __future__ import print_function$/;"	kind:namespace	line:17
+print_function	../venv/bin/pilconvert.py	/^from __future__ import print_function$/;"	kind:namespace	line:16
+print_function	../venv/bin/pildriver.py	/^from __future__ import print_function$/;"	kind:namespace	line:51
+print_function	../venv/bin/pilfile.py	/^from __future__ import print_function$/;"	kind:namespace	line:20
+print_function	../venv/bin/pilfont.py	/^from __future__ import print_function$/;"	kind:namespace	line:13
+print_function	../venv/bin/pilprint.py	/^from __future__ import print_function$/;"	kind:namespace	line:14
+print_function	../venv/bin/player.py	/^from __future__ import print_function$/;"	kind:namespace	line:7
+print_function	../venv/bin/viewer.py	/^from __future__ import print_function$/;"	kind:namespace	line:7
+printerArgs	../venv/bin/pilprint.py	/^        printerArgs = ["lpr", "-P%s" % a]$/;"	kind:variable	line:68
+printerArgs	../venv/bin/pilprint.py	/^        printerArgs = ["lpr"]$/;"	kind:variable	line:65
+printerArgs	../venv/bin/pilprint.py	/^printerArgs = []  # print to stdout$/;"	kind:variable	line:51
+production.py	../config/settings/production.py	1;"	kind:file	line:1
+prospector	../venv/bin/prospector	1;"	kind:file	line:1
+ps	../venv/bin/pilprint.py	/^        ps = PSDraw.PSDraw(fp)$/;"	kind:variable	line:87
+push	../venv/bin/pildriver.py	/^    def push(self, item):$/;"	kind:member	line:71
+pycodestyle	../venv/bin/pycodestyle	1;"	kind:file	line:1
+pydocstyle	../venv/bin/pydocstyle	1;"	kind:file	line:1
+pyflakes	../venv/bin/pyflakes	1;"	kind:file	line:1
+pygmentize	../venv/bin/pygmentize	1;"	kind:file	line:1
+pylint	../venv/bin/pylint	1;"	kind:file	line:1
+pyreverse	../venv/bin/pyreverse	1;"	kind:file	line:1
+quiet	../venv/bin/pilfile.py	/^        quiet = 1$/;"	kind:variable	line:59
+raven	../config/settings/production.py	/^import raven$/;"	kind:namespace	line:15
+re	../venv/bin/coverage	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/coverage-3.6	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/coverage3	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/django-admin	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/easy_install	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/easy_install-3.6	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/epylint	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/ipdb3	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/iptest	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/iptest3	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/ipython	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/ipython3	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/isort	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/pip	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/pip3	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/pip3.6	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/pipdeptree	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/prospector	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/pycodestyle	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/pydocstyle	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/pyflakes	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/pygmentize	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/pylint	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/pyreverse	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/sqlformat	/^import re$/;"	kind:namespace	line:4
+re	../venv/bin/symilar	/^import re$/;"	kind:namespace	line:4
+redirect	../apps/accounts/views.py	/^from django.shortcuts import render,redirect$/;"	kind:namespace	line:1
+redraw	../venv/bin/thresholder.py	/^    def redraw(self, event=None):$/;"	kind:member	line:51
+render	../apps/accounts/views.py	/^from django.shortcuts import render,redirect$/;"	kind:namespace	line:1
+render	../apps/errors/views.py	/^from django.shortcuts import render$/;"	kind:namespace	line:3
+render	../apps/testapp/views.py	/^from django.shortcuts import render$/;"	kind:namespace	line:1
+render_to_response	../apps/errors/tests.py	/^from django.shortcuts import render_to_response$/;"	kind:namespace	line:5
+repair	../venv/bin/painter.py	/^    def repair(self, box):$/;"	kind:member	line:55
+reverse	../apps/accounts/tests.py	/^from django.shortcuts import reverse$/;"	kind:namespace	line:2
+reverse	../apps/errors/tests.py	/^from django.urls import reverse$/;"	kind:namespace	line:4
+root	../venv/bin/enhancer.py	/^root = tkinter.Tk()$/;"	kind:variable	line:53
+root	../venv/bin/painter.py	/^root = tkinter.Tk()$/;"	kind:variable	line:75
+root	../venv/bin/player.py	/^    root = tkinter.Tk()$/;"	kind:variable	line:79
+root	../venv/bin/thresholder.py	/^root = tkinter.Tk()$/;"	kind:variable	line:69
+root	../venv/bin/viewer.py	/^    root = tkinter.Tk()$/;"	kind:variable	line:48
+run	../venv/bin/detect-requirements	/^from requirements_detector.run import run$/;"	kind:namespace	line:2
+run	../venv/bin/dodgy	/^import dodgy.run$/;"	kind:namespace	line:3
+run_epylint	../venv/bin/epylint	/^from pylint import run_epylint$/;"	kind:namespace	line:7
+run_pylint	../venv/bin/pylint	/^from pylint import run_pylint$/;"	kind:namespace	line:7
+run_pyreverse	../venv/bin/pyreverse	/^from pylint import run_pyreverse$/;"	kind:namespace	line:7
+run_symilar	../venv/bin/symilar	/^from pylint import run_symilar$/;"	kind:namespace	line:7
+send_mail	../apps/testapp/views.py	/^from django.core.mail import send_mail$/;"	kind:namespace	line:2
+server_error	../apps/errors/tests.py	/^from .views import server_error, not_found, permission_denied, bad_request$/;"	kind:namespace	line:6
+server_error	../apps/errors/views.py	/^def server_error(request):$/;"	kind:function	line:6
+setUp	../apps/accounts/tests.py	/^    def setUp(self):$/;"	kind:member	line:6
+setUp	../apps/errors/tests.py	/^    def setUp(self):$/;"	kind:member	line:20
+setinterval	../venv/bin/explode.py	/^    def setinterval(self, interval):$/;"	kind:member	line:22
+settings	../apps/testapp/views.py	/^from django.conf import settings$/;"	kind:namespace	line:3
+settings	../config/storage.py	/^from django.conf import settings$/;"	kind:namespace	line:2
+settings	../config/urls.py	/^from django.conf import settings$/;"	kind:namespace	line:18
+settings	../config/wsgi.py	/^from django.conf import settings$/;"	kind:namespace	line:12
+sqlformat	../venv/bin/sqlformat	1;"	kind:file	line:1
+stack	../venv/bin/pildriver.py	/^    stack = []          # Stack of pending operations$/;"	kind:variable	line:69
+start_ipython	../venv/bin/ipython	/^from IPython import start_ipython$/;"	kind:namespace	line:7
+start_ipython	../venv/bin/ipython3	/^from IPython import start_ipython$/;"	kind:namespace	line:7
+static	../config/urls.py	/^        from django.conf.urls.static import  static$/;"	kind:namespace	line:31
+storage	../config/storage.py	/^from b2_storage import storage$/;"	kind:namespace	line:1
+storage.py	../config/storage.py	1;"	kind:file	line:1
+string	../venv/bin/pilconvert.py	/^import string$/;"	kind:namespace	line:19
+subprocess	../venv/bin/pilprint.py	/^import subprocess$/;"	kind:namespace	line:18
+symilar	../venv/bin/symilar	1;"	kind:file	line:1
+sys	../config/wsgi.py	/^import sys$/;"	kind:namespace	line:11
+sys	../manage.py	/^import sys$/;"	kind:namespace	line:3
+sys	../venv/bin/coverage	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/coverage-3.6	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/coverage3	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/django-admin	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/easy_install	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/easy_install-3.6	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/enhancer.py	/^import sys$/;"	kind:namespace	line:10
+sys	../venv/bin/epylint	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/explode.py	/^import sys$/;"	kind:namespace	line:13
+sys	../venv/bin/gifmaker.py	/^    import sys$/;"	kind:namespace	line:23
+sys	../venv/bin/ipdb3	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/iptest	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/iptest3	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/ipython	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/ipython3	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/isort	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/painter.py	/^import sys$/;"	kind:namespace	line:12
+sys	../venv/bin/pilconvert.py	/^import sys$/;"	kind:namespace	line:20
+sys	../venv/bin/pildriver.py	/^    import sys$/;"	kind:namespace	line:501
+sys	../venv/bin/pilfile.py	/^import sys$/;"	kind:namespace	line:25
+sys	../venv/bin/pilfont.py	/^import sys$/;"	kind:namespace	line:16
+sys	../venv/bin/pilprint.py	/^import sys$/;"	kind:namespace	line:17
+sys	../venv/bin/pip	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/pip3	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/pip3.6	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/pipdeptree	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/player.py	/^import sys$/;"	kind:namespace	line:9
+sys	../venv/bin/prospector	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/pycodestyle	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/pydocstyle	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/pyflakes	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/pygmentize	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/pylint	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/pyreverse	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/sqlformat	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/symilar	/^import sys$/;"	kind:namespace	line:5
+sys	../venv/bin/thresholder.py	/^import sys$/;"	kind:namespace	line:10
+sys	../venv/bin/viewer.py	/^import sys$/;"	kind:namespace	line:9
+template_name	../apps/testapp/views.py	/^    template_name = 'base.html'$/;"	kind:variable	line:33
+test_are_templates_rendered	../apps/errors/tests.py	/^    def test_are_templates_rendered(self):$/;"	kind:member	line:34
+test_contains_homepage_link	../apps/errors/tests.py	/^    def test_contains_homepage_link(self):$/;"	kind:member	line:38
+test_csrf	../apps/accounts/tests.py	/^    def test_csrf(self):$/;"	kind:member	line:11
+test_start	../apps/testapp/tests.py	/^    def test_start(self):$/;"	kind:member	line:5
+test_status_code	../apps/errors/tests.py	/^    def test_status_code(self):$/;"	kind:member	line:25
+test_view	../apps/testapp/urls.py	/^from .views import test_view, upload_view, TestView$/;"	kind:namespace	line:2
+test_view	../apps/testapp/views.py	/^def test_view(request):$/;"	kind:function	line:14
+testapp	../config/urls.py	/^import testapp$/;"	kind:namespace	line:19
+testing.py	../config/settings/testing.py	1;"	kind:file	line:1
+tests.py	../apps/accounts/tests.py	1;"	kind:file	line:1
+tests.py	../apps/errors/tests.py	1;"	kind:file	line:1
+tests.py	../apps/testapp/tests.py	1;"	kind:file	line:1
+thresholder.py	../venv/bin/thresholder.py	1;"	kind:file	line:1
+title	../venv/bin/pilprint.py	/^        title = description(filepath, im)$/;"	kind:variable	line:75
+tkinter	../venv/bin/enhancer.py	/^    import Tkinter as tkinter$/;"	kind:namespace	line:15
+tkinter	../venv/bin/enhancer.py	/^    import tkinter$/;"	kind:namespace	line:13
+tkinter	../venv/bin/painter.py	/^    import Tkinter as tkinter$/;"	kind:namespace	line:17
+tkinter	../venv/bin/painter.py	/^    import tkinter$/;"	kind:namespace	line:15
+tkinter	../venv/bin/player.py	/^    import Tkinter as tkinter$/;"	kind:namespace	line:14
+tkinter	../venv/bin/player.py	/^    import tkinter$/;"	kind:namespace	line:12
+tkinter	../venv/bin/thresholder.py	/^    import Tkinter as tkinter$/;"	kind:namespace	line:15
+tkinter	../venv/bin/thresholder.py	/^    import tkinter$/;"	kind:namespace	line:13
+tkinter	../venv/bin/viewer.py	/^    import Tkinter as tkinter$/;"	kind:namespace	line:14
+tkinter	../venv/bin/viewer.py	/^    import tkinter$/;"	kind:namespace	line:12
+top	../venv/bin/pildriver.py	/^    def top(self):$/;"	kind:member	line:75
+traceback	../venv/bin/pilfile.py	/^        import traceback$/;"	kind:namespace	line:98
+unicode_literals	../apps/testapp/migrations/0001_initial.py	/^from __future__ import unicode_literals$/;"	kind:namespace	line:3
+update	../venv/bin/enhancer.py	/^    def update(self, value):$/;"	kind:member	line:42
+update_scale	../venv/bin/thresholder.py	/^    def update_scale(self, value):$/;"	kind:member	line:46
+upload_view	../apps/testapp/urls.py	/^from .views import test_view, upload_view, TestView$/;"	kind:namespace	line:2
+upload_view	../apps/testapp/views.py	/^def upload_view(request):$/;"	kind:function	line:21
+url	../apps/accounts/urls.py	/^from django.conf.urls import url$/;"	kind:namespace	line:1
+url	../apps/testapp/urls.py	/^from django.conf.urls import url$/;"	kind:namespace	line:1
+url	../config/urls.py	/^from django.conf.urls import url,include$/;"	kind:namespace	line:16
+urlpatterns	../apps/accounts/urls.py	/^urlpatterns = [$/;"	kind:variable	line:6
+urlpatterns	../apps/testapp/urls.py	/^urlpatterns=[$/;"	kind:variable	line:4
+urlpatterns	../config/urls.py	/^urlpatterns = [$/;"	kind:variable	line:22
+urlresolvers	../apps/accounts/forms.py	/^from django.core import urlresolvers$/;"	kind:namespace	line:4
+urls.py	../apps/accounts/urls.py	1;"	kind:file	line:1
+urls.py	../apps/testapp/urls.py	1;"	kind:file	line:1
+urls.py	../config/urls.py	1;"	kind:file	line:1
+usage	../venv/bin/pilconvert.py	/^def usage():$/;"	kind:function	line:25
+username	../apps/accounts/forms.py	/^    username = forms.CharField()$/;"	kind:variable	line:7
+verbose	../venv/bin/pildriver.py	/^    verbose = 0$/;"	kind:variable	line:58
+verbose	../venv/bin/pilfile.py	/^        verbose = 1$/;"	kind:variable	line:57
+verify	../venv/bin/pilfile.py	/^        verify = 1$/;"	kind:variable	line:61
+viewer.py	../venv/bin/viewer.py	1;"	kind:file	line:1
+views	../apps/errors/tests.py	/^    views = {500: server_error, 400: bad_request,$/;"	kind:variable	line:17
+views.py	../apps/accounts/views.py	1;"	kind:file	line:1
+views.py	../apps/errors/views.py	1;"	kind:file	line:1
+views.py	../apps/testapp/views.py	1;"	kind:file	line:1
+wsgi.py	../config/wsgi.py	1;"	kind:file	line:1

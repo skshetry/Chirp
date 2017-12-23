@@ -4,8 +4,25 @@ from django.utils.safestring import mark_safe
 from django.core import urlresolvers
 
 class UserAuthenticationForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField()
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Username',
+                'required': 'required',
+            }
+        )
+    )
+
+    password = forms.CharField(
+        widget = forms.PasswordInput(
+            attrs = {
+                'class': 'form-control',
+                'placeholder': 'Password',
+                'required': 'required',
+            }
+        )
+    )
 
     def clean(self, *args, **kwargs):
         username = self.cleaned_data.get("username")
