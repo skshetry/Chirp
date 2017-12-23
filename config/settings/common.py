@@ -55,6 +55,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # Apps specific for this project go here.
     'testapp.apps.TestappConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -246,3 +247,5 @@ MEDIA_URL = '/media/'
 
 # Location of root django.contrib.admin URL, use {% url 'admin:index' %}
 ADMIN_URL = r'^admin/'
+
+LOGIN_REDIRECT_URL = 'upload_pic'
