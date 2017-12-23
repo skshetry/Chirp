@@ -32,3 +32,8 @@ if settings.DEBUG:
         urlpatterns += [
             url(r'^__debug__/', include(debug_toolbar.urls)),
         ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = 'apps.errors.views.not_found'
+handler500 = 'apps.errors.views.server_error'
+handler403 = 'apps.errors.views.permission_denied'
+handler400 = 'apps.errors.views.bad_request'
