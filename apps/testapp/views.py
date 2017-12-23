@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 import logging
 import os
 from .models import Images, ImageUploadForm
+from django.contrib.auth.decorators import login_required
 
 logger=logging.getLogger('raven')
 
@@ -16,6 +17,7 @@ def test_view(request):
     logger.error("Error occured.")
     return render(request, 'a.html')
 
+@login_required
 def upload_view(request):
     all_images = all_images = Images.objects.all()
     if request.method == 'GET':

@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from django.conf import settings
+<<<<<<< HEAD
 from testapp import urls
 from accounts import urls as accounts_urls
 
@@ -24,6 +25,15 @@ urlpatterns = [
     url(settings.ADMIN_URL, admin.site.urls),
     url(r'^', include(urls)),
     url(r'^', include(accounts_urls),)
+=======
+import testapp
+import accounts
+
+urlpatterns = [
+    url(settings.ADMIN_URL, admin.site.urls),
+    url(r'accounts/', include('accounts.urls', namespace='accounts')),
+    url(r'^', include('testapp.urls')),
+>>>>>>> Created login and logout views and logic. Doesnot allow login to users wthout email verification.
 ]
 
 if settings.DEBUG:
