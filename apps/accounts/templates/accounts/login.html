@@ -2,19 +2,9 @@
 {% block content %}
 <div class="card card-register mx-auto">
         <h3 class="title">Welcome</h3>
-        <form class="register-form" method="POST" action="{% url 'accounts:login' %}">
-            {% if form.non_field_errors %}
-                <ul class='form-errors'>
-                    {% for error in form.non_field_errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+        <form class="register-form" method="POST">
+            {{form.non_field_errors}}
             {% csrf_token %}
-            {% comment %} <label>Email</label>
-            <input class="form-control" name="username" placeholder="Email or Username" autocomplete="off" type="text" required>
-            <label>Password</label>
-            <input class="form-control" name="password" placeholder="Password" autocomplete="off" type="password" required> {% endcomment %}
             {{ form.as_p }}
             <button class="btn btn-info btn-block btn-round">Login</button>
         </form>
