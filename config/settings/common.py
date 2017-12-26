@@ -56,6 +56,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # Apps specific for this project go here.
     'testapp.apps.TestappConfig',
+    'accounts.apps.AccountsConfig',
     'errors.apps.ErrorsConfig',
 ]
 
@@ -216,7 +217,7 @@ SITE_ID = 1
 # AUTHENTICATION CONFIGURATION
 # ------------------------------------------------------------------------------
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.AllowAllUsersModelBackend',
 ]
 
 # Static files (CSS, JavaScript, Images)
@@ -249,3 +250,5 @@ MEDIA_URL = '/media/'
 
 # Location of root django.contrib.admin URL, use {% url 'admin:index' %}
 ADMIN_URL = r'^admin/'
+
+LOGIN_REDIRECT_URL = 'upload_pic'

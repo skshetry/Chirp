@@ -4,6 +4,24 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+    {
+        "name": "Django Testing",
+        "type": "python",
+        "request": "launch",
+        "stopOnEntry": true,
+        "pythonPath": "${config:python.pythonPath}",
+        "program": "${workspaceFolder}/manage.py",
+        "cwd": "${workspaceFolder}",
+        "args": [
+            "test",
+        ],
+        "env": {},
+        "envFile": "${workspaceFolder}/.env",
+        "debugOptions": [
+            "RedirectOutput",
+            "DjangoDebugging"
+        ]
+    },
         {
             "name": "Python",
             "type": "python",

@@ -57,7 +57,8 @@ INSTALLED_APPS += [
     'debug_toolbar',
 ]
 
-INTERNAL_IPS = ['127.0.0.1', '10.0.2.2', 'localhost', ]
+INTERNAL_IPS = ['127.0.0.1', '10.0.2.2', 'localhost', '192.168.100.3', '0.0.0.0']
+ALLOWED_HOSTS = INTERNAL_IPS
 
 DEBUG_TOOLBAR_CONFIG = {
     'DISABLE_PANELS': [
