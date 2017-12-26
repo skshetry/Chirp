@@ -17,11 +17,13 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from django.conf import settings
 from testapp import urls
+from accounts import urls as accounts_urls
 
 
 urlpatterns = [
     url(settings.ADMIN_URL, admin.site.urls),
     url(r'^', include(urls)),
+    url(r'^', include(accounts_urls),)
 ]
 
 if settings.DEBUG:
