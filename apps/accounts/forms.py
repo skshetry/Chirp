@@ -1,3 +1,4 @@
+"""Form handling for :accounts:."""
 from django import forms
 
 from django.contrib.auth.forms import AuthenticationForm
@@ -6,6 +7,12 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 
 
 class CustomUserAuthenticationForm(AuthenticationForm):
+    """
+    CustomUserAuthForm with custom error message.
+
+    Also, adds attributes to the input fields.
+    """
+
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -16,8 +23,8 @@ class CustomUserAuthenticationForm(AuthenticationForm):
         )
     )
     password = forms.CharField(
-        widget = forms.PasswordInput(
-            attrs = {
+        widget=forms.PasswordInput(
+            attrs={
                 'class': 'form-control',
                 'placeholder': 'Password',
                 'required': 'required',
