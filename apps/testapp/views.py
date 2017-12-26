@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 logger=logging.getLogger('raven')
 
 # Create your views here.
+@login_required
 def test_view(request):
     send_mail('Subject here','Here is the message.','from@example.com',[os.environ.get('DJANGO_ADMINS_EMAIL_ADDRESS',default='acb@pahcjsdjsdkskssdskdskdjskdjsdsdskdjskdksjkdksexample.com')],fail_silently=False,)
     #email failing?
