@@ -15,7 +15,8 @@ import environ
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-ROOT_DIR = environ.Path(__file__) - 3  # (Chirp/config/settings/base.py - 3 = Chirp/)
+# (Chirp/config/settings/base.py - 3 = Chirp/)
+ROOT_DIR = environ.Path(__file__) - 3
 APPS_DIR = ROOT_DIR.path('apps')  # (Chirp/apps)
 PROJECT_DIR = ROOT_DIR.path('chirp')  # (Chirp/chirp)
 
@@ -38,7 +39,7 @@ ALLOWED_HOSTS = []
 # ------------------------------------------------------------------------------
 # Application definition
 DJANGO_APPS = [
-    #Admin
+    # Admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,6 +56,8 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # Apps specific for this project go here.
     'testapp.apps.TestappConfig',
+    'accounts.apps.AccountsConfig',
+    'errors.apps.ErrorsConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -93,6 +96,7 @@ TEMPLATES = [
         'DIRS': [
             str(PROJECT_DIR.path('templates')),
         ],
+
         'OPTIONS': {
             # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
             'debug': DEBUG,
@@ -131,7 +135,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Uses django-environ to accept uri format
 # See: https://django-environ.readthedocs.io/en/latest/#supported-types
 DATABASES = {
-    'default': env.db('DATABASE_URL',default="postgres:///test"),
+    'default': env.db('DATABASE_URL', default="postgres:///test"),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
@@ -168,7 +172,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # EMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
-EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
+                    default='django.core.mail.backends.smtp.EmailBackend')
 
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -197,7 +202,6 @@ TIME_ZONE = 'UTC'
 LANGUAGE_CODE = 'en-us'
 
 
-
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
 
@@ -213,7 +217,7 @@ SITE_ID = 1
 # AUTHENTICATION CONFIGURATION
 # ------------------------------------------------------------------------------
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.AllowAllUsersModelBackend',
 ]
 
 # Static files (CSS, JavaScript, Images)
@@ -246,3 +250,5 @@ MEDIA_URL = '/media/'
 
 # Location of root django.contrib.admin URL, use {% url 'admin:index' %}
 ADMIN_URL = r'^admin/'
+
+LOGIN_REDIRECT_URL = 'upload_pic'

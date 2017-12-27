@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card card-register mx-auto">
+        <h3 class="title">Welcome</h3>
+        <form class="register-form" method="POST">
+            {{form.non_field_errors}}
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-info btn-block btn-round">Login</button>
+        </form>
+        <div class="forgot">
+            <a href="#forgot_password" class="btn btn-link btn-danger">Forgot password?</a>
+        </div>
+        <div class="no-account">
+            <a href="#signup" class="btn btn-link btn-default">Don't have an account?</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
