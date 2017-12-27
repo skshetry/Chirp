@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card card-register mx-auto">
+
+  <h2 class="title">Sign up</h2>
+  <form method="post" novalidate>
+      {% csrf_token %}
+      {% include 'includes/form.html' %}
+      <button type="submit" class="btn btn-primary">Create an account</button>
+    </form>
+  </div>
+
+{% endblock %}

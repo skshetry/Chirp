@@ -16,14 +16,13 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from django.conf import settings
-from testapp import urls
-from accounts import urls as accounts_urls
-
+import testapp
+import accounts
 
 urlpatterns = [
     url(settings.ADMIN_URL, admin.site.urls),
-    url(r'^', include(urls)),
-    url(r'^', include(accounts_urls),)
+    url(r'accounts/', include('accounts.urls', namespace='accounts')),
+    url(r'^', include('testapp.urls')),
 ]
 
 if settings.DEBUG:
