@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card card-register mx-auto">
+        <h3 class="title">Settings</h3>
+        <div class="forgot">
+            <a href="{% url 'user:change_password' %}" class="btn btn-link btn-danger">Change Password</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
