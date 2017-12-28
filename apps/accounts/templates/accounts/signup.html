@@ -4,12 +4,12 @@
 <div class="card card-register mx-auto">
 
   <h2 class="title">Sign up</h2>
-  <form method="post" novalidate>
-    {{form.non_field_errors}}
+  <form class="register-form" method="POST">
+      {{form.non_field_errors}}
       {% csrf_token %}
-      {{form.as_p}}
-      <button type="submit" class="btn btn-primary">Create an account</button>
-    </form>
+      {{ form.as_p }}
+      <button class="btn btn-info btn-block btn-round">Create account</button>
+  </form>
   </div>
 
 {% endblock %}
