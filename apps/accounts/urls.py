@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from .views import UserLoginView, logout_view, signup, activate as activate_view
-
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'signup/$', signup, name='signup'),
