@@ -44,8 +44,9 @@ class LoginGETTest(TestCase):
 
     def test_contains_forgot_password_link(self):
         """Test if it contains `forgot_password` link."""
-        # TODO: Change this to test for actual link
-        self.assertContains(self.response, 'href="#forgot_password"')
+        # DONE: Changed this to test for actual link
+        url = reverse('accounts:password_reset')
+        self.assertContains(self.response, url)
 
     def test_form_inputs(self):
         """The view must contain three inputs: csrf, username, password."""
