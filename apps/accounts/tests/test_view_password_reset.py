@@ -63,3 +63,17 @@ class InvalidPasswordResetTests(TestCase):
 
     def test_no_reset_email_sent(self):
         self.assertEqual(0, len(mail.outbox))
+class PasswordResetDoneTests(TestCase):
+    def setUp(self):
+        url = reverse('accounts:password_reset_done')
+        self.response = self.client.get(url)
+
+    def test_status_code(self):
+        self.assertEquals(self.response.status_code, 200)
+
+    def test_view_function(self):
+        view = resolve('/accounts/reset/done/')
+        self.assertEquals(
+            view.func.view_class,
+            auth_views.PasswordResetDoneView
+        )
