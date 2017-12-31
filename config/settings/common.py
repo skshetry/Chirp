@@ -47,7 +47,6 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-    'widget_tweaks', 
 
 ]
 
