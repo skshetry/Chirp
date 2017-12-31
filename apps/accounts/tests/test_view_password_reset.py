@@ -48,3 +48,18 @@ class SuccessfulPasswordResetTests(TestCase):
 
     def test_send_password_reset_email(self):
         self.assertEqual(1, len(mail.outbox))
+class InvalidPasswordResetTests(TestCase):
+    def setUp(self):
+        url = reverse('accounts:password_reset')
+        self.response = self.client.post(url, {'email': 'donotexist@email.com'})
+
+    def test_redirection(self):
+        '''
+        Even invalid emails in the database should
+        redirect the user to `password_reset_done` view
+        '''
+        url = reverse('accounts:password_reset_done')
+        self.assertRedirects(self.response, url)
+
+    def test_no_reset_email_sent(self):
+        self.assertEqual(0, len(mail.outbox))
