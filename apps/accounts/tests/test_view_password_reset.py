@@ -8,14 +8,14 @@ from django.test import TestCase
 
 class PasswordResetTests(TestCase):
     def setUp(self):
-        url = reverse('password_reset')
+        url = reverse('accounts:password_reset')
         self.response = self.client.get(url)
 
     def test_status_code(self):
         self.assertEquals(self.response.status_code, 200)
 
     def test_view_function(self):
-        view = resolve('/reset/')
+        view = resolve('/accounts/reset/')
         self.assertEquals(view.func.view_class, auth_views.PasswordResetView)
 
     def test_csrf(self):
@@ -31,3 +31,20 @@ class PasswordResetTests(TestCase):
         '''
         self.assertContains(self.response, '<input', 2)
         self.assertContains(self.response, 'type="email"', 1)
+
+class SuccessfulPasswordResetTests(TestCase):
+    def setUp(self):
+        email = 'john@doe.com'
+        User.objects.create_user(username='john', email=email, password='123abcdef')
+        url = reverse('accounts:password_reset')
+        self.response = self.client.post(url, {'email': email})
+
+    def test_redirection(self):
+        '''
+        A valid form submission should redirect the user to `password_reset_done` view
+        '''
+        url = reverse('accounts:password_reset_done')
+        self.assertRedirects(self.response, url)
+
+    def test_send_password_reset_email(self):
+        self.assertEqual(1, len(mail.outbox))
