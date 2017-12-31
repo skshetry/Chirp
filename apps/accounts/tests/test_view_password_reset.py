@@ -143,3 +143,17 @@ class InvalidPasswordResetConfirmTests(TestCase):
         self.assertContains(
             self.response, 'href="{0}"'.format(password_reset_url)
         )
+class PasswordResetCompleteTests(TestCase):
+    def setUp(self):
+        url = reverse('accounts:password_reset_complete')
+        self.response = self.client.get(url)
+
+    def test_status_code(self):
+        self.assertEquals(self.response.status_code, 200)
+
+    def test_view_function(self):
+        view = resolve('/accounts/reset/complete/')
+        self.assertEquals(
+            view.func.view_class,
+            auth_views.PasswordResetCompleteView
+        )
