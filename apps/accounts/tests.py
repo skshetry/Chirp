@@ -7,6 +7,7 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 
 from accounts.forms import CustomUserAuthenticationForm
+from accounts.forms import SignUpForm
 
 # Create your tests here.
 
@@ -296,3 +297,30 @@ class LogoutTest(TestCase):
             expected_url=reverse('accounts:login'),
             status_code=302
             )
+
+class SignupGetTest(TestCase):
+
+    """Tests the signup view `GET`."""
+
+    def setUp(self):
+        """Set things up for testing signup functionality."""
+        self.url = reverse('accounts:signup')
+        self.response = self.client.get(self.url)
+
+    def test_csrf(self):
+        """Test for csrf token."""
+        self.assertContains(self.response, 'csrfmiddlewaretoken')
+
+    def test_contains_form(self):
+        """Tests if it contains form."""
+        form = self.response.context.get('form')
+        self.assertIsInstance(form, SignUpForm)
+
+    def test_response_status_code(self):
+        """Tests for `OK` response."""
+        self.assertEqual(self.response.status_code, 200)
+
+    def test_signup_view_is_rendered(self):
+        """Tests if `accounts/signup.html` and `base.html` is used."""
+        self.assertTemplateUsed(self.response, 'accounts/signup.html')
+        self.assertTemplateUsed(self.response, 'base.html')
