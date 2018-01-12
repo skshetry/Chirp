@@ -16,7 +16,7 @@ class PasswordChangeTests(TestCase):
         username = 'john'
         password = 'secret123'
         user = User.objects.create_user(username=username, email='john@doe.com', password=password)
-        url = reverse('user:change_password')
+        url = reverse('settings:change_password')
         self.client.login(username=username, password=password)
         self.response = self.client.get(url)
 
@@ -26,7 +26,7 @@ class PasswordChangeTests(TestCase):
 
     def test_url_resolves_correct_view(self):
         """Tests if the url is correct for changing password."""
-        view = resolve('/user/settings/change-password/')
+        view = resolve('/settings/change-password/')
         self.assertEquals(view.func.view_class, auth_views.PasswordChangeView)
 
     def test_csrf(self):
@@ -43,7 +43,6 @@ class PasswordChangeTests(TestCase):
         Tests if the page contains all the fields i.e. 3 password fields and the csrf token.
         """
         self.assertContains(self.response, '<input', 4)
-        self.assertContains(self.response, 'type="password"', 3)
 
 
 class LoginRequiredPasswordChangeTests(TestCase):
@@ -51,7 +50,7 @@ class LoginRequiredPasswordChangeTests(TestCase):
 
     def test_redirection(self):
         """Test for redirection after unauthorized access."""
-        url = reverse('user:change_password')
+        url = reverse('settings:change_password')
         login_url = reverse('accounts:login')
         response = self.client.get(url)
         self.assertRedirects(response, f'{login_url}?next={url}')
@@ -64,7 +63,7 @@ class PasswordChangeTestCase(TestCase):
     """
     def setUp(self, data={}):
         self.user = User.objects.create_user(username='john', email='john@doe.com', password='old_password')
-        self.url = reverse('user:change_password')
+        self.url = reverse('settings:change_password')
         self.client.login(username='john', password='old_password')
         self.response = self.client.post(self.url, data)
 
@@ -81,8 +80,7 @@ class SuccessfulPasswordChangeTests(PasswordChangeTestCase):
         """
         A valid form submission should redirect the user
         """
-        # FIXME: Is this really the way to go?
-        self.assertEqual(self.url + 'done/', reverse('user:password_change_done'))
+        self.assertRedirects(self.response, expected_url=reverse('settings:password_change_done'))
 
     def test_password_changed(self):
         """

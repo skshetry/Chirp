@@ -58,7 +58,7 @@ LOCAL_APPS = [
     'testapp.apps.TestappConfig',
     'accounts.apps.AccountsConfig',
     'errors.apps.ErrorsConfig',
-    'user.apps.UserConfig',
+    'settings.apps.SettingsConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

@@ -18,13 +18,13 @@ from django.contrib import admin
 from django.conf import settings
 import testapp
 import accounts
-import user
+import settings as user_settings
 
 urlpatterns = [
     url(settings.ADMIN_URL, admin.site.urls),
     url(r'accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^', include('testapp.urls')),
-    url(r'^user/', include('user.urls', namespace='user'))
+    url(r'^settings/', include('settings.urls', namespace='settings'))
 ]
 
 if settings.DEBUG:
