@@ -1,0 +1,317 @@
+/*      light colors - used for select dropdown         */
+.link-danger {
+  color: #EB5E28 !important; }
+  .link-danger:focus, .link-danger:active, .link-danger:hover {
+    color: #B33C12 !important; }
+
+.link-info {
+  color: #68B3C8 !important; }
+  .link-info:focus, .link-info:active, .link-info:hover {
+    color: #3091B2 !important; }
+
+.landing-alert {
+  margin-bottom: 0; }
+
+.landing-header {
+  background-size: cover;
+  min-height: 570px; }
+
+.landing-header .motto {
+  padding-top: 8%;
+  text-align: left;
+  z-index: 3; }
+
+.landing-section {
+  padding: 100px 0; }
+
+.landing-section .btn-simple {
+  padding: 0; }
+
+.landing-section .column {
+  padding: 0 75px 0 25px; }
+
+.team-player .img-circle, .team-player .img-thumbnail {
+  display: block;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 120px; }
+
+.contact-form {
+  margin-top: 30px; }
+
+.contact-form label {
+  margin-top: 15px; }
+
+.contact-form .btn {
+  margin-top: 30px; }
+
+.navbar-relative {
+  position: relative;
+  z-index: 2; }
+
+#register-navbar a {
+  color: #FFF; }
+
+.register-background {
+  background-image: url("/static/img/profile_default.png");
+  background-position: center center;
+  background-size: cover;
+  min-height: 100vh;
+  overflow: hidden;
+  position: absolute;
+  width: 100%; }
+
+.register-background .filter-black::after {
+  background-color: rgba(0, 0, 0, 0.5);
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1; }
+
+.register-background .container {
+  margin-top: 0%;
+  position: relative;
+  z-index: 3; }
+
+.register-footer {
+  bottom: 20px;
+  color: #fff;
+  position: absolute;
+  z-index: 3;
+  width: 100%; }
+
+.register-footer .fa-heart {
+  color: #EB5E28; }
+
+.register-card {
+  background-color: #FF8F5E;
+  border-radius: 8px;
+  color: #fff;
+  max-width: 350px;
+  margin: 20px 0 70px;
+  min-height: 400px;
+  padding: 30px; }
+
+.register-card label {
+  margin-top: 15px; }
+
+.register-card .title {
+  color: #B33C12;
+  text-align: center; }
+
+.register-card .btn {
+  margin-top: 30px; }
+
+.register-card .forgot {
+  text-align: center; }
+
+.full-screen #register-navbar a {
+  color: #FFF; }
+.full-screen .background {
+  background-position: center center;
+  background-size: cover;
+  min-height: 100vh;
+  overflow: hidden;
+  position: absolute;
+  width: 100%; }
+.full-screen .background .filter-black::after {
+  background-color: rgba(0, 0, 0, 0.5);
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1; }
+.full-screen .background .container {
+  margin-top: 11%;
+  position: relative;
+  z-index: 3; }
+.full-screen .demo-footer {
+  bottom: 10px;
+  color: #fff;
+  position: absolute;
+  z-index: 3;
+  width: 100%; }
+.full-screen .demo-footer .fa-heart {
+  color: #EB5E28; }
+.full-screen .demo-card {
+  border-radius: 8px;
+  max-width: 350px;
+  margin: 20px 0;
+  min-height: 400px;
+  padding: 30px; }
+.full-screen.login .demo-card {
+  background-color: #FF8F5E;
+  color: #fff; }
+  .full-screen.login .demo-card label {
+    margin-top: 15px; }
+  .full-screen.login .demo-card .title {
+    color: #B33C12;
+    text-align: center; }
+  .full-screen.login .demo-card .btn {
+    margin-top: 30px; }
+  .full-screen.login .demo-card .forgot {
+    text-align: center; }
+.full-screen.register .background .filter-black::after {
+  background-color: rgba(0, 0, 0, 0.6); }
+.full-screen.register .container {
+  margin-bottom: 50px; }
+.full-screen.register .info-horizontal {
+  color: #FFFFFF;
+  margin-bottom: 15px; }
+.full-screen.register .demo-card {
+  background-color: #E8E7E3;
+  max-width: 360px; }
+  .full-screen.register .demo-card input {
+    margin-bottom: 8px; }
+  .full-screen.register .demo-card .btn {
+    margin-top: 20px; }
+  .full-screen.register .demo-card .division {
+    float: none;
+    margin: 0 auto;
+    overflow: hidden;
+    margin: 20px 0;
+    position: relative;
+    text-align: center;
+    width: 100%; }
+    .full-screen.register .demo-card .division .line {
+      border-top: 1px solid #66615b;
+      position: absolute;
+      top: 10px;
+      width: 40%; }
+      .full-screen.register .demo-card .division .line.l {
+        left: 0; }
+      .full-screen.register .demo-card .division .line.r {
+        right: 0; }
+.full-screen.register .social {
+  margin-bottom: 10px;
+  margin-top: 15px;
+  text-align: center; }
+.full-screen.register .login {
+  margin-top: 20px;
+  text-align: center; }
+  .full-screen.register .login p {
+    font-size: 0.9em; }
+
+.profile-background {
+  background-position: center center;
+  background-size: cover;
+  height: 300px;
+  position: relative;
+  margin-top: -40px; }
+
+.profile-background .filter-black::after {
+  background-color: rgba(0, 0, 0, 0.5);
+  content: "";
+  display: block;
+  height: 300px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1; }
+
+.profile-content {
+  position: relative; }
+
+.owner .avatar {
+  margin-top: -85px;
+  padding: 15px;
+  position: relative;
+  z-index: 3; }
+
+.owner .name h4 {
+  margin-top: 10px; }
+
+.profile-tabs {
+  margin: 50px 0;
+  min-height: 300px; }
+
+#following h3 {
+  margin: 40px 0; }
+
+.follows .unfollow {
+  width: 15px; }
+
+.follows hr {
+  margin-top: 10px; }
+
+.alert h5 {
+  margin-bottom: 10px; }
+
+.settings .settings-form {
+  margin-bottom: 50px;
+  margin-top: 50px; }
+.settings .fileinput {
+  margin-top: -85px;
+  position: relative;
+  z-index: 3; }
+.settings .form-group {
+  padding-bottom: 10px; }
+.settings .notifications {
+  list-style: none;
+  margin-left: -40px;
+  padding-bottom: 30px;
+  padding-top: 20px; }
+  .settings .notifications .notification-item {
+    border-top: 1px solid #e8e7e3;
+    min-height: 60px;
+    padding-top: 20px;
+    padding-bottom: 15px; }
+    .settings .notifications .notification-item .switch {
+      float: right; }
+
+.about-us .container {
+  max-width: 970px; }
+.about-us .header-wrapper {
+  height: 550px; }
+.about-us .section {
+  padding-top: 50px; }
+.about-us h3.title-uppercase {
+  margin-top: 50px; }
+.about-us p {
+  margin-top: 20px; }
+.about-us .creators {
+  margin-top: 100px; }
+.about-us .more-info {
+  margin-top: 50px;
+  margin-bottom: 30px; }
+
+
+@media (max-width: 1200px) {
+  .presentation-page .section-header .card {
+    min-height: 290px; } }
+@media (max-width: 968px) {
+  .presentation-page .section-header .image-background {
+    min-height: 100%; }
+    .presentation-page .section-header .image-background img {
+      width: auto;
+      height: 100%; } }
+@media (max-width: 768px) {
+  .presentation-page .components-container .card {
+    margin-bottom: 40px !important; }
+
+  .btn-wd {
+    min-width: 280px; }
+
+  .presentation-page .title-brand {
+    font-size: 3.4em; }
+
+  .presentation-page .title-brand .type {
+    font-size: 16px;
+    transform: translateY(-28px);
+    -webkit-transform: translateY(-28px);
+    -moz-transform: translateY(-28px);
+    -o-transform: translateY(-28px); } }
+@media (max-width: 500px) {
+  .presentation-page .section-header .card {
+    min-height: 230px; } }
+
+/*# sourceMappingURL=examples.css.map */
