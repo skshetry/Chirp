@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
     <div class="wrapper settings">
-        <div class="profile-background settings-background" style="background-image: url('/static/img/default_cover.png');">
+        <div class="profile-background settings-background" style="background-image: url('{% static  'img/default_cover.png' %}');">
             <div class="filter-black"></div>
         </div>
         <div class="profile-content section-nude">
@@ -12,7 +13,7 @@
 
                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                       <div class="fileinput-new thumbnail img-circle img-no-padding" style="width: 150px; height: 150px;">
-                         <img src="/static/img/default_profile.jpg" alt="Circle Image" >
+                         <img src="{% static  'img/default_profile.jpg' %}" alt="Circle Image" >
 
                       </div>
                       <div class="fileinput-preview fileinput-exists thumbnail img-circle img-no-padding" style="max-width: 200px; max-height: 200px;"></div>
@@ -59,9 +60,6 @@
                                  <div class="row">
                                       <div class="col-xs-9">
                                         <a href="{%url 'settings:change_password' %}"><b>Change Password</b></a>
-                                      </div>
-                                      <div class="col-xs-3">
-                                        <div class="switch has-switch"><div class="switch-animate switch-on"><input checked="checked" data-toggle="switch" class="ct-info" type="checkbox"><span class="switch-left">ON</span><label>&nbsp;</label><span class="switch-right">OFF</span></div></div>
                                       </div>
                                   </div>
                               </li>
