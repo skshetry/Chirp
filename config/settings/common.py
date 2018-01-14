@@ -214,7 +214,7 @@ USE_L10N = True
 USE_TZ = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
-SITE_ID = 2
+SITE_ID = 1
 
 # AUTHENTICATION CONFIGURATION
 # ------------------------------------------------------------------------------
