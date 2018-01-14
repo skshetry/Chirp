@@ -375,24 +375,23 @@ class SignupPostTest(TestCase):
         self.assertTemplateUsed(response, 'base.html')
         self.assertEqual(response.status_code, 200)
 
-def test_password_mismatch(self):
+    def test_password_mismatch(self):
 
-    data  = {
-    'username': 'testusername1',
-    'first_name': 'testfirstname',
-    'last_name': 'testlastname',
-    'email': 'testemail@gmail.com',
-    'password1': 'testpassword',
-    'password2': 'testpassword1',
+        data = {
+        'username': 'testusername1',
+        'first_name': 'testfirstname',
+        'last_name': 'testlastname',
+        'email': 'testemail@gmail.com',
+        'password1': 'testpassword1',
+        'password2': 'testpassword2',
+            }
 
-    }
+        response = self.client.post(reverse('accounts:signup'), data)
 
-    response = self.client.post(reverse('accounts:signup'), data)
+        error_messages = ["The two password fields didn't match."]
+        self.assertFormError(response, 'form', 'password2', error_messages)
+        self.assertFalse(User.objects.filter(username=data['username']).exists())
 
-    error_messages = ["The two password fields didn't match."]
-    self.assertFormError(response, 'form', 'password1', error_messages)
-    self.assertFalse(User.objects.exists(username = data['username']))
-
-    self.assertTemplateUsed(response, 'accounts/signup.html')
-    self.assertTemplateUsed(response, 'base.html')
-    self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'accounts/signup.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertEqual(response.status_code, 200)
