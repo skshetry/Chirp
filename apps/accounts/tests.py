@@ -7,6 +7,7 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 
 from accounts.forms import CustomUserAuthenticationForm
+from accounts.forms import SignUpForm
 
 # Create your tests here.
 
@@ -296,3 +297,101 @@ class LogoutTest(TestCase):
             expected_url=reverse('accounts:login'),
             status_code=302
             )
+
+class SignupGetTest(TestCase):
+
+    """Tests the signup view `GET`."""
+
+    def setUp(self):
+        """Set things up for testing signup functionality."""
+        self.url = reverse('accounts:signup')
+        self.response = self.client.get(self.url)
+
+
+
+    def test_csrf(self):
+        """Test for csrf token."""
+        self.assertContains(self.response, 'csrfmiddlewaretoken')
+
+    def test_contains_form(self):
+        """Tests if it contains form."""
+        form = self.response.context.get('form')
+        self.assertIsInstance(form, SignUpForm)
+
+    def test_response_status_code(self):
+        """Tests for `OK` response."""
+        self.assertEqual(self.response.status_code, 200)
+
+    def test_signup_view_is_rendered(self):
+        """Tests if `accounts/signup.html` and `base.html` is used."""
+        self.assertTemplateUsed(self.response, 'accounts/signup.html')
+        self.assertTemplateUsed(self.response, 'base.html')
+
+        # unable to link, need assistance
+    def test_contains_login_link(self):
+        """Test if it contains `signup` link."""
+        url = reverse('accounts:login')
+        self.assertContains(self.response, f'href="{url}"')
+
+
+    def test_form_inputs(self):
+        """The view must contain three inputs: csrf, username, first_name, last_name
+        email, password1, password2"""
+        self.assertContains(self.response, '<input', 7)
+        self.assertContains(self.response, 'type="text"', 4)
+        self.assertContains(self.response, 'type="password"', 2)
+
+
+
+
+class SignupPostTest(TestCase):
+    """Tests the login `POST` requests."""
+
+    def setUp(self):
+        """Set ups the user and url for this test."""
+        self.url = reverse('accounts:signup')
+
+    def test_successfull_post_signup(self):
+        data  = {
+        'username': 'testusername',
+        'first_name': 'testfirstname',
+        'last_name': 'testlastname',
+        'email': 'testemail@gmail.com',
+        'password1': 'testpassword',
+        'password2': 'testpassword',
+
+        }
+
+        response = self.client.post(self.url, data)
+
+        user = User.objects.get(username = data['username'])
+        self.assertEqual(user.first_name, data['first_name'])
+        self.assertEqual(user.last_name, data['last_name'])
+        self.assertEqual(user.email, data['email'])
+        self.assertFalse(user.is_active)
+        self.assertTrue(user)
+
+        self.assertTemplateUsed(response, 'accounts/email_sent.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertEqual(response.status_code, 200)
+
+    def test_password_mismatch(self):
+
+        data = {
+        'username': 'testusername1',
+        'first_name': 'testfirstname',
+        'last_name': 'testlastname',
+        'email': 'testemail@gmail.com',
+        'password1': 'testpassword1',
+        'password2': 'testpassword2',
+            }
+
+        response = self.client.post(reverse('accounts:signup'), data)
+
+        error_messages = ["The two password fields didn't match."]
+        self.assertFormError(response, 'form', 'password2', error_messages)
+        self.assertFalse(User.objects.filter(username=data['username']).exists())
+
+        self.assertTemplateUsed(response, 'accounts/signup.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertEqual(response.status_code, 200)
