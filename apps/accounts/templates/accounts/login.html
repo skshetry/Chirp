@@ -9,9 +9,9 @@
             <button class="btn btn-info btn-block btn-round">Login</button>
         </form>
         <div class="forgot">
-            <a href="#forgot_password" class="btn btn-link btn-danger">Forgot password?</a>
+            <a href="{%url 'accounts:password_reset'%}" class="btn btn-link btn-danger">Forgot password?</a>
         </div>
-        <div class="no-account">
+        <div class="no-account text-center">
             <a href="{% url 'accounts:signup' %}" class="btn btn-link btn-default">Don't have an account?</a>
         </div>
     </div>
