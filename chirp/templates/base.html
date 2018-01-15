@@ -22,7 +22,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href="{% static  'css/nucleo-icons.css' %}" rel="stylesheet" />
     <link href="{% static  'css/main.css' %}" rel="stylesheet" />
-    <link href="{% static  'css/css.css' %}" rel="stylesheet" />
 </head>
 
 <body>
@@ -44,14 +43,14 @@
                         <li class="dropdown-header"></li>
                         <a class="dropdown-item" href="#pk">Profile</a>
                         <a class="dropdown-item" href="{% url 'settings:settings' %}">Settings</a>
-                        <a class="dropdown-item" href="#pk"></a>
+                        <a class="dropdown-item" href="{% url 'accounts:logout' %}">logout</a>
                         <div class="dropdown-divider"></div>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item black-box">Made with <i class="fa fa-heart" style="color:red;"></i></a>
                     </ul>
                 {%else%}
-                    <a class="navbar-brand" href="#signup">Signup</a>
+                    <a class="navbar-brand" href="{% url 'accounts:signup' %}">Signup</a>
                 {% endif %}
             </div>
         </div>
@@ -62,7 +61,7 @@
             <div class="nav-tabs-wrapper">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link" href="#home">
+                        <a class="nav-link" href="{% url 'Home' %}">
                             <i class="fa fa-home" aria-hidden="true" style="font-size:large;margin-right:7px;"></i>
                             <b class="d-none d-sm-inline-block">Home</b>
                         </a>
