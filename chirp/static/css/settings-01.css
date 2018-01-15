@@ -268,23 +268,6 @@
     .settings .notifications .notification-item .switch {
       float: right; }
 
-.about-us .container {
-  max-width: 970px; }
-.about-us .header-wrapper {
-  height: 550px; }
-.about-us .section {
-  padding-top: 50px; }
-.about-us h3.title-uppercase {
-  margin-top: 50px; }
-.about-us p {
-  margin-top: 20px; }
-.about-us .creators {
-  margin-top: 100px; }
-.about-us .more-info {
-  margin-top: 50px;
-  margin-bottom: 30px; }
-
-
 @media (max-width: 1200px) {
   .presentation-page .section-header .card {
     min-height: 290px; } }
