@@ -40,8 +40,8 @@ class LoginGETTest(TestCase):
 
     def test_contains_signup_link(self):
         """Test if it contains `signup` link."""
-        # TODO: Change this to test for actual link
-        self.assertContains(self.response, 'href="#signup"')
+        url = reverse('accounts:signup')
+        self.assertContains(self.response, 'href="' + url + '"')
 
     def test_contains_forgot_password_link(self):
         """Test if it contains `forgot_password` link."""
