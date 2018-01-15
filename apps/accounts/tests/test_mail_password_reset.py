@@ -15,7 +15,7 @@ class PasswordResetMailTests(TestCase):
         self.email = mail.outbox[0]
 
     def test_email_subject(self):
-        self.assertEqual('ProjectChirp password reset', self.email.subject)
+        self.assertEqual('Reset ProjectChirp Password', self.email.subject)
 
     def test_email_body(self):
         context = self.response.context
