@@ -60,6 +60,7 @@ LOCAL_APPS = [
     'accounts.apps.AccountsConfig',
     'errors.apps.ErrorsConfig',
     'settings.apps.SettingsConfig',
+    'posts.apps.PostsConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
