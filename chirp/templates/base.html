@@ -31,7 +31,7 @@
 <!--    navbar come here          -->
     <nav class="navbar navbar-expand-md bg-teal">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{% url 'Home' %}">
                 Project<img src="{% static 'img/favicon.png' %}">Chirp</a>
             <div class="nav-item dropdown pull-right">
                 {% if user.is_authenticated %}
