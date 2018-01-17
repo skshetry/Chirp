@@ -1,0 +1,21 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Chirp{% endblock %}</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link href="{% static  'css/paper-kit.css' %}" rel="stylesheet"/>
+    {%block stylesheet%}{%endblock%}
+  </head>
+  <body>
+    <div class="container">
+        <h1 class="text-center logo my-4">
+            <a href="{% url 'accounts:login'%}">Project Chirp</a>
+         </h1>      
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>
