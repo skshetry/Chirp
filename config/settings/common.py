@@ -98,6 +98,7 @@ TEMPLATES = [
         # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         'DIRS': [
             str(PROJECT_DIR.path('templates')),
+            str(PROJECT_DIR.path('templates/registration')),
         ],
 
         'OPTIONS': {
