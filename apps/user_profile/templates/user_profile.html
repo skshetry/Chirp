@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     <div class="wrapper">
-        <!-- <div class="profile-background settings-background" style="background-image: url('{% static  'img/default_cover.png' %}');"></div> -->
+        <div class="profile-background settings-background" style="background-image: url('{% static  'img/default_cover.png' %}');">
             <div class="filter-black"></div>
         </div>
         <div class="profile-content section-nude">
@@ -21,7 +21,7 @@
                     <div class="col-md-6 col-md-offset-3 text-center">
                         <p>An artist of considerable range, Chet Faker — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. </p>
                         <br />
-                        <btn class="btn"><i class="fa fa-cog"></i> <a href="{% url 'settings:' %}">Settings</a></btn>
+                        <btn class="btn"><i class="fa fa-cog"></i> <a href="{% url 'settings:settings' %}">Settings</a></btn>
                     </div>
                 </div>
                 <div class="profile-tabs">
