@@ -2,6 +2,8 @@
 {% load static %}
 {% block content %}
 
+{{form.non_field_errors}}
+{% csrf_token %}
     <div class="wrapper settings">
         <div class="profile-background settings-background" style="background-image: url('{% static  'img/default_cover.png' %}');">
             <div class="filter-black"></div>
@@ -33,23 +35,28 @@
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control border-input" placeholder="First Name">
+                                        {{ user_form.first_name }}
                                     </div>
                                 </div>
 
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control border-input" placeholder="Last Name">
-                                    </div>
+                                        {{ user_form.last_name }}                                    </div>
                                 </div>
                             </div>
                           <div class="form-group">
-                            <label>Description</label>
-                                <textarea class="form-control textarea-limited border-input" placeholder="This is a textarea limited to 150 characters." rows="3", data-limit="150" ></textarea>
-                                <h5><small><span id="textarea-limited-message" class="pull-right">150 characters left</span></small></h5>
-
+                            <label>Bio</label>
+                            {{ profile_form.bio }}
                           </div>
+                          <div class="form-group">
+                                <label>Gender</label>
+                                {{ profile_form.gender }}
+                              </div>
+                              <div class="form-group">
+                                    <label>Date of Birth</label>
+                                    {{ profile_form.date_of_birth }}
+                                  </div>
 <label>Account Settings</label>
                           <ul class="notifications">
                               <li class="notification-item">
