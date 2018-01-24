@@ -15,6 +15,7 @@
     <link href="{% static  'css/settings-01.css' %}" rel="stylesheet" />
     <link href="{% static  'css/settings-02.css' %}" rel="stylesheet" />
     <link href="{% static  'css/ct-paper.css' %}" rel="stylesheet" />
+    <link href="{% static  'css/cropper.min.css' %}" rel="stylesheet" />
 
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Comfortaa|Indie+Flower" rel="stylesheet">
@@ -115,6 +116,7 @@
     <script src="{% static  'js/jquery-ui-1.12.1.custom.min.js' %}" type="text/javascript"></script>
     <script src="{% static  'js/popper.js' %}" type="text/javascript"></script>
     <script src="{% static  'js/bootstrap.min.js' %}" type="text/javascript"></script>
+    <script src="{% static  'js/cropper.min.js' %}" type="text/javascript"></script>
 
     <!-- Switches -->
     <script src="{% static  'js/bootstrap-switch.min.js' %}"></script>
@@ -127,7 +129,10 @@
     <script src="{% static  'js/bootstrap-datetimepicker.min.js' %}"></script>
 
     <!--  Paper Kit Initialization snd functons -->
-    <script src="{% static  'js/paper-kit.js' %}"></script>
+    <!-- <script src="{% static  'js/paper-kit.js' %}"></script>-->
+    <script src="{% static  'js/ct-paper.js' %}"></script>
+
+<script src="{% static  'js/ct-paper-bootstrapswitch.js' %}"></script>
     <script>
             $(function(){
                 $('a').each(function(){
@@ -137,4 +142,13 @@
                 });
             });
     </script>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker12').datetimepicker({
+            inline: true,
+            sideBySide: true,
+            format: 'DD.MM.YYYY' /*remove this line if you want to use time as well */
+        });
+    });
+</script>
 </html>
