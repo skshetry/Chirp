@@ -13,15 +13,15 @@
                             <img src="{% static  'img/default_profile.jpg' %}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                         </div>
                         <div class="name">
-                            <h4>{{ user.first_name }} {{ user.last_name}}<br /><small>Music Producer</small></h4>
+                            <h4>{{ user.first_name }} {{ user.last_name}}<br /><small>@{{ user.username }}</small></h4>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3 text-center">
-                        <p>An artist of considerable range, Chet Faker — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. </p>
+                        <p> {{ user.bio }}</p>
                         <br />
-                        <btn class="btn"><i class="fa fa-cog"></i> <a href="{% url 'settings:settings' %}">Settings</a></btn>
+                        <a href="{%url 'settings:settings' %}"> <btn class="btn"><i class="fa fa-cog"></i> Settings</btn></a>
                     </div>
                 </div>
                 <div class="profile-tabs">
@@ -30,7 +30,6 @@
                             <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
                                 <li class="active"><a href="#follows" data-toggle="tab">Follows</a></li>
                                 <li><a href="#following" data-toggle="tab">Following</a></li>
-<!--                                 <li><a href="#following" data-toggle="tab">Following</a></li> -->
                             </ul>
                         </div>
                     </div>
