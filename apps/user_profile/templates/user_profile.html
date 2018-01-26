@@ -45,13 +45,15 @@
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3">
                                     <ul class="list-unstyled follows">
+                                            {% if user.user_details.followed_by.all %}
+                                            {% for following_user in user.user_details.followed_by.all %}
                                         <li>
                                             <div class="row">
                                                 <div class="col-md-2 col-md-offset-0 col-xs-3 col-xs-offset-2">
                                                     <img src="/paper-kit/assets/paper_img/flume.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                                                 </div>
                                                 <div class="col-md-7 col-xs-4">
-                                                    <h6>Flume<br /><small>Musical Producer</small></h6>
+                                                    <h6>{{following_user.user.first_name }} {{following_user.user.last_name }}<br /><small>@{{following_user.user.username}}</small></h6>
                                                 </div>
                                                 <div class="col-md-3 col-xs-2">
                                                     <div class="unfollow" rel="tooltip" title="Unfollow">
@@ -63,30 +65,44 @@
                                             </div>
                                         </li>
                                         <hr />
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-md-2 col-md-offset-0 col-xs-3 col-xs-offset-2">
-                                                    <img src="/paper-kit/assets/paper_img/banks.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                </div>
-                                                <div class="col-md-7 col-xs-4">
-                                                    <h6>Banks<br /><small>Singer</small></h6>
-                                                </div>
-                                                <div class="col-md-3 col-xs-2">
-                                                    <div class="unfollow" rel="tooltip" title="Unfollow">
-                                                        <label class="checkbox" for="checkbox1" >
-                                                            <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" checked>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
+                                        {% endfor %}
+                                        {% else %}
+                                        <h3 class="text-muted">No one follows you yet :(</h3>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane text-center" id="following">
-                            <h3 class="text-muted">Not following anyone yet :(</h3>
-                            <btn class="btn btn-warning btn-fill">Find artists</btn>
+                                <div class="row">
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <ul class="list-unstyled follows">
+                                                    {% if user.user_details.follows.all %}
+                                                    {% for user_follows in user.user_details.follows.all %}
+                                                <li>
+                                                    <div class="row">
+                                                        <div class="col-md-2 col-md-offset-0 col-xs-3 col-xs-offset-2">
+                                                            <img src="/paper-kit/assets/paper_img/flume.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                                                        </div>
+                                                        <div class="col-md-7 col-xs-4">
+                                                            <h6>{{user_follows.user.first_name }} {{user_follows.user.last_name }}<br /><small>@{{user_follows.user.username}}</small></h6>
+                                                        </div>
+                                                        <div class="col-md-3 col-xs-2">
+                                                            <div class="unfollow" rel="tooltip" title="Unfollow">
+                                                                <label class="checkbox" for="checkbox1" >
+                                                                    <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" checked>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <hr />
+                                                {% endfor %}
+                                                {% else %}
+                                                <h3 class="text-muted">Not following anyone yet :(</h3>
+                                                <btn class="btn btn-warning btn-fill">Find Friends</btn>
+                                                {% endif %}
+                                            </ul>
                         </div>
                     </div>
 
