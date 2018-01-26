@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
-{{form.non_field_errors}}
-{% csrf_token %}
     <div class="wrapper settings">
         <div class="profile-background settings-background" style="background-image: url('{% static  'img/default_cover.png' %}');">
             <div class="filter-black"></div>
@@ -28,9 +25,18 @@
                     </div>
 
                 </div>
+                {% if messages %}
+                <div class="messages">
+                        {% for message in messages %}
+                        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                        {% endfor %}
+                        </div>
+                {% endif %}
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                        <form class="settings-form">
+                        <form class="settings-form" method="POST">
+                                {{form.non_field_errors}}
+                                {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
@@ -54,8 +60,8 @@
                                 {{ profile_form.gender }}
                               </div>
                               <div class="form-group">
-                                    <label>Date of Birth</label>
-                                    {{ profile_form.date_of_birth }}
+                                    <label>Date of Birth: (YYYY-MM-DD)</label>
+                                        {{ profile_form.date_of_birth }}
                                   </div>
 <label>Account Settings</label>
                           <ul class="notifications">
