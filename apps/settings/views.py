@@ -4,6 +4,7 @@ from user_profile.forms import UserDetailsForm, UserForm
 from django.contrib import messages
 from django.contrib.auth import forms
 from django.db import transaction
+from django.core.urlresolvers import reverse
 
 
 @login_required
@@ -18,7 +19,7 @@ def settings_view(request):
             profile_form.user = request.user
             profile_form.save()
             messages.success(request, ('Your profile was successfully updated!'))
-            return redirect('user_profile:user_profile')
+            return redirect(reverse('user_profile:user_profile', kwargs={'username': request.user.username}))
         else:
             messages.error(request, ('Please correct the error below.'))
     else:
