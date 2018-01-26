@@ -42,7 +42,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <li class="dropdown-header"></li>
-                        <a class="dropdown-item" href="{% url 'user_profile:user_profile' %}">Profile</a>
+                        <a class="dropdown-item" href="{% url 'user_profile:user_profile' user.username %}">Profile</a>
                         <a class="dropdown-item" href="{% url 'settings:settings' %}">Settings</a>
                         <a class="dropdown-item" href="{% url 'accounts:logout' %}">logout</a>
                         <div class="dropdown-divider"></div>
