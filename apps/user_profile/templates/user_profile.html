@@ -35,8 +35,8 @@
                     <div class="nav-tabs-navigation">
                         <div class="nav-tabs-wrapper">
                             <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-                                <li class="active"><a href="#follows" data-toggle="tab">Follows</a></li>
-                                <li><a href="#following" data-toggle="tab">Following</a></li>
+                                <li class="active"><a href="#follows" data-toggle="tab">Follows({{ user.user_details.followed_by.all.count }})</a></li>
+                                <li><a href="#following" data-toggle="tab">Following({{ user.user_details.follows.all.count }})</a></li>
                             </ul>
                         </div>
                     </div>
