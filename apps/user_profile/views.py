@@ -1,14 +1,20 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 # from .models import Photo
 # from .forms import PhotoForm
 
 
 @login_required
-def user_profile(request):
+def user_profile(request, username=None):
     """The User Profile page view."""
-    return render(request, 'user_profile.html')
-
+    if User.objects.get(username=username):
+        user = User.objects.get(username=username)
+        return render(request, "user_profile.html", {
+            "user": user,
+        })
+    else:
+        return render("User not found")
 
 # def photo_list(request):
 #     photos = Photo.objects.all()
