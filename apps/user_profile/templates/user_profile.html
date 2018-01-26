@@ -12,14 +12,21 @@
                         <div class="avatar">
                             <img src="{% static  'img/default_profile.jpg' %}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                         </div>
+                        {% if messages %}
+                        <div class="messages">
+                                {% for message in messages %}
+                                <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                                {% endfor %}
+                                </div>
+                        {% endif %}
                         <div class="name">
-                            <h4>{{ user.first_name }} {{ user.last_name}}<br /><small>@{{ user.username }}</small></h4>
+                            <h4>{{ user.first_name }} {{ user.last_name}}<br /><small>{{ user.user_details.gender }}<br>@{{ user.username }}</small></h4>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3 text-center">
-                        <p> {{ user.bio }}</p>
+                        <p> {{ user.user_details.bio }}</p>
                         <br />
                         <a href="{%url 'settings:settings' %}"> <btn class="btn"><i class="fa fa-cog"></i> Settings</btn></a>
                     </div>
