@@ -17,6 +17,7 @@ class User_details(models.Model):
         choices=GENDER_CHOICES,
         null=True,
     )
+    follows = models.ManyToManyField('User_details', related_name='followed_by')
     # file = models.ImageField()
 
 
