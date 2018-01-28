@@ -7,6 +7,8 @@ from django.db import models
 from django.db.models import signals
 from django.dispatch import receiver
 
+from django.utils import timezone
+
 from django.contrib.auth.models import User
 
 from .model_validators import validate_file_extension_posts_media
@@ -17,6 +19,47 @@ def upload_posts_media_to(instance, filename):
     _, file_extension = os.path.splitext(filename)
     filename = str(random.getrandbits(64)) + file_extension
     return f'posts/{username}/{filename}'
+
+
+class PostManager(models.Manager):
+    def share(self, user, post, quote_text=None):
+        shared_post_parent = None
+
+        if post.parent:
+            shared_post_parent = post.parent
+
+        shared_post_exists = self.get_queryset().filter(
+            user=user, parent=shared_post_parent
+        ).filter(
+            created__year=timezone.now().year,
+            created__month=timezone.now().month,
+            created__day=timezone.now().day,
+            shared_post__isnull=False,
+        ).exists()
+
+        if shared_post_exists:
+            return None
+
+        share_post = self.model(
+            parent=shared_post_parent,
+            user=user,
+            text=quote_text,
+            shared_post=post,
+        )
+
+        share_post.save()
+
+
+    def like(self, user, post):
+        if user in post.liked.all():
+            is_liked = False
+            post.likes.remove(user)
+        else:
+            is_liked = True
+            post.likes.add(user)
+        return is_liked
+
+
 
 
 class PostMedia(models.Model):
@@ -42,8 +85,31 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     shared_post = models.ForeignKey('self', blank=True, null=True, verbose_name='If shared only', related_name='post_shared')
 
+    objects = PostManager()
+
     def __str__(self):
         return f'{self.id} : {self.user}'
+
+    def create_post(self, user, text):
+        self._create(user=user, text=text)
+
+    def create_reply(self, user, text, parent):
+        self._create(user=user, text=text, parent=parent)
+
+    def _create(self, user, text, parent=None):
+        self.objects.create(user=user, text=text, parent=parent)
+
+    def get_parent(self):
+        x=self.parent if self.parent else None
+        print(x)
+        return x
+
+    def get_childs(self):
+        childs = Post.objects.filter(parent=self)
+        return childs if childs.exists() else None
+
+    def get_medias(self):
+        return self.post_media.all() if self.posts_media.exists() else None
 
 
 class Tag(models.Model):
