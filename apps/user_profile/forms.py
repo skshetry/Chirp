@@ -1,7 +1,6 @@
 from PIL import Image
 from django import forms
 from django.core.files import File
-# from testapp.models import Images
 from django.contrib.auth.models import User
 from .models import User_details
 
@@ -22,33 +21,56 @@ class UserDetailsForm(forms.ModelForm):
         widget=forms.Select(choices=User_details.GENDER_CHOICES),
     )
     date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'class': 'datepicker form-control'}))
-    # profile_photo = forms.ImageField()
-
     class Meta:
         model = User_details
-        fields = ('bio', 'gender', 'date_of_birth',)
+        fields = ('bio', 'gender', 'date_of_birth')
 
-# class PhotoForm(forms.ModelForm):
-#     x = forms.FloatField(widget=forms.HiddenInput())
-#     y = forms.FloatField(widget=forms.HiddenInput())
-#     width = forms.FloatField(widget=forms.HiddenInput())
-#     height = forms.FloatField(widget=forms.HiddenInput())
 
-#     class Meta:
-#         model = Photo
-#         fields = ('file', 'x', 'y', 'width', 'height', )
+class ProfilePhotoForm(forms.ModelForm):
+    profile_x = forms.FloatField(widget=forms.HiddenInput())
+    profile_y = forms.FloatField(widget=forms.HiddenInput())
+    profile_width = forms.FloatField(widget=forms.HiddenInput())
+    profile_height = forms.FloatField(widget=forms.HiddenInput())
+    DIMENSIONS = (200, 200)
+    class Meta:
+            model = User_details
+            fields = ('profile_photo', 'profile_x', 'profile_y', 'profile_height', 'profile_width')
 
-#     def save(self):
-#         photo = super(PhotoForm, self).save()
+    def save(self):
+        photo = super(ProfilePhotoForm, self).save()
+        x = self.cleaned_data.get('profile_x')
+        y = self.cleaned_data.get('profile_y')
+        w = self.cleaned_data.get('profile_width')
+        h = self.cleaned_data.get('profile_height')
 
-#         x = self.cleaned_data.get('x')
-#         y = self.cleaned_data.get('y')
-#         w = self.cleaned_data.get('width')
-#         h = self.cleaned_data.get('height')
+        image = Image.open(photo.profile_photo)
+        cropped_image = image.crop((x, y, w+x, h+y))
+        resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
+        resized_image.save(photo.profile_photo.path)
 
-#         image = photo.open(Photo.file)
-#         cropped_image = photo.crop((x, y, w+x, h+y))
-#         resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
-#         resized_image.save(photo.file.path)
+        return photo
 
-#         return photo
+
+class CoverPhotoForm(forms.ModelForm):
+    cover_x = forms.FloatField(widget=forms.HiddenInput())
+    cover_y = forms.FloatField(widget=forms.HiddenInput())
+    cover_width = forms.FloatField(widget=forms.HiddenInput())
+    cover_height = forms.FloatField(widget=forms.HiddenInput())
+    DIMENSIONS = (675, 150)
+    class Meta:
+            model = User_details
+            fields = ('cover_photo', 'cover_x', 'cover_y', 'cover_height', 'cover_width')
+
+    def save(self):
+        photo = super(CoverPhotoForm, self).save()
+        x = self.cleaned_data.get('cover_x')
+        y = self.cleaned_data.get('cover_y')
+        w = self.cleaned_data.get('cover_width')
+        h = self.cleaned_data.get('cover_height')
+
+        image = Image.open(photo.cover_photo)
+        cropped_image = image.crop((x, y, w+x, h+y))
+        resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
+        resized_image.save(photo.cover_photo.path)
+
+        return photo
