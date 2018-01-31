@@ -20,7 +20,7 @@ class UserDetailsForm(forms.ModelForm):
         max_length=2,
         widget=forms.Select(choices=User_details.GENDER_CHOICES),
     )
-    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'class': 'datepicker form-control'}))
+    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'class': 'datetimepicker form-control'}))
     class Meta:
         model = User_details
         fields = ('bio', 'gender', 'date_of_birth')
