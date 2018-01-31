@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     <div class="wrapper settings">
-        <div class="profile-background settings-background" style="background-image: url('{% static  'img/default_cover.png' %}');">
+        <div class="profile-background settings-background" style="background-image: url(&quot;{% if user.user_details.cover_photo.url %}{{ user.user_details.cover_photo.url }}{%else%}{% static  'img/default_cover.png' %}{% endif %}&quot;);">
             <div class="filter-black"></div>
         </div>
         <div class="profile-content section-nude">
@@ -12,14 +12,25 @@
 
                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                       <div class="fileinput-new thumbnail img-circle img-no-padding" style="width: 150px; height: 150px;">
-                         <img src="{% static  'img/default_profile.jpg' %}" alt="Circle Image" >
+                         <img src="{% if user.user_details.profile_photo.url %}
+                         {{ user.user_details.profile_photo.url }}
+                         {%else%}
+                         {% static  'img/default_profile.jpg' %}
+                         {% endif %}" alt="Circle Image" >
 
                       </div>
-                      <div class="fileinput-preview fileinput-exists thumbnail img-circle img-no-padding" style="max-width: 200px; max-height: 200px;"></div>
-                      <div class="row">
-<div>
-                        <span class="btn btn-default btn-file pull-right"><span class="fileinput-new">Change Photo</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
-</div>
+                          <!-- FORM TO UPLOAD THE IMAGES -->
+  <form method="post" enctype="multipart/form-data" id="profile_photo">
+    {% csrf_token %}
+    {{ profile_photo_form }}
+    <input type="submit" hidden id="profile_submit_button" name="profile_submit_button">
+</form>
+<form method="post" enctype="multipart/form-data" id="cover_photo">
+  {% csrf_token %}
+  {{ cover_photo_form }}
+  <input type="submit" hidden id="cover_submit_button" name="cover_submit_button">
+</form>
+<div class="row">
                       </div>
                     </div>
                     </div>
@@ -34,7 +45,7 @@
                 {% endif %}
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                        <form class="settings-form" method="POST">
+                            <form class="settings-form" method="POST" enctype="multipart/form-data" id="formUpload">
                                 {{form.non_field_errors}}
                                 {% csrf_token %}
                             <div class="row">
@@ -86,6 +97,147 @@
             </div>
         </div>
     </div>
+                    <!-- MODAL TO CROP THE IMAGE -->
+                    <div class="modal fade" id="modalCrop">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">Crop the photo</h4>
+                          </div>
+                          <div class="modal-body">
+                            <img src="" id="image" style="max-width: 100%;">
+                          </div>
+                          <div class="modal-footer">
+                            <div class="btn-group pull-left" role="group">
+                              <button type="button" class="btn btn-default js-zoom-in">
+                                <span class="glyphicon glyphicon-zoom-in"></span>
+                              </button>
+                              <button type="button" class="btn btn-default js-zoom-out">
+                                <span class="glyphicon glyphicon-zoom-out"></span>
+                              </button>
+                              <input type="text" hidden id="status">
+                            </div>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+                            <button type="button" class="btn btn-primary js-crop-and-upload">Crop and upload</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+    {% block javascripts %}
+  <script>
+    var size_x, size_y;
+  $('#id_cover_photo').on("change", function() {
+      if(! window.FileReader){console.log('Not supported.')}
+      var browse_btn = $('#id_cover_photo')[0];
+      file = browse_btn.files[0];
+        if (file) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $("#image").attr("src", e.target.result);
+            $("#modalCrop").modal("show");
+            $('#status')[0].value = '0';
+            size_x = 675;
+            size_y = 150;
+            aspect_ratio = 9/2;
+          }
+          reader.readAsDataURL(file);
+        }
+      
+    });
+
+    $('#id_profile_photo').on("change", function() {
+      if(! window.FileReader){console.log('Not supported.')}
+      var browse_btn = $('#id_profile_photo')[0];
+      file = browse_btn.files[0];;
+        if (file) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $("#image").attr("src", e.target.result);
+            $("#modalCrop").modal("show");
+            $('#status')[0].value = '1';
+            size_x = 200;
+            size_y = 200;
+            aspect_ratio = 1/1;
+          }
+          var css = document.createElement("style");
+          css.type = "text/css";
+          css.innerHTML = "  .cropper-crop-box, .cropper-view-box {border-radius: 50%;} .cropper-view-box {box-shadow: 0 0 0 1px #39f;outline: 0;";
+          document.body.appendChild(css);
+          reader.readAsDataURL(file);}
+      
+    });
+
+
+      /* SCRIPTS TO HANDLE THE CROPPER BOX */
+      var $image = $("#image");
+      var cropBoxData = {
+        width: size_x,
+        height: size_y
+      };
+      var canvasData= {
+        width: size_x,
+        height: size_y
+      };
+      $("#modalCrop").on("shown.bs.modal", function () {
+        $image.cropper({
+          viewMode: 1,
+          aspectRatio: aspect_ratio,
+          minCropBoxWidth: size_x,
+          minCropBoxHeight: size_y,
+          ready: function () {
+            $image.cropper("setCanvasData", canvasData);
+            $image.cropper("setCropBoxData", cropBoxData);
+            $image.cropper;
+
+          }
+          
+        });
+      }).on("hidden.bs.modal", function () {
+        cropBoxData = $image.cropper("getCropBoxData");
+        canvasData = $image.cropper("getCanvasData");
+        $image.cropper("destroy");
+      });
+
+      $(".js-zoom-in").click(function () {
+        $image.cropper("zoom", 0.1);
+      });
+
+      $(".js-zoom-out").click(function () {
+        $image.cropper("zoom", -0.1);
+      });
+
+      /* SCRIPT TO COLLECT THE DATA AND POST TO THE SERVER */
+      $(".js-crop-and-upload").click(function () {
+        var cropData = $image.cropper("getData");
+        // $("#id_x").val(cropData["x"]);
+        // $("#id_y").val(cropData["y"]);
+        // $("#id_height").val(cropData["height"]);
+        // $("#id_width").val(cropData["width"]);
+        if ($('#status')[0].value === '1'){
+        $("#id_profile_x").val(cropData["x"]);
+        $("#id_profile_y").val(cropData["y"]);
+        $("#id_profile_height").val(cropData["height"]);
+        $("#id_profile_width").val(cropData["width"]);
+          $("#profile_submit_button").click();
+        }
+        else if ($('#status')[0].value === '0'){
+        $("#id_cover_x").val(cropData["x"]);
+        $("#id_cover_y").val(cropData["y"]);
+        $("#id_cover_height").val(cropData["height"]);
+        $("#id_cover_width").val(cropData["width"]);
+          $("#cover_submit_button").click();
+        }
+        else{
+          // do nothing 
+        }
+      });
+
+  </script>
+{% endblock javascripts %}
+
 
 
 {% endblock content %}
