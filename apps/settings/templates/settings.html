@@ -70,9 +70,12 @@
                                 <label>Gender</label>
                                 {{ profile_form.gender }}
                               </div>
-                              <div class="form-group">
+                              <div class="row input-group date" id="datetimepicker">
                                     <label>Date of Birth: (YYYY-MM-DD)</label>
                                         {{ profile_form.date_of_birth }}
+                                        <span class="input-group-addon">
+                                          <span class="glyphicon glyphicon-calendar"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                      </span>
                                   </div>
 <label>Account Settings</label>
                           <ul class="notifications">
