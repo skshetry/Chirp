@@ -3,6 +3,16 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import os
+import random
+
+
+def upload_posts_media_to(instance, filename):
+    username = instance.user.username
+    _, file_extension = os.path.splitext(filename)
+    filename = str(random.getrandbits(64)) + file_extension
+    return f'photos/{username}/{filename}'
+
 
 class User_details(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_details')
@@ -18,7 +28,10 @@ class User_details(models.Model):
         null=True,
     )
     follows = models.ManyToManyField('User_details', related_name='followed_by')
-    # file = models.ImageField()
+    profile_photo = models.ImageField(null=True, upload_to=upload_posts_media_to)
+    cover_photo = models.ImageField(null=True, upload_to=upload_posts_media_to)
+
+
 
 
 @receiver(post_save, sender=User)
