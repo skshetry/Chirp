@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     <div class="wrapper">
-        <div class="profile-background settings-background" style="background-image: url('{% static  'img/default_cover.png' %}');">
+        <div class="profile-background settings-background" style="background-image: url(&quot;{% if user.user_details.cover_photo.url %}{{ user.user_details.cover_photo.url }}{%else%}{% static  'img/default_cover.png' %}{% endif %}&quot;);">
             <div class="filter-black"></div>
         </div>
         <div class="profile-content section-nude">
@@ -10,7 +10,11 @@
                 <div class="row owner">
                     <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3 text-center">
                         <div class="avatar">
-                            <img src="{% static  'img/default_profile.jpg' %}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                            <img src="{% if user.user_details.profile_photo.url %}
+                            {{ user.user_details.profile_photo.url }}
+                            {%else%}
+                            {% static  'img/default_profile.jpg' %}
+                            {% endif %}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                         </div>
                         <div class="name">
                             <h4>{{ user.first_name }} {{ user.last_name}}<br /><small>{{ user.user_details.gender }}<br>@{{ user.username }}</small></h4>
