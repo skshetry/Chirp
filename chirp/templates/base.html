@@ -131,7 +131,7 @@
     <!--  Paper Kit Initialization snd functons -->
     <!-- <script src="{% static  'js/paper-kit.js' %}"></script>-->
     <script src="{% static  'js/ct-paper.js' %}"></script>
-
+    
 <script src="{% static  'js/ct-paper-bootstrapswitch.js' %}"></script>
     <script>
             $(function(){
@@ -142,6 +142,9 @@
                 });
             });
     </script>
+            {% block javascripts %}
+                <!-- custom javascripts here     -->
+            {% endblock javascripts%}
 <script type="text/javascript">
     $('.datepicker').datepicker({
 
