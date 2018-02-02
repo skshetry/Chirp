@@ -63,6 +63,7 @@ LOCAL_APPS = [
     'user_profile.apps.UserProfileConfig',
     'posts.apps.PostsConfig',
     'feed.apps.FeedConfig',
+    'search.apps.SearchConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
