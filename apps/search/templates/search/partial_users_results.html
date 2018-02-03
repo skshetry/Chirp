@@ -1,0 +1,15 @@
+<p class="font-italic">You searched for user "<strong>{{querystring}}</strong>" </p>
+{% if results %}
+  <ul class="users-results">
+    {% for user_result in results %}
+      <li username="{{ user.username }}">
+        <h5>
+         
+          {{user_result.username}}
+        </h5>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <h4 class="no-result">Sorry!Couldn't find user for you :(</h4>
+{% endif %}
