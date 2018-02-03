@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from posts.models import Post
 from .decorators import ajax_required
 # Create your views here.
-
+@login_required
 def search(request):
     if 'q' in request.GET:
         querystring = request.GET.get('q').strip()
