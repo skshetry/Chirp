@@ -1,0 +1,21 @@
+<p class="font-italic">You searched for "{{querystring}}" in posts</p>
+{% if results %}
+<p class="font-weight-normal">we found some!!! :)</p>
+  <ul class="posts-results">
+    {% for posts in results %}
+      <li post-id="{{ post.pk }}">
+        
+          @{{posts.user.username}}
+        
+        <div class="post">
+          <h3>
+            {{posts.text}}<br>
+            <small>{{ posts.created }}</small>
+          </h3>          
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <h4 class="no-result">Sorry!Couldn't find any posts :(</h4>
+{% endif %}
