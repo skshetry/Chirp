@@ -2,7 +2,11 @@
 {% load static %}
 {% block content %}
     <div class="wrapper settings">
-        <div class="profile-background settings-background" style="background-image: url(&quot;{% if user.user_details.cover_photo.url %}{{ user.user_details.cover_photo.url }}{%else%}{% static  'img/default_cover.png' %}{% endif %}&quot;);">
+        <div class="profile-background settings-background" style="background-image: url({% if user.user_details.cover_photo %}
+                            {{ user.user_details.cover_photo.url }}
+                            {%else%}
+                            {% static  'img/default_cover.png' %}
+                            {% endif %});">
             <div class="filter-black"></div>
         </div>
         <div class="profile-content section-nude">
@@ -12,11 +16,11 @@
 
                     <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                       <div class="fileinput-new thumbnail img-circle img-no-padding" style="width: 150px; height: 150px;">
-                         <img src="{% if user.user_details.profile_photo.url %}
-                         {{ user.user_details.profile_photo.url }}
-                         {%else%}
-                         {% static  'img/default_profile.jpg' %}
-                         {% endif %}" alt="Circle Image" >
+                          <img src="{% if user.user_details.profile_photo %}
+                          {{ user.user_details.profile_photo.url }}
+                          {%else%}
+                          {% static  'img/default_profile.jpg' %}
+                          {% endif %}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
 
                       </div>
                           <!-- FORM TO UPLOAD THE IMAGES -->
