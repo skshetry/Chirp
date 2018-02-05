@@ -28,11 +28,19 @@ class User_details(models.Model):
         null=True,
     )
     follows = models.ManyToManyField('User_details', related_name='followed_by')
-    profile_photo = models.ImageField(null=True, upload_to=upload_posts_media_to)
-    cover_photo = models.ImageField(null=True, upload_to=upload_posts_media_to)
+    profile_photo = models.ImageField(null=True, upload_to=upload_posts_media_to, default=None)
+    cover_photo = models.ImageField(null=True, upload_to=upload_posts_media_to, default=None)
+
+    @property
+    def cover_photo_url(self):
+        if self.cover_photo and hasattr(self.cover_photo, 'url'):
+            return self.cover_photo.url
 
 
-
+    @property
+    def profile_photo_url(self):
+        if self.profile_photo and hasattr(self.profile_photo, 'url'):
+            return self.profile_photo.url
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
