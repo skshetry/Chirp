@@ -15,4 +15,3 @@ def user_profile(request, username=None):
         })
     else:
         return ("User not found")
-    
