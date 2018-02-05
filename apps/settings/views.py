@@ -33,14 +33,10 @@ def cover_photo_view(request):
 @transaction.atomic
 def settings_view(request):
     if request.method == 'POST':
-        print(request.POST)
-        print(request.POST.get('profile_submit_button'))
-        print(request.POST.get('profile_photo'))
         if 'profile_submit_button' in request.POST:
             return profile_photo_view(request)
 
         if 'cover_submit_button' in request.POST:
-            print("gayo")
             return cover_photo_view(request)
 
         user_form = UserForm(request.POST, instance=request.user)
