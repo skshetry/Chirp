@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'favicon.ico/$', RedirectView.as_view(
         url=static_tag('img/favicon.png'),
         permanent=True)),
-
+    url(r'posts/', include('posts.urls', namespace='posts')),
 ]
 
 if settings.DEBUG:
