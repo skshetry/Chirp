@@ -60,8 +60,6 @@ class PostManager(models.Manager):
         return is_liked
 
 
-
-
 class PostMedia(models.Model):
     media = models.FileField(upload_to=upload_posts_media_to, validators=[validate_file_extension_posts_media])
     media_type = models.CharField(default='image', max_length=6)
@@ -133,4 +131,3 @@ def create_tags(sender, instance, created, *args, **kwargs):
 def create_metadata_for_post(sender, instance, created, **kwargs):
     if created:
         PostsMetadata.objects.create(post=instance)
-

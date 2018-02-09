@@ -21,3 +21,4 @@ class PostAdmin(admin.ModelAdmin):
 admin.site.register(Post, admin_class=PostAdmin)
 admin.site.register(Tag)
 admin.site.register(PostsMetadata)
+admin.site.register(PostMedia)
