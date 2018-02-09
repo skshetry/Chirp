@@ -65,7 +65,7 @@
                 {% csrf_token %}
                 <div class="modal-body">
                     {% if post_form.errors %}
-                        <div class="form-control-feedback">
+                        <div class="form-control-feedback text-danger">
                             <i class="fa fa-exclamation-circle"></i>
                             {{ post_form.non_field_errors.as_text }}
                         </div>
