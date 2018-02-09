@@ -59,7 +59,11 @@
                                         <li>
                                             <div class="row">
                                                 <div class="col-md-2 col-md-offset-0 col-xs-3 col-xs-offset-2">
-                                                    <img src="/paper-kit/assets/paper_img/flume.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                                                    <img src="{% if following_user.user.user_details.profile_photo %}
+                                                    {{ following_user.user.user_details.profile_photo.url }}
+                                                    {%else%}
+                                                    {% static  'img/default_profile.jpg' %}
+                                                    {% endif %}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                                                 </div>
                                                 <div class="col-md-7 col-xs-4">
                                                     <h6>{{following_user.user.first_name }} {{following_user.user.last_name }}<br /><small>@{{following_user.user.username}}</small></h6>
@@ -91,7 +95,11 @@
                                                 <li>
                                                     <div class="row">
                                                         <div class="col-md-2 col-md-offset-0 col-xs-3 col-xs-offset-2">
-                                                            <img src="/paper-kit/assets/paper_img/flume.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                                                            <img src="{% if user_follows.user.user_details.profile_photo %}
+                                                            {{ user_follows.user.user_details.profile_photo.url }}
+                                                            {%else%}
+                                                            {% static  'img/default_profile.jpg' %}
+                                                            {% endif %}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                                                         </div>
                                                         <div class="col-md-7 col-xs-4">
                                                             <h6>{{user_follows.user.first_name }} {{user_follows.user.last_name }}<br /><small>@{{user_follows.user.username}}</small></h6>
