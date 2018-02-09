@@ -1,7 +1,11 @@
 from django.shortcuts import render, reverse, redirect
+
+from django.contrib.auth.decorators import login_required
+
 from .forms import PostForm, PostMediaFormSet
 
 
+@login_required
 def posts_add(request):
     if request.method == 'POST':
         post_form = PostForm(request.POST)
