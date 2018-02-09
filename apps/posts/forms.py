@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import modelformset_factory, BaseModelFormSet
+from django.forms import modelformset_factory, BaseModelFormSet, ValidationError
 from .models import Post, PostMedia
 
 
@@ -14,6 +14,11 @@ class PostForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+
+    def clean(self,*args,**kwargs):
+        super().clean(*args,**kwargs)
+        if len(self.cleaned_data.get('text')) > 140:
+            raise ValidationError("Character limit exceeded.")
 
 
 class BasePostMediaFormSet(BaseModelFormSet):

@@ -5,7 +5,7 @@
 {% block content %}
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-default btn-round" data-toggle="modal" data-target="#postAddModal">
+<button type="button" class="btn btn-outline-default btn-primary btn-round" data-toggle="modal" data-target="#postAddModal">
     <i class="fa fa-pencil-square-o"></i> Add Post</button>
 </button>
 <!-- Modal -->
@@ -64,7 +64,9 @@
             <form method="POST" autocomplete="off" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="modal-body"> 
-                    <textarea id="id_text" name="text" maxlength="140" type="text" placeholder="Status" cols="33" rows="5" required></textarea>
+                    {{post_form.non_field_errors}}
+                    <textarea class="form-control" id="id_text" name="text" maxlength="140" type="text" placeholder="Status" cols="33" rows="5" required></textarea>
+                    {{ post_form.text.errors }}
                     <div class="media-forms">
                         {{mediaformset.management_form}}
                         <div style="display:none;" id="form_template">
@@ -76,17 +78,16 @@
                             <!-- here the generated forms go -->
                         </div>
                     </div>
+                    <!-- Here add media button goes-->
+                    <button type="button" class="btn btn-info btn-round" id="addmedia">
+                        <i class="fa fa-image"></i>
+                        Add Media
+                    </button>
+                    
                     <input type="submit" id="postformsubmit" hidden>
+                    <input value="0" id="justfornum" hidden>
                 </div>
             </form>
-            <input value="0" id="justfornum" hidden>
-
-            <!-- Here add media button goes-->
-            <button type="button" class="btn btn-info btn-round" id="addmedia">
-                <i class="fa fa-image"></i>
-                Add Media
-            </button>
-
             <div class="modal-footer">
                 <div class="left-side">
                     <button type="button" class="btn btn-default btn-link" data-dismiss="modal">
@@ -107,8 +108,15 @@
 
 {% endblock content %}
 
-
 {% block post_add_js %}
     <script src="{% static 'js/addmediaform.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.uploadPreview.min.js' %}"></script>
+    <script>
+        $("[name=form-INITIAL_FORMS]").val(0);
+        $("[name=form-TOTAL_FORMS]").val(0);
+
+        {% if post_form.errors %}
+            $('#postAddModal').modal('show');
+        {% endif %}
+    </script>
 {% endblock post_add_js %}

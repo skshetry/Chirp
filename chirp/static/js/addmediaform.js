@@ -1,7 +1,6 @@
 $('#addmedia').click(function(){
     var formnum = parseInt($("#justfornum").val());
     $("[name=form-TOTAL_FORMS]").val(formnum+1);
-    $("[name=form-INITIAL_FORMS]").val(0);
     html = $("#form_template").clone().html().replace(/__prefix__/g,formnum);
     $('#forms').append(html);
 
