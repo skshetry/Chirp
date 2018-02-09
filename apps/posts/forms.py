@@ -18,7 +18,7 @@ class PostForm(forms.ModelForm):
     def clean(self,*args,**kwargs):
         super().clean(*args,**kwargs)
         if len(self.cleaned_data.get('text')) > 140:
-            raise ValidationError("Character limit exceeded.")
+            raise ValidationError("Character limit exceeded. Posts should be less than 140 characters.")
 
 
 class BasePostMediaFormSet(BaseModelFormSet):

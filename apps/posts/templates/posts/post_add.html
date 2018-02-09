@@ -63,8 +63,13 @@
             </div>
             <form method="POST" autocomplete="off" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="modal-body"> 
-                    {{post_form.non_field_errors}}
+                <div class="modal-body">
+                    {% if post_form.errors %}
+                        <div class="form-control-feedback">
+                            <i class="fa fa-exclamation-circle"></i>
+                            {{ post_form.non_field_errors.as_text }}
+                        </div>
+                    {% endif %}
                     <textarea class="form-control" id="id_text" name="text" maxlength="140" type="text" placeholder="Status" cols="33" rows="5" required></textarea>
                     {{ post_form.text.errors }}
                     <div class="media-forms">
