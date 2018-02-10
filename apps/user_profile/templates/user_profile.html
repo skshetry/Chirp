@@ -31,15 +31,16 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 ml-auto mr-auto text-center">
-                        <p>{{ user.user_details.bio }}</p>
+                        <p>{% if user.user_details.bio %}{{ user.user_details.bio }}{% endif %}</p>
                         <div class="description-details">
                             <ul class="list-unstyled">
                                 <li><i class="{% if user.user_details.gender == 'M' %}
                                     fa fa-male
-                                    {% else %}
+                                    {% elif user.user_details.gender == 'F' %}
                                     fa fa-female
-                                    {% endif %}"></i>{{ user.user_details.gender }}</li>
-                                <li><i class="fa fa-calendar"></i> Joined {{ user.date_joined }}</li>
+                                    {% else %}
+                                    {% endif %}"></i>{% if user.user_details.gender %}{{ user.user_details.gender }}{% endif %}</li>
+                                <li>{% if user.user_details.date_of_birth %}<i class="fa fa-calendar"></i> Joined {{ user.user_details.date_of_birth }} {% else %}{% endif %}</li>
                             </ul>
                         </div>
                     </div>
