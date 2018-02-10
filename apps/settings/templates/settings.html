@@ -1,52 +1,44 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="wrapper settings">
-        <div class="profile-background settings-background" style="background-image: url({% if user.user_details.cover_photo %}
-                            {{ user.user_details.cover_photo.url }}
-                            {%else%}
-                            {% static  'img/default_cover.png' %}
-                            {% endif %});">
-            <div class="filter-black"></div>
-        </div>
-        <div class="profile-content section-nude">
-            <div class="container">
-                <div class="row owner btn-group">
-                    <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3 text-center">
-
-                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                      <div class="fileinput-new thumbnail img-circle img-no-padding" style="width: 150px; height: 150px;">
-                          <img src="{% if user.user_details.profile_photo %}
-                          {{ user.user_details.profile_photo.url }}
-                          {%else%}
-                          {% static  'img/default_profile.jpg' %}
-                          {% endif %}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-
-                      </div>
+<div class="wrapper">
+    <div class="profile-background settings-background" style="background-image: url({% if user.user_details.cover_photo %}
+                        {{ user.user_details.cover_photo.url }}
+                        {%else%}
+                        {% static  'img/default_cover.png' %}
+                        {% endif %});">
+        <div class="filter"></div>
+    </div>
+    <div class="profile-content section-white-gray">
+        <div class="container">
+            <div class="row owner">
+                <div class="col-md-2 col-sm-4 col-6 ml-auto mr-auto text-center">
+                    <div class="avatar">
+                        <img src="{% if user.user_details.profile_photo %}
+                        {{ user.user_details.profile_photo.url }}
+                        {%else%}
+                        {% static  'img/default_profile.jpg' %}
+                        {% endif %}" alt="Circle Image" class="img-circle img-responsive">
+                    </div>
+                    </div>
                           <!-- FORM TO UPLOAD THE IMAGES -->
-  <form method="post" enctype="multipart/form-data" id="profile_photo">
-    {% csrf_token %}
-    {{ profile_photo_form }}
-    <input type="submit" hidden id="profile_submit_button" name="profile_submit_button">
-</form>
-<form method="post" enctype="multipart/form-data" id="cover_photo">
-  {% csrf_token %}
-  {{ cover_photo_form }}
-  <input type="submit" hidden id="cover_submit_button" name="cover_submit_button">
-</form>
 <div class="row">
-                      </div>
+    <form method="post" enctype="multipart/form-data" id="profile_photo">
+      {% csrf_token %}
+      {{ profile_photo_form }}
+      <input type="submit" hidden id="profile_submit_button" name="profile_submit_button">
+  </form>
+  <form method="post" enctype="multipart/form-data" id="cover_photo">
+    {% csrf_token %}
+    {{ cover_photo_form }}
+    <input type="submit" hidden id="cover_submit_button" name="cover_submit_button">
+  </form>
+</div>
                     </div>
                     </div>
 
                 </div>
-                {% if messages %}
-                <div class="messages">
-                        {% for message in messages %}
-                        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-                        {% endfor %}
-                        </div>
-                {% endif %}
+
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                             <form class="settings-form" method="POST" enctype="multipart/form-data" id="formUpload">
@@ -74,13 +66,15 @@
                                 <label>Gender</label>
                                 {{ profile_form.gender }}
                               </div>
-                              <div class="row input-group date" id="datetimepicker">
-                                    <label>Date of Birth: (YYYY-MM-DD)</label>
+                              <div class="form-group">
+                                  <label>Date of Birth: (YYYY-MM-DD)</label>
+                                  <div class="row input-group date" id="datetimepicker">
                                         {{ profile_form.date_of_birth }}
                                         <span class="input-group-addon">
                                           <span class="glyphicon glyphicon-calendar"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                       </span>
-                                  </div>
+                                  </div></div>
+
 <label>Account Settings</label>
                           <ul class="notifications">
                               <li class="notification-item">
