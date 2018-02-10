@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-default btn-primary btn-round" data-toggle="modal" data-target="#postAddModal">
+    <i class="fa fa-pencil-square-o"></i> Add Post</button>
+</button>
+<!-- Modal -->
+
+<style type="text/css">
+    .image-preview {
+      width: 400px;
+      height: 400px;
+      position: relative;
+      overflow: hidden;
+      background-color: #ffffff;
+      color: #ecf0f1;
+    }
+    .image-preview input {
+      line-height: 200px;
+      font-size: 200px;
+      position: absolute;
+      opacity: 0;
+      z-index: 10;
+    }
+    .image-preview label {
+        position: absolute;
+        z-index: 5;
+        opacity: 0.8;
+        cursor: pointer;
+        background-color: #bdc3c7;
+        width: 200px;
+        height: 50px;
+        font-size: 20px;
+        line-height: 50px;
+        text-transform: uppercase;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        text-align: center;
+    }
+    textarea {
+        resize: none;
+    }
+    </style>
+    
+<div class="modal fade" id="postAddModal" tabindex="-1" role="dialog" aria-labelledby="postAddModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="postaddtitleheader">
+                    <i class="fa fa-pencil-square-o"></i>
+                    Add Post
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" autocomplete="off" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                    {% if post_form.errors %}
+                        <div class="form-control-feedback text-danger">
+                            <i class="fa fa-exclamation-circle"></i>
+                            {{ post_form.non_field_errors.as_text }}
+                        </div>
+                    {% endif %}
+                    <textarea class="form-control" id="id_text" name="text" maxlength="140" type="text" placeholder="Status" cols="33" rows="5" required></textarea>
+                    {{ post_form.text.errors }}
+                    <div class="media-forms">
+                        {{mediaformset.management_form}}
+                        <div style="display:none;" id="form_template">
+                            <div id='image-preview-__prefix__' class="image-preview">
+                                {{ mediaformset.empty_form.as_p }}
+                            </div>
+                        </div><!-- stores empty form for javascript -->
+                        <div id="forms">
+                            <!-- here the generated forms go -->
+                        </div>
+                    </div>
+                    <!-- Here add media button goes-->
+                    <button type="button" class="btn btn-info btn-round" id="addmedia">
+                        <i class="fa fa-image"></i>
+                        Add Media
+                    </button>
+                    
+                    <input type="submit" id="postformsubmit" hidden>
+                    <input value="0" id="justfornum" hidden>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <div class="left-side">
+                    <button type="button" class="btn btn-default btn-link" data-dismiss="modal">
+                        Cancel
+                    </button>
+                </div>
+
+                <div class="divider"></div>
+                <div class="right-side">
+                    <button type="button" class="btn btn-danger btn-link" onclick="$('#postformsubmit').click();">
+                        Post
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block post_add_js %}
+    <script src="{% static 'js/addmediaform.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.uploadPreview.min.js' %}"></script>
+    <script>
+        $("[name=form-INITIAL_FORMS]").val(0);
+        $("[name=form-TOTAL_FORMS]").val(0);
+
+        {% if post_form.errors %}
+            $('#postAddModal').modal('show');
+        {% endif %}
+    </script>
+{% endblock post_add_js %}
