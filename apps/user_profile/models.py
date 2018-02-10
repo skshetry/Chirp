@@ -19,6 +19,7 @@ class User_details(models.Model):
     date_of_birth = models.DateField(null=True)
     bio = models.TextField(max_length=300, null=True)
     GENDER_CHOICES = (
+        (None, None),
         ('M', 'Male'),
         ('F', 'Female')
     )
