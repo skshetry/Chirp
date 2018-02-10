@@ -15,12 +15,13 @@ class UserForm(forms.ModelForm):
 
 
 class UserDetailsForm(forms.ModelForm):
-    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control textarea-limited border-input', 'rows': '3'}))
+    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control textarea-limited border-input', 'rows': '3', 'maxlength': '140'}), required=False)
     gender = forms.CharField(
         max_length=2,
         widget=forms.Select(choices=User_details.GENDER_CHOICES),
+        required=False
     )
-    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'class': 'datetimepicker form-control'}))
+    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'class': 'datetimepicker form-control'}), required=False)
     class Meta:
         model = User_details
         fields = ('bio', 'gender', 'date_of_birth')
