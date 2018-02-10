@@ -56,7 +56,7 @@ class CoverPhotoForm(forms.ModelForm):
     cover_y = forms.FloatField(widget=forms.HiddenInput())
     cover_width = forms.FloatField(widget=forms.HiddenInput())
     cover_height = forms.FloatField(widget=forms.HiddenInput())
-    DIMENSIONS = (675, 150)
+    DIMENSIONS = (1357, 334)
     class Meta:
             model = User_details
             fields = ('cover_photo', 'cover_x', 'cover_y', 'cover_height', 'cover_width')
