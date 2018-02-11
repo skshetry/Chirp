@@ -61,6 +61,7 @@ LOCAL_APPS = [
     'errors.apps.ErrorsConfig',
     'settings.apps.SettingsConfig',
     'posts.apps.PostsConfig',
+    'feed.apps.FeedConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

@@ -31,6 +31,7 @@ urlpatterns = [
         url=static_tag('img/favicon.png'),
         permanent=True)),
     url(r'posts/', include('posts.urls', namespace='posts')),
+    url(r'home/', include('feed.urls', namespace='feeds')),
 ]
 
 if settings.DEBUG:
