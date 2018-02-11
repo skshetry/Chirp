@@ -60,6 +60,7 @@ LOCAL_APPS = [
     'accounts.apps.AccountsConfig',
     'errors.apps.ErrorsConfig',
     'settings.apps.SettingsConfig',
+    'user_profile.apps.UserProfileConfig',
     'posts.apps.PostsConfig',
     'feed.apps.FeedConfig',
 ]

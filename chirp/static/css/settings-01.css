@@ -54,7 +54,7 @@
   color: #FFF; }
 
 .register-background {
-  background-image: url("/static/img/profile_default.png");
+  background-image: url("");
   background-position: center center;
   background-size: cover;
   min-height: 100vh;

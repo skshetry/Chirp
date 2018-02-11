@@ -21,12 +21,14 @@ from django.templatetags.static import static as static_tag
 import testapp
 import accounts
 import settings as user_settings
+import user_profile
 
 urlpatterns = [
     url(settings.ADMIN_URL, admin.site.urls),
     url(r'accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^', include('testapp.urls')),
     url(r'^settings/', include('settings.urls', namespace='settings')),
+    url(r'^user/', include('user_profile.urls', namespace='user_profile')),
     url(r'favicon.ico/$', RedirectView.as_view(
         url=static_tag('img/favicon.png'),
         permanent=True)),

@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="wrapper">
+        <div class="profile-background settings-background" style="background-image: url({% if user.user_details.cover_photo %}
+                            {{ user.user_details.cover_photo.url }}
+                            {%else%}
+                            {% static  'img/default_cover.png' %}
+                            {% endif %});">
+            <div class="filter"></div>
+        </div>
+        <div class="profile-content section-white-gray">
+            <div class="container">
+                <div class="row owner">
+                    <div class="col-md-2 col-sm-4 col-6 ml-auto mr-auto text-center">
+                        <div class="avatar">
+                            <img src="{% if user.user_details.profile_photo %}
+                            {{ user.user_details.profile_photo.url }}
+                            {%else%}
+                            {% static  'img/default_profile.jpg' %}
+                            {% endif %}" alt="Circle Image" class="img-circle img-responsive">
+                            <div class="following">
+                                <btn class="btn btn-sm btn-info btn-just-icon" rel="tooltip" title="Follow"><i class="nc-icon nc-simple-add"></i></btn>
+                            </div>
+                        </div>
+
+                        <div class="name">
+                            <h4>{{ user.first_name }} {{ user.last_name}}<br><small>@{{ user.username }}</small></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 ml-auto mr-auto text-center">
+                        <p>{% if user.user_details.bio %}{{ user.user_details.bio }}{% endif %}</p>
+                        <div class="description-details">
+                            <ul class="list-unstyled">
+                                <li><i class="{% if user.user_details.gender == 'M' %}
+                                    fa fa-male
+                                    {% elif user.user_details.gender == 'F' %}
+                                    fa fa-female
+                                    {% else %}
+                                    {% endif %}"></i>{% if user.user_details.gender %}{{ user.user_details.gender }}{% endif %}</li>
+                                <li>{% if user.user_details.date_of_birth %}<i class="fa fa-calendar"></i> Joined {{ user.user_details.date_of_birth }} {% else %}{% endif %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-tabs">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <ul id="tabs" class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+									<a class="nav-link active" href="#tweets" data-toggle="tab" role="tab">Tweets</a>
+								</li>
+                                <li class="nav-item">
+									<a class="nav-link" href="#following" data-toggle="tab" role="tab">Following({{ user.user_details.follows.all.count }})</a>
+								</li>
+                                <li class="nav-item">
+									<a class="nav-link" href="#follows" data-toggle="tab" role="tab">Followers({{ user.user_details.followed_by.all.count }})</a>
+								</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="my-tab-content" class="tab-content">
+                    <div class="tab-pane active text-center" id="tweets">
+                            <div class="row">
+                                <h3 class="text-muted">No tweets yet :(</h3>
+                            </div>
+                        </div>
+                                
+                        <div class="tab-pane text-center" id="follows">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <ul class="list-unstyled follows">
+                                            {% if user.user_details.followed_by.all %}
+                                            {% for following_user in user.user_details.followed_by.all %}
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-2 col-md-offset-0 col-xs-3 col-xs-offset-2">
+                                                    <img src="{% if following_user.user.user_details.profile_photo %}
+                                                    {{ following_user.user.user_details.profile_photo.url }}
+                                                    {%else%}
+                                                    {% static  'img/default_profile.jpg' %}
+                                                    {% endif %}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                                                </div>
+                                                <div class="col-md-7 col-xs-4">
+                                                    <h6>{{following_user.user.first_name }} {{following_user.user.last_name }}<br /><small>@{{following_user.user.username}}</small></h6>
+                                                </div>
+                                                <div class="col-md-3 col-xs-2">
+                                                    <div class="unfollow" rel="tooltip" title="Unfollow">
+                                                        <label class="checkbox" for="checkbox1" >
+                                                            <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" checked>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <hr />
+                                        {% endfor %}
+                                        {% else %}
+                                        <h3 class="text-muted">No one follows you yet :(</h3>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane text-center" id="following">
+                                <div class="row">
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <ul class="list-unstyled follows">
+                                                    {% if user.user_details.follows.all %}
+                                                    {% for user_follows in user.user_details.follows.all %}
+                                                <li>
+                                                    <div class="row">
+                                                        <div class="col-md-2 col-md-offset-0 col-xs-3 col-xs-offset-2">
+                                                            <img src="{% if user_follows.user.user_details.profile_photo %}
+                                                            {{ user_follows.user.user_details.profile_photo.url }}
+                                                            {%else%}
+                                                            {% static  'img/default_profile.jpg' %}
+                                                            {% endif %}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                                                        </div>
+                                                        <div class="col-md-7 col-xs-4">
+                                                            <h6>{{user_follows.user.first_name }} {{user_follows.user.last_name }}<br /><small>@{{user_follows.user.username}}</small></h6>
+                                                        </div>
+                                                        <div class="col-md-3 col-xs-2">
+                                                            <div class="unfollow" rel="tooltip" title="Unfollow">
+                                                                <label class="checkbox" for="checkbox1" >
+                                                                    <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" checked>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <hr />
+                                                {% endfor %}
+                                                {% else %}
+                                                <h3 class="text-muted">Not following anyone yet :(</h3>
+                                                {% endif %}
+                                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
