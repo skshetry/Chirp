@@ -22,17 +22,19 @@ import testapp
 import accounts
 import settings as user_settings
 import user_profile
+import feed.views as feed_views
 
 urlpatterns = [
     url(settings.ADMIN_URL, admin.site.urls),
     url(r'accounts/', include('accounts.urls', namespace='accounts')),
-    url(r'^', include('testapp.urls')),
+    url(r'^$', RedirectView.as_view(url='/home', permanent=False)),
     url(r'^settings/', include('settings.urls', namespace='settings')),
     url(r'^user/', include('user_profile.urls', namespace='user_profile')),
     url(r'favicon.ico/$', RedirectView.as_view(
         url=static_tag('img/favicon.png'),
         permanent=True)),
     url(r'posts/', include('posts.urls', namespace='posts')),
+    url(r'home/', include('feed.urls', namespace='feeds')),
 ]
 
 if settings.DEBUG:

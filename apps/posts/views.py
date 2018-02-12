@@ -13,7 +13,7 @@ def posts_add(request):
         if post_form.is_valid() and media_form_set.is_valid():
             post = post_form.save(request.user)
             media_form_set.save(post)
-            return redirect(reverse('Home'))
+            return redirect(reverse('feeds:home'))
     elif request.method == 'GET':
         post_form = PostForm()
         media_form_set = PostMediaFormSet()

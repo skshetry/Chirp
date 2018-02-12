@@ -62,6 +62,7 @@ LOCAL_APPS = [
     'settings.apps.SettingsConfig',
     'user_profile.apps.UserProfileConfig',
     'posts.apps.PostsConfig',
+    'feed.apps.FeedConfig',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -256,4 +257,4 @@ MEDIA_URL = '/media/'
 # Location of root django.contrib.admin URL, use {% url 'admin:index' %}
 ADMIN_URL = r'^admin/'
 
-LOGIN_REDIRECT_URL = 'upload_pic'
+LOGIN_REDIRECT_URL = 'feeds:home'

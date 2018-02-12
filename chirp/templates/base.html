@@ -16,13 +16,14 @@
     <link href="{% static  'css/settings-02.css' %}" rel="stylesheet" />
     <link href="{% static  'css/ct-paper.css' %}" rel="stylesheet" />
     <link href="{% static  'css/cropper.min.css' %}" rel="stylesheet" />
+    <link href="{% static '/css/demo.css' %}" rel="stylesheet" />
 
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Comfortaa|Indie+Flower" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href="{% static  'css/nucleo-icons.css' %}" rel="stylesheet" />
-    <link href="{% static  'css/main.css' %}" rel="stylesheet" />
+    {% comment %} <link href="{% static  'css/main.css' %}" rel="stylesheet" /> {% endcomment %}
 </head>
 
 <body>
@@ -35,73 +36,10 @@
         {% endif %}
 
 
-<!--    navbar come here          -->
-    <nav class="navbar navbar-expand-md bg-teal">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{% url 'Home' %}">
-                Project<img src="{% static 'img/favicon.png' %}">Chirp</a>
-            <div class="nav-item dropdown pull-right">
-                {% if user.is_authenticated %}
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" href="#pk" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user-circle"></i>
-												<i> {{ user.username}} </i>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li class="dropdown-header"></li>
-                        <a class="dropdown-item" href="{% url 'user_profile:user_profile' user.username %}">Profile</a>
-                        <a class="dropdown-item" href="{% url 'settings:settings' %}">Settings</a>
-                        <a class="dropdown-item" href="{% url 'accounts:logout' %}">logout</a>
-                        <div class="dropdown-divider"></div>
+{% block navbar %}
 
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item black-box">Made with <i class="fa fa-heart" style="color:red;"></i></a>
-                    </ul>
-                {%else%}
-                    <a class="navbar-brand" href="{% url 'accounts:signup' %}">Signup</a>
-                {% endif %}
-            </div>
-        </div>
-    </nav>
-
-    {% if user.is_authenticated %}
-        <div class="nav-tabs-navigation">
-            <div class="nav-tabs-wrapper">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'Home' %}">
-                            <i class="fa fa-home" aria-hidden="true" style="font-size:large;margin-right:7px;"></i>
-                            <b class="d-none d-sm-inline-block">Home</b>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#messages">
-                            <i class="fa fa-envelope navbar-icons" aria-hidden="true" style="font-size:large;"></i>
-                            <i class="navbar-numbers">3</i>
-                            <b class="d-none d-sm-inline-block">Messages</b>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#notifications">
-                            <i class="fa fa-bell-o navbar-icons" aria-hidden="true" style="font-size:large;"></i>
-                            <i class="navbar-numbers">5</i>
-                            <b class="d-none d-sm-inline-block">Notifications</b>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#search">
-                            <i class="fa fa-search" aria-hidden="true" style="font-size:large;"></i>
-                            <b class="d-none d-sm-inline-block">Search</b>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    {% endif %}
-
-
+    {% include 'navbar.html' %}
+{% endblock navbar %}
 
         <div class="wrapper">
             {% block content %}
@@ -139,15 +77,21 @@
     <script src="{% static  'js/ct-paper.js' %}"></script>
     
 <script src="{% static  'js/ct-paper-bootstrapswitch.js' %}"></script>
-    <script>
-            $(function(){
-                $('a').each(function(){
-                    if ($(this).prop('href') == window.location.href) {
-                        $(this).addClass('active'); $(this).parents('li').addClass('active');
-                    }
-                });
-            });
-    </script>
+<script src="{% static 'js/photoswipe.min.js' %}"></script>
+<script src="{% static 'js/photoswipe-ui-default.min.js' %}"></script>
+<script src="{% static 'js/init-gallery.js' %}"></script>
+
+<!--  Plugins for Select -->
+<script src="{% static 'js/bootstrap-select.js' %}"></script>
+
+<!--  for fileupload -->
+<script src="{% static 'js/jasny-bootstrap.min.js' %}"></script>
+
+<!--  Plugins for Tags -->
+<script src="{% static 'js/bootstrap-tagsinput.js' %}"></script>
+
+<!-- Control Center for Paper Kit: parallax effects, scripts for the example pages etc -->
+<script src="{% static 'js/paper-kit.js' %}"></script>
             {% block javascripts %}
                 <!-- custom javascripts here     -->
             {% endblock javascripts%}

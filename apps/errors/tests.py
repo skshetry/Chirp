@@ -12,7 +12,7 @@ class ErrorViewTestCase(object):
     ERROR_CODE = None
     ERROR_BASE_TEMPLATE = 'error_base.html'
     ERROR_TEMPLATE_VIEW = None
-    HOMEPAGE_LINK = reverse('Home')
+    HOMEPAGE_LINK = reverse('feeds:home')
     factory = RequestFactory()
     views = {500: server_error, 400: bad_request,
              403: permission_denied, 404: not_found}

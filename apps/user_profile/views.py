@@ -10,8 +10,13 @@ def user_profile(request, username=None):
     """The User Profile page view."""
     if User.objects.get(username=username):
         user = User.objects.get(username=username)
-        return render(request, "user_profile.html", {
-            "user": user,
-        })
+        if user == request.user:
+            return render(request, "user_profile.html", {
+                "profile_user": user,
+            })
+        else:
+            return render(request, "user_profile.html", {
+                "profile_user": user,
+            })
     else:
         return ("User not found")

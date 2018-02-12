@@ -1,0 +1,69 @@
+{% load static %}
+<div class="row owner">
+    {% if not profile_user %}
+        {% with profile_user=user %}
+        <div class="col-md-2 col-sm-4 col-6 ml-auto mr-auto text-center">
+            <div class="avatar">
+                <img src="{% if profile_user.user_details.profile_photo %} {{ profile_user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="Circle Image" class="img-circle img-responsive">
+                {% comment %} <div class="following">
+                    <btn class="btn btn-sm btn-info btn-just-icon" rel="tooltip" title="Follow"><i class="nc-icon nc-simple-add"></i></btn>
+                </div> {% endcomment %}
+            </div>
+            <div class="name">
+
+                {% comment %} <a href="{% url 'user_profile:user_profile' username=profile_user.username %}"><h4>{{profile_user.first_name}} {{profile_user.last_name}} <br /><small>@{{profile_user.username}}</small></h4></a> {% endcomment %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 ml-auto mr-auto text-center">
+            <p>{% if profile_user.user_details.bio %}{{ profile_user.user_details.bio }}{% endif %}</p>
+            <div class="description-details">
+                <ul class="list-unstyled">
+                        <li>{% if profile_user.user_details.gender == 'M' %}
+                                <i class="fa fa-male"></i>Male
+                            {% elif profile_user.user_details.gender == 'F' %}
+                                <i class="fa fa-female"></i>Female
+                            {% else %}
+                            <i></i>
+                            {% endif %}
+                        <li>{% if profile_user.user_details.date_of_birth %}<i class="fa fa-calendar"></i> Born {{ profile_user.user_details.date_of_birth }} {% else %}{% endif %}</li>
+
+                </ul>
+            </div>
+        </div>
+
+        {% endwith %}
+        {% else %}
+        <div class="col-md-2 col-sm-4 col-6 ml-auto mr-auto text-center">
+                <div class="avatar">
+                    <img src="{% if profile_user.user_details.profile_photo %} {{ profile_user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="Circle Image" class="img-circle img-responsive">
+                    {% comment %} <div class="following">
+                        <btn class="btn btn-sm btn-info btn-just-icon" rel="tooltip" title="Follow"><i class="nc-icon nc-simple-add"></i></btn>
+                    </div> {% endcomment %}
+                </div>
+                <div class="name">
+    
+                    {% comment %} <a href="{% url 'user_profile:user_profile' username=profile_user.username %}"><h4>{{profile_user.first_name}} {{profile_user.last_name}} <br /><small>@{{profile_user.username}}</small></h4></a> {% endcomment %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 ml-auto mr-auto text-center">
+                <p>{% if profile_user.user_details.bio %}{{ profile_user.user_details.bio }}{% endif %}</p>
+                <div class="description-details">
+                    <ul class="list-unstyled">
+                            <li>{% if profile_user.user_details.gender == 'M' %}
+                                    <i class="fa fa-male"></i>Male
+                                {% elif profile_user.user_details.gender == 'F' %}
+                                    <i class="fa fa-female"></i>Female
+                                {% else %}
+                                <i></i>
+                                {% endif %}
+                            <li>{% if profile_user.user_details.date_of_birth %}<i class="fa fa-calendar"></i> Born {{ profile_user.user_details.date_of_birth }} {% else %}{% endif %}</li>
+    
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+    </div>
