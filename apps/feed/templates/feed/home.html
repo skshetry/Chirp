@@ -2,7 +2,10 @@
     {% load static %}
 {% load trendings_tag %}
 {% load follow_user_tag %}
+{% load check_liked_filter %}
+{% load post_include %}
 {% block content %}
+
     <div class="wrapper">
             {% include 'cover_photo.html' %}
         <div class="profile-content section-white-gray">
@@ -28,402 +31,20 @@
                                             {% include 'posts/post_add.html' %}
                                     </div>
                                     <div class="tweets">
-                                        {% comment %} <div class="media">
-                                              <a class="pull-left" href="#paper-kit">
-                                               <div class="avatar">
-                                                    <img class="media-object" src="static/img/rihanna.jpg" alt="..." />
-                                                </div>
-                                              </a>
-                                              <div class="media-body">
-                                                <strong>Rihanna</strong>
-                                                <h5 class="media-heading"><small>@rihanna &middot; 1h</small></h5>
-                                                <p>It's just beyond the vault. Discover room 7 of the <a href="javascript: void(0);" class="link-danger">#ANTIdiaRy</a> at <a href="" class="link-info">http://smarturl.it/AntidiaRyTW</a></p>
+                                        {% if not user.post_set.all %}
+                                            <h3 class="text-muted">No tweets yet :(</h3>
+                                        {% endif %}
+                                        {% for post in user.post_set.all %}
+                                            {% post_include post user%}
+                                        {% endfor %}
 
-                                                <div class="media-footer">
-                                                    <a href="#paper-kit" class="btn btn-link">
-                                                         <i class="fa fa-reply"></i>
-                                                    </a>
-                                                    <a href="#paper-kit" class="btn btn-success btn-link">
-                                                         <i class="fa fa-retweet"></i> 2.1k
-                                                    </a>
-                                                    <a href="#paper-kit" class="btn btn-danger btn-link">
-                                                         <i class="fa fa-heart"></i> 3.2k
-                                                    </a>
-                                                    <div class="dropdown">
-                                                      <button id="dLabel" type="button" class="btn btn-just-icon btn-link btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fa fa-ellipsis-h"></i>
-                                                      </button>
-                                                      <ul class="dropdown-menu dropdown-menu-right">
-                                                            <li class="dropdown-item">
-                                                                <a href="#paper-kit">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-2">
-                                                                            <span class="icon-simple"><i class="fa fa-envelope"></i></span>
-                                                                        </div>
-                                                                        <div class="col-sm-9">Direct Message</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <div class="dropdown-divider"></div>
-                                                            <li class="dropdown-item">
-                                                                <a href="#paper-kit">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-2">
-                                                                            <span class="icon-simple"><i class="fa fa-microphone-slash"></i></span>
-                                                                        </div>
-                                                                        <div class="col-sm-9">Mute</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <div class="dropdown-divider"></div>
-                                                            <li class="dropdown-item">
-                                                                <a href="#paper-kit">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-2">
-                                                                            <span class="icon-simple"><i class="fa fa-exclamation-circle"></i></span>
-                                                                        </div>
-                                                                        <div class="col-sm-9">Report</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-
-                                              </div>
-                                        </div> <!-- end media --> {% endcomment %}
-
-
-
-
-{% if not user.post_set.all %}
-<h2>No any posts :(</h2>
-{% endif %}
-{% for post in user.post_set.all %}
-                                        <div class="media">
-                                                <a class="pull-left" href="#paper-kit">
-                                                 <div class="avatar">
-                                                      <img class="media-object" src="{% if post.user.user_details.profile_photo %}{{ post.user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="..." />
-                                                  </div>
-                                                </a>
-                                                <div class="media-body">
-                                                  <strong>{{post.user.first_name}} {{post.user.last_name}}</strong>
-                                                  <h5 class="media-heading"><small>@{{post.user.username}} &middot; 1h</small></h5>
-                                                  <p>{{post.text}}</p>
-  
-                                                  <div class="media-footer">
-                                                      <a href="#paper-kit" class="btn btn-link">
-                                                           <i class="fa fa-reply"></i>
-                                                      </a>
-                                                      <a href="#paper-kit" class="btn btn-success btn-link">
-                                                           <i class="fa fa-retweet"></i> 2.1k
-                                                      </a>
-                                                      <a href="#paper-kit" class="btn btn-danger btn-link">
-                                                           <i class="fa fa-heart"></i> 3.2k
-                                                      </a>
-                                                      <span class="dropdown">
-                                                            <button id="dLabel" type="button" class="btn btn-just-icon btn-link btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    <i class="fa fa-ellipsis-h"></i>
-                                                                  </button>
-                                                        <ul class="dropdown-menu dropdown-menu-right">
-                                                              <li class="dropdown-item">
-                                                                  <a href="#paper-kit">
-                                                                      <div class="row">
-                                                                          <div class="col-sm-2">
-                                                                              <span class="icon-simple"><i class="fa fa-envelope"></i></span>
-                                                                          </div>
-                                                                          <div class="col-sm-9">Direct Message</div>
-                                                                      </div>
-                                                                  </a>
-                                                              </li>
-                                                              <div class="dropdown-divider"></div>
-                                                              <li class="dropdown-item">
-                                                                  <a href="#paper-kit">
-                                                                      <div class="row">
-                                                                          <div class="col-sm-2">
-                                                                              <span class="icon-simple"><i class="fa fa-microphone-slash"></i></span>
-                                                                          </div>
-                                                                          <div class="col-sm-9">Mute</div>
-                                                                      </div>
-                                                                  </a>
-                                                              </li>
-                                                              <div class="dropdown-divider"></div>
-                                                              <li class="dropdown-item">
-                                                                  <a href="#paper-kit">
-                                                                      <div class="row">
-                                                                          <div class="col-sm-2">
-                                                                              <span class="icon-simple"><i class="fa fa-exclamation-circle"></i></span>
-                                                                          </div>
-                                                                          <div class="col-sm-9">Report</div>
-                                                                      </div>
-                                                                  </a>
-                                                              </li>
-                                                          </ul>
-                                                      </span>
-                                                  </div>
-                                                </div>
-                                          </div> <!-- end media -->
-{% endfor %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% comment %} 
-                                        <div class="media">
-                                          <a class="pull-left" href="#paper-kit">
-                                              <div class="avatar">
-                                                 <img class="media-object" alt="Tim Picture" src="static/img/khaled.jpg">
-                                              </div>
-                                              <div class="retweet">
-                                                    <btn class="btn btn-xs btn-success btn-just-icon btn-sm" rel="tooltip" title="Follow"><i class="fa fa-retweet"></i></btn>
-                                              </div>
-                                          </a>
-                                          <div class="media-body">
-                                            <strong>DJ KHALED</strong>
-                                            <h5 class="media-heading"><small>@djkhaled &middot;  6 Jan 2016</small></h5>
-                                             <p><a href="#paper-kit" class="link-danger">#LA</a> fan luv I'm be <a href="#paper-kit" class="link-info">@1oakla</a> tonight i want see fan luv let's win more ! <a href="#paper-kit" class="link-danger">#wethebest</a> </p>
-                                            <div class="tweet-link">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <img src="/static/img/khaled_tweet.png" alt="Rounded Image" class="img-rounded img-tweet-link img-responsive">
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <strong>Let's win more by DJ Khaled</strong>
-                                                        <a href="#0"><p>This is a 3-day event hosted by DJ Khaled for his fan luv in LA. Major 🔑 to success. Bless up!</p>
-                                                        <small><a href="#paper-kit" class="text-muted">djkhaled.com</a></small></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="media-footer">
-                                                <a href="#paper-kit" class="btn btn-link">
-                                                     <i class="fa fa-reply"></i>
-                                                </a>
-                                                <a href="#paper-kit" class="btn btn-link">
-                                                     <i class="fa fa-retweet"></i> 100
-                                                </a>
-                                                <a href="#paper-kit" class="btn btn-danger btn-link">
-                                                     <i class="fa fa-heart"></i> 234
-                                                </a>
-                                                <div class="dropdown">
-                                                      <button id="dLabel" type="button" class="btn btn-icon btn-link btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fa fa-ellipsis-h"></i>
-                                                      </button>
-                                                      <ul class="dropdown-menu dropdown-menu-right">
-                                                            <li class="dropdown-item">
-                                                                <a href="#paper-kit">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-2">
-                                                                            <span class="icon-simple"><i class="fa fa-envelope"></i></span>
-                                                                        </div>
-                                                                        <div class="col-sm-9">Direct Message</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                          <div class="dropdown-divider"></div>
-                                                            <li class="dropdown-item">
-                                                                <a href="#paper-kit">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-2">
-                                                                            <span class="icon-simple"><i class="fa fa-microphone-slash"></i></span>
-                                                                        </div>
-                                                                        <div class="col-sm-9">Mute</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                          <div class="dropdown-divider"></div>
-                                                            <li class="dropdown-item">
-                                                                <a href="#paper-kit">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-2">
-                                                                            <span class="icon-simple"><i class="fa fa-exclamation-circle"></i></span>
-                                                                        </div>
-                                                                        <div class="col-sm-9">Report</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                            </div>
-                                          </div>
-                                        </div> <!-- end media -->
-                                        <div class="media">
-                                          <a class="pull-left" href="#paper-kit">
-                                              <div class="avatar">
-                                                 <img class="media-object" alt="Tim Picture" src="/static/img/rihanna.jpg">
-                                              </div>
-                                          </a>
-                                          <div class="media-body">
-                                            <strong>Rihanna</strong>
-                                            <h5 class="media-heading"><small>@rihanna &middot;  8 Jan 2016</small></h5>
-                                             <p>bitch better have my mistletoe <a href="#paper-kit" class="link-danger">#rihannaxstance</a> </p>
-                                             <img src="/static/img/rihanna_tweet.jpeg" alt="Rounded Image" class="img-rounded img-tweet">
-
-
-                                            <div class="media-footer">
-                                                <a href="#paper-kit" class="btn btn-link">
-                                                     <i class="fa fa-reply"></i>
-                                                </a>
-                                                <a href="#paper-kit" class="btn btn-link">
-                                                     <i class="fa fa-retweet"></i> 5.8K
-                                                </a>
-                                                <a href="#paper-kit" class="btn btn-danger btn-link">
-                                                     <i class="fa fa-heart"></i> 12K
-                                                </a>
-                                                <a href="#paper-kit" class="btn btn-link">
-                                                     <i class="fa fa-ellipsis-h"></i>
-                                                </a>
-                                            </div>
-                                          </div>
-                                        </div> <!-- end media -->
-                                        <div class="media">
-                                          <a class="pull-left" href="#paper-kit">
-                                              <div class="avatar">
-                                                 <img class="media-object" alt="Tim Picture" src="/static/img/rihanna.jpg">
-                                              </div>
-                                          </a>
-                                          <div class="media-body">
-                                            <strong>Rihanna</strong>
-                                            <h5 class="media-heading"><small>@rihanna &middot;  9 Jan 2016</small></h5>
-                                             <p>Thank you God for fulfilling Your plans in my life.... All the Glory belongs to You!!!! <a href="https://instagram.com/p/4m5W4sBMzj/">https://instagram.com/p/4m5W4sBMzj/</a> </p>
-
-
-                                            <div class="media-footer">
-                                                <a href="#paper-kit" class="btn btn-link">
-                                                     <i class="fa fa-reply"></i>
-                                                </a>
-                                                <a href="#paper-kit" class="btn btn-link">
-                                                     <i class="fa fa-retweet"></i> 5.9K
-                                                </a>
-                                                <a href="#paper-kit" class="btn btn-link">
-                                                     <i class="fa fa-heart"></i> 11K
-                                                </a>
-                                                <div class="dropdown">
-                                                      <button id="dLabel" type="button" class="btn btn-icon btn-link btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fa fa-ellipsis-h"></i>
-                                                      </button>
-                                                      <ul class="dropdown-menu dropdown-menu-right">
-                                                            <li class="dropdown-item">
-                                                                <a href="#paper-kit">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-2">
-                                                                            <span class="icon-simple"><i class="fa fa-envelope"></i></span>
-                                                                        </div>
-                                                                        <div class="col-sm-9">Direct Message</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <div class="dropdown-divider"></div>
-                                                            <li class="dropdown-item">
-                                                                <a href="#paper-kit">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-2">
-                                                                            <span class="icon-simple"><i class="fa fa-microphone-slash"></i></span>
-                                                                        </div>
-                                                                        <div class="col-sm-9">Mute</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <div class="dropdown-divider"></div>
-                                                            <li class="dropdown-item">
-                                                                <a href="#paper-kit">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-2">
-                                                                            <span class="icon-simple"><i class="fa fa-exclamation-circle"></i></span>
-                                                                        </div>
-                                                                        <div class="col-sm-9">Report</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                            </div>
-                                          </div>
-                                        </div> <!-- end media -->
-                                        <div class="media last-media">
-                                          <a class="pull-left" href="#paper-kit">
-                                              <div class="avatar">
-                                                 <img class="media-object" alt="Tim Picture" src="../assets/img/billboard.jpeg">
-                                              </div>
-                                              <div class="retweet">
-                                                    <btn class="btn btn-xs btn-success btn-just-icon btn-sm" rel="tooltip" title="Follow"><i class="fa fa-retweet"></i></btn>
-                                              </div>
-                                          </a>
-                                          <div class="media-body">
-                                            <strong>billboard</strong>
-                                            <h5 class="media-heading"><small>@billboard &middot;  1 Jul 2016</small></h5>
-                                             <p><a href="#paper-kit">@Rihanna</a> has become the first artist to surpass RIAA's 100 million cumulative singles award threshold: <a href="http://blbrd.cm/3rQ3Iq">http://blbrd.cm/3rQ3Iq</a> </p>
-
-                                            <div class="media-footer">
-                                                <a href="#paper-kit" class="btn btn-link">
-                                                     <i class="fa fa-reply"></i>
-                                                </a>
-                                                <a href="#paper-kit" class="btn btn-link">
-                                                     <i class="fa fa-retweet"></i> 5.6K
-                                                </a>
-                                                <a href="#paper-kit" class="btn btn-danger btn-link">
-                                                     <i class="fa fa-heart"></i> 7.2K
-                                                </a>
-                                                <div class="dropdown">
-                                                      <button id="dLabel" type="button" class="btn btn-icon btn-link btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fa fa-ellipsis-h"></i>
-                                                      </button>
-                                                      <ul class="dropdown-menu dropdown-menu-right">
-                                                            <li class="dropdown-item">
-                                                                <a href="#paper-kit">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-2">
-                                                                            <span class="icon-simple"><i class="fa fa-envelope"></i></span>
-                                                                        </div>
-                                                                        <div class="col-sm-9">Direct Message</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <a href="#paper-kit">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-2">
-                                                                            <span class="icon-simple"><i class="fa fa-microphone-slash"></i></span>
-                                                                        </div>
-                                                                        <div class="col-sm-9">Mute</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li class="dropdown-item">
-                                                                <a href="#paper-kit">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-2">
-                                                                            <span class="icon-simple"><i class="fa fa-exclamation-circle"></i></span>
-                                                                        </div>
-                                                                        <div class="col-sm-9">Report</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                            </div>
-                                          </div>
-                                        </div> <!-- end media --> {% endcomment %}
-                                        <br />
+                                        <br/>
                                         <div class="text-center">
-                                         <btn class="btn btn-outline-info btn-round">Load more Posts</btn>
+                                            <btn class="btn btn-outline-info btn-round">Load more Posts</btn>
                                         </div>
                                     </div>
-
                                 </div>
+
                         {% follow_user_tag as follow_users%}
                                 <div class="col-md-4 col-sm-6">
                                     <div class="card card-with-shadow">
@@ -434,59 +55,24 @@
                                                     {% for follow_user in follow_users %}
                                                     <li class="account">
                                                         <div class="row">
-                                                            <div class="col-md-3">
+                                                            <div class="col-md-3"><a href="{% url 'user_profile:user_profile' follow_user.username %}">
                                                                 <div class="avatar">
                                                                     <img src="{% if follow_user.user_details.profile_photo %} {{ follow_user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                                                                 </div>
+                                                                </a>
                                                             </div>
                                                             <div class="col-md-7 description-section">
-                                                               {{follow_user.first_name}} {{follow_user.last_name}} <a href="{% url 'user_profile:user_profile' username=follow_user.username %}" class="text-muted">@{{follow_user.username}}</a></span>
+                                                                    <a href="{% url 'user_profile:user_profile' username=follow_user.username %}" class="text-muted">{{follow_user.first_name}} {{follow_user.last_name}} @{{follow_user.username}}</a></span>
                                                                 <br />
                                                                 {% comment %} <span class="text-muted"><small>Followed by <a href="#paper-kit" class="link-info">@banks</a> and <a href="#paper-kit" class="link-info">@rihanna</a> </small></span> {% endcomment %}
                                                             </div>
-
+        
                                                             <div class="col-md-2 follow">
-                                                                <btn class="btn btn-sm btn-outline-info btn-just-icon"><i class="fa fa-plus"></i></btn>
+                                                                <a href="#follow"><i class="fa fa-user-plus"></i></a>
                                                             </div>
                                                         </div>
                                                     </li>
                                                     {% endfor %}
-                                                    {% comment %} <li class="account">
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <div class="avatar">
-                                                                    <img src="../assets/img/placeholder.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-7 description-section">
-                                                                John Green <a href="#paper-kit" class="text-muted">@johngreen</a></span>
-                                                                <br />
-                                                                <span class="text-muted"><small>Followed by <a href="#paper-kit" class="link-info">@rihanna</a> </small></span>
-                                                            </div>
-
-                                                            <div class="col-md-2 follow">
-                                                                <btn class="btn btn-sm btn-outline-info btn-just-icon"><i class="fa fa-plus"></i></btn>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li class="account">
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <div class="avatar">
-                                                                    <img src="../assets/img/drake.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-7 description-section">
-                                                                Drake <a href="#paper-kit" class="text-muted">@drake</a></span>
-                                                                <br />
-                                                                <span class="text-muted"><small>Followed by <a href="#paper-kit" class="link-info">@chetfaker</a> </small></span>
-                                                            </div>
-
-                                                            <div class="col-md-2 follow">
-                                                                <btn class="btn btn-sm btn-outline-info btn-just-icon"><i class="fa fa-plus"></i></btn>
-                                                            </div>
-                                                        </div>
-                                                    </li>  {% endcomment %}
                                                 </ul>
                                             </div>
 
@@ -529,9 +115,6 @@
                     </ul>
                 </nav>
                 <div class="credits ml-auto">
-                    {% comment %} <span class="copyright">
-                        © <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
-                    </span> {% endcomment %}
                 </div>
             </div>
         </div>
@@ -549,6 +132,34 @@
         {% if post_form.errors %}
             $('#postAddModal').modal('show');
         {% endif %}
+        $(".like-click").click(function(event){
+            event.preventDefault();
+            $(this).toggleClass('btn-danger');
+            $.ajax({
+                url: $(this).attr('href'),
+                success: function(response) {
+                    console.log(response)
+                    if(response.liked == true){
+                        if($(this).hasClass('btn-danger') != false){
+                            $(this).toggleClass('btn-danger');
+
+                    console.log('changed danger');
+                        }
+                }
+                else if(response.liked == false){
+                    if($(this).hasClass('btn-danger') == false){
+                        $(this).toggleClass('btn-danger');
+                console.log('removed danger');
+                    }
+                }
+            }
+            });
+        })
     </script>
+    <style>
+            .black{
+                color: black;
+            }
+        </style>
 {% endblock post_add_js %}
     

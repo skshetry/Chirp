@@ -1,0 +1,26 @@
+{% load static %}
+{% load check_liked_filter %}
+<div class="media">
+        <div class="pull-left" href="{% url 'user_profile:user_profile' post.user %}">
+         <div class="avatar">
+              <img class="media-object" src="{% if post.user.user_details.profile_photo %}{{ post.user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="..." />
+          </div>
+        </div>
+        <div class="media-body">
+          <strong>{{post.user.first_name}} {{post.user.last_name}}</strong>
+          <h5 class="media-heading"><small>@{{post.user.username}} &middot; 1h</small></h5>
+          <p>{{post.text}}</p>
+
+          <div class="media-footer">
+              <a href="#paper-kit" class="btn btn-link">
+                   <i class="fa fa-reply"></i>
+              </a>
+              <a href="#paper-kit" class="btn btn-success btn-link">
+                   <i class="fa fa-retweet"></i> 2.1k
+              </a>
+              <a href="{% url 'posts:like' post.id %}" class="btn {%if post|check_liked_posts:user %}btn-danger{% endif %} btn-link black like-click">
+                   <i class="fa fa-heart"></i> 3.2k
+              </a>
+          </div>
+        </div>
+</div>
