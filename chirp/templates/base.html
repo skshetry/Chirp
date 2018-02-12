@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="{% static  'img/favicon.png' %}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>Project Chirp</title>
+    <title>{%block title%}Project Chirp{%endblock%}</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
@@ -23,6 +23,7 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href="{% static  'css/nucleo-icons.css' %}" rel="stylesheet" />
+    {%block stylesheet%}{%endblock%}
     {% comment %} <link href="{% static  'css/main.css' %}" rel="stylesheet" /> {% endcomment %}
 </head>
 
