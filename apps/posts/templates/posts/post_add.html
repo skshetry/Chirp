@@ -1,8 +1,7 @@
-{% extends 'base.html' %}
 
 {% load static %}
 
-{% block content %}
+
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-outline-default btn-primary btn-round" data-toggle="modal" data-target="#postAddModal">
@@ -61,7 +60,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" autocomplete="off" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'posts:add'%}" autocomplete="off" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="modal-body">
                     {% if post_form.errors %}
@@ -111,17 +110,4 @@
     </div>
 </div>
 
-{% endblock content %}
 
-{% block post_add_js %}
-    <script src="{% static 'js/addmediaform.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.uploadPreview.min.js' %}"></script>
-    <script>
-        $("[name=form-INITIAL_FORMS]").val(0);
-        $("[name=form-TOTAL_FORMS]").val(0);
-
-        {% if post_form.errors %}
-            $('#postAddModal').modal('show');
-        {% endif %}
-    </script>
-{% endblock post_add_js %}

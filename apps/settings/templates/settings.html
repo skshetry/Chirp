@@ -2,25 +2,10 @@
 {% load static %}
 {% block content %}
 <div class="wrapper">
-    <div class="profile-background settings-background" style="background-image: url({% if user.user_details.cover_photo %}
-                        {{ user.user_details.cover_photo.url }}
-                        {%else%}
-                        {% static  'img/default_cover.png' %}
-                        {% endif %});">
-        <div class="filter"></div>
-    </div>
-    <div class="profile-content section-white-gray">
-        <div class="container">
-            <div class="row owner">
-                <div class="col-md-2 col-sm-4 col-6 ml-auto mr-auto text-center">
-                    <div class="avatar">
-                        <img src="{% if user.user_details.profile_photo %}
-                        {{ user.user_details.profile_photo.url }}
-                        {%else%}
-                        {% static  'img/default_profile.jpg' %}
-                        {% endif %}" alt="Circle Image" class="img-circle img-responsive">
-                    </div>
-                    </div>
+    {% include 'cover_photo.html' %}
+
+    {% include 'profile_details.html' %}
+
                           <!-- FORM TO UPLOAD THE IMAGES -->
 <div class="row">
     <form method="post" enctype="multipart/form-data" id="profile_photo">

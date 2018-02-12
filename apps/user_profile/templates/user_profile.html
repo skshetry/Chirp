@@ -2,49 +2,8 @@
 {% load static %}
 {% block content %}
     <div class="wrapper">
-        <div class="profile-background settings-background" style="background-image: url({% if user.user_details.cover_photo %}
-                            {{ user.user_details.cover_photo.url }}
-                            {%else%}
-                            {% static  'img/default_cover.png' %}
-                            {% endif %});">
-            <div class="filter"></div>
-        </div>
-        <div class="profile-content section-white-gray">
-            <div class="container">
-                <div class="row owner">
-                    <div class="col-md-2 col-sm-4 col-6 ml-auto mr-auto text-center">
-                        <div class="avatar">
-                            <img src="{% if user.user_details.profile_photo %}
-                            {{ user.user_details.profile_photo.url }}
-                            {%else%}
-                            {% static  'img/default_profile.jpg' %}
-                            {% endif %}" alt="Circle Image" class="img-circle img-responsive">
-                            <div class="following">
-                                <btn class="btn btn-sm btn-info btn-just-icon" rel="tooltip" title="Follow"><i class="nc-icon nc-simple-add"></i></btn>
-                            </div>
-                        </div>
-
-                        <div class="name">
-                            <h4>{{ user.first_name }} {{ user.last_name}}<br><small>@{{ user.username }}</small></h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 ml-auto mr-auto text-center">
-                        <p>{% if user.user_details.bio %}{{ user.user_details.bio }}{% endif %}</p>
-                        <div class="description-details">
-                            <ul class="list-unstyled">
-                                <li><i class="{% if user.user_details.gender == 'M' %}
-                                    fa fa-male
-                                    {% elif user.user_details.gender == 'F' %}
-                                    fa fa-female
-                                    {% else %}
-                                    {% endif %}"></i>{% if user.user_details.gender %}{{ user.user_details.gender }}{% endif %}</li>
-                                <li>{% if user.user_details.date_of_birth %}<i class="fa fa-calendar"></i> Joined {{ user.user_details.date_of_birth }} {% else %}{% endif %}</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+        {% include 'cover_photo.html' %}
+        {% include 'profile_details.html' %}
                 <div class="profile-tabs">
                     <div class="nav-tabs-navigation">
                         <div class="nav-tabs-wrapper">
