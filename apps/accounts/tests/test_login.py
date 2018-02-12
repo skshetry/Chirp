@@ -157,13 +157,13 @@ class LoginPostTest(TestCase):
         }
 
         # Send post data to client.
-        response = self.client.post(self.url+'?next='+reverse('Home'), data)
+        response = self.client.post(self.url+'?next='+reverse('feeds:home'), data)
 
         # Test that the redirect doesnot occur.
         # Redirect occurs after successful login.
         self.assertRedirects(
             response,
-            expected_url=reverse('Home'),
+            expected_url=reverse('feeds:home'),
             status_code=302
             )
 

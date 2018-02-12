@@ -19,7 +19,7 @@ from .tokens import account_activation_token
 
 def signup(request):
     if request.user.is_authenticated():
-        return redirect('Home')
+        return redirect('feeds:home')
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -57,7 +57,7 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
-        # return redirect('home')
+        # return redirect('feeds:home')
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
