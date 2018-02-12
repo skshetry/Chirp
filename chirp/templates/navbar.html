@@ -30,7 +30,7 @@
                 <ul class="navbar-nav ml-auto">
                     {% if not hide_search %} 
                     <li class="nav-item">
-                            <form action="" method="get" style="display: inline;" class="navbar-form navbar-left">
+                            <form action="{% url 'search:search' %}" method="get" style="display: inline;" class="navbar-form navbar-left">
                                     <div>
                                         <div class="input-group">
 
