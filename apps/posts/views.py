@@ -1,8 +1,10 @@
 from django.shortcuts import render, reverse, redirect
 
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 
 from .forms import PostForm, PostMediaFormSet
+from .models import Post
 
 
 @login_required
@@ -22,3 +24,9 @@ def posts_add(request):
             'mediaformset': media_form_set,
             'post_form': post_form,
             })
+
+@login_required
+def like_post(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    is_liked = Post.objects.like(request.user, post)
+    return JsonResponse({"liked": is_liked})

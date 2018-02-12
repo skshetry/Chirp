@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load check_liked_filter %}
+{% load post_include %}
 {% block content %}
     <div class="wrapper">
         {% include 'cover_photo.html' %}
@@ -22,9 +24,39 @@
                     </div>
                     <div id="my-tab-content" class="tab-content">
                     <div class="tab-pane active text-center" id="tweets">
-                            <div class="row">
-                                <h3 class="text-muted">No tweets yet :(</h3>
-                            </div>
+                            {% if user != profile_user %}
+                            {% with user=profile_user %}
+                                {% if not user.post_set.all %}
+                                    <h3 class="text-muted">No tweets yet :(</h3>
+                                {% endif %}
+                                {% for post in user.post_set.all %}
+                                <div class="container h-100 d-flex justify-content-center">
+                                    <div class="row">
+                                    {% post_include post user%}
+                                    </div>
+                                </div>
+
+                                {% endfor %}
+                                {% endwith %}
+                            {% else %}
+                                {% if not user.post_set.all %}
+                                    <h3 class="text-muted">No tweets yet :(</h3>
+                                {% endif %}
+                                <div class="container h-100 d-flex justify-content-center">
+                                        {% include 'posts/post_add.html' %}
+                                </div>
+                                {% for post in user.post_set.all %}
+                                <div class="container h-100 d-flex justify-content-center">
+
+                                    <div class="row">
+                                    {% post_include post user%}
+                                    </div>
+                                </div>
+
+                                {% endfor %}
+                                {% endif %}
+
+                            
                         </div>
                                 
                         <div class="tab-pane text-center" id="follows">
@@ -105,3 +137,43 @@
     </div>
 {% endblock content %}
 
+{% block post_add_js %}
+    <script src="{% static 'js/addmediaform.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.uploadPreview.min.js' %}"></script>
+    <script>
+        $("[name=form-INITIAL_FORMS]").val(0);
+        $("[name=form-TOTAL_FORMS]").val(0);
+    
+        {% if post_form.errors %}
+            $('#postAddModal').modal('show');
+        {% endif %}
+        $(".like-click").click(function(event){
+            event.preventDefault();
+            $(this).toggleClass('btn-danger');
+            $.ajax({
+                url: $(this).attr('href'),
+                success: function(response) {
+                    console.log(response)
+                    if(response.liked == true){
+                        if($(this).hasClass('btn-danger') != false){
+                            $(this).toggleClass('btn-danger');
+
+                    console.log('changed danger');
+                        }
+                }
+                else if(response.liked == false){
+                    if($(this).hasClass('btn-danger') == false){
+                        $(this).toggleClass('btn-danger');
+                console.log('removed danger');
+                    }
+                }
+            }
+            });
+        })
+    </script>
+    <style>
+            .black{
+                color: black;
+            }
+        </style>
+{% endblock post_add_js %}
