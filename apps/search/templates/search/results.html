@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{%load static%}
+{%block title%}Search{%endblock%}
+
+{%block stylesheet%}
+<link href="{% static 'css/search.css' %}" rel="stylesheet"> 
+<script src="{% static 'js/search.js' %}"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+{%endblock%}   
+
+{%block content%}
+{% include 'cover_photo.html' %}
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-md-3">
+            <h3>Search</h3>
+        </div>
+        <div class="col-md-9 pt-4">
+            <form role="search" action="{% url 'search:search' %}">
+                <input type="hidden" name="type" value="{{ active }}">
+                <div class="input-group">
+                    <input type="text" id="auto-search" class="form-control" name="q" placeholder="Search" value="{{ querystring }}">
+                    <button type="submit"><i class="fa fa-search" aria-hidden="true" style="font-size:large;"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row results">
+    <div class="col-md-3">
+        {% include 'search/partial_results_menu.html' with active=active count=count querystring=querystring %}
+    </div>
+    <div class="col-md-9">
+        {% if active == 'posts' %}
+        {% include 'search/partial_posts_results.html' with results=results %}
+        {% elif active == 'users' %}
+        {% include 'search/partial_users_results.html' with results=results %}
+        {% endif %}
+    </div>
+</div>
+{%endblock content%}
+
