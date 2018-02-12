@@ -49,7 +49,8 @@
                                 <div class="col-md-4 col-sm-6">
                                     <div class="card card-with-shadow">
                                         <div class="card-body">
-                                            <h5 class="card-title">Who to follow &middot; <small><a href="javascript: void(0);" class="link-info">View all</a></small></h5>
+                                            <a id="follow_friends"><h5 class="card-title">Who to follow &middot; <small><a href="javascript: void(0);" class="link-info">View all</a></small></h5>
+                                            </a>
                                             <div class="accounts-suggestion">
                                                 <ul class="list-unstyled">
                                                     {% for follow_user in follow_users %}
@@ -81,7 +82,8 @@
                                     {% trendings_tag as trending %}
                                     <div class="card card-with-shadow">
                                         <div class="card-body">
-                                            <h5 class="card-title">Trends &middot; <!--<small><a href="javascript: void(0);" class="link-info">Change</a></small>--></h5>
+                                            <a id="trending_hashtags"><h5 class="card-title">Trends &middot; <!--<small><a href="javascript: void(0);" class="link-info">Change</a></small>--></h5>
+                                            </a>
                                             <div class="hashtag-suggestions">
                                                 <ul class="list-unstyled">
                                                 {% for trend in trending %}

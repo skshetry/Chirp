@@ -33,7 +33,7 @@
                                     <div>
                                         <div class="input-group">
 
-                                            <input type="text" class="form-control" style="margin-right:130px;" size="30" placeholder="Search" aria-describedby="basic-addon1">          
+                                            <input type="text" class="form-control" style="margin-right:90px;" size="30" placeholder="Search" aria-describedby="basic-addon1">          
 
                                         </div>
                                     </div>
@@ -41,8 +41,12 @@
                     </li>
                     <li class="nav-item">
 
-                        <a class="nav-link" href="#trending" data-scroll="true" href="javascript:void(0)">Trending</a>
+                        <a class="nav-link" href="{% url 'feeds:home' %}#follow_friends" data-scroll="true" href="javascript:void(0)">Follow</a>
                     </li>
+                    <li class="nav-item">
+
+                            <a class="nav-link" href="{% url 'feeds:home' %}#trending_hashtags" data-scroll="true" href="javascript:void(0)">Trending</a>
+                        </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><img src="{% if user.user_details.profile_photo %} {{ user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" class="img-circle img-no-padding img-responsive profile-img"></a>
                         <ul class="dropdown-menu dropdown-menu-right dropdown-danger">
