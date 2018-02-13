@@ -28,17 +28,20 @@
         {% if user.is_authenticated %}
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
+                    {% if not hide_search %} 
                     <li class="nav-item">
-                            <form action="" method="get" style="display: inline;" class="navbar-form navbar-left">
+                            <form role ="search" action="{% url 'search:search' %}" method="get" style="display: inline;" class="navbar-form navbar-left">
                                     <div>
+                                        <input type="hidden" name="type">
                                         <div class="input-group">
 
-                                            <input type="text" class="form-control" style="margin-right:90px;" size="30" placeholder="Search" aria-describedby="basic-addon1">          
+                                            <input type="text" id="auto-search" name="q" class="form-control" style="margin-right:130px;" size="30" placeholder="Search" aria-describedby="basic-addon1">          
 
                                         </div>
                                     </div>
                                 </form>
                     </li>
+                    {%endif%}
                     <li class="nav-item">
 
                         <a class="nav-link" href="{% url 'feeds:home' %}#follow_friends" data-scroll="true" href="javascript:void(0)">Follow</a>

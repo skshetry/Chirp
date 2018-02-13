@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{%load static%}
+{% load trendings_tag %}
+{%block title%}Search{%endblock%}
+
+{%block stylesheet%}
+<link href="{% static 'css/search.css' %}" rel="stylesheet"> 
+<script src="{% static 'js/search.js' %}"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+{%endblock%}   
+
+{%block content%}
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-md-3">
+            <h3>Search</h3>
+        </div>
+        <div class="col-md-9 pt-4">
+            <form role="search" action="{% url 'search:search' %}">
+                <input type="hidden" name="type" value="{{ active }}">
+                <div class="input-group">
+                    <input type="text" id="auto-search" class="form-control" name="q" placeholder="Search" value="{{ querystring }}">
+                    <button type="submit"><i class="fa fa-search" aria-hidden="true" style="font-size:large;"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row results">
+    <div class="col-md-3">
+        {% include 'search/partial_results_menu.html' with active=active count=count querystring=querystring %}
+    </div>
+    <div class="col-md-6">
+        {% if active == 'posts' %}
+        {% include 'search/partial_posts_results.html' with results=results %}
+        {% elif active == 'users' %}
+        {% include 'search/partial_users_results.html' with results=results %}
+        {% endif %}
+    </div>
+    <div class="col-md-3">
+    {% trendings_tag as trending %}
+    <div class="card card-with-shadow">
+        <div class="card-body">
+            <h5 class="card-title">Trends &middot; <!--<small><a href="javascript: void(0);" class="link-info">Change</a></small>--></h5>
+            <div class="hashtag-suggestions">
+                <ul class="list-unstyled">
+                {% for trend in trending %}
+                    <li><a href="{% url 'search:search' %}?q=%23{{trend.tag}}" class="link-danger">#{{trend.tag}}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+    </div> 
+    </div>
+</div>
+{%endblock content%}
+

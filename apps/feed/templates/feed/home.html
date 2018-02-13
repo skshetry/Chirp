@@ -88,7 +88,7 @@
                                             <div class="hashtag-suggestions">
                                                 <ul class="list-unstyled">
                                                 {% for trend in trending %}
-                                                    <li><a href="#trends" class="link-danger">#{{trend.tag}}</a></li>
+                                                    <li><a href="{% url 'search:search' %}?q=%23{{trend.tag}}" class="link-danger">#{{trend.tag}}</a></li>
                                                 {% endfor %}
                                                 </ul>
                                             </div>
