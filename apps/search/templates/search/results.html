@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {%load static%}
+{% load trendings_tag %}
 {%block title%}Search{%endblock%}
 
 {%block stylesheet%}
@@ -9,7 +10,6 @@
 {%endblock%}   
 
 {%block content%}
-{% include 'cover_photo.html' %}
 <div class="container">
     <div class="row mt-2">
         <div class="col-md-3">
@@ -30,12 +30,28 @@
     <div class="col-md-3">
         {% include 'search/partial_results_menu.html' with active=active count=count querystring=querystring %}
     </div>
-    <div class="col-md-9">
+    <div class="col-md-6">
         {% if active == 'posts' %}
         {% include 'search/partial_posts_results.html' with results=results %}
         {% elif active == 'users' %}
         {% include 'search/partial_users_results.html' with results=results %}
         {% endif %}
+    </div>
+    <div class="col-md-3">
+    {% trendings_tag as trending %}
+    <div class="card card-with-shadow">
+        <div class="card-body">
+            <h5 class="card-title">Trends &middot; <!--<small><a href="javascript: void(0);" class="link-info">Change</a></small>--></h5>
+            <div class="hashtag-suggestions">
+                <ul class="list-unstyled">
+                {% for trend in trending %}
+                    <li><a href="{% url 'search:search' %}?q=%23{{trend.tag}}" class="link-danger">#{{trend.tag}}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+    </div> 
     </div>
 </div>
 {%endblock content%}
