@@ -31,10 +31,11 @@
                                             {% include 'posts/post_add.html' %}
                                     </div>
                                     <div class="tweets">
-                                        {% if not user.post_set.all %}
-                                            <h3 class="text-muted">No tweets yet :(</h3>
+                                        {% posts_from_feed user as feed_posts %}
+                                        {% if not feed_posts %}
+                                            <h3 class="text-muted">Empty feeds. Follow some users and get back here. :(</h3>
                                         {% endif %}
-                                        {% for post in user.post_set.all %}
+                                        {% for post in feed_posts %}
                                             {% post_include post user%}
                                         {% endfor %}
 
