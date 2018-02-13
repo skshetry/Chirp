@@ -1,10 +1,10 @@
 {%load static%}
 <p class="font-italic">You searched for:</p>
-<nav class="navbar text-white " style="background-color: #0e7c13;">
-  <span class="navbar-text">
-    <p style="margin: 0;font-weight: 60;font-size: 1.5em;">{{querystring}}</p>
-  </span>
-</nav>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">{{querystring}}</li>
+    </ol>
+  </nav>
 {% if results %}
 <!-- <p class="font-weight-normal">we found some!!! :)</p> -->
   <ul class="posts-results">
