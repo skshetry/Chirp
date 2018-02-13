@@ -7,7 +7,6 @@
         {% include 'cover_photo.html' %}
         {% include 'profile_details.html' %}
         
-        {% with profile_user=user %}
                 <div class="profile-tabs">
                     <div class="nav-tabs-navigation">
                         <div class="nav-tabs-wrapper">
@@ -26,12 +25,16 @@
                     </div>
                     <div id="my-tab-content" class="tab-content">
                     <div class="tab-pane active text-center" id="tweets">
+                            {{ profile_user.username }}
+                            {{ user.username}}
                             {% if user != profile_user %}
+                            {{ profile_user.username }}
+                            {{ user.username}}
                             {% with user=profile_user %}
                                 {% if not user.post_set.all %}
                                     <h3 class="text-muted">No tweets yet :(</h3>
                                 {% endif %}
-                                {% for post in user.post_set.all %}
+                                {% for post in profile_user.post_set.all %}
                                 <div class="container h-100 d-flex justify-content-center">
                                     <div class="row">
                                     {% post_include post user%}
@@ -41,6 +44,8 @@
                                 {% endfor %}
                                 {% endwith %}
                             {% else %}
+                            <h3 class="text-muted">No tweets yet :(</h3>
+
                                 {% if not user.post_set.all %}
                                     <h3 class="text-muted">No tweets yet :(</h3>
                                 {% endif %}
@@ -135,9 +140,7 @@
 
                 </div>
             </div>
-        </div>
-        {% endwith %}
-        
+        </div>        
     </div>
 {% endblock content %}
 
