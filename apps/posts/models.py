@@ -51,7 +51,7 @@ class PostManager(models.Manager):
 
 
     def like(self, user, post):
-        if user in post.liked.all():
+        if user in post.likes.all():
             is_liked = False
             post.likes.remove(user)
         else:
@@ -99,7 +99,6 @@ class Post(models.Model):
 
     def get_parent(self):
         x=self.parent if self.parent else None
-        print(x)
         return x
 
     def get_childs(self):
@@ -108,6 +107,7 @@ class Post(models.Model):
 
     def get_medias(self):
         return self.post_media.all() if self.posts_media.exists() else None
+
 
 
 class Tag(models.Model):
