@@ -1,19 +1,77 @@
-<p class="font-italic">You searched for "{{querystring}}" in posts</p>
+{%load static%}
+<p class="font-italic">You searched for:</p>
+<nav class="navbar text-white " style="background-color: #0e7c13;">
+  <span class="navbar-text">
+    <p style="margin: 0;font-weight: 60;font-size: 1.5em;">{{querystring}}</p>
+  </span>
+</nav>
 {% if results %}
-<p class="font-weight-normal">we found some!!! :)</p>
+<!-- <p class="font-weight-normal">we found some!!! :)</p> -->
   <ul class="posts-results">
     {% for posts in results %}
-      <li post-id="{{ post.pk }}">
-        
-          @{{posts.user.username}}
-        
-        <div class="post">
-          <h3>
-            {{posts.text}}<br>
-            <small>{{ posts.created }}</small>
-          </h3>          
+    <div class="media">
+      <a class="pull-left" href="#paper-kit">
+       <div class="avatar">
+            <img class="media-object" src="{% if posts.user.user_details.profile_photo %}{{ posts.user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="..." />
         </div>
-      </li>
+      </a>
+      <div class="media-body">
+        <strong>{{posts.user.first_name}} {{posts.user.last_name}}</strong>
+        <h5 class="media-heading"><small>@{{posts.user.username}} &middot; 1h</small></h5>
+        <p>{{posts.text}}</p>
+
+        <div class="media-footer">
+            <a href="#paper-kit" class="btn btn-link">
+                 <i class="fa fa-reply"></i>
+            </a>
+            <a href="#paper-kit" class="btn btn-success btn-link">
+                 <i class="fa fa-retweet"></i> 2.1k
+            </a>
+            <a href="#paper-kit" class="btn btn-danger btn-link">
+                 <i class="fa fa-heart"></i> 3.2k
+            </a>
+            <span class="dropdown">
+                  <button id="dLabel" type="button" class="btn btn-just-icon btn-link btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fa fa-ellipsis-h"></i>
+                        </button>
+              <ul class="dropdown-menu dropdown-menu-right">
+                    <li class="dropdown-item">
+                        <a href="#paper-kit">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <span class="icon-simple"><i class="fa fa-envelope"></i></span>
+                                </div>
+                                <div class="col-sm-9">Direct Message</div>
+                            </div>
+                        </a>
+                    </li>
+                    <div class="dropdown-divider"></div>
+                    <li class="dropdown-item">
+                        <a href="#paper-kit">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <span class="icon-simple"><i class="fa fa-microphone-slash"></i></span>
+                                </div>
+                                <div class="col-sm-9">Mute</div>
+                            </div>
+                        </a>
+                    </li>
+                    <div class="dropdown-divider"></div>
+                    <li class="dropdown-item">
+                        <a href="#paper-kit">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <span class="icon-simple"><i class="fa fa-exclamation-circle"></i></span>
+                                </div>
+                                <div class="col-sm-9">Report</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </span>
+        </div>
+      </div>
+</div> <!-- end media -->
     {% endfor %}
   </ul>
 {% else %}
