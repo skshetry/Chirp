@@ -14,6 +14,37 @@ def upload_posts_media_to(instance, filename):
     return f'photos/{username}/{filename}'
 
 
+class UserProfileManager(models.Manager):
+    use_for_related_field = True
+
+    def all(self):
+        qs = self.get_queryset().all()
+        try:
+            if self.instance:
+                qs = qs.exclude(user=self.instance)
+        except:
+            pass
+        return qs
+
+    def toggle_follow(self, user, to_toggle_user):
+        user_profile, created = User_details.objects.get_or_create(user=user)
+        if to_toggle_user in user_profile.follows.all():
+            user_profile.follows.remove(to_toggle_user)
+            added = False
+        else:
+            user_profile.follows.add(to_toggle_user)
+            added = True
+        return added
+
+    def is_following(self, user, followed_by_user):
+        user_profile, created = User_details.objects.get_or_create(user=user)
+        if created:
+            return False
+        if followed_by_user in user_profile.following.all():
+            return True
+        return False
+
+
 class User_details(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_details')
     date_of_birth = models.DateField(null=True)
@@ -28,9 +59,10 @@ class User_details(models.Model):
         choices=GENDER_CHOICES,
         null=True,
     )
-    follows = models.ManyToManyField('User_details', related_name='followed_by')
+    follows = models.ManyToManyField('User_details', related_name='followed_by', blank=True)
     profile_photo = models.ImageField(null=True, upload_to=upload_posts_media_to, default=None)
     cover_photo = models.ImageField(null=True, upload_to=upload_posts_media_to, default=None)
+    objects = UserProfileManager()
 
     @property
     def cover_photo_url(self):

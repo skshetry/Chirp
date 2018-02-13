@@ -6,6 +6,8 @@
     <div class="wrapper">
         {% include 'cover_photo.html' %}
         {% include 'profile_details.html' %}
+        
+        {% with profile_user=user %}
                 <div class="profile-tabs">
                     <div class="nav-tabs-navigation">
                         <div class="nav-tabs-wrapper">
@@ -14,10 +16,10 @@
 									<a class="nav-link active" href="#tweets" data-toggle="tab" role="tab">Tweets</a>
 								</li>
                                 <li class="nav-item">
-									<a class="nav-link" href="#following" data-toggle="tab" role="tab">Following({{ user.user_details.follows.all.count }})</a>
+									<a class="nav-link" href="#following" data-toggle="tab" role="tab">Following({{ profile_user.user_details.follows.all.count }})</a>
 								</li>
                                 <li class="nav-item">
-									<a class="nav-link" href="#follows" data-toggle="tab" role="tab">Followers({{ user.user_details.followed_by.all.count }})</a>
+									<a class="nav-link" href="#follows" data-toggle="tab" role="tab">Followers({{ profile_user.user_details.followed_by.all.count }})</a>
 								</li>
                             </ul>
                         </div>
@@ -63,8 +65,8 @@
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-3">
                                     <ul class="list-unstyled follows">
-                                            {% if user.user_details.followed_by.all %}
-                                            {% for following_user in user.user_details.followed_by.all %}
+                                            {% if profile_user.user_details.followed_by.all %}
+                                            {% for following_user in profile_user.user_details.followed_by.all %}
                                         <li>
                                             <div class="row">
                                                 <div class="col-md-2 col-md-offset-0 col-xs-3 col-xs-offset-2">
@@ -99,8 +101,8 @@
                                 <div class="row">
                                         <div class="col-md-6 col-md-offset-3">
                                             <ul class="list-unstyled follows">
-                                                    {% if user.user_details.follows.all %}
-                                                    {% for user_follows in user.user_details.follows.all %}
+                                                    {% if profile_user.user_details.follows.all %}
+                                                    {% for user_follows in profile_user.user_details.follows.all %}
                                                 <li>
                                                     <div class="row">
                                                         <div class="col-md-2 col-md-offset-0 col-xs-3 col-xs-offset-2">
@@ -134,6 +136,8 @@
                 </div>
             </div>
         </div>
+        {% endwith %}
+        
     </div>
 {% endblock content %}
 

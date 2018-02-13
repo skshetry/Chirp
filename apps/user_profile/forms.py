@@ -47,7 +47,7 @@ class ProfilePhotoForm(forms.ModelForm):
         image = Image.open(photo.profile_photo)
         cropped_image = image.crop((x, y, w+x, h+y))
         resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
-        resized_image.save(photo.profile_photo.path)
+        resized_image.save(photo.profile_photo.name)
 
         return photo
 
@@ -72,6 +72,6 @@ class CoverPhotoForm(forms.ModelForm):
         image = Image.open(photo.cover_photo)
         cropped_image = image.crop((x, y, w+x, h+y))
         resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
-        resized_image.save(photo.cover_photo.path)
+        resized_image.save(photo.cover_photo.name)
 
         return photo
