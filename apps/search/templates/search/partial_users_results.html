@@ -1,13 +1,19 @@
+{%load static%}
 <p class="font-italic">You searched for user "<strong>{{querystring}}</strong>" </p>
 {% if results %}
   <ul class="users-results">
     {% for user_result in results %}
-      <li username="{{ user.username }}">
-        <h5>
-         
-          {{user_result.username}}
-        </h5>
-      </li>
+    <div class="media">
+      <a class="pull-left" href="#paper-kit">
+       <div class="avatar">
+            <img class="media-object" src="{% if user_result.user_details.profile_photo %}{{ user_result.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="..." />
+        </div>
+      </a>
+      <div class="media-body">
+        <strong><a href="{%url 'user_profile:user_profile' user_result.username%}">{{user_result.first_name}} {{user_result.last_name}}</a></strong></br>
+        <h5 class="media-heading"><small><a href="{%url 'user_profile:user_profile' user_result.username%}">@{{user_result.username}}</a> &middot; 1h</small></h5>
+        </div>
+</div> <!-- end media -->
     {% endfor %}
   </ul>
 {% else %}
