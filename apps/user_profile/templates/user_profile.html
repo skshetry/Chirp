@@ -149,22 +149,22 @@
         {% endif %}
         $(".like-click").click(function(event){
             event.preventDefault();
+            var clicked = $(this);
             $(this).toggleClass('btn-danger');
+            var like_count = parseInt($(this, '.like-count').text());
             $.ajax({
                 url: $(this).attr('href'),
-                success: function(response) {
-                    console.log(response)
+                success: function(response){
                     if(response.liked == true){
+                        $(clicked).find('.like-count').text(++like_count);
                         if($(this).hasClass('btn-danger') != false){
                             $(this).toggleClass('btn-danger');
-
-                    console.log('changed danger');
                         }
                 }
                 else if(response.liked == false){
+                    $(clicked).find('.like-count').text(--like_count);
                     if($(this).hasClass('btn-danger') == false){
                         $(this).toggleClass('btn-danger');
-                console.log('removed danger');
                     }
                 }
             }
