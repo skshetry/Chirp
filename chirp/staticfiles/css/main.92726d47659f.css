@@ -1,0 +1,90 @@
+.bg-teal{
+    background-color: rgb(4, 124, 98);
+}
+
+.navbar-header {
+    float: left;
+    height: 50px;
+    text-align: center;
+    width: 100%;
+}
+
+.navbar-brand {
+    float:none; 
+    font-family:'Comfortaa', cursive;
+}
+
+ .navbar-nav > li > a, .navbar-brand {
+    padding-top:5px !important; padding-bottom:0 !important;
+    height: 30px;
+}
+
+.navbar {min-height:30px !important;}
+
+.nav-tabs-navigation{
+    min-height: 30px;
+}
+
+.pull-right {
+    float: right !important;
+  }
+
+.dropdown-menu{
+    margin-left:-150px;
+  }
+
+.navbar-icons{
+  }
+
+.navbar-numbers{
+    color:red;
+    margin-left:-5px;
+  }
+
+.dropdown.show .dropdown-menu .dropdown-item:hover,
+.dropdown.show .dropdown-menu .dropdown-item:focus,
+.dropdown .dropdown-menu .dropdown-item:hover,
+.dropdown .dropdown-menu .dropdown-item:focus {
+    background-color: black;
+    border-radius: 0;
+}
+
+.dropdown.show .dropdown-menu,
+.dropdown .dropdown-menu {
+    background-color: white;
+    border: 0;
+    transition: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    width: auto;
+    border-radius: 0;
+}
+
+.nav-tabs .nav-link {
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0rem;
+    font-weight: 350;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+    color: rgb(4, 124, 98);
+}
+
+.nav-tabs .nav-item .nav-link:hover{
+    color:black;
+}
+
+.nav-link:hover> .nav-numbers{
+    color:black;
+}
+.black-box{
+    background-color: black;
+}
+.nav-link:hover>.navbar-numbers{
+    color:black;
+    font-weight: 350;
+}
+.nav-link.active>.navbar-numbers{
+    color:rgb(4, 124, 98);
+    font-weight: 350;
+}
