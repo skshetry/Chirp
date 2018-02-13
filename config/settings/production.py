@@ -171,4 +171,4 @@ SENDGRID_API_KEY = env('DJANGO_SENDGRID_EMAIL_PASSWORD')
 
 
 DEFAULT_FILE_STORAGE = 'config.storage.MediaStorage'
-STATICFILES_STORAGE = 'config.storage.StaticStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
