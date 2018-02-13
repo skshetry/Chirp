@@ -1,9 +1,13 @@
 {% extends 'base.html' %} 
+{%load static %}
 {%block title%}Search{%endblock%}
-
+{%block stylesheet%}
+<link href="{% static 'css/search.css' %}" rel="stylesheet"> 
+<script src="{% static 'js/search.js' %}"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+{%endblock%}  
 
 {%block content%}
-{% include 'cover_photo.html' %}
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8 offset-md-2">

@@ -59,3 +59,10 @@
     font-weight: 100;
     font-size: 2em;
 }
+body { padding-top: 70px; }
+
+.navbar
+{
+  background:#3eaa5d !important;
+  padding-top:5px !important; padding-bottom:5px !important;
+}
