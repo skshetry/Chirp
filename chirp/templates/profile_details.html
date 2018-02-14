@@ -1,4 +1,6 @@
 {% load static %}
+{% load check_followed_filter %}
+
 <div class="row owner">
     {% if not profile_user %}
         {% with profile_user=user %}
@@ -40,8 +42,13 @@
                     <img src="{% if profile_user.user_details.profile_photo %} {{ profile_user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="Circle Image" class="img-circle img-responsive">
                      {% if profile_user != user %}
                     <div class="following">
+                        {% if user|check_followed_user_already:profile_user %}
+                        <a href="{% url 'user_profile:follow_user' username=profile_user.username %}"><btn class="btn btn-info btn-round" rel="tooltip" title="Follow"></i>Unfollow</btn></a>
+                        {% else %}
                         <a href="{% url 'user_profile:follow_user' username=profile_user.username %}"><btn class="btn btn-info btn-round" rel="tooltip" title="Follow"><i class="fa fa-user-plus"></i>Follow</btn></a>
-                        </div>
+                        {% endif %}
+                    </div>
+
                     {% endif %}
                 </div>
                 <div class="name">

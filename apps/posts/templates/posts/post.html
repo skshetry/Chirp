@@ -4,12 +4,15 @@
 <div class="media">
         <div class="pull-left" href="{% url 'user_profile:user_profile' post.user %}">
          <div class="avatar">
+            <a href="{% url 'user_profile:user_profile' username=post.user.username %}">
               <img class="media-object" src="{% if post.user.user_details.profile_photo %}{{ post.user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="..." />
-          </div>
+            </a>
+            </div>
         </div>
         <div class="media-body">
-          <strong>{{post.user.first_name}} {{post.user.last_name}}</strong>
+          <a href="{% url 'user_profile:user_profile' username=post.user.username %}"><strong>{{post.user.first_name}} {{post.user.last_name}}</strong>
           <h5 class="media-heading"><small>@{{post.user.username}} &middot; {{post.created|naturaltime}}</small></h5>
+          </a>
           <p>{{post.text}}</p>
 
           <div class="media-footer">
