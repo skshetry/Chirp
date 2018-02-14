@@ -1,0 +1,11 @@
+
+<div class="list-group">
+    <a href="{% url 'search:search' %}?q={{ querystring }}&type=posts" class="list-group-item{% if active == 'posts' %} active{% endif %}">
+        <span>Posts</span>
+        <span class="badge badge-light">{{ count.posts }}</span>
+    </a>
+    <a href="{% url 'search:search' %}?q={{ querystring }}&type=users" class="list-group-item{% if active == 'users' %} active{% endif %}">
+        <span>Users</span>
+        <span class="badge badge-light">{{ count.users }}</span>
+    </a>
+</div>

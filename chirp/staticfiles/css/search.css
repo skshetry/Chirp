@@ -1,0 +1,68 @@
+.results ul {
+    padding: 0;
+}
+
+.results ul li {
+    list-style: none;
+    padding: .8em .4em;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.results ul li:last-child {
+    border-bottom: none;
+}
+
+.results ul li img {
+    width: 45px;
+    border-radius: 5px;
+}
+
+.posts-results h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.posts-results .posts {
+    margin-left: 55px;
+    padding-top: .2em;
+}
+
+.posts-results .posts p {
+    margin: 0;
+    margin-top: .2em;
+}
+
+[class$='-results'] li:hover {
+    cursor: pointer;
+    background-color: #f5f8fa;
+}
+
+.no-result {
+    margin-top: 2em;
+}
+.result-user {
+    width: 20px;
+    border-radius: 4px;
+    margin-right: .2em;
+}
+
+.results {
+    margin-top: 1em;
+}
+
+.p-header {
+    margin: 0;
+}
+
+.p-header h1 {
+    margin: 0;
+    font-weight: 100;
+    font-size: 2em;
+}
+body { padding-top: 70px; }
+
+.navbar
+{
+  background:#3eaa5d !important;
+  padding-top:5px !important; padding-bottom:5px !important;
+}

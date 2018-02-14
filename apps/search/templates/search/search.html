@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+{%load static %}
+{%block title%}Search{%endblock%}
+{%block stylesheet%}
+<link href="{% static 'css/search.css' %}" rel="stylesheet"> 
+<script src="{% static 'js/search.js' %}"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+{%endblock%}  
+
+{%block content%}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 offset-md-2">
+      <h4>Search Posts and Users</h4>
+      <form role="search" action="{% url 'search:search' %}">
+        <div class="input-group">
+          <input type="text" class="form-control input-lg" name="q" placeholder="Search">
+          <button type="submit"><i class="fa fa-search"  style="font-size:large;"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{%endblock content%}

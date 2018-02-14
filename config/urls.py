@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/home', permanent=False)),
     url(r'^settings/', include('settings.urls', namespace='settings')),
     url(r'^user/', include('user_profile.urls', namespace='user_profile')),
+    url(r'^', include('search.urls', namespace='search')),
     url(r'favicon.ico/$', RedirectView.as_view(
         url=static_tag('img/favicon.png'),
         permanent=True)),

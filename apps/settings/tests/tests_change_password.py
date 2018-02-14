@@ -42,7 +42,7 @@ class PasswordChangeTests(TestCase):
         """
         Tests if the page contains all the fields i.e. 3 password fields and the csrf token.
         """
-        self.assertContains(self.response, '<input', 5)
+        self.assertContains(self.response, '<input', 6)
 
 
 class LoginRequiredPasswordChangeTests(TestCase):
