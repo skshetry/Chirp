@@ -3,21 +3,24 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+
+from posts.forms import PostForm, PostMediaFormSet
+
 from .models import User_details
 
 User_model = get_user_model()
 @login_required
 def user_profile(request, username=None):
     """The User Profile page view."""
+    media_form_set = PostMediaFormSet()
+    post_form = PostForm()
+
     if User.objects.get(username=username):
         user = User.objects.get(username=username)
-        if user == request.user:
-            return render(request, "user_profile.html", {
+        return render(request, "user_profile.html", {
                 "profile_user": user,
-            })
-        else:
-            return render(request, "user_profile.html", {
-                "profile_user": user,
+                "mediaformset": media_form_set,
+                "post_form": post_form,
             })
     else:
         return ("User not found")
