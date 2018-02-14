@@ -25,12 +25,15 @@
                     <div id="my-tab-content" class="tab-content">
                         <div class="tab-pane active" id="tweets" role="tabpanel">
                             <div class="row">
-
                                 <div class="col-md-8">
                                                 <div class="tweets">
                                                         {% include 'posts/post_add.html' %}
                                     </div>
-                                    <div class="tweets">
+                                    <div class="tweets text-center show-more-btn __hidden__">
+                                    <button type="button" class="btn btn-link" onclick="show_new_posts();">Show new posts</button>
+                                </div>
+
+                                    <div class="tweets tweets2">
                                         {% posts_from_feed user as feed_posts %}
                                         {% if not feed_posts %}
                                             <h3 class="text-muted">Empty feeds. Follow some users and get back here. :(</h3>
@@ -38,7 +41,33 @@
                                         {% for post in feed_posts %}
                                             {% post_include post user%}
                                         {% endfor %}
-
+                                        <div class="media __hidden__" postId="__prefix_post_id__" id="cloneme">
+                                                <div class="pull-left" href="{% url 'user_profile:user_profile' username='__prefix_username__' %}">
+                                                 <div class="avatar">
+                                                    <a href="{% url 'user_profile:user_profile' username='__prefix_username__' %}">
+                                                      <img class="media-object" src="" alt="..." />
+                                                    </a>
+                                                    </div>
+                                                </div>
+                                                <div class="media-body">
+                                                  <a href="{% url 'user_profile:user_profile' username='__prefix_username__' %}"><strong>__prefix_first_name__ __prefix_last_name__</strong>
+                                                  <h5 class="media-heading"><small>@__prefix_username__ &middot; __prefix_post_created_on__</small></h5>
+                                                  </a>
+                                                  <p>__prefix_post_text__</p>
+                                        
+                                                  <div class="media-footer">
+                                                      <a href="#paper-kit" class="btn btn-link">
+                                                           <i class="fa fa-reply"></i>
+                                                      </a>
+                                                      <a href="#paper-kit" class="btn btn-success btn-link">
+                                                           <i class="fa fa-retweet"></i> 2.1k
+                                                      </a>
+                                                      <a href="__{% url 'posts:like' post_id='1' %}/__" class="btn btn-danger btn-link black like-click">
+                                                           <i class="fa fa-heart"></i> <i class="like-count"></i>
+                                                      </a>
+                                                  </div>
+                                                </div>
+                                        </div>
                                         <br/>
                                     </div>
                                 </div>
@@ -128,7 +157,7 @@
     <script>
         $("[name=form-INITIAL_FORMS]").val(0);
         $("[name=form-TOTAL_FORMS]").val(0);
-    
+    var response_data={};
         {% if post_form.errors %}
             $('#postAddModal').modal('show');
         {% endif %}
@@ -154,11 +183,54 @@
                 }
             }
             });
-        })
+        });
+        function y(){
+            $.ajax({
+                url: location.href+'new-feed/'+$('.tweets .media').attr('postid'),
+                success: function(response){
+                    response_data.data = JSON.parse(response);
+                    console.log('response received: ', response_data.data)
+                    var data = response_data.data;
+                    if (data.length==0){
+                        console.log("Nothing here");
+                    }
+                    else{
+                        $('.show-more-btn').toggleClass('__hidden__');
+                        }
+                    },
+                complete: function() {
+                    // Schedule the next request when the current one's complete
+                    setTimeout(y, 10000)
+                  },
+            });
+        };
+        
+
+        function show_new_posts(){
+        var html=$('#cloneme')[0].outerHTML;
+        var data = response_data.data;
+        console.log('response_data2: ', response_data.data)
+                        for(var i=response_data.data.length; i!=0;i--){
+                            html = html.replace(/__prefix_post_id__/g,response_data.data[i-1].pk);
+                            console.log('pk: ', response_data.data[i-1].pk)
+                            html = html.replace(/__prefix_post_created_on__/g,response_data.data[i-1].pk);
+                            html = html.replace(/__hidden__/g,'');
+                            html = html.replace(/__prefix_post_text__/g,response_data.data[i-1].fields.text);
+                            console.log('pk: ',response_data.data[i-1].pk)
+                            $('.tweets2').prepend(html);
+                            console.log("prepended successfully")
+                            console.log('html: ',html)
+                        }
+                        $('.show-more-btn').toggleClass('__hidden__');
+                    };
+        y();
     </script>
     <style>
             .black{
                 color: black;
+            }
+            .__hidden__{
+                display: none;
             }
         </style>
 {% endblock post_add_js %}
