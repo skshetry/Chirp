@@ -3,6 +3,7 @@ from django import forms
 from django.core.files import File
 from django.contrib.auth.models import User
 from .models import User_details
+from django.core.files.storage import default_storage as storage
 
 
 class UserForm(forms.ModelForm):
@@ -47,7 +48,10 @@ class ProfilePhotoForm(forms.ModelForm):
         image = Image.open(photo.profile_photo)
         cropped_image = image.crop((x, y, w+x, h+y))
         resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
-        resized_image.save(photo.profile_photo.name)
+        fh = storage.open(photo.profile_photo.name, "w")
+        format = 'jpeg'
+        resized_image.save(fh, format)
+        fh.close()
 
         return photo
 
@@ -72,6 +76,9 @@ class CoverPhotoForm(forms.ModelForm):
         image = Image.open(photo.cover_photo)
         cropped_image = image.crop((x, y, w+x, h+y))
         resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
-        resized_image.save(photo.cover_photo.name)
+        fh = storage.open(photo.cover_photo.name, "w")
+        format = 'jpeg'
+        resized_image.save(fh, format)
+        fh.close()
 
         return photo
