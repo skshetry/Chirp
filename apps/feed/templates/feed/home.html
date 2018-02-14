@@ -45,7 +45,7 @@
                                                 <div class="pull-left" href="{% url 'user_profile:user_profile' username='__prefix_username__' %}">
                                                  <div class="avatar">
                                                     <a href="{% url 'user_profile:user_profile' username='__prefix_username__' %}">
-                                                      <img class="media-object" src="" alt="..." />
+                                                      <img class="media-object" src="{% url 'user_profile:profile_photo' username='__prefix_username__'%}" alt="..." />
                                                     </a>
                                                     </div>
                                                 </div>
@@ -62,8 +62,8 @@
                                                       <a href="#paper-kit" class="btn btn-success btn-link">
                                                            <i class="fa fa-retweet"></i> 2.1k
                                                       </a>
-                                                      <a href="__{% url 'posts:like' post_id='1' %}/__" class="btn btn-danger btn-link black like-click">
-                                                           <i class="fa fa-heart"></i> <i class="like-count"></i>
+                                                      <a href="__{% url 'posts:like' post_id='1' %}/__" class="btn btn-link black like-click">
+                                                           <i class="fa fa-heart"></i> <i class="like-count">__prefix_like_count__</i>
                                                       </a>
                                                   </div>
                                                 </div>
@@ -189,13 +189,13 @@
                 url: location.href+'new-feed/'+$('.tweets .media').attr('postid'),
                 success: function(response){
                     response_data.data = JSON.parse(response);
-                    console.log('response received: ', response_data.data)
                     var data = response_data.data;
                     if (data.length==0){
-                        console.log("Nothing here");
+                        $('.show-more-btn').hide();
+
                     }
                     else{
-                        $('.show-more-btn').toggleClass('__hidden__');
+                        $('.show-more-btn').show();
                         }
                     },
                 complete: function() {
@@ -207,25 +207,22 @@
         
 
         function show_new_posts(){
-        var html=$('#cloneme')[0].outerHTML;
         var data = response_data.data;
-        console.log('response_data2: ', response_data.data)
                         for(var i=response_data.data.length; i!=0;i--){
-                            html = html.replace(/__prefix_post_id__/g,response_data.data[i-1].pk);
-                            console.log('pk: ', response_data.data[i-1].pk)
-                            html = html.replace(/__prefix_post_created_on__/g,response_data.data[i-1].pk);
-                            html = html.replace(/__hidden__/g,'');
+                            var html=$('#cloneme')[0].outerHTML;
+                            html = html.replace("__prefix_post_id__", response_data.data[i-1].id);
+                            html = html.replace(/__prefix_post_created_on__/g,moment(response_data.data[i-1].created).fromNow());
+                            html = html.replace(/__hidden__/g, '');
                             html = html.replace(/__prefix_username__/g,response_data.data[i-1].post_user);
                             html = html.replace(/__prefix_first_name__/g,response_data.data[i-1].userfname);
                             html = html.replace(/__prefix_last_name__/g,response_data.data[i-1].userlname);
-
                             html = html.replace(/__prefix_post_text__/g,response_data.data[i-1].text);
-                            console.log('pk: ',response_data.data[i-1].pk)
-                            $('.tweets2').prepend(html);
-                            console.log("prepended successfully")
-                            console.log('html: ',html)
+                            html = html.replace(/__prefix_like_count__/g,response_data.data[i-1].like_count);
+                            html = html.replace("__/posts/1/like/__",'/posts/'+response_data.data[i-1].id+'/like');
+                            var new_post = $('.tweets2').prepend(html);
+                            new_post.find('[postid="'+response_data.data[i-1].id+'"]').removeAttr('id');
                         }
-                        $('.show-more-btn').toggleClass('__hidden__');
+                        $('.show-more-btn').hide();
                     };
         y();
     </script>
@@ -233,9 +230,7 @@
             .black{
                 color: black;
             }
-            .__hidden__{
-                display: none;
-            }
+
         </style>
 {% endblock post_add_js %}
     

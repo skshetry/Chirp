@@ -25,8 +25,19 @@ def user_profile(request, username=None):
     else:
         return ("User not found")
 
+@login_required
 def follow_user(request, username=None):
     toggle_user = get_object_or_404(User_model, username__iexact=username)
     if request.user.is_authenticated():
         is_following = User_details.objects.toggle_follow(request.user, toggle_user.user_details)
     return redirect('user_profile:user_profile', username=username)
+
+
+@login_required
+def profile_photo(request, username=None):
+    user = User.objects.get(username=username)
+    if user:
+        if user.user_details.profile_photo:
+            return redirect(user.user_details.profile_photo.url)
+        from django.templatetags.static import static as static_tag
+        return redirect(static_tag('img/default_profile.jpg'))

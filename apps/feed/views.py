@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 from posts.forms import PostMediaFormSet, PostForm
 from posts.models import Post
-from django.db.models import F 
+from django.db.models import F, Count
 
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'feed/home.html'
@@ -32,7 +32,7 @@ def retrieve_new_post(request, post_id):
             )
     new_feed = Post.objects.filter(
         feed__user=request.user
-        ).order_by('-created').filter(created__gt=created_on).annotate(post_user=F('user__username'),userfname=F('user__first_name'), userlname=F('user__last_name')).values()[:100]
+        ).order_by('-created').filter(created__gt=created_on).annotate(post_user=F('user__username'),userfname=F('user__first_name'), like_count=Count('likes'), userlname=F('user__last_name')).values()[:100]
     print(new_feed)
     serialized_response = json.dumps(list(new_feed), cls=DjangoJSONEncoder)
     return JsonResponse(serialized_response, safe=False)
