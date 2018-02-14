@@ -26,10 +26,11 @@
                     <div id="my-tab-content" class="tab-content">
                     <div class="tab-pane active text-center" id="tweets">
                             {% if user != profile_user %}
-                            {{ profile_user.username }}
-                            {{ user.username}}
+                            <div class="container h-100 d-flex justify-content-center">
+                                {% include 'posts/post_add.html' %}
+                        </div>
                             {% with user=profile_user %}
-                                {% if not user.post_set.all %}
+                                {% if not profile_user.post_set.all %}
                                     <h3 class="text-muted">No tweets yet :(</h3>
                                 {% endif %}
                                 {% for post in profile_user.post_set.all %}
@@ -42,12 +43,12 @@
                                 {% endfor %}
                                 {% endwith %}
                             {% else %}
+                            <div class="container h-100 d-flex justify-content-center">
+                                {% include 'posts/post_add.html' %}
+                        </div>
                                 {% if not user.post_set.all %}
                                     <h3 class="text-muted">No tweets yet :(</h3>
                                 {% endif %}
-                                <div class="container h-100 d-flex justify-content-center">
-                                        {% include 'posts/post_add.html' %}
-                                </div>
                                 {% for post in user.post_set.all %}
                                 <div class="container h-100 d-flex justify-content-center">
 
