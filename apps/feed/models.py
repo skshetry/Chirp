@@ -16,6 +16,8 @@ class Feed(models.Model):
 @receiver(signals.post_save, sender=Post)
 def create_feed_for_following_users(sender, instance, created, **kwargs):
     if created:
-        Feed.objects.create(post=instance, user=instance.user)
+        Feed.objects.create(
+            post=instance, user=instance.user
+            )
         for user_details in instance.user.user_details.followed_by.all():
             feed_post = Feed.objects.create(post=instance, user=user_details.user)
