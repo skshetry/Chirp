@@ -215,7 +215,11 @@
                             console.log('pk: ', response_data.data[i-1].pk)
                             html = html.replace(/__prefix_post_created_on__/g,response_data.data[i-1].pk);
                             html = html.replace(/__hidden__/g,'');
-                            html = html.replace(/__prefix_post_text__/g,response_data.data[i-1].fields.text);
+                            html = html.replace(/__prefix_username__/g,response_data.data[i-1].post_user);
+                            html = html.replace(/__prefix_first_name__/g,response_data.data[i-1].userfname);
+                            html = html.replace(/__prefix_last_name__/g,response_data.data[i-1].userlname);
+
+                            html = html.replace(/__prefix_post_text__/g,response_data.data[i-1].text);
                             console.log('pk: ',response_data.data[i-1].pk)
                             $('.tweets2').prepend(html);
                             console.log("prepended successfully")

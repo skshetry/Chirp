@@ -3,7 +3,8 @@ from django.views.generic import TemplateView
 
 from django.core import serializers
 from django.http import JsonResponse
-
+from django.core.serializers.json import DjangoJSONEncoder
+import json
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
@@ -31,6 +32,7 @@ def retrieve_new_post(request, post_id):
             )
     new_feed = Post.objects.filter(
         feed__user=request.user
-        ).order_by('-created').filter(created__gt=created_on).annotate(postuser=F('user__username'))[:100]
-    serialized_response = serializers.serialize('json', new_feed)
+        ).order_by('-created').filter(created__gt=created_on).annotate(post_user=F('user__username'),userfname=F('user__first_name'), userlname=F('user__last_name')).values()[:100]
+    print(new_feed)
+    serialized_response = json.dumps(list(new_feed), cls=DjangoJSONEncoder)
     return JsonResponse(serialized_response, safe=False)
