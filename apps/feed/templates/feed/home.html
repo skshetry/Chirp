@@ -27,8 +27,8 @@
                             <div class="row">
 
                                 <div class="col-md-8">
-                                    <div class="tweets">
-                                            {% include 'posts/post_add.html' %}
+                                                <div class="tweets">
+                                                        {% include 'posts/post_add.html' %}
                                     </div>
                                     <div class="tweets">
                                         {% posts_from_feed user as feed_posts %}
@@ -40,9 +40,6 @@
                                         {% endfor %}
 
                                         <br/>
-                                        <div class="text-center">
-                                            <btn class="btn btn-outline-info btn-round">Load more Posts</btn>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -70,7 +67,7 @@
                                                             </div>
         
                                                             <div class="col-md-2 follow">
-                                                                <a href="#follow"><i class="fa fa-user-plus"></i></a>
+                                                                <a href="{% url 'user_profile:follow_user' username=follow_user.username %}"><i class="fa fa-user-plus"></i></a>
                                                             </div>
                                                         </div>
                                                     </li>
