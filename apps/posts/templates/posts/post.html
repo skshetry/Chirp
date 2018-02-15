@@ -1,6 +1,7 @@
 {% load static %}
 {% load humanize %}
 {% load check_liked_filter %}
+{% load post_include %}
 <div class="media" postId="{{post.id}}">
         <div class="pull-left" href="{% url 'user_profile:user_profile' post.user %}">
          <div class="avatar">
@@ -14,6 +15,31 @@
           <h5 class="media-heading date_created_value" value="{{post.created|date:'c'}}"><small>@{{post.user.username}} &middot; <i class="natural-date">{{post.created|naturaltime}}</i></small></h5>
           </a>
           <p>{{post.text}}</p>
+          {% media_posts post as medias %}
+{% comment %} 
+  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+    <a href="{{media_post.media.url}}" itemprop="contentUrl" data-size="1000x667" data-index="0">
+      <img src="{{media_post.media.url}}" height="233" width="233" itemprop="thumbnail" alt="Beach">
+    </a>
+  </figure> {% endcomment %}
+
+  <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+    {% for media_post in medias %}
+    {% if media_post.media %}
+
+    <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+      <a href="{{media_post.media.url}}" itemprop="contentUrl" data-size="1024x1024">
+          <img src="{{media_post.media.url}}" itemprop="thumbnail" alt="Image description" />
+      </a>
+      <figcaption itemprop="caption description">          <a href="{% url 'user_profile:user_profile' username=post.user.username %}"><strong>{{post.user.first_name}} {{post.user.last_name}}</strong>
+        <h5 class="media-heading date_created_value" value="{{post.created|date:'c'}}"><small>@{{post.user.username}} &middot; <i class="natural-date">{{post.created|naturaltime}}</i></small></h5>
+        {{post.text}}</figcaption>
+    </figure>
+
+    {% endif %}
+    {% endfor %}
+  </div>
+
 
           <div class="media-footer">
               <a href="#paper-kit" class="btn btn-link">

@@ -10,4 +10,8 @@ def post_include(post, user):
 
 @register.simple_tag
 def posts_from_feed(user):
-    return Post.objects.filter(feed__user=user).order_by('-created')
+    return Post.objects.filter(feed__user=user).select_related('user').order_by('-created')
+
+@register.simple_tag
+def media_posts(post):
+    return post.get_medias()

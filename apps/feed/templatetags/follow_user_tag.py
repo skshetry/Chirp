@@ -11,4 +11,4 @@ def follow_user_tag(user):
         user_details__followed_by__user=user,
         ).exclude(
             user_details__user=user,
-            ).order_by('-date_joined')[:10]
+            ).select_related('user_details').order_by('-date_joined')[:10]

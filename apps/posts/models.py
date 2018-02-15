@@ -106,7 +106,7 @@ class Post(models.Model):
         return childs if childs.exists() else None
 
     def get_medias(self):
-        return self.post_media.all() if self.posts_media.exists() else None
+        return self.posts_media.all() if self.posts_media.exists() else None
 
 
 
