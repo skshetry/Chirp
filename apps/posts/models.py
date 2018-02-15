@@ -4,7 +4,7 @@ import re
 import uuid
 
 from django.db import models
-from django.db.models import signals
+from django.db.models import signals, F
 from django.dispatch import receiver
 
 from django.utils import timezone
@@ -28,26 +28,34 @@ class PostManager(models.Manager):
         if post.parent:
             shared_post_parent = post.parent
 
-        shared_post_exists = self.get_queryset().filter(
+        shared_post = self.get_queryset().filter(
             user=user, parent=shared_post_parent
         ).filter(
             created__year=timezone.now().year,
             created__month=timezone.now().month,
             created__day=timezone.now().day,
             shared_post__isnull=False,
-        ).exists()
-
-        if shared_post_exists:
+        )
+        if shared_post.exists():
+            shared_post.delete()
             return None
 
         share_post = self.model(
             parent=shared_post_parent,
             user=user,
-            text=quote_text,
+            text=f'Reshared @{post.user.username}: {post.text}',
             shared_post=post,
         )
-
         share_post.save()
+
+        for media in PostMedia.objects.filter(post=post):
+            media.pk = None
+            media.save()
+            media.post=share_post
+            media.save()
+
+        print(share_post)
+        return share_post
 
 
     def like(self, user, post):
@@ -77,7 +85,7 @@ class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     parent = models.ForeignKey('self', blank=True, null=True, related_name='post_childs')
     user = models.ForeignKey(User)
-    text = models.CharField(max_length=500)
+    text = models.CharField(max_length=500, null=True)
     likes = models.ManyToManyField(User, blank=True, related_name='liked')
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -116,6 +124,7 @@ class Post(models.Model):
 class Tag(models.Model):
     tag = models.CharField(max_length=140)
     created = models.DateTimeField(auto_now_add=True)
+    count = models.IntegerField(default=0)
 
     def __str__(self):
         return f'#{self.tag}'
@@ -125,9 +134,14 @@ class Tag(models.Model):
 def create_tags(sender, instance, created, *args, **kwargs):
     if created:
         tag_regex = r'#(?P<tag>[\w\d-]+)'
-        tags = re.findall(tag_regex, instance.text)
-        for tag in tags:
-            Tag.objects.get_or_create(tag=tag)
+        if instance.text:
+            tags = re.findall(tag_regex, instance.text)
+            for tag in tags:
+                _tag = Tag.objects.filter(tag__iexact=tag)
+                if _tag.exists():
+                    _tag.update(count=F('count')+1)
+                else:
+                    Tag.objects.create(tag=tag)
 
 
 @receiver(signals.post_save, sender=Post)

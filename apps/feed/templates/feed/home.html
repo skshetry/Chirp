@@ -169,13 +169,13 @@
             $.ajax({
                 url: $(this).attr('href'),
                 success: function(response){
-                    if(response.liked == true){
+                    if(response.done == true){
                         $(clicked).find('.like-count').text(++like_count);
                         if($(this).hasClass('btn-danger') != false){
                             $(this).toggleClass('btn-danger');
                         }
                 }
-                else if(response.liked == false){
+                else if(response.done == false){
                     $(clicked).find('.like-count').text(--like_count);
                     if($(this).hasClass('btn-danger') == false){
                         $(this).toggleClass('btn-danger');
@@ -234,7 +234,6 @@
                         $(this).find('.natural-date').not('.dont-run').text(moment(time).fromNow());
                         });
                         setTimeout(updatetime, 30000);
-
                     };
         y();
         updatetime();
