@@ -11,7 +11,7 @@
         </div>
         <div class="media-body">
           <a href="{% url 'user_profile:user_profile' username=post.user.username %}"><strong>{{post.user.first_name}} {{post.user.last_name}}</strong>
-          <h5 class="media-heading"><small>@{{post.user.username}} &middot; {{post.created|naturaltime}}</small></h5>
+          <h5 class="media-heading date_created_value" value="{{post.created|date:'c'}}"><small>@{{post.user.username}} &middot; <i class="natural-date">{{post.created|naturaltime}}</i></small></h5>
           </a>
           <p>{{post.text}}</p>
 

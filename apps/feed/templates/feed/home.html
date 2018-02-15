@@ -51,7 +51,7 @@
                                                 </div>
                                                 <div class="media-body">
                                                   <a href="{% url 'user_profile:user_profile' username='__prefix_username__' %}"><strong>__prefix_first_name__ __prefix_last_name__</strong>
-                                                  <h5 class="media-heading"><small>@__prefix_username__ &middot; __prefix_post_created_on__</small></h5>
+                                                  <h5 class="media-heading date_created_value" value="__prefix_post_created_on__"><small>@__prefix_username__ &middot; <i class="natural-date">__prefix_post_created_on_natural__</i></small></h5>
                                                   </a>
                                                   <p>__prefix_post_text__</p>
                                         
@@ -204,14 +204,14 @@
                   },
             });
         };
-        
-
         function show_new_posts(){
         var data = response_data.data;
                         for(var i=response_data.data.length; i!=0;i--){
                             var html=$('#cloneme')[0].outerHTML;
                             html = html.replace("__prefix_post_id__", response_data.data[i-1].id);
-                            html = html.replace(/__prefix_post_created_on__/g,moment(response_data.data[i-1].created).fromNow());
+                            var a = moment(response_data.data[i-1].created).fromNow();
+                            html = html.replace(/__prefix_post_created_on_natural__/g,a.toString());
+                            html = html.replace(/__prefix_post_created_on__/g,response_data.data[i-1].created);
                             html = html.replace(/__hidden__/g, '');
                             html = html.replace(/__prefix_username__/g,response_data.data[i-1].post_user);
                             html = html.replace(/__prefix_first_name__/g,response_data.data[i-1].userfname);
@@ -224,7 +224,16 @@
                         }
                         $('.show-more-btn').hide();
                     };
+
+        function updatetime(){
+            $('.date_created_value').each(function(){
+                        var time = $(this).attr('value');
+                        $(this).find('.natural-date').text(moment(time).fromNow());
+                        });
+                     setTimeout(updatetime, 10000);
+                    };
         y();
+        updatetime();
     </script>
     <style>
             .black{
