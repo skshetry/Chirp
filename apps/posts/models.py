@@ -84,6 +84,9 @@ class Post(models.Model):
     shared_post = models.ForeignKey('self', blank=True, null=True, verbose_name='If shared only', related_name='post_shared')
 
     objects = PostManager()
+    
+    class Meta:
+        ordering = ['-created']
 
     def __str__(self):
         return f'{self.id} : {self.user}'
@@ -106,7 +109,7 @@ class Post(models.Model):
         return childs if childs.exists() else None
 
     def get_medias(self):
-        return self.post_media.all() if self.posts_media.exists() else None
+        return self.posts_media.all() if self.posts_media.exists() else None
 
 
 
