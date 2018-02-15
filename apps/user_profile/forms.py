@@ -26,6 +26,13 @@ class UserDetailsForm(forms.ModelForm):
     class Meta:
         model = User_details
         fields = ('bio', 'gender', 'date_of_birth')
+    
+    def clean_image(self, photo_name):
+        image_file = photo_name
+        if not image_file.name.endswith('.jpg'):
+            raise forms.ValidationError("Only .jpg image accepted")
+        return image_file
+
 
 
 class ProfilePhotoForm(forms.ModelForm):
@@ -34,9 +41,14 @@ class ProfilePhotoForm(forms.ModelForm):
     profile_width = forms.FloatField(widget=forms.HiddenInput())
     profile_height = forms.FloatField(widget=forms.HiddenInput())
     DIMENSIONS = (200, 200)
+    photo_name = 'profile_photo'
+
     class Meta:
             model = User_details
             fields = ('profile_photo', 'profile_x', 'profile_y', 'profile_height', 'profile_width')
+            widgets = {
+                'profile_photo': forms.FileInput(attrs={'accept': 'image/jpeg'})
+            }
 
     def save(self):
         photo = super(ProfilePhotoForm, self).save()
@@ -45,7 +57,8 @@ class ProfilePhotoForm(forms.ModelForm):
         w = self.cleaned_data.get('profile_width')
         h = self.cleaned_data.get('profile_height')
 
-        image = Image.open(photo.profile_photo)
+        clean_image_file = UserDetailsForm.clean_image(self, photo.profile_photo)
+        image = Image.open(clean_image_file)
         cropped_image = image.crop((x, y, w+x, h+y))
         resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
         fh = storage.open(photo.profile_photo.name, "w")
@@ -62,9 +75,14 @@ class CoverPhotoForm(forms.ModelForm):
     cover_width = forms.FloatField(widget=forms.HiddenInput())
     cover_height = forms.FloatField(widget=forms.HiddenInput())
     DIMENSIONS = (1357, 334)
+    photo_name = 'cover_photo'
+
     class Meta:
             model = User_details
             fields = ('cover_photo', 'cover_x', 'cover_y', 'cover_height', 'cover_width')
+            widgets = {
+                'profile_photo': forms.FileInput(attrs={'accept': 'image/jpeg'})
+            }
 
     def save(self):
         photo = super(CoverPhotoForm, self).save()
@@ -77,7 +95,7 @@ class CoverPhotoForm(forms.ModelForm):
         cropped_image = image.crop((x, y, w+x, h+y))
         resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
         fh = storage.open(photo.cover_photo.name, "w")
-        format = 'jpeg'
+        format = image.format
         resized_image.save(fh, format)
         fh.close()
 
