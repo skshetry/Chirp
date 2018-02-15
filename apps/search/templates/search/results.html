@@ -10,12 +10,12 @@
 {%endblock%}   
 
 {%block content%}
-<div class="container">
+<div class="wrapper">
     <div class="row mt-2">
-        <div class="col-md-3">
+        <div class="col-md-3 text-center">
             <h3>Search</h3>
         </div>
-        <div class="col-md-9 pt-4">
+        <div class="col-md-6 pt-4 search">
             <form role="search" action="{% url 'search:search' %}">
                 <input type="hidden" name="type" value="{{ active }}">
                 <div class="input-group">
@@ -38,21 +38,63 @@
         {% endif %}
     </div>
     <div class="col-md-3">
-    {% trendings_tag as trending %}
-    <div class="card card-with-shadow">
-        <div class="card-body">
-            <h5 class="card-title">Trends &middot; <!--<small><a href="javascript: void(0);" class="link-info">Change</a></small>--></h5>
-            <div class="hashtag-suggestions">
-                <ul class="list-unstyled">
-                {% for trend in trending %}
-                    <li><a href="{% url 'search:search' %}?q=%23{{trend.tag}}" class="link-danger">#{{trend.tag}}</a></li>
-                {% endfor %}
-                </ul>
+        {% trendings_tag as trending %}
+        <div class="card card-with-shadow">
+            <div class="card-body">
+                <h5 class="card-title">Trends &middot; <!--<small><a href="javascript: void(0);" class="link-info">Change</a></small>--></h5>
+                <div class="hashtag-suggestions">
+                    <ul class="list-unstyled">
+                        {% for trend in trending %}
+                        <li><a href="{% url 'search:search' %}?q=%23{{trend.tag}}" class="link-danger">#{{trend.tag}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
             </div>
-
-        </div>
-    </div> 
+        </div> 
     </div>
 </div>
 {%endblock content%}
+{% block post_add_js %}
+<script src="{% static 'js/addmediaform.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.uploadPreview.min.js' %}"></script>
+<script>
+    $("[name=form-INITIAL_FORMS]").val(0);
+    $("[name=form-TOTAL_FORMS]").val(0);
+    
+    {% if post_form.errors %}
+    $('#postAddModal').modal('show');
+    {% endif %}
+    $(".like-click").click(function(event){
+        event.preventDefault();
+        var clicked = $(this);
+        $(this).toggleClass('btn-danger');
+        var like_count = parseInt($(this, '.like-count').text());
+        $.ajax({
+            url: $(this).attr('href'),
+            success: function(response){
+                if(response.liked == true){
+                    $(clicked).find('.like-count').text(++like_count);
+                    if($(this).hasClass('btn-danger') != false){
+                        $(this).toggleClass('btn-danger');
+                    }
+                }
+                else if(response.liked == false){
+                    $(clicked).find('.like-count').text(--like_count);
+                    if($(this).hasClass('btn-danger') == false){
+                        $(this).toggleClass('btn-danger');
+                    }
+                }
+            }
+        });
+    })
+    
+</script>
+<style>
+    .black{
+        color: black;
+    }
+</style>
+{% endblock post_add_js %}
+
 
