@@ -84,6 +84,9 @@ class Post(models.Model):
     shared_post = models.ForeignKey('self', blank=True, null=True, verbose_name='If shared only', related_name='post_shared')
 
     objects = PostManager()
+    
+    class Meta:
+        ordering = ['-created']
 
     def __str__(self):
         return f'{self.id} : {self.user}'

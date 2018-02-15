@@ -31,8 +31,7 @@
       <a href="{{media_post.media.url}}" itemprop="contentUrl" data-size="1024x1024">
           <img src="{{media_post.media.url}}" itemprop="thumbnail" alt="Image description" />
       </a>
-      <figcaption itemprop="caption description">          <a href="{% url 'user_profile:user_profile' username=post.user.username %}"><strong>{{post.user.first_name}} {{post.user.last_name}}</strong>
-        <h5 class="media-heading date_created_value" value="{{post.created|date:'c'}}"><small>@{{post.user.username}} &middot; <i class="natural-date">{{post.created|naturaltime}}</i></small></h5>
+      <figcaption itemprop="caption description">         
         {{post.text}}</figcaption>
     </figure>
 
