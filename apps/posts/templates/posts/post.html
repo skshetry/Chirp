@@ -16,13 +16,6 @@
           </a>
           <p>{{post.text}}</p>
           {% media_posts post as medias %}
-{% comment %} 
-  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-    <a href="{{media_post.media.url}}" itemprop="contentUrl" data-size="1000x667" data-index="0">
-      <img src="{{media_post.media.url}}" height="233" width="233" itemprop="thumbnail" alt="Beach">
-    </a>
-  </figure> {% endcomment %}
-
   <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     {% for media_post in medias %}
     {% if media_post.media %}
@@ -31,7 +24,7 @@
       <a href="{{media_post.media.url}}" itemprop="contentUrl" data-size="1024x1024">
           <img src="{{media_post.media.url}}" itemprop="thumbnail" alt="Image description" />
       </a>
-      <figcaption itemprop="caption description">         
+      <figcaption itemprop="caption description">
         {{post.text}}</figcaption>
     </figure>
 
@@ -44,8 +37,8 @@
               <a href="#paper-kit" class="btn btn-link">
                    <i class="fa fa-reply"></i>
               </a>
-              <a href="#paper-kit" class="btn btn-success btn-link">
-                   <i class="fa fa-retweet"></i> 2.1k
+              <a href="{% url 'posts:share' post.id %}" class="btn {%if post|check_shared_posts:user %}btn-danger {% endif %} btn-link like-click">
+                   <i class="fa fa-retweet"></i> <i class="like-count">{{post.shared_count}}</i>
               </a>
               <a href="{% url 'posts:like' post.id %}" class="btn {%if post|check_liked_posts:user %}btn-danger{% endif %} btn-link black like-click">
                    <i class="fa fa-heart"></i> <i class="like-count">{{ post.likes.count }}</i>

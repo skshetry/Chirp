@@ -29,4 +29,16 @@ def posts_add(request):
 def like_post(request, post_id):
     post = Post.objects.get(pk=post_id)
     is_liked = Post.objects.like(request.user, post)
-    return JsonResponse({"liked": is_liked})
+    return JsonResponse({"done": is_liked})
+
+
+@login_required
+def share_post(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    print(post)
+    shared_post = Post.objects.share(user=request.user, post=post)
+    is_shared = False
+    if shared_post:
+        print(shared_post)
+        is_shared = True
+    return JsonResponse({'done': is_shared})
