@@ -184,6 +184,26 @@
             }
             });
         });
+
+        $('.share-click').click(function(event){
+            event.preventDefault();
+            var clicked = $(this);
+            var cloned_post = $(this).closest('.media').clone();
+            var share_post_id = $(this).closest('.media').attr('postid');
+            $('.share-form').html(cloned_post);
+            $('#share-post-input-id').val(share_post_id);
+            $('#addmedia').hide();
+            $('.media-forms').hide();
+            $('#postAddModal').modal('show');
+        })
+
+        $('#close-post-btn').click(function(event){
+            // do post cleanup
+            $('.share-form').html('');
+            $('#share-post-input-id').val('');
+            $('#addmedia').show();
+            $('.media-forms').show();
+        })
         function y(){
             $.ajax({
                 url: location.href+'new-feed/'+$('.tweets .media').attr('postid'),
@@ -218,6 +238,10 @@
                             html = html.replace(/__prefix_username__/g,response_data.data[i-1].post_user);
                             html = html.replace(/__prefix_first_name__/g,response_data.data[i-1].userfname);
                             html = html.replace(/__prefix_last_name__/g,response_data.data[i-1].userlname);
+                            if (response_data.data[i-1].text == null){
+                                html = html.replace(/__prefix_post_text__/g,'I just shared something. Refresh the browser to see.');
+                            }
+
                             html = html.replace(/__prefix_post_text__/g,response_data.data[i-1].text);
                             html = html.replace(/__prefix_like_count__/g,response_data.data[i-1].like_count);
                             html = html.replace("__/posts/1/like/__",'/posts/'+response_data.data[i-1].id+'/like');

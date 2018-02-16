@@ -13,7 +13,10 @@ def posts_add(request):
         post_form = PostForm(request.POST)
         media_form_set = PostMediaFormSet(request.POST, request.FILES)
         if post_form.is_valid() and media_form_set.is_valid():
-            post = post_form.save(request.user)
+            shared_post_id = request.POST.get('shared_post')
+            if not shared_post_id:
+                shared_post_id=None
+            post = post_form.save(request.user, shared_post_id)
             media_form_set.save(post)
             return redirect(reverse('feeds:home'))
     elif request.method == 'GET':
@@ -35,10 +38,8 @@ def like_post(request, post_id):
 @login_required
 def share_post(request, post_id):
     post = Post.objects.get(pk=post_id)
-    print(post)
     shared_post = Post.objects.share(user=request.user, post=post)
     is_shared = False
     if shared_post:
-        print(shared_post)
         is_shared = True
     return JsonResponse({'done': is_shared})

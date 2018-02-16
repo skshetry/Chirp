@@ -27,7 +27,8 @@ class PostManager(models.Manager):
 
         if post.parent:
             shared_post_parent = post.parent
-
+        if post.shared_post:
+            post=post.shared_post
         shared_post = self.get_queryset().filter(
             user=user, parent=shared_post_parent
         ).filter(
@@ -43,16 +44,10 @@ class PostManager(models.Manager):
         share_post = self.model(
             parent=shared_post_parent,
             user=user,
-            text=f'Reshared @{post.user.username}: {post.text}',
+            text=quote_text,
             shared_post=post,
         )
         share_post.save()
-
-        for media in PostMedia.objects.filter(post=post):
-            media.pk = None
-            media.save()
-            media.post=share_post
-            media.save()
 
         print(share_post)
         return share_post
