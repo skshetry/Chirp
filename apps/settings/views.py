@@ -43,7 +43,7 @@ def settings_view(request):
         profile_form = UserDetailsForm(request.POST, instance=request.user.user_details)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
-            profile_form.user.date_of_birth = profile_form.clean_date()
+            profile_form.date_of_birth = profile_form.clean_date()
             profile_form.save(commit=False)
             profile_form.user = request.user
             profile_form.save()
