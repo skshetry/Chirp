@@ -4,8 +4,8 @@
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-default btn-primary btn-round" data-toggle="modal" data-target="#postAddModal">
-    <i class="fa fa-pencil-square-o"></i> Add Post</button>
+<button type="button" class="btn btn-floating btn-outline-default btn-primary btn-round" data-toggle="modal" data-target="#postAddModal">
+    <i class="fa fa-pencil-square-o"></i>Add Post</button>
 </button>
 <!-- Modal -->
 
@@ -49,19 +49,24 @@
     </style>
     
 <div class="modal fade" id="postAddModal" tabindex="-1" role="dialog" aria-labelledby="postAddModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-center" id="postaddtitleheader">
                     <i class="fa fa-pencil-square-o"></i>
                     Add Post
                 </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" id="close-post-btn" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form method="POST" action="{% url 'posts:add'%}" autocomplete="off" enctype="multipart/form-data">
                 {% csrf_token %}
+                <input type="hidden" value="" name="parent" id="reply-post-input-id">
+
+                <div class="reply-form">
+                    </div>
+
                 <div class="modal-body">
                     {% if post_form.errors %}
                         <div class="form-control-feedback text-danger">
@@ -71,6 +76,10 @@
                     {% endif %}
                     <textarea class="form-control" id="id_text" name="text" maxlength="140" type="text" placeholder="Status" cols="33" rows="5" required></textarea>
                     {{ post_form.text.errors }}
+                    <div class="share-form">
+                                            </div>
+
+                    <input type="hidden" value="" name="shared_post" id="share-post-input-id">
                     <div class="media-forms">
                         {{mediaformset.management_form}}
                         <div style="display:none;" id="form_template">
@@ -94,7 +103,7 @@
             </form>
             <div class="modal-footer">
                 <div class="left-side">
-                    <button type="button" class="btn btn-default btn-link" data-dismiss="modal">
+                    <button type="button" id="close-post-btn" class="btn btn-default btn-link" data-dismiss="modal">
                         Cancel
                     </button>
                 </div>

@@ -10,9 +10,40 @@ register = template.Library()
 def post_include(post, user):
     return {'post': post, 'user':user}
 
+def get_all_posts():
+        return Post.objects.prefetch_related(
+        'posts_media'
+        ).select_related(
+                'user__user_details'
+                ).select_related(
+                    'shared_post'
+                    ).select_related(
+                        'shared_post__user'
+                        ).select_related(
+                            'parent'
+                            ).select_related(
+                                'parent__user'
+                                ).prefetch_related(
+                                    'parent__posts_media'
+                                    ).select_related(
+                                        'parent__user__user_details'
+                                        ).prefetch_related(
+                                            'post_childs'
+                                            ).prefetch_related(
+                                                'post_childs__user'
+                                                ).prefetch_related(
+                                                    'post_childs__posts_media'
+                                                    ).prefetch_related(
+                                                        'post_childs__user__user_details'
+                                                        ).prefetch_related(
+                                                            'likes'
+                                                            )
+
+
 @register.simple_tag
 def posts_from_feed(user):
-    return Post.objects.filter(feed__user=user).select_related('user').annotate(shared_count=Count('post_shared')).order_by('-created')
+    return get_all_posts().filter(feed__user=user).annotate(shared_count=Count('post_shared')).order_by('-created')
+
 
 @register.simple_tag
 def media_posts(post):
@@ -20,5 +51,5 @@ def media_posts(post):
 
 @register.simple_tag
 def posts_from_users_profile(user):
-    return Post.objects.filter(user=user).select_related('user').annotate(shared_count=Count('post_shared')).order_by('-created')
+    return get_all_posts().filter(user=user).annotate(shared_count=Count('post_shared')).order_by('-created')
 

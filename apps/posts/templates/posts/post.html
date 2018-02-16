@@ -11,10 +11,51 @@
             </div>
         </div>
         <div class="media-body">
-          <a href="{% url 'user_profile:user_profile' username=post.user.username %}"><strong>{{post.user.first_name}} {{post.user.last_name}}</strong>
-          <h5 class="media-heading date_created_value" value="{{post.created|date:'c'}}"><small>@{{post.user.username}} &middot; <i class="natural-date">{{post.created|naturaltime}}</i></small></h5>
+          <a href="{% url 'user_profile:user_profile' username=post.user.username %}"><strong>{{post.fullName}}</strong>
+          <h5 class="media-heading date_created_value" value="{{post.created|date:'c'}}"><small>@{{post.user.username}} &middot; 
+           <i class="status"> {% if post.shared_post %}shared{%elif post.parent %}replied{% else%}posted{% endif%}</i>
+            <i class="natural-date">{{post.created|naturaltime}}</i></small></h5>
           </a>
+          {% if post.text %}
           <p>{{post.text}}</p>
+          {% endif %}
+         
+        
+          {% if post.shared_post %}
+          <div class="tweet-link">
+            <div class="row">
+              <div class="avatar">
+                <img src="{% if post.shared_post.user.user_details.profile_photo %}{{ post.shared_post.user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="Rounded Image" class="img-rounded img-tweet-link img-responsive">
+                </div>
+                <div class="col-md-8">
+                    <a href="{% url 'user_profile:user_profile' username=post.shared_post.user.username %}"><strong>{{post.shared_post.fullName}}</strong>
+                      <h5 class="media-heading date_created_value" value="{{post.shared_post.created|date:'c'}}"><small>@{{post.shared_post.user.username}} &middot; <i class="natural-date">{{post.shared_post.created|naturaltime}}</i></small></h5>
+                      </a>
+                      <a href="">
+                          {% if post.shared_post.text %}
+                        <p>{{post.shared_post.text}}</p>
+                      {% endif %}</a>
+                      {% media_posts post.shared_post as medias %}
+                      <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+                       {% for media in medias %}
+                       {% if media.media %}
+
+                        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                          <a href="{{media.media.url}}" itemprop="contentUrl" data-size="1024x1024">
+                              <img src="{{media.media.url}}" itemprop="thumbnail" alt="Image description" />
+                          </a>
+                          <figcaption itemprop="caption description">
+                            {{post.text}}</figcaption>
+                        </figure>
+                        {% endif %}
+                        {% endfor %}
+                      </div>
+                      
+                </div>
+              </div>
+            </div>
+
+        {% endif  %}
           {% media_posts post as medias %}
   <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
     {% for media_post in medias %}
@@ -33,16 +74,63 @@
   </div>
 
 
-          <div class="media-footer">
-              <a href="#paper-kit" class="btn btn-link">
-                   <i class="fa fa-reply"></i>
-              </a>
-              <a href="{% url 'posts:share' post.id %}" class="btn {%if post|check_shared_posts:user %}btn-danger {% endif %} btn-link like-click">
-                   <i class="fa fa-retweet"></i> <i class="like-count">{{post.shared_count}}</i>
-              </a>
-              <a href="{% url 'posts:like' post.id %}" class="btn {%if post|check_liked_posts:user %}btn-danger{% endif %} btn-link black like-click">
-                   <i class="fa fa-heart"></i> <i class="like-count">{{ post.likes.count }}</i>
-              </a>
+  <div class="media-footer">
+      <a href="{% url 'posts:add'%}" class="btn btn-link reply-click">
+           <i class="fa fa-comment"></i>
+      </a>
+      <span class="dropdown">
+        {% if post.shared_post %}
+          <a href="" class="btn {%if post.shared_post|check_shared_posts:user %}btn-danger {% endif %} btn-link" data-toggle="dropdown">
+              <i class="fa fa-share-alt"></i> <i class="like-count">{{post.shared_post.shared_count}}</i>
+         </a>
+         {% else %}
+         <a href="" class="btn {%if post|check_shared_posts:user %}btn-danger {% endif %} btn-link" data-toggle="dropdown">
+            <i class="fa fa-share-alt"></i> <i class="like-count">{{post.shared_count}}</i>
+       </a>
+       {% endif %}
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" class="">
+              <a class="dropdown-item btn {%if post|check_shared_posts:user %}btn-danger {% endif %} btn-link like-click" href="{% url 'posts:share' post.id %}">Share post</a>
+              <a class="dropdown-item btn {%if post|check_shared_posts:user %}btn-danger {% endif %} btn-link share-click" href="{% url 'posts:share' post.id %}">Share with quote</a>
+          </ul>
+        </span>
+      <a href="{% url 'posts:like' post.id %}" class="btn {%if post|check_liked_posts:user %}btn-danger{% endif %} btn-link black like-click">
+           <i class="fa fa-heart"></i> <i class="like-count">{{ post.likes.count }}</i>
+      </a>
+  </div>
+  {% for child_post in post.post_childs.all %}
+  <div class="tweet-link">
+      <div class="row">
+        <div class="avatar">
+          <img src="{% if child_post.user.user_details.profile_photo %}{{ child_post.user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="Rounded Image" class="img-rounded img-tweet-link img-responsive">
           </div>
+          <div class="col-md-8">
+              <a href="{% url 'user_profile:user_profile' username=child_post.user.username %}"><strong>{{child_post.fullName}}</strong>
+                <h5 class="media-heading date_created_value" value="{{child_post.created|date:'c'}}"><small>@{{child_post.user.username}} &middot; <i class="natural-date">{{child_post.created|naturaltime}}</i></small></h5>
+                </a>
+                <a href="">
+                    {% if child_post.text %}
+                  <p>{{child_post.text}}</p>
+                {% endif %}</a>
+                {% media_posts child_post as medias %}
+                <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+                 {% for media in medias %}
+                 {% if media.media %}
+
+                  <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                    <a href="{{media.media.url}}" itemprop="contentUrl" data-size="1024x1024">
+                        <img src="{{media.media.url}}" itemprop="thumbnail" alt="Image description" />
+                    </a>
+                    <figcaption itemprop="caption description">
+                      {{post.text}}</figcaption>
+                  </figure>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+                
+          </div>
+        </div>
+      </div>
+
+  {% endfor  %}
         </div>
 </div>

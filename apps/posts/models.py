@@ -10,6 +10,7 @@ from django.dispatch import receiver
 from django.utils import timezone
 
 from django.contrib.auth.models import User
+from django.utils.functional import cached_property
 
 from .model_validators import validate_file_extension_posts_media
 
@@ -27,7 +28,8 @@ class PostManager(models.Manager):
 
         if post.parent:
             shared_post_parent = post.parent
-
+        if post.shared_post:
+            post=post.shared_post
         shared_post = self.get_queryset().filter(
             user=user, parent=shared_post_parent
         ).filter(
@@ -43,16 +45,10 @@ class PostManager(models.Manager):
         share_post = self.model(
             parent=shared_post_parent,
             user=user,
-            text=f'Reshared @{post.user.username}: {post.text}',
+            text=quote_text,
             shared_post=post,
         )
         share_post.save()
-
-        for media in PostMedia.objects.filter(post=post):
-            media.pk = None
-            media.save()
-            media.post=share_post
-            media.save()
 
         print(share_post)
         return share_post
@@ -119,7 +115,10 @@ class Post(models.Model):
     def get_medias(self):
         return self.posts_media.all() if self.posts_media.exists() else None
 
-
+    def fullName(self):
+        # Any expensive calculation on instance data
+        # This returning value is cached and not calculated again
+        return self.user.first_name + " " + self.user.last_name
 
 class Tag(models.Model):
     tag = models.CharField(max_length=140)

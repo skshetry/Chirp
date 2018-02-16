@@ -6,11 +6,23 @@ from .models import Post, PostMedia
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['text',]
+        fields = ['text', 'shared_post']
 
-    def save(self, user, commit=True, *args, **kwargs):
+    def save(self, user, shared_post_id=None, parent_id=None,commit=True, *args, **kwargs):
         instance = super().save(commit=False,)
         instance.user = user
+        if shared_post_id:
+            post = Post.objects.get(pk=shared_post_id)
+            if post.shared_post:
+                    instance.shared_post = post.shared_post
+                    instance.parent = post.shared_post.parent
+            else:
+                instance.shared_post = post
+                instance.parent = post.parent
+        if parent_id:
+            post = Post.objects.get(pk=parent_id)
+            if post:
+                instance.parent = post
         if commit:
             instance.save()
         return instance
