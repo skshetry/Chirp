@@ -10,9 +10,8 @@ register = template.Library()
 def post_include(post, user):
     return {'post': post, 'user':user}
 
-@register.simple_tag
-def posts_from_feed(user):
-    return Post.objects.filter(feed__user=user).prefetch_related(
+def get_all_posts():
+        return Post.objects.prefetch_related(
         'posts_media'
         ).select_related(
                 'user__user_details'
@@ -38,12 +37,12 @@ def posts_from_feed(user):
                                                         'post_childs__user__user_details'
                                                         ).prefetch_related(
                                                             'likes'
-                                                            ).annotate(
-                                                                shared_count=Count(
-                                                                    'post_shared'
-                                                                    )).order_by(
-                                                                        '-created'
-                                                                        )[:100]
+                                                            )
+
+
+@register.simple_tag
+def posts_from_feed(user):
+    return get_all_posts().filter(feed__user=user).annotate(shared_count=Count('post_shared')).order_by('-created')
 
 
 @register.simple_tag
@@ -52,5 +51,5 @@ def media_posts(post):
 
 @register.simple_tag
 def posts_from_users_profile(user):
-    return Post.objects.filter(user=user).select_related('user').prefetch_related('posts_media').annotate(shared_count=Count('post_shared')).order_by('-created')
+    return get_all_posts().filter(user=user).annotate(shared_count=Count('post_shared')).order_by('-created')
 
