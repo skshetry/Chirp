@@ -37,11 +37,12 @@
                                 <div class="container h-100 d-flex justify-content-center">
                                     <div class="row">
                                             {% posts_from_users_profile user as posts %}
+                                            <div class="column justify-content-center col-sm-12">
                                             {% for post in posts %}
                                             {% media_posts post as medias %}
                                               {% for media_post in medias %}
                                               {% if media_post.media %}
-                                              <div class="my-gallery d-flex justify-content-center" itemscope itemtype="http://schema.org/ImageGallery">
+                                              <div class="my-gallery row d-flex justify-content-center col-sm-4" itemscope itemtype="http://schema.org/ImageGallery">
                                               <figure class="row" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                                                 <a href="{{media_post.media.url}}" itemprop="contentUrl" data-size="1024x1024">
                                                     <img src="{{media_post.media.url}}" itemprop="thumbnail" alt="Image description" />
@@ -52,8 +53,8 @@
                                             </div>
                                               {% endif %}
                                               {% endfor %}
-            
                                             {% endfor %}
+                                    </div>
                                     </div>
                                 </div>
                                 {% endwith %}
@@ -62,11 +63,12 @@
                                         <h3 class="text-muted">No Media yet :(</h3>
                                     {% endif %}
                                     {% posts_from_users_profile profile_user as posts %}
+                                    <div class="column justify-content-center col-sm-12">
                                     {% for post in posts %}
                                     {% media_posts post as medias %}
                                       {% for media_post in medias %}
                                       {% if media_post.media %}
-                                      <div class="my-gallery d-flex justify-content-center" itemscope itemtype="http://schema.org/ImageGallery">
+                                      <div class="my-gallery row d-flex justify-content-center  col-sm-3" itemscope itemtype="http://schema.org/ImageGallery">
                                       <figure class="row" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                                         <a href="{{media_post.media.url}}" itemprop="contentUrl" data-size="1024x1024">
                                             <img src="{{media_post.media.url}}" itemprop="thumbnail" alt="Image description" />
@@ -76,8 +78,9 @@
                                       </figure>
                                     </div>
                                       {% endif %}
-                                      {% endfor %}    
+                                      {% endfor %}
                                     {% endfor %}
+                                </div>
                                     {% endif %}
                           </div>
                     <div class="tab-pane active text-center" id="posts_tab">
