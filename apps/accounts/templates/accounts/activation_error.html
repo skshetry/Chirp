@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+
+{% block navbar %}
+
+<style>
+    .bg-w{
+        background-color: rgba(20, 153, 60, 0.815);
+            }
+            .profile-img {
+                margin-top: -5px;
+                margin-right: 5px;
+                float: left;
+                background-size: auto 100%; /* Interchange this value depending on prefering width vs. height */
+                width: 30px;
+                height: 30px;
+            }
+</style>
+{% load static %}
+
+<nav class="navbar navbar-expand-lg fixed-top  bg-w nav-down">
+
+    <div class="container">
+        <div class="navbar-translate">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'feeds:home' %}">Project Chirp</a>
+            </div>
+            <button class="navbar-toggler navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar"></span>
+                <span class="navbar-toggler-bar"></span>
+                <span class="navbar-toggler-bar"></span>
+            </button>
+        </div>
+    {% if user.is_authenticated %}
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                        <form action="" method="get" style="display: inline;" class="navbar-form navbar-left">
+                                <div>
+                                    <div class="input-group">
+
+                                        <input type="text" class="form-control" style="margin-right:90px;" size="30" placeholder="Search" aria-describedby="basic-addon1">          
+
+                                    </div>
+                                </div>
+                            </form>
+                </li>
+                <li class="nav-item">
+
+                    <a class="nav-link" href="{% url 'feeds:home' %}#follow_friends" data-scroll="true" href="javascript:void(0)">Follow</a>
+                </li>
+                <li class="nav-item">
+
+                        <a class="nav-link" href="{% url 'feeds:home' %}#trending_hashtags" data-scroll="true" href="javascript:void(0)">Trending</a>
+                    </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><img src="{% if user.user_details.profile_photo %} {{ user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" class="img-circle img-no-padding img-responsive profile-img"></a>
+                    <ul class="dropdown-menu dropdown-menu-right dropdown-danger">
+                        <a class="dropdown-item" href="{% url 'user_profile:user_profile' username=user.username %}"><i class="fa fa-user"></i>&nbsp; Profile</a>
+                        <a class="dropdown-item" href="{% url 'settings:settings' %}"><i class="nc-icon nc-settings"></i>&nbsp; Settings</a>
+                        <a class="dropdown-item" href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out"></i>&nbsp; Logout</a>
+                        <a class="dropdown-item" href="#with <3">Made with <i class="fa fa-heart" style="color:red;"></i>&nbsp; </a>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+    </div>
+</nav>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+
+    
+<div  id='textBox' > 
+    <div class="emailSentText">
+    <p id="box">
+        The activation link is invalid. 
+        Either the account is already activated or the link has expired.
+    </p>
+  </div>
+</div>
+
+<style>
+  
+  #textBox{
+    position: absolute;
+      top: 65%;
+      left: 0;
+      width: 100%;
+      top: 95px;
+      margin-top : 100px;
+      text-align: center;
+      
+      line-height: 90px; 
+  }
+
+  .emailSentText {
+      position: relative;
+      top: 45%;
+      left: 0;
+      width: 100%;
+      margin-left: 40px;
+  }
+  #box {
+        border-radius: 25px;
+        border: 2px solid #73AD21;
+        padding: 20px; 
+        width: 60%;
+        margin-left: 20%;
+        height: 80px; 
+    }    
+      
+  
+</style>
+{% endblock %}
+
+
