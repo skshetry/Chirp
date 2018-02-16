@@ -12,7 +12,7 @@ def post_include(post, user):
 
 @register.simple_tag
 def posts_from_feed(user):
-    return Post.objects.filter(feed__user=user).select_related('user').annotate(shared_count=Count('post_shared')).order_by('-created')
+    return Post.objects.filter(feed__user=user).select_related('user').select_related('shared_post').select_related('shared_post__user').annotate(shared_count=Count('post_shared')).order_by('-created')
 
 @register.simple_tag
 def media_posts(post):

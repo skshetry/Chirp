@@ -71,6 +71,10 @@
                     {% endif %}
                     <textarea class="form-control" id="id_text" name="text" maxlength="140" type="text" placeholder="Status" cols="33" rows="5" required></textarea>
                     {{ post_form.text.errors }}
+                    <div class="share-form">
+                                            </div>
+
+                    <input type="hidden" value="" name="shared_post" id="share-post-input-id">
                     <div class="media-forms">
                         {{mediaformset.management_form}}
                         <div style="display:none;" id="form_template">
