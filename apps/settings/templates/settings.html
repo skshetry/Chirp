@@ -7,7 +7,7 @@
     {% include 'profile_details.html' %}
 
                           <!-- FORM TO UPLOAD THE IMAGES -->
-<div class="row">
+<div class="row d-flex justify-content-center">
     <form method="post" enctype="multipart/form-data" id="profile_photo">
       {% csrf_token %}
       {{ profile_photo_form }}
@@ -24,7 +24,7 @@
 
                 </div>
 
-                <div class="row">
+                <div class="row d-flex justify-content-center">
                     <div class="col-md-6 col-md-offset-3">
                             <form class="settings-form" method="POST" enctype="multipart/form-data" id="formUpload">
                                 {{form.non_field_errors}}
@@ -71,7 +71,7 @@
                               </li>
                           </ul>
 
-                                                    <div class="row">
+                                                    <div class="row d-flex justify-content-center">
                               <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
                                 <button type="submit" class="btn btn-block btn-info">Save</button>
                               </div>
@@ -99,10 +99,10 @@
                           <div class="modal-footer">
                             <div class="btn-group pull-left" role="group">
                               <button type="button" class="btn btn-default js-zoom-in">
-                                <span class="glyphicon glyphicon-zoom-in"></span>
+                                <span class="fa fa-plus"></span>
                               </button>
                               <button type="button" class="btn btn-default js-zoom-out">
-                                <span class="glyphicon glyphicon-zoom-out"></span>
+                                <span class="fa fa-minus"></span>
                               </button>
                               <input type="text" hidden id="status">
                             </div>

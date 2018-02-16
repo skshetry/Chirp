@@ -28,8 +28,13 @@
                 position: fixed !important;
                 bottom: 50px !important;
                 right: 50px !important;
-                z-index: 10;
-            }
+                z-index: 10;}
+            .container-alert-message {
+                    position: absolute;
+                    top: 30px;
+                    z-index: 5000;
+                    
+                }
     </style>
 	{% load static %}
     <meta charset="utf-8" />
@@ -58,30 +63,15 @@
 </head>
 
 <body>
-        {% if messages %}
-        <div class="messages">
-        <div class="alert" data-notify="container">
-                {% for message in messages %}
-
-                <div class="container">
-                    <div class="alert-wrapper alert alert-{{ message.tags }}">
-                        <div class="message text-center">{{ message }} </div>
-                    </div>
-                </div>
-                {% endfor %}
-
-            </div>
-        </div>
-        {% endif %}
-
-
-
 {% block navbar %}
 
     {% include 'navbar.html' %}
 {% endblock navbar %}
 
         <div class="wrapper">
+                        {% if messages %}
+                        {% include 'alert_message.html' %}
+                        {% endif %}
             {% block content %}
                 <!-- content come here     -->
             {% endblock content%}
@@ -201,6 +191,9 @@
                 <!-- custom javascripts here     -->
             {% endblock javascripts%}
 <script type="text/javascript">
+ var date = new Date();
+var d = new Date();        
+d.setDate(date.getDate());
 $('#datetimepicker').datetimepicker({
 	icons: {
 		time: "fa fa-clock-o",
@@ -213,7 +206,8 @@ $('#datetimepicker').datetimepicker({
 		clear: 'fa fa-trash',
 		close: 'fa fa-remove'
 	},
-    format: 'YYYY-MM-DD'
+    format: 'YYYY-MM-DD',
+    maxDate: d,
 
 });
 

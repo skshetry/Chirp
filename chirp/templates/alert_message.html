@@ -1,0 +1,12 @@
+<div class="messages col-sm-3 col-sm-offset-8">
+    <div class="alert" data-notify="container">
+        {% for message in messages %}
+
+        <div class="container container-alert-message">
+            <div class="alert-wrapper alert alert-{{ message.tags }}">
+                <div class="message text-center">{{ message }} </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

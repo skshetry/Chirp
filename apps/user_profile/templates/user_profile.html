@@ -13,20 +13,79 @@
                         <div class="nav-tabs-wrapper">
                             <ul id="tabs" class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
-									<a class="nav-link active" href="#tweets" data-toggle="tab" role="tab">Tweets</a>
+									<a class="nav-link active" href="#posts_tab" data-toggle="tab" role="tab">Posts</a>
 								</li>
                                 <li class="nav-item">
 									<a class="nav-link" href="#following" data-toggle="tab" role="tab">Following({{ profile_user.user_details.follows.all.count }})</a>
 								</li>
                                 <li class="nav-item">
 									<a class="nav-link" href="#follows" data-toggle="tab" role="tab">Followers({{ profile_user.user_details.followed_by.all.count }})</a>
+                                </li>
+                                <li class="nav-item">
+									<a class="nav-link" href="#media" data-toggle="tab" role="tab">Media</a>
 								</li>
                             </ul>
                         </div>
                     </div>
                     <div id="my-tab-content" class="tab-content">
-                    <div class="tab-pane active text-center" id="tweets">
+                    <div class="tab-pane text-center" id="media">
                             {% if user != profile_user %}
+                            {% with user=profile_user %}
+                                {% if not profile_user.post_set.all %}
+                                    <h3 class="text-muted">No Media yet :(</h3>
+                                {% endif %}
+                                <div class="container h-100 d-flex justify-content-center">
+                                    <div class="row">
+                                            {% posts_from_users_profile user as posts %}
+                                            <div class="column justify-content-center col-sm-12">
+                                            {% for post in posts %}
+                                            {% media_posts post as medias %}
+                                              {% for media_post in medias %}
+                                              {% if media_post.media %}
+                                              <div class="my-gallery row d-flex justify-content-center col-sm-4" itemscope itemtype="http://schema.org/ImageGallery">
+                                              <figure class="row" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                                <a href="{{media_post.media.url}}" itemprop="contentUrl" data-size="1024x1024">
+                                                    <img src="{{media_post.media.url}}" itemprop="thumbnail" alt="Image description" />
+                                                </a>
+                                                <figcaption itemprop="caption description">
+                                                  {{post.text}}</figcaption>
+                                              </figure>
+                                            </div>
+                                              {% endif %}
+                                              {% endfor %}
+                                            {% endfor %}
+                                    </div>
+                                    </div>
+                                </div>
+                                {% endwith %}
+                                {% else %}
+                                    {% if not user.post_set.all %}
+                                        <h3 class="text-muted">No Media yet :(</h3>
+                                    {% endif %}
+                                    {% posts_from_users_profile profile_user as posts %}
+                                    <div class="column justify-content-center col-sm-12">
+                                    {% for post in posts %}
+                                    {% media_posts post as medias %}
+                                      {% for media_post in medias %}
+                                      {% if media_post.media %}
+                                      <div class="my-gallery row d-flex justify-content-center  col-sm-3" itemscope itemtype="http://schema.org/ImageGallery">
+                                      <figure class="row" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                        <a href="{{media_post.media.url}}" itemprop="contentUrl" data-size="1024x1024">
+                                            <img src="{{media_post.media.url}}" itemprop="thumbnail" alt="Image description" />
+                                        </a>
+                                        <figcaption itemprop="caption description">
+                                          {{post.text}}</figcaption>
+                                      </figure>
+                                    </div>
+                                      {% endif %}
+                                      {% endfor %}
+                                    {% endfor %}
+                                </div>
+                                    {% endif %}
+                          </div>
+                    <div class="tab-pane active text-center" id="posts_tab">
+                            {% if user != profile_user %}
+                            <div class="media" postId="{{post.id}}"></div>
                             <div class="container h-100 d-flex justify-content-center">
                                 {% include 'posts/post_add.html' %}
                         </div>
@@ -66,15 +125,15 @@
                             
                         </div>
                                 
-                        <div class="tab-pane text-center" id="follows">
+                        <div class="tab-pane justify-content-center text-center" id="follows">
                             <div class="row">
-                                <div class="col-md-6 col-md-offset-3">
+                                <div class="col-md-6 justify-content-center">
                                     <ul class="list-unstyled follows">
                                             {% if profile_user.user_details.followed_by.all %}
                                             {% for following_user in profile_user.user_details.followed_by.all %}
                                         <li>
                                             <div class="row">
-                                                <div class="col-md-2 col-md-offset-0 col-xs-3 col-xs-offset-2">
+                                                <div class="col-md-2 d-flex justify-content-center">
                                                         <a href="{% url 'user_profile:user_profile' following_user.user.username %}">
                                                         <img src="{% if following_user.user.user_details.profile_photo %}
                                                     {{ following_user.user.user_details.profile_photo.url }}
@@ -83,7 +142,7 @@
                                                     {% endif %}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                                                         </a>
                                                 </div>
-                                                <div class="col-md-7 col-xs-4">
+                                                <div class="col-md-7 d-flex justify-content-center">
                                                     <a href="{% url 'user_profile:user_profile' following_user.user.username %}">
                                                         <h6>
                                                             {{following_user.user.first_name }} {{following_user.user.last_name }}
@@ -93,11 +152,17 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md-3 col-xs-2">
+                                                        {% if profile_user != user %}
                                                     <div class="unfollow" rel="tooltip" title="Unfollow">
-                                                        <label class="checkbox" for="checkbox1" >
-                                                            <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" checked>
-                                                        </label>
+                                                        <div class="following">
+                                                            {% if user|check_followed_user_already:following_user.user %}
+                                                            <a href="{% url 'user_profile:follow_user' username=following_user.user.username %}"><btn class="btn btn-sm btn-info btn-round" rel="tooltip" title="Follow"></i>Unfollow</btn></a>
+                                                            {% else %}
+                                                            <a href="{% url 'user_profile:follow_user' username=following_user.user.username %}"><btn class="btn btn-sm btn-info btn-round" rel="tooltip" title="Follow"><i class="fa fa-user-plus"></i>Follow</btn></a>
+                                                            {% endif %}
+                                                        </div>
                                                     </div>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </li>
@@ -110,7 +175,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane text-center" id="following">
+                        <div class="tab-pane text-center justify-content-center" id="following">
                                 <div class="row">
                                         <div class="col-md-6 col-md-offset-3">
                                             <ul class="list-unstyled follows">
@@ -134,9 +199,13 @@
                                                         </div>
                                                         <div class="col-md-3 col-xs-2">
                                                             <div class="unfollow" rel="tooltip" title="Unfollow">
-                                                                <label class="checkbox" for="checkbox1" >
-                                                                    <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" checked>
-                                                                </label>
+                                                                <div class="following">
+                                                                    {% if user|check_followed_user_already:user_follows.user %}
+                                                                    <a href="{% url 'user_profile:follow_user' username=user_follows.user.username %}"><btn class="btn btn-sm btn-info btn-round" rel="tooltip" title="Follow"></i>Unfollow</btn></a>
+                                                                    {% else %}
+                                                                    <a href="{% url 'user_profile:follow_user' username=user_follows.user.username %}"><btn class="btn btn-sm btn-info btn-round" rel="tooltip" title="Follow"><i class="fa fa-user-plus"></i>Follow</btn></a>
+                                                                    {% endif %}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
