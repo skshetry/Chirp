@@ -24,7 +24,7 @@ def search(request):
         
         count = {}
         results = {}
-        results['posts'] = Post.objects.filter(text__icontains=querystring, parent=None)
+        results['posts'] = Post.objects.filter(text__icontains=querystring)
         results['users'] = User.objects.filter(
             Q(username__icontains=querystring) | Q(
                 first_name__icontains=querystring) | Q(

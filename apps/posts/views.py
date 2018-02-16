@@ -14,9 +14,12 @@ def posts_add(request):
         media_form_set = PostMediaFormSet(request.POST, request.FILES)
         if post_form.is_valid() and media_form_set.is_valid():
             shared_post_id = request.POST.get('shared_post')
+            parent_id = request.POST.get('parent')
             if not shared_post_id:
                 shared_post_id=None
-            post = post_form.save(request.user, shared_post_id)
+            if not parent_id:
+                parent_id = None
+            post = post_form.save(request.user, shared_post_id, parent_id)
             media_form_set.save(post)
             return redirect(reverse('feeds:home'))
     elif request.method == 'GET':

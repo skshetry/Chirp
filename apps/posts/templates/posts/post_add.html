@@ -4,8 +4,8 @@
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-default btn-primary btn-round" data-toggle="modal" data-target="#postAddModal">
-    <i class="fa fa-pencil-square-o"></i> Add Post</button>
+<button type="button" class="btn btn-floating btn-outline-default btn-primary btn-round" data-toggle="modal" data-target="#postAddModal">
+    <i class="fa fa-pencil-square-o"></i>Add Post</button>
 </button>
 <!-- Modal -->
 
@@ -62,6 +62,11 @@
             </div>
             <form method="POST" action="{% url 'posts:add'%}" autocomplete="off" enctype="multipart/form-data">
                 {% csrf_token %}
+                <input type="hidden" value="" name="parent" id="reply-post-input-id">
+
+                <div class="reply-form">
+                    </div>
+
                 <div class="modal-body">
                     {% if post_form.errors %}
                         <div class="form-control-feedback text-danger">

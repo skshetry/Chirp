@@ -8,7 +8,7 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['text', 'shared_post']
 
-    def save(self, user, shared_post_id=None, commit=True, *args, **kwargs):
+    def save(self, user, shared_post_id=None, parent_id=None,commit=True, *args, **kwargs):
         instance = super().save(commit=False,)
         instance.user = user
         if shared_post_id:
@@ -19,6 +19,10 @@ class PostForm(forms.ModelForm):
             else:
                 instance.shared_post = post
                 instance.parent = post.parent
+        if parent_id:
+            post = Post.objects.get(pk=parent_id)
+            if post:
+                instance.parent = post
         if commit:
             instance.save()
         return instance

@@ -200,11 +200,21 @@
             $('.media-forms').hide();
             $('#postAddModal').modal('show');
         })
-
+        $('.reply-click').click(function(event){
+            event.preventDefault();
+            var clicked = $(this);
+            var cloned_post = $(this).closest('.media').clone();
+            var reply_post_id = $(this).closest('.media').attr('postid');
+            $('.reply-form').html(cloned_post);
+            $('#reply-post-input-id').val(reply_post_id);
+            $('#postAddModal').modal('show');
+        })
         $('#close-post-btn').click(function(event){
             // do post cleanup
             $('.share-form').html('');
             $('#share-post-input-id').val('');
+            $('.reply-form').html('');
+            $('#reply-post-input-id').val('');
             $('#addmedia').show();
             $('.media-forms').show();
         })
