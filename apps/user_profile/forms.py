@@ -35,9 +35,9 @@ class UserDetailsForm(forms.ModelForm):
         return image_file
 
     def clean_date(self):
-        date = self.cleaned_data['date_of_birth']
-        if date > date.today():
-            raise forms.ValidationError("The date cannot be in the Future. Aren't you born yet?")
+        birth_date = self.cleaned_data['date_of_birth']
+        if birth_date > date.today():
+            raise forms.ValidationError("The date cannot be in the Future.")
 
 
 class ProfilePhotoForm(forms.ModelForm):
