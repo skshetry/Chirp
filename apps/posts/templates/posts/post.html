@@ -12,7 +12,9 @@
         </div>
         <div class="media-body">
           <a href="{% url 'user_profile:user_profile' username=post.user.username %}"><strong>{{post.fullName}}</strong>
-          <h5 class="media-heading date_created_value" value="{{post.created|date:'c'}}"><small>@{{post.user.username}} &middot; <i class="natural-date">{{post.created|naturaltime}}</i></small></h5>
+          <h5 class="media-heading date_created_value" value="{{post.created|date:'c'}}"><small>@{{post.user.username}} &middot; 
+           <i class="status"> {% if post.shared_post %}shared{%elif post.parent %}replied{% else%}posted{% endif%}</i>
+            <i class="natural-date">{{post.created|naturaltime}}</i></small></h5>
           </a>
           {% if post.text %}
           <p>{{post.text}}</p>
