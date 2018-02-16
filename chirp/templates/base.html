@@ -60,11 +60,20 @@
 <body>
         {% if messages %}
         <div class="messages">
+        <div class="alert" data-notify="container">
                 {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                {% endfor %}
+
+                <div class="container">
+                    <div class="alert-wrapper alert alert-{{ message.tags }}">
+                        <div class="message text-center">{{ message }} </div>
+                    </div>
                 </div>
+                {% endfor %}
+
+            </div>
+        </div>
         {% endif %}
+
 
 
 {% block navbar %}

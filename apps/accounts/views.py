@@ -1,6 +1,6 @@
 """Views for :accounts: handling."""
 from django.shortcuts import render, redirect
-
+from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -57,11 +57,14 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        
+        messages.success(request, ('Your account has been verified. Please login.'))
+        messages.success(request, ('Your account has been verified. Please login.'))
+
         return redirect('feeds:home')
         
 
     else:
+
         return render(request, 'accounts/activation_error.html')
 
 
