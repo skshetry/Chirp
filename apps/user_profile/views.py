@@ -15,8 +15,8 @@ def user_profile(request, username=None):
     media_form_set = PostMediaFormSet()
     post_form = PostForm()
 
-    if User.objects.get(username=username):
-        user = User.objects.get(username=username)
+    if User.objects.filter(username=username).exists():
+        user = User.objects.select_related('user_details').prefetch_related('post_set').get(username=username)
         return render(request, "user_profile.html", {
                 "profile_user": user,
                 "mediaformset": media_form_set,
