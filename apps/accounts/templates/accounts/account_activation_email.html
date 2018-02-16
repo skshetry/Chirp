@@ -4,9 +4,9 @@ Thank you for signing up at Chirp.
 Please click on the link to confirm your registration,
 
 
-<button ><a href="{{ protocol }}://{{ domain}}{% url 'accounts:activate' uidb64=uid token=token %}">Activate account</a></button>
+<button ><a href="{% if request.is_secure %}https{% else %}http{% endif %}://{{ domain}}{% url 'accounts:activate' uidb64=uid token=token %}">Activate account</a></button>
 
 In case link doesn't work please copy and paste the below url in a new tab:
 
-{{ protocol }}://{{ domain}}{% url 'accounts:activate' uidb64=uid token=token %}
+{% if request.is_secure %}https{% else %}http{% endif %}://{{ domain}}{% url 'accounts:activate' uidb64=uid token=token %}
 {% endautoescape %}
