@@ -81,7 +81,7 @@ class CoverPhotoForm(forms.ModelForm):
             model = User_details
             fields = ('cover_photo', 'cover_x', 'cover_y', 'cover_height', 'cover_width')
             widgets = {
-                'profile_photo': forms.FileInput(attrs={'accept': 'image/jpeg'})
+                'cover_photo': forms.FileInput(attrs={'accept': 'image/jpeg'})
             }
 
     def save(self):
@@ -91,7 +91,8 @@ class CoverPhotoForm(forms.ModelForm):
         w = self.cleaned_data.get('cover_width')
         h = self.cleaned_data.get('cover_height')
 
-        image = Image.open(photo.cover_photo)
+        clean_image_file = UserDetailsForm.clean_image(self, photo.cover_photo)
+        image = Image.open(clean_image_file)
         cropped_image = image.crop((x, y, w+x, h+y))
         resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
         fh = storage.open(photo.cover_photo.name, "w")
