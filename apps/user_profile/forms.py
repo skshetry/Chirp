@@ -4,6 +4,7 @@ from django.core.files import File
 from django.contrib.auth.models import User
 from .models import User_details
 from django.core.files.storage import default_storage as storage
+from datetime import date
 
 
 class UserForm(forms.ModelForm):
@@ -33,6 +34,10 @@ class UserDetailsForm(forms.ModelForm):
             raise forms.ValidationError("Only .jpg image accepted")
         return image_file
 
+    def clean_date(self):
+        date = self.cleaned_data['date_of_birth']
+        if date > date.today():
+            raise forms.ValidationError("The date cannot be in the Future. Aren't you born yet?")
 
 
 class ProfilePhotoForm(forms.ModelForm):
