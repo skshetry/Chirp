@@ -149,11 +149,17 @@
                                                     </a>
                                                 </div>
                                                 <div class="col-md-3 col-xs-2">
+                                                        {% if profile_user != user %}
                                                     <div class="unfollow" rel="tooltip" title="Unfollow">
-                                                        <label class="checkbox" for="checkbox1" >
-                                                            <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" checked>
-                                                        </label>
+                                                        <div class="following">
+                                                            {% if user|check_followed_user_already:following_user.user %}
+                                                            <a href="{% url 'user_profile:follow_user' username=following_user.user.username %}"><btn class="btn btn-sm btn-info btn-round" rel="tooltip" title="Follow"></i>Unfollow</btn></a>
+                                                            {% else %}
+                                                            <a href="{% url 'user_profile:follow_user' username=following_user.user.username %}"><btn class="btn btn-sm btn-info btn-round" rel="tooltip" title="Follow"><i class="fa fa-user-plus"></i>Follow</btn></a>
+                                                            {% endif %}
+                                                        </div>
                                                     </div>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </li>
@@ -190,9 +196,13 @@
                                                         </div>
                                                         <div class="col-md-3 col-xs-2">
                                                             <div class="unfollow" rel="tooltip" title="Unfollow">
-                                                                <label class="checkbox" for="checkbox1" >
-                                                                    <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" checked>
-                                                                </label>
+                                                                <div class="following">
+                                                                    {% if user|check_followed_user_already:user_follows.user %}
+                                                                    <a href="{% url 'user_profile:follow_user' username=user_follows.user.username %}"><btn class="btn btn-sm btn-info btn-round" rel="tooltip" title="Follow"></i>Unfollow</btn></a>
+                                                                    {% else %}
+                                                                    <a href="{% url 'user_profile:follow_user' username=user_follows.user.username %}"><btn class="btn btn-sm btn-info btn-round" rel="tooltip" title="Follow"><i class="fa fa-user-plus"></i>Follow</btn></a>
+                                                                    {% endif %}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
