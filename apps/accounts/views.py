@@ -27,7 +27,7 @@ def signup(request):
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
-            mail_subject = 'Activate your blog account.'
+            mail_subject = 'Welcome to Chirp.'
             message = render_to_string('accounts/account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
@@ -43,6 +43,7 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
+    
 
 
 
@@ -56,11 +57,12 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        login(request, user)
-        # return redirect('feeds:home')
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        
+        return redirect('feeds:home')
+        
+
     else:
-        return HttpResponse('Activation link is invalid!')
+        return render(request, 'accounts/activation_error.html')
 
 
 class UserLoginView(LoginView):

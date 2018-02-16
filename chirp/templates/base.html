@@ -207,6 +207,38 @@ $('#datetimepicker').datetimepicker({
     format: 'YYYY-MM-DD'
 
 });
+
+
+
+hashtag_regexp = /#([a-zA-Z0-9]+)/g;
+mention_regexp = /@([a-zA-Z0-9]+)/g;
+
+function linkHashtags(text) {
+    return text.replace(
+        hashtag_regexp,
+        '<a class="hashtag" href="/search/?q=%23$1">#$1</a>'
+    );
+} 
+
+function linkMentions(text){
+    return text.replace(
+        mention_regexp,
+        '<a class="hashtag" href="/user/$1">@$1</a>'
+    );
+}
+
+$(document).ready(function(){
+    $('p').each(function() {
+        $(this).html(linkHashtags($(this).html()));
+    });
+});
+
+$(document).ready(function(){
+    $('p').each(function() {
+        $(this).html(linkMentions($(this).html()));
+    });
+});
+
 var initPhotoSwipeFromDOM = function(gallerySelector) {
 
     // parse slide data (url, title, size ...) from DOM elements 
