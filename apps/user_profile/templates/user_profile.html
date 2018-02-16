@@ -189,6 +189,25 @@
             }
             });
         })
+        $('.share-click').click(function(event){
+            event.preventDefault();
+            var clicked = $(this);
+            var cloned_post = $(this).closest('.media').clone();
+            var share_post_id = $(this).closest('.media').attr('postid');
+            $('.share-form').html(cloned_post);
+            $('#share-post-input-id').val(share_post_id);
+            $('#addmedia').hide();
+            $('.media-forms').hide();
+            $('#postAddModal').modal('show');
+        })
+
+        $('#close-post-btn').click(function(event){
+            // do post cleanup
+            $('.share-form').html('');
+            $('#share-post-input-id').val('');
+            $('#addmedia').show();
+            $('.media-forms').show();
+        })
     </script>
     <style>
             .black{

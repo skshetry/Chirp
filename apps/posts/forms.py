@@ -12,7 +12,13 @@ class PostForm(forms.ModelForm):
         instance = super().save(commit=False,)
         instance.user = user
         if shared_post_id:
-            instance.shared_post = Post.objects.get(pk=shared_post_id)
+            post = Post.objects.get(pk=shared_post_id)
+            if post.shared_post:
+                    instance.shared_post = post.shared_post
+                    instance.parent = post.shared_post.parent
+            else:
+                instance.shared_post = post
+                instance.parent = post.parent
         if commit:
             instance.save()
         return instance

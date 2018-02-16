@@ -12,7 +12,7 @@
         </div>
         <div class="media-body">
           <a href="{% url 'user_profile:user_profile' username=post.user.username %}"><strong>{{post.user.first_name}} {{post.user.last_name}}</strong>
-          <h5 class="media-heading date_created_value" value="{{post.created|date:'c'}}"><small>@{{post.shared_post.user.username}} &middot; <i class="natural-date">{{post.created|naturaltime}}</i></small></h5>
+          <h5 class="media-heading date_created_value" value="{{post.created|date:'c'}}"><small>@{{post.user.username}} &middot; <i class="natural-date">{{post.created|naturaltime}}</i></small></h5>
           </a>
           {% if post.text %}
           <p>{{post.text}}</p>
@@ -23,35 +23,34 @@
               <div class="avatar">
                 <img src="{% if post.shared_post.user.user_details.profile_photo %}{{ post.shared_post.user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="Rounded Image" class="img-rounded img-tweet-link img-responsive">
                 </div>
-
                 <div class="col-md-8">
-                  <a href="{% url 'user_profile:user_profile' username=post.shared_post.user.username %}"><strong>{{post.shared_post.user.first_name}} {{post.shared_post.user.last_name}}</strong>
-                    <h5 class="media-heading date_created_value" value="{{post.created|date:'c'}}"><small>@{{post.shared_post.user.username}} &middot; <i class="natural-date">{{post.shared_post.created|naturaltime}}</i></small></h5>
-                    </a>
-                    <a href="">
-                        {% if post.shared_post.text %}
-                      <p>{{post.shared_post.text}}</p>
-                    {% endif %}</a>
-                      {% media_posts post as medias %}
+                    <a href="{% url 'user_profile:user_profile' username=post.shared_post.user.username %}"><strong>{{post.shared_post.user.first_name}} {{post.shared_post.user.last_name}}</strong>
+                      <h5 class="media-heading date_created_value" value="{{post.shared_post.created|date:'c'}}"><small>@{{post.shared_post.user.username}} &middot; <i class="natural-date">{{post.shared_post.created|naturaltime}}</i></small></h5>
+                      </a>
+                      <a href="">
+                          {% if post.shared_post.text %}
+                        <p>{{post.shared_post.text}}</p>
+                      {% endif %}</a>
+                      {% media_posts post.shared_post as medias %}
                       <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-                        {% media_posts post.shared_post as medias %}
-                        {% for media_post in medias %}
-                        {% if media_post.media %}
+                       {% for media in medias %}
+                       {% if media.media %}
 
                         <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                          <a href="{{media_post.media.url}}" itemprop="contentUrl" data-size="1024x1024">
-                              <img src="{{media_post.media.url}}" itemprop="thumbnail" alt="Image description" />
+                          <a href="{{media.media.url}}" itemprop="contentUrl" data-size="1024x1024">
+                              <img src="{{media.media.url}}" itemprop="thumbnail" alt="Image description" />
                           </a>
                           <figcaption itemprop="caption description">
                             {{post.text}}</figcaption>
                         </figure>
-                      </div>
                         {% endif %}
                         {% endfor %}
-                    <small></small><small><a href="#paper-kit" class="text-muted"></a></small>
+                      </div>
+                      
                 </div>
+              </div>
             </div>
-        </div>
+
         {% endif  %}
           {% media_posts post as medias %}
   <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
@@ -69,24 +68,30 @@
     {% endif %}
     {% endfor %}
   </div>
+
+
+  <div class="media-footer">
+      <a href="#paper-kit" class="btn btn-link">
+           <i class="fa fa-reply"></i>
+      </a>
+      <span class="dropdown">
+        {% if post.shared_post %}
+          <a href="" class="btn {%if post.shared_post|check_shared_posts:user %}btn-danger {% endif %} btn-link" data-toggle="dropdown">
+              <i class="fa fa-share-alt"></i> <i class="like-count">{{post.shared_post.shared_count}}</i>
+         </a>
+         {% else %}
+         <a href="" class="btn {%if post|check_shared_posts:user %}btn-danger {% endif %} btn-link" data-toggle="dropdown">
+            <i class="fa fa-share-alt"></i> <i class="like-count">{{post.shared_count}}</i>
+       </a>
+       {% endif %}
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" class="">
+              <a class="dropdown-item btn {%if post|check_shared_posts:user %}btn-danger {% endif %} btn-link like-click" href="{% url 'posts:share' post.id %}">Share post</a>
+              <a class="dropdown-item btn {%if post|check_shared_posts:user %}btn-danger {% endif %} btn-link share-click" href="{% url 'posts:share' post.id %}">Share with quote</a>
+          </ul>
+        </span>
+      <a href="{% url 'posts:like' post.id %}" class="btn {%if post|check_liked_posts:user %}btn-danger{% endif %} btn-link black like-click">
+           <i class="fa fa-heart"></i> <i class="like-count">{{ post.likes.count }}</i>
+      </a>
+  </div>
         </div>
-
-
-          <div class="media-footer">
-              <a href="#paper-kit" class="btn btn-link">
-                   <i class="fa fa-reply"></i>
-              </a>
-              <span class="dropdown">
-                  <a href="" class="btn {%if post|check_shared_posts:user %}btn-danger {% endif %} btn-link" data-toggle="dropdown">
-                      <i class="fa fa-retweet"></i> <i class="like-count">{{post.shared_count}}</i>
-                 </a>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" class="">
-                      <a class="dropdown-item btn {%if post|check_shared_posts:user %}btn-danger {% endif %} btn-link like-click" href="{% url 'posts:share' post.id %}">Share post</a>
-                      <a class="dropdown-item btn {%if post|check_shared_posts:user %}btn-danger {% endif %} btn-link share-click" href="{% url 'posts:share' post.id %}">Share with quote</a>
-                  </ul>
-                </span>
-              <a href="{% url 'posts:like' post.id %}" class="btn {%if post|check_liked_posts:user %}btn-danger{% endif %} btn-link black like-click">
-                   <i class="fa fa-heart"></i> <i class="like-count">{{ post.likes.count }}</i>
-              </a>
-          </div>
 </div>
