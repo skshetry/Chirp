@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="media-body">
-          <a href="{% url 'user_profile:user_profile' username=post.user.username %}"><strong>{{post.user.first_name}} {{post.user.last_name}}</strong>
+          <a href="{% url 'user_profile:user_profile' username=post.user.username %}"><strong>{{post.fullName}}</strong>
           <h5 class="media-heading date_created_value" value="{{post.created|date:'c'}}"><small>@{{post.user.username}} &middot; <i class="natural-date">{{post.created|naturaltime}}</i></small></h5>
           </a>
           {% if post.text %}
@@ -26,7 +26,7 @@
                 <img src="{% if post.shared_post.user.user_details.profile_photo %}{{ post.shared_post.user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="Rounded Image" class="img-rounded img-tweet-link img-responsive">
                 </div>
                 <div class="col-md-8">
-                    <a href="{% url 'user_profile:user_profile' username=post.shared_post.user.username %}"><strong>{{post.shared_post.user.first_name}} {{post.shared_post.user.last_name}}</strong>
+                    <a href="{% url 'user_profile:user_profile' username=post.shared_post.user.username %}"><strong>{{post.shared_post.fullName}}</strong>
                       <h5 class="media-heading date_created_value" value="{{post.shared_post.created|date:'c'}}"><small>@{{post.shared_post.user.username}} &middot; <i class="natural-date">{{post.shared_post.created|naturaltime}}</i></small></h5>
                       </a>
                       <a href="">
@@ -102,7 +102,7 @@
           <img src="{% if child_post.user.user_details.profile_photo %}{{ child_post.user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="Rounded Image" class="img-rounded img-tweet-link img-responsive">
           </div>
           <div class="col-md-8">
-              <a href="{% url 'user_profile:user_profile' username=child_post.user.username %}"><strong>{{child_post.user.first_name}} {{child_post.user.last_name}}</strong>
+              <a href="{% url 'user_profile:user_profile' username=child_post.user.username %}"><strong>{{child_post.fullName}}</strong>
                 <h5 class="media-heading date_created_value" value="{{child_post.created|date:'c'}}"><small>@{{child_post.user.username}} &middot; <i class="natural-date">{{child_post.created|naturaltime}}</i></small></h5>
                 </a>
                 <a href="">
