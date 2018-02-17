@@ -64,19 +64,18 @@
         </button>
         
         {% if user.is_authenticated %}
-        <div class="collapse navbar-collapse" id="navbarToggler">            
+        <div class="collapse navbar-collapse" id="navbarToggler" style="padding-left:0;text-align:center;">            
             <ul class="navbar-nav ml-auto">
                 
                 <li class="nav-item mx-auto">
                     <form role ="search" action="{% url 'search:search' %}" method="get" style="display: inline;" class="navbar-form navbar-left">
                         <div>
                             <input type="hidden" name="type">
-                            <div class="input-group search-input">
-                                <div class="form-group has-feedback has-clear">  
+                            <div class="input-group has-feedback has-clear">
+                                
                                     <input type="text" id="auto-search" name="q" class="form-control"  size="30" placeholder="Search"  value="{{ querystring }}" aria-describedby="basic-addon1">          
-                                    <i class="form-control-clear fa fa-remove form-control-feedback hidden" style="padding-top:0px;padding-right:12px; color:#02856f;" ></i>
-                                </div>
-                            </div>
+                                    <i class="form-control-clear fa fa-remove form-control-feedback hidden" style="padding-left:0px;margin-top:-10px; color:#02856f;" ></i>
+                             </div>
                         </div>
                     </form>
                 </li>
@@ -90,7 +89,7 @@
                     <a class="nav-link" href="{% url 'feeds:home' %}#trending_hashtags" data-scroll="true" href="javascript:void(0)">Trending</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="dropdownMenuButton" href="javascript:void(0)" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{% if user.user_details.profile_photo %} {{ user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" class="img-circle img-no-padding img-responsive profile-img"></a>
+                    <a class="nav-link " id="dropdownMenuButton" href="javascript:void(0)" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{% if user.user_details.profile_photo %} {{ user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" class="img-circle img-no-padding img-responsive profile-img"></a>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="{% url 'user_profile:user_profile' username=user.username %}"><i class="fa fa-user"></i>&nbsp; Profile</a>
                         <a class="dropdown-item" href="{% url 'settings:settings' %}"><i class="nc-icon nc-settings"></i>&nbsp; Settings</a>
