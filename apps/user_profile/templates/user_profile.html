@@ -132,8 +132,8 @@
                                             {% if profile_user.user_details.followed_by.all %}
                                             {% for following_user in profile_user.user_details.followed_by.all %}
                                         <li>
-                                            <div class="row">
-                                                <div class="col-md-2 d-flex justify-content-center">
+                                            <div class="row ">
+                                                <div class="col-md-2">
                                                         <a href="{% url 'user_profile:user_profile' following_user.user.username %}">
                                                         <img src="{% if following_user.user.user_details.profile_photo %}
                                                     {{ following_user.user.user_details.profile_photo.url }}
@@ -142,7 +142,7 @@
                                                     {% endif %}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                                                         </a>
                                                 </div>
-                                                <div class="col-md-7 d-flex justify-content-center">
+                                                <div class="col-md-7">
                                                     <a href="{% url 'user_profile:user_profile' following_user.user.username %}">
                                                         <h6>
                                                             {{following_user.user.first_name }} {{following_user.user.last_name }}
@@ -162,7 +162,17 @@
                                                             {% endif %}
                                                         </div>
                                                     </div>
-                                                    {% endif %}
+                                                    {% else %}
+                                                    <div class="unfollow" rel="tooltip" title="Unfollow">
+                                                            <div class="following">
+                                                                {% if user|check_followed_user_already:following_user.user %}
+                                                                <a href="{% url 'user_profile:follow_user' username=following_user.user.username %}"><btn class="btn btn-sm btn-info btn-round" rel="tooltip" title="Follow"></i>Unfollow</btn></a>
+                                                                {% else %}
+                                                                <a href="{% url 'user_profile:follow_user' username=following_user.user.username %}"><btn class="btn btn-sm btn-info btn-round" rel="tooltip" title="Follow"><i class="fa fa-user-plus"></i>Follow</btn></a>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        {% endif %}
                                                 </div>
                                             </div>
                                         </li>
