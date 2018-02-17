@@ -239,6 +239,7 @@
             event.preventDefault();
             var clicked = $(this);
             $(this).toggleClass('btn-danger');
+            $(".like-click").blur(); 
             var like_count = parseInt($(this, '.like-count').text());
             $.ajax({
                 url: $(this).attr('href'),
@@ -257,7 +258,8 @@
                 }
             }
             });
-        })
+        });
+
         $('.share-click').click(function(event){
             event.preventDefault();
             var clicked = $(this);
@@ -266,15 +268,19 @@
             $('.share-form').html(cloned_post);
             $('#share-post-input-id').val(share_post_id);
             $('#addmedia').hide();
+            $(".like-click").blur(); 
             $('.media-forms').hide();
+            $('.dropdown-menu').toggle();
             $('#postAddModal').modal('show');
         })
+
         $('.reply-click').click(function(event){
             event.preventDefault();
             var clicked = $(this);
             var cloned_post = $(this).closest('.media').clone();
             var reply_post_id = $(this).closest('.media').attr('postid');
             $('.reply-form').html(cloned_post);
+            $(".like-click").blur(); 
             $('#reply-post-input-id').val(reply_post_id);
             $('#postAddModal').modal('show');
         })
