@@ -15,14 +15,12 @@
         <div class="col-md-3 text-center">
             <h3>Search</h3>
         </div>
-        <div class="col-md-6 pt-4 search">
-            <form role="search" action="{% url 'search:search' %}">
-                <input type="hidden" name="type" value="{{ active }}">
-                <div class="input-group">
-                    <input type="text" id="auto-search" class="form-control" name="q" placeholder="Search" value="{{ querystring }}">
-                    <button type="submit"><i class="fa fa-search" aria-hidden="true" style="font-size:large;"></i></button>
-                </div>
-            </form>
+        <div class="col-md-6 pt-4 searched">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item active" aria-current="page">{{querystring}}</li>
+                </ol>
+              </nav>
         </div>
     </div>
 </div>
