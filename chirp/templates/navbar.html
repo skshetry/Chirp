@@ -20,6 +20,16 @@
         padding:0px !important;
         min-height:32px !important;
     }
+    ::placeholder { /* Most modern browsers support this now. */
+        color:rgb(68, 230, 122)  !important; 
+        font-weight:500 !important;
+    }
+    input{
+       color:rgb(2, 133, 111) !important;
+       font-weight:bold !important;
+       border-radius: 20px;
+    }
+       
 </style>
 {% load static %}
 
@@ -36,12 +46,12 @@
         {% if user.is_authenticated %}
         <div class="collapse navbar-collapse" id="navbarToggler">            
             <ul class="navbar-nav ml-auto">
-                {% if not hide_search %} 
+                
                 <li class="nav-item mx-auto">
                     <form role ="search" action="{% url 'search:search' %}" method="get" style="display: inline;" class="navbar-form navbar-left">
                         <div>
                         <input type="hidden" name="type">
-                        <div class="input-group">
+                        <div class="input-group search-input">
                             
                             <input type="text" id="auto-search" name="q" class="form-control" style="margin-right:130px;" size="30" placeholder="Search" aria-describedby="basic-addon1">          
                             
@@ -49,7 +59,7 @@
                     </div>
                     </form>
                 </li>
-                {%endif%}
+                
                 <li class="nav-item">
                     
                     <a class="nav-link" href="{% url 'feeds:home' %}#follow_friends" data-scroll="true" href="javascript:void(0)">Follow</a>
