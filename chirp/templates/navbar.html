@@ -26,7 +26,7 @@
         text-align: center !important;
     }
     input{
-        color:rgb(2, 133, 111) !important;
+        color:#02856f !important;
         font-weight:bold !important;
         -webkit-border-radius: 50px !important;
         -moz-border-radius: 50px !important;
@@ -35,6 +35,21 @@
         text-align: center !important;
     }
     
+    ::-ms-clear {
+        display: none;
+    }
+    
+    .form-control-clear {
+        z-index: 10;
+        pointer-events: auto;
+        cursor: pointer;
+    }
+    .hidden {
+        visibility: hidden; /* If you want to reserve space */
+    }
+    .visible {
+        visibility: show; /* If you want to reserve space */
+    }
 </style>
 {% load static %}
 
@@ -57,9 +72,10 @@
                         <div>
                             <input type="hidden" name="type">
                             <div class="input-group search-input">
-                                
-                                <input type="text" id="auto-search" name="q" class="form-control"  size="30" placeholder="Search"  value="{{ querystring }}" aria-describedby="basic-addon1">          
-                                
+                                <div class="form-group has-feedback has-clear">  
+                                    <input type="text" id="auto-search" name="q" class="form-control"  size="30" placeholder="Search"  value="{{ querystring }}" aria-describedby="basic-addon1">          
+                                    <i class="form-control-clear fa fa-remove form-control-feedback hidden" style="padding-top:0px;padding-right:12px; color:#02856f;" ></i>
+                                </div>
                             </div>
                         </div>
                     </form>
