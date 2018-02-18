@@ -18,9 +18,12 @@
         <div class="col-md-6 pt-4 searched">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item active" aria-current="page">{{querystring}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{querystring}}</li>
                 </ol>
-              </nav>
+            </nav>
+        </div>
+        <div class="col-md-3 pt-4">
+            {% include 'posts/post_add.html' %}
         </div>
     </div>
 </div>
@@ -59,7 +62,7 @@
 <script>
     $("[name=form-INITIAL_FORMS]").val(0);
     $("[name=form-TOTAL_FORMS]").val(0);
-    
+    var response_data={};
     {% if post_form.errors %}
     $('#postAddModal').modal('show');
     {% endif %}
@@ -67,6 +70,7 @@
         event.preventDefault();
         var clicked = $(this);
         $(this).toggleClass('btn-danger');
+        $(".like-click").blur(); 
         var like_count = parseInt($(this, '.like-count').text());
         $.ajax({
             url: $(this).attr('href'),
@@ -85,8 +89,41 @@
                 }
             }
         });
+    });
+    
+    $('.share-click').click(function(event){
+        event.preventDefault();
+        var clicked = $(this);
+        var cloned_post = $(this).closest('.media').clone();
+        var share_post_id = $(this).closest('.media').attr('postid');
+        $('.share-form').html(cloned_post);
+        $('#share-post-input-id').val(share_post_id);
+        $('#addmedia').hide();
+        $(".like-click").blur(); 
+        $('.media-forms').hide();
+        $('.dropdown-menu').toggle();
+        $('#postAddModal').modal('show');
     })
     
+    $('.reply-click').click(function(event){
+        event.preventDefault();
+        var clicked = $(this);
+        var cloned_post = $(this).closest('.media').clone();
+        var reply_post_id = $(this).closest('.media').attr('postid');
+        $('.reply-form').html(cloned_post);
+        $(".like-click").blur(); 
+        $('#reply-post-input-id').val(reply_post_id);
+        $('#postAddModal').modal('show');
+    })
+    $('#close-post-btn').click(function(event){
+        // do post cleanup
+        $('.share-form').html('');
+        $('#share-post-input-id').val('');
+        $('.reply-form').html('');
+        $('#reply-post-input-id').val('');
+        $('#addmedia').show();
+        $('.media-forms').show();
+    })
 </script>
 <style>
     .black{
