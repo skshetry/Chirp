@@ -20,17 +20,17 @@
         padding:0px !important;
         min-height:32px !important;
     }
-    ::placeholder { /* Most modern browsers support this now. */
+    .search-bar::placeholder { /* Most modern browsers support this now. */
         color:rgb(68, 230, 122)  !important; 
         font-weight:500 !important;
         text-align: center !important;
     }
-    input{
+    .search-bar input{
         color:#02856f !important;
         font-weight:bold !important;
-        -webkit-border-radius: 50px !important;
-        -moz-border-radius: 50px !important;
-        border-radius: 50px !important;
+        -webkit-border-radius: 5px !important;
+        -moz-border-radius: 5px !important;
+        border-radius: 5px !important;
         width:100% !important;
         text-align: center !important;
     }
@@ -71,7 +71,7 @@
                     <form role ="search" action="{% url 'search:search' %}" method="get" style="display: inline;" class="navbar-form navbar-left">
                         <div>
                             <input type="hidden" name="type">
-                            <div class="input-group has-feedback has-clear">
+                            <div class="input-group has-feedback has-clear search-bar">
                                 
                                     <input type="text" id="auto-search" name="q" class="form-control"  size="30" placeholder="Search"  value="{{ querystring }}" aria-describedby="basic-addon1">          
                                     <i class="form-control-clear fa fa-remove form-control-feedback hidden" style="padding-left:0px;margin-top:-10px; color:#02856f;" ></i>
