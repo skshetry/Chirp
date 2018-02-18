@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 from posts.models import Post
 from .decorators import ajax_required
+from posts.forms import PostMediaFormSet, PostForm
 # Create your views here.
 @login_required
 def search(request):
@@ -41,7 +42,9 @@ def search(request):
             'querystring': querystring,
             'active': search_type,
             'count': count,
-            'results': results[search_type],        
+            'results': results[search_type],
+            'mediaformset': PostMediaFormSet(),
+            'post_form': PostForm(),       
         })
     else:
         return render(request, 'search/search.html', {'hide_search': True})
