@@ -1,21 +1,58 @@
 {% load static %}<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>{% block title %}Chirp{% endblock %}</title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link href="{% static  'css/paper-kit.css' %}" rel="stylesheet"/>
-    {%block stylesheet%}{%endblock%}
-  </head>
-  <body>
-    <div class="container">
-        <h1 class="text-center logo my-4">
-            <a href="{% url 'accounts:login'%}">Project Chirp</a>
-         </h1>      
-      {% block content %}
-      {% endblock %}
-    </div>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Chirp{% endblock %}</title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport' />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link href="{% static  'css/paper-kit.css' %}" rel="stylesheet"/>
+  {%block stylesheet%}{%endblock%}
+  <style>
+    body { padding-top: 70px;
+     background-color:seashell;
+    }
+    
+    .navbar
+    {
+      background:rgb(62, 170, 93) !important;
+      padding-top:0px !important; padding-bottom:0px !important;
+    }
+    .navbar .navbar-brand {
+    font-weight: 600;
+    margin: 5px auto !important;
+    padding: 20px 15px;
+    font-size: 22px !important;
+    }
+    p input{
+      border-radius:5px;
+      background-color:transparent;
+      border:1px solid black;
+      text-align:center;
+      font-family: 'Courier New', Courier, monospace;
+      font-size:15px;
+      width:100%;
+      height: 30px;
+    }
+    .container{
+      font-family:Arial, Helvetica, sans-serif;
+    }
+    p{
+      font-size: 16px;
+      font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      width:100%;
+
+    }
+  </style>
+</head>
+<body>
+  {% include 'navbar.html' %}
+  <div class="container">
+    <h5 class="text-center logo my-4">
+      <a href="{% url 'feeds:home'%}">Back to Home</a>
+    </h5>      
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
 </html>
