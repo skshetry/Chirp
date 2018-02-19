@@ -88,13 +88,28 @@
                     
                     <a class="nav-link" href="{% url 'feeds:home' %}#trending_hashtags" data-scroll="true" href="javascript:void(0)">Trending</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link " id="dropdownMenuButton" href="javascript:void(0)" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{% if user.user_details.profile_photo %} {{ user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" class="img-circle img-no-padding img-responsive profile-img"></a>
+                <li class="nav-item dropdown d-none d-lg-block">
+                    <a class="nav-link dropdown-toggle" id="dropdownMenuButton" href="javascript:void(0)" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{% if user.user_details.profile_photo %} {{ user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" class="img-circle img-no-padding img-responsive profile-img"></a>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="{% url 'user_profile:user_profile' username=user.username %}"><i class="fa fa-user"></i>&nbsp; Profile</a>
                         <a class="dropdown-item" href="{% url 'settings:settings' %}"><i class="nc-icon nc-settings"></i>&nbsp; Settings</a>
                         <a class="dropdown-item" href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out"></i>&nbsp; Logout</a>
                         <a class="dropdown-item" href="#with <3">Made with <i class="fa fa-heart" style="color:red;"></i>&nbsp; </a>
+                    </ul>
+                </li>
+                <li class="nav-item d-md-none">
+                        <a class="nav-link" href="{% url 'user_profile:user_profile' username=user.username %}"><i class="fa fa-user"></i>&nbsp; Profile</a>
+                        </li>
+                        <li class="nav-item d-md-none">
+                        <a class="nav-link" href="{% url 'settings:settings' %}"><i class="nc-icon nc-settings"></i>&nbsp; Settings</a>
+                        </li>
+                        <li class="nav-item d-md-none">
+
+                        <a class="nav-link" href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out"></i>&nbsp; Logout</a>
+                        </li>
+                        <li class="nav-item d-md-none">
+                        <a class="nav-link" href="#with <3">Made with <i class="fa fa-heart" style="color:red;"></i>&nbsp; </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

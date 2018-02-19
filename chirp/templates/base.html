@@ -465,4 +465,11 @@ initPhotoSwipeFromDOM('.my-gallery');
     {% block post_add_js %}
         <!-- Add js here for adding posts -->
     {% endblock post_add_js %}
+
+<script>
+    $('#postAddButton').click(function () {
+        $(window).scrollTop(0);
+        $('#postAddModal').modal('show');
+    });
+</script>
 </html>
