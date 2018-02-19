@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 from posts.models import Post
 from .decorators import ajax_required
+from posts.forms import PostMediaFormSet, PostForm
 # Create your views here.
 @login_required
 def search(request):
@@ -24,11 +25,15 @@ def search(request):
         
         count = {}
         results = {}
-        results['posts'] = Post.objects.filter(text__icontains=querystring)
-        results['users'] = User.objects.filter(
-            Q(username__icontains=querystring) | Q(
-                first_name__icontains=querystring) | Q(
-                    last_name__icontains=querystring))
+        results['posts'] = Post.objects.none()
+        queries = querystring.split()
+        for query in queries:
+            results['posts'] = results['posts'] | (Post.objects.filter(
+                text__icontains=query))
+            results['users'] = User.objects.filter(
+                Q(username__icontains=query) | Q(
+                    first_name__icontains=query) | Q(
+                        last_name__icontains=query))
         count['posts'] = results['posts'].count()
         count['users'] = results['users'].count()
 
@@ -37,7 +42,9 @@ def search(request):
             'querystring': querystring,
             'active': search_type,
             'count': count,
-            'results': results[search_type],        
+            'results': results[search_type],
+            'mediaformset': PostMediaFormSet(),
+            'post_form': PostForm(),       
         })
     else:
         return render(request, 'search/search.html', {'hide_search': True})

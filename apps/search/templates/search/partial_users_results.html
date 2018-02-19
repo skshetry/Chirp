@@ -1,5 +1,5 @@
 {%load static%}
-<p class="font-italic">You searched for user "<strong>{{querystring}}</strong>" </p>
+<!-- <p class="font-italic">You searched for user "<strong>{{querystring}}</strong>" </p> -->
 {% if results %}
   <ul class="users-results">
     {% for user_result in results %}
@@ -17,5 +17,5 @@
     {% endfor %}
   </ul>
 {% else %}
-  <h4 class="no-result">Sorry!Couldn't find user for you :(</h4>
+  <h4 class="no-result">NOO!!!<br>Does that name even exists 😃😄😅</h4>
 {% endif %}

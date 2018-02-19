@@ -448,6 +448,20 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 // execute above function
 initPhotoSwipeFromDOM('.my-gallery');
 </script>
+{% if user.is_authenticated %}
+<script>
+    $('.has-clear input[type="text"]').on('input propertychange', function() {
+    var $this = $(this);
+    var visible = Boolean($this.val());
+    $this.siblings('.form-control-clear').toggleClass('hidden', !visible);
+    }).trigger('propertychange');
+
+    $('.form-control-clear').click(function() {
+    $(this).siblings('input[type="text"]').val('')
+        .trigger('propertychange').focus();
+    });
+</script>
+{%endif%}
     {% block post_add_js %}
         <!-- Add js here for adding posts -->
     {% endblock post_add_js %}

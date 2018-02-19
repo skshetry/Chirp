@@ -1,5 +1,7 @@
 {% extends 'base.html' %} 
 {%load static %}
+{% load trendings_tag %}
+{% load follow_user_tag %}
 {%block title%}Search{%endblock%}
 {%block stylesheet%}
 <link href="{% static 'css/search.css' %}" rel="stylesheet"> 
@@ -12,16 +14,66 @@
   <div class="row justify-content-center">
     <div class="col-md-8 offset-md-2 text-center">
       <h4>Search Posts and Users</h4>
-      <form role="search" action="{% url 'search:search' %}">
-        <div class="input-group">
-          <input type="text" class="form-control input-lg" name="q" placeholder="Search">
-          <button type="submit"><i class="fa fa-search"  style="font-size:large;"></i></button>
-        </div>
-      </form>
     </div>
   </div>
 </div>
-<style>
+<div class="row results">
+  {% follow_user_tag user as follow_users%}
+  <div class="col-md-3 col-sm-6">
+    <div class="card card-with-shadow">
+      <div class="card-body">
+        <a id="follow_friends"><h5 class="card-title">Who to follow &middot; <small><a href="javascript: void(0);" class="link-info">View all</a></small></h5>
+      </a>
+      <div class="accounts-suggestion">
+        <ul class="list-unstyled">
+          {% for follow_user in follow_users %}
+          <li class="account">
+            <div class="row">
+              <div class="col-md-3"><a href="{% url 'user_profile:user_profile' follow_user.username %}">
+                <div class="avatar">
+                  <img src="{% if follow_user.user_details.profile_photo %} {{ follow_user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                </div>
+              </a>
+             </div>
+            <div class="col-md-7 description-section">
+              <a href="{% url 'user_profile:user_profile' username=follow_user.username %}" class="text-muted">{{follow_user.first_name}} {{follow_user.last_name}} @{{follow_user.username}}</a></span>
+              <br />
+              {% comment %} <span class="text-muted"><small>Followed by <a href="#paper-kit" class="link-info">@banks</a> and <a href="#paper-kit" class="link-info">@rihanna</a> </small></span> {% endcomment %}
+            </div>
+            
+            <div class="col-md-2 follow">
+              <a href="{% url 'user_profile:follow_user' username=follow_user.username %}"><i class="fa fa-user-plus"></i></a>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div> 
+  </div>
+</div> <!-- end card -->
+<div class="col-md-6">
+  <p>You can search for your favourite post or any of close friends on the search bar above!!!</p>
+</div>
 
+<div class="col-md-3">
+  {% trendings_tag as trending %}
+  <div class="card card-with-shadow">
+    <div class="card-body">
+      <h5 class="card-title">Trends &middot; <!--<small><a href="javascript: void(0);" class="link-info">Change</a></small>--></h5>
+      <div class="hashtag-suggestions">
+        <ul class="list-unstyled">
+          {% for trend in trending %}
+          <li><a href="{% url 'search:search' %}?q=%23{{trend.tag}}" class="link-danger">#{{trend.tag}}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      
+    </div>
+  </div> 
+</div>
+
+<style>
+  
 </style>
 {%endblock content%}
