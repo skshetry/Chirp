@@ -4,7 +4,7 @@
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-floating btn-outline-default btn-primary btn-round" data-toggle="modal" data-target="#postAddModal">
+<button type="button" id="postAddButton" class="btn btn-floating btn-outline-default btn-primary btn-round" data-toggle="modal">
     <i class="fa fa-pencil-square-o"></i>Add Post</button>
 </button>
 <!-- Modal -->
@@ -46,9 +46,13 @@
     textarea {
         resize: none;
     }
+    .modal-body {
+        max-height: calc(100vh - 300px);
+        overflow-y: auto;
+    }
     </style>
     
-<div class="modal fade" id="postAddModal" tabindex="-1" role="dialog" aria-labelledby="postAddModalLabel" aria-hidden="true">
+<div class="modal fade" id="postAddModal" tabindex="-1" role="dialog" data-backdrop="false" aria-labelledby="postAddModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
