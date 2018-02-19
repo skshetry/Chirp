@@ -89,7 +89,7 @@
        </a>
        {% endif %}
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" class="">
-              <a class="dropdown-item btn {%if post|check_shared_posts:user %}btn-danger {% endif %} btn-link like-click" href="{% url 'posts:share' post.id %}">Share post</a>
+              <a class="dropdown-item btn {%if post|check_shared_posts:user %}btn-danger {% endif %} btn-link normal-share-click" href="{% url 'posts:share' post.id %}">Share post</a>
               <a class="dropdown-item btn {%if post|check_shared_posts:user %}btn-danger {% endif %} btn-link share-click" href="{% url 'posts:share' post.id %}">Share with quote</a>
           </ul>
         </span>

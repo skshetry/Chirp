@@ -44,11 +44,12 @@ def create_feed_for_following_users(sender, instance, created, **kwargs):
         # if mentioned show that post to all
         import re
         mention_regex = r'@(?P<tag>[\w\d-]+)'
-        mentions = re.findall(mention_regex, instance.text)
-        for mention in mentions:
-            _user = User.objects.filter(username__iexact=mention)
-            if _user.exists():
-                for user_details in _user.get().user_details.followed_by.all():
-                    Feed.objects.create(
-                        post=instance, user=user_details.user,
-                    )
+        if instance.text:
+            mentions = re.findall(mention_regex, instance.text)
+            for mention in mentions:
+                _user = User.objects.filter(username__iexact=mention)
+                if _user.exists():
+                    for user_details in _user.get().user_details.followed_by.all():
+                        Feed.objects.create(
+                            post=instance, user=user_details.user,
+                        )
