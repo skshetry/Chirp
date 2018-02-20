@@ -60,6 +60,7 @@
                     <i class="fa fa-pencil-square-o"></i>
                     Add Post
                 </h5>
+                <i>[[remainingChars]]</i>
                 <button type="button" class="close" id="close-post-btn" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -78,7 +79,7 @@
                             {{ post_form.non_field_errors.as_text }}
                         </div>
                     {% endif %}
-                    <textarea class="form-control" id="id_text" name="text" maxlength="140" type="text" placeholder="Status" cols="33" rows="5" required></textarea>
+                    <textarea class="form-control" id="id_text" name="text" maxlength="140" type="text" placeholder="Status" cols="33" rows="5" required v-model="post_text">[[post_text]]</textarea>
                     {{ post_form.text.errors }}
                     <div class="share-form">
                                             </div>
@@ -122,5 +123,21 @@
         </div>
     </div>
 </div>
+<script>
+    var app1 = new Vue({
+        el: '#postAddModal',
+        delimiters: ['[[', ']]'],
+        data: {
+            post_text: '',
+        },
+        computed: {
+            remainingChars: function(){
+                var length = 140 - this.post_text.length;
+                console.log(length);
+                return length;
+            }
+        }
+    })
+</script>
 
 
