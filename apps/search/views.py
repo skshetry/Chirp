@@ -5,11 +5,14 @@ from django.http import HttpResponse
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 
 from posts.models import Post
-from .decorators import ajax_required
 from posts.forms import PostMediaFormSet, PostForm
-# Create your views here.
+
+from .decorators import ajax_required
+
+
 @login_required
 def search(request):
     if 'q' in request.GET:
@@ -34,6 +37,14 @@ def search(request):
                 Q(username__icontains=query) | Q(
                     first_name__icontains=query) | Q(
                         last_name__icontains=query))
+
+        # full text search
+        query = SearchQuery(querystring)
+        vector = SearchVector('text')
+
+        result_fulltext = Post.objects.annotate(rank=SearchRank(vector, query)).filter(rank__gte=0.0001).order_by('-rank')
+        results['posts'] = result_fulltext | results['posts']
+
         count['posts'] = results['posts'].count()
         count['users'] = results['users'].count()
 
