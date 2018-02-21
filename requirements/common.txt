@@ -3,10 +3,11 @@ Django==1.11.9
 # Configuration
 django-environ==0.4.4
 six==1.11.0
-django-silk==2.0.0
 # Time zones support
 pytz==2017.3
-
+django-debug-toolbar==1.9.1
+django-debug-toolbar-template-profiler==1.0.2
+django-debug-toolbar-template-timings==0.8
 # Python-PostgreSQL Database Adapter
 psycopg2==2.7.3.2
 
