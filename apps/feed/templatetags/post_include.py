@@ -48,7 +48,12 @@ def posts_from_feed(user):
         When(likes__username__in=user.username, then=True),
         default=Value(False),
         output_field=BooleanField(),
-    )).annotate(shared_count=Count('post_shared')).order_by('-created')[:100]
+    )).annotate(shared=Case(
+        When(post_shared__user__username__in=user.username, then=True),
+        When(shared_post__user__username__in=user.username, then=True),
+        default=Value(False),
+        output_field=BooleanField(),
+    )).annotate(shared_count=Count('post_shared')).order_by('-created')
 
 @register.simple_tag
 def media_posts(post):
@@ -58,6 +63,11 @@ def media_posts(post):
 def posts_from_users_profile(user):
     return get_all_posts().filter(user=user).annotate(post_liked=Case(
         When(likes__username__in=user.username, then=True),
+        default=Value(False),
+        output_field=BooleanField(),
+    )).annotate(shared=Case(
+        When(post_shared__user__username__in=user.username, then=True),
+        When(shared_post__user__username__in=user.username, then=True),
         default=Value(False),
         output_field=BooleanField(),
     )).annotate(shared_count=Count('post_shared')).order_by('-created')

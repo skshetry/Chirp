@@ -48,7 +48,12 @@ def search(request):
                             When(likes__username__in=request.user.username, then=True),
                             default=Value(False),
                             output_field=BooleanField(),
-                            )).annotate(rank=SearchRank(vector, query)).filter(rank__gte=0.0001).order_by('-rank')
+                            )).annotate(shared=Case(
+                                When(post_shared__user__username__in=request.user.username, then=True),
+                                When(shared_post__user__username__in=request.user.username, then=True),
+                                default=Value(False),
+                                output_field=BooleanField(),
+                                )).annotate(rank=SearchRank(vector, query)).filter(rank__gte=0.0001).order_by('-rank')
 
         results['posts'] = result_fulltext | results['posts']
 
