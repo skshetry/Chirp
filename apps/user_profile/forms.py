@@ -65,10 +65,8 @@ class ProfilePhotoForm(forms.ModelForm):
         image = Image.open(clean_image_file)
         cropped_image = image.crop((x, y, w+x, h+y))
         resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
-        resized_image.format = image.format
-        resized_image.name = photo.profile_photo.name
-        fh = storage.open(resized_image.name, "w")
-        format = resized_image.format
+        fh = storage.open(photo.profile_photo.name, "w")
+        format = 'jpeg'
         resized_image.save(fh, format)
         fh.close()
 
@@ -101,10 +99,8 @@ class CoverPhotoForm(forms.ModelForm):
         image = Image.open(clean_image_file)
         cropped_image = image.crop((x, y, w+x, h+y))
         resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
-        resized_image.format = image.format
-        resized_image.name = photo.cover_photo.name
-        fh = storage.open(resized_image.name, "w")
-        format = resized_image.format
+        fh = storage.open(photo.cover_photo.name, "w")
+        format = image.format
         resized_image.save(fh, format)
         fh.close()
 
