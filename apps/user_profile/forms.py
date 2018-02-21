@@ -69,7 +69,6 @@ class ProfilePhotoForm(forms.ModelForm):
         new_image_io = BytesIO()
         resized_image.save(new_image_io, format='JPEG')
         temp_name = photo.profile_photo.name
-        photo.profile_photo.delete(save=False)
         photo.profile_photo.save(
             temp_name,
             content=ContentFile(new_image_io.getvalue()),
@@ -112,7 +111,6 @@ class CoverPhotoForm(forms.ModelForm):
         new_image_io = BytesIO()
         resized_image.save(new_image_io, format='JPEG')
         temp_name = photo.cover_photo.name
-        photo.cover_photo.delete(save=False)
         photo.cover_photo.save(
             temp_name,
             content=ContentFile(new_image_io.getvalue()),
