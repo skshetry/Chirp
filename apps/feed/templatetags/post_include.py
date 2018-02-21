@@ -1,7 +1,9 @@
 from django import template
 
-from django.db.models import Count
+from django.db.models import Count, Case, When, Value, BooleanField
 from posts.models import Post
+
+
 
 
 register = template.Library()
@@ -13,19 +15,19 @@ def post_include(post, user):
 def get_all_posts():
         return Post.objects.prefetch_related(
         'posts_media'
-        ).select_related(
+        ).prefetch_related(
                 'user__user_details'
-                ).select_related(
+                ).prefetch_related(
                     'shared_post'
-                    ).select_related(
+                    ).prefetch_related(
                         'shared_post__user'
-                        ).select_related(
+                        ).prefetch_related(
                             'parent'
-                            ).select_related(
+                            ).prefetch_related(
                                 'parent__user'
                                 ).prefetch_related(
                                     'parent__posts_media'
-                                    ).select_related(
+                                    ).prefetch_related(
                                         'parent__user__user_details'
                                         ).prefetch_related(
                                             'post_childs'
@@ -42,8 +44,11 @@ def get_all_posts():
 
 @register.simple_tag
 def posts_from_feed(user):
-    return get_all_posts().filter(feed__user=user).annotate(shared_count=Count('post_shared')).order_by('-created')
-
+    return get_all_posts().filter(feed__user=user).annotate(post_liked=Case(
+        When(likes__username__in=user.username, then=True),
+        default=Value(False),
+        output_field=BooleanField(),
+    )).annotate(shared_count=Count('post_shared')).order_by('-created')[:100]
 
 @register.simple_tag
 def media_posts(post):
@@ -51,5 +56,9 @@ def media_posts(post):
 
 @register.simple_tag
 def posts_from_users_profile(user):
-    return get_all_posts().filter(user=user).annotate(shared_count=Count('post_shared')).order_by('-created')
+    return get_all_posts().filter(user=user).annotate(post_liked=Case(
+        When(likes__username__in=user.username, then=True),
+        default=Value(False),
+        output_field=BooleanField(),
+    )).annotate(shared_count=Count('post_shared')).order_by('-created')
 
