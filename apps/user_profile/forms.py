@@ -5,8 +5,6 @@ from django.contrib.auth.models import User
 from .models import User_details
 from django.core.files.storage import default_storage as storage
 from datetime import date
-from io import BytesIO
-
 
 class UserForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control border-input', 'placeholder': 'First Name'}))
@@ -74,7 +72,7 @@ class ProfilePhotoForm(forms.ModelForm):
         resized_image.save(fh, format)
         fh.close()
 
-        return photo
+        return resized_image
 
 
 class CoverPhotoForm(forms.ModelForm):
@@ -110,4 +108,4 @@ class CoverPhotoForm(forms.ModelForm):
         resized_image.save(fh, format)
         fh.close()
 
-        return photo
+        return resized_image
