@@ -1,0 +1,26 @@
+.results ul {
+    padding: 0;
+}
+
+.results ul li {
+    list-style: none;
+    padding: .8em .4em;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.results ul li:last-child {
+    border-bottom: none;
+}
+.results {
+    margin-top: 1em;
+}
+.search{
+    padding-left:0;
+}
+body { padding-top: 70px; }
+
+.navbar
+{
+  background:#3eaa5d !important;
+  padding-top:0px !important; padding-bottom:0px !important;
+}

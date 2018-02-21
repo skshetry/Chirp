@@ -2,10 +2,12 @@ import json
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.db.models import Q
+from django.db.models import Count, Case, When, Value, BooleanField, Q
+
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+
 
 from posts.models import Post
 from posts.forms import PostMediaFormSet, PostForm
@@ -42,7 +44,12 @@ def search(request):
         query = SearchQuery(querystring)
         vector = SearchVector('text')
 
-        result_fulltext = Post.objects.annotate(rank=SearchRank(vector, query)).filter(rank__gte=0.0001).order_by('-rank')
+        result_fulltext = Post.objects.annotate(post_liked=Case(
+                            When(likes__username__in=request.user.username, then=True),
+                            default=Value(False),
+                            output_field=BooleanField(),
+                            )).annotate(rank=SearchRank(vector, query)).filter(rank__gte=0.0001).order_by('-rank')
+
         results['posts'] = result_fulltext | results['posts']
 
         count['posts'] = results['posts'].count()
