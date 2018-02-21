@@ -45,7 +45,6 @@ if settings.DEBUG:
         urlpatterns += [
             url(r'^__debug__/', include(debug_toolbar.urls)),
         ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-        urlpatterns += [url(r'^silk/', include('silk.urls', namespace='silk'))]
 
 handler404 = 'apps.errors.views.not_found'
 handler500 = 'apps.errors.views.server_error'

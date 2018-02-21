@@ -55,7 +55,6 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     # Add third party apps here.
-        'silk',
 ]
 
 LOCAL_APPS = [
@@ -89,7 +88,6 @@ DJANGO_MIDDLEWARE = [
 
 THIRD_PARTY_MIDDLEWARE = [
     # Add third party middleware here
-        'silk.middleware.SilkyMiddleware',
 ]
 
 MIDDLEWARE = DJANGO_MIDDLEWARE + THIRD_PARTY_MIDDLEWARE
@@ -266,5 +264,3 @@ MEDIA_URL = '/media/'
 ADMIN_URL = r'^admin/'
 
 LOGIN_REDIRECT_URL = 'feeds:home'
-SILKY_AUTHENTICATION = True  # User must login
-SILKY_AUTHORISATION = True  # User must have permissions
