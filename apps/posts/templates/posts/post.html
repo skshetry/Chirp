@@ -81,7 +81,7 @@
       <span class="dropdown">
         {% if post.shared_post %}
           <a href="" class="btn {%if post.shared %}btn-danger {% endif %} btn-link" data-toggle="dropdown">
-              <i class="fa fa-share-alt"></i> <i class="like-count">{{post.shared_post.shared_count}}</i>
+              <i class="fa fa-share-alt"></i> <i class="like-count">{{post.shared_count}}</i>
          </a>
          {% else %}
          <a href="" class="btn {%if post.shared %}btn-danger {% endif %} btn-link share-count" data-toggle="dropdown">
