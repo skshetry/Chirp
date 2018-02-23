@@ -9,14 +9,14 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['text', 'shared_post']
 
-    def save(self, user, shared_post_id=None, parent_id=None,commit=True, *args, **kwargs):
-        instance = super().save(commit=False,)
+    def save(self, user, shared_post_id=None, parent_id=None, commit=True, *args, **kwargs):
+        instance = super().save(commit=False, )
         instance.user = user
         if shared_post_id:
             post = Post.objects.get(pk=shared_post_id)
             if post.shared_post:
-                    instance.shared_post = post.shared_post
-                    instance.parent = post.shared_post.parent
+                instance.shared_post = post.shared_post
+                instance.parent = post.shared_post.parent
             else:
                 instance.shared_post = post
                 instance.parent = post.parent
@@ -28,8 +28,8 @@ class PostForm(forms.ModelForm):
             instance.save()
         return instance
 
-    def clean(self,*args,**kwargs):
-        super().clean(*args,**kwargs)
+    def clean(self, *args, **kwargs):
+        super().clean(*args, **kwargs)
         if len(self.cleaned_data.get('text')) > 140:
             raise ValidationError("Character limit exceeded. Posts should be less than 140 characters.")
 
@@ -49,4 +49,4 @@ PostMediaFormSet = modelformset_factory(
     fields=('media',),
     extra=0,
     formset=BasePostMediaFormSet
-    )
+)

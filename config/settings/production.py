@@ -19,17 +19,15 @@ from .common import *
 # Raises ImproperlyConfigured exception if DJANGO_SECRET_KEY not in os.environ
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
-
 # raven sentry client
 # See https://docs.sentry.io/clients/python/integrations/django/
-INSTALLED_APPS += ['gunicorn', 'raven.contrib.django.raven_compat',]
+INSTALLED_APPS += ['gunicorn', 'raven.contrib.django.raven_compat', ]
 
 RAVEN_MIDDLEWARE = [
     'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
-      ]
+]
 MIDDLEWARE = RAVEN_MIDDLEWARE + MIDDLEWARE
-
 
 # Sentry Configuration
 SENTRY_DSN = env('DJANGO_SENTRY_DSN')
@@ -80,7 +78,6 @@ RAVEN_CONFIG = {
 # properly on Heroku.
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-
 # SECURITY CONFIGURATION
 # ------------------------------------------------------------------------------
 # See https://docs.djangoproject.com/en/dev/ref/middleware/#module-django.middleware.security
@@ -116,17 +113,18 @@ DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL',
 EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[test]')
 SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
+
 def show_toolbar_for_admin(request):
     if request.user.is_authenticated():
         return request.user.is_staff
     else:
         return False
 
+
 DEBUG_TOOLBAR_PANELS = [
-        'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
 
 ]
-
 
 DEBUG_TOOLBAR_CONFIG = {
     'DISABLE_PANELS': [
@@ -145,12 +143,11 @@ DEBUG_TOOLBAR_CONFIG = {
         'debug_toolbar.panels.redirects.RedirectsPanel',
         'template_timings_panel.panels.TemplateTimings.TemplateTimings',
         'template_profiler_panel.panels.template.TemplateProfilerPanel',
-        ],
+    ],
     'SHOW_TEMPLATE_CONTEXT': True,
     'SHOW_TOOLBAR_CALLBACK': show_toolbar_for_admin
 
 }
-
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -181,7 +178,7 @@ CACHES = {
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
             'IGNORE_EXCEPTIONS': True,  # mimics memcache behavior.
-                                        # http://niwinz.github.io/django-redis/latest/#_memcached_exceptions_behavior
+            # http://niwinz.github.io/django-redis/latest/#_memcached_exceptions_behavior
         }
     }
 }
@@ -198,7 +195,6 @@ BACKBLAZEB2_BUCKET_NAME_MEDIA = env('DJANGO_BACKBLAZE_B2_BUCKET_NAME_MEDIA')
 
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = env('DJANGO_SENDGRID_EMAIL_PASSWORD')
-
 
 DEFAULT_FILE_STORAGE = 'config.storage.MediaStorage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

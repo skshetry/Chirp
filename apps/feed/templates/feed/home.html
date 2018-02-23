@@ -90,7 +90,7 @@
                                                                 </a>
                                                             </div>
                                                             <div class="col-md-7 description-section">
-                                                                    <a href="{% url 'user_profile:user_profile' username=follow_user.username %}" class="text-muted">{{follow_user.first_name}} {{follow_user.last_name}} @{{follow_user.username}}</a></span>
+                                                                    <a href="{% url 'user_profile:user_profile' username=follow_user.username %}" class="text-muted">{{follow_user.first_name}} {{follow_user.last_name}} @{{follow_user.username}}</a>
                                                                 <br />
                                                                 {% comment %} <span class="text-muted"><small>Followed by <a href="#paper-kit" class="link-info">@banks</a> and <a href="#paper-kit" class="link-info">@rihanna</a> </small></span> {% endcomment %}
                                                             </div>
@@ -191,7 +191,7 @@
             event.preventDefault();
             var clicked = $(this);
 
-            var share_count_btn = $(this).closest('.dropdown-menu').siblings()
+            var share_count_btn = $(this).closest('.dropdown-menu').siblings();
             share_count_btn.toggleClass('btn-danger');
             $(share_count_btn).blur(); 
             var like_count = parseInt($(share_count_btn, '.like-count').text());
@@ -201,14 +201,14 @@
                 success: function(response){
                     if(response.done == true && !isNaN(like_count)){
                         $(share_count_btn).find('.like-count').text(++like_count);
-                        console.log('inside plus')
+                        console.log('inside plus');
                         if($(share_count_btn).hasClass('btn-danger') != false){
                             $(share_count_btn).addClass('btn-danger');
                         }
                 }
                 else if(response.done == false && !isNaN(like_count)){
                     $(share_count_btn).find('.like-count').text(--like_count);
-                    console.log('inside minus')
+                    console.log('inside minus');
                     if($(share_count_btn).hasClass('btn-danger') == false){
                         $(share_count_btn).removeClass('btn-danger');
                     }
@@ -229,7 +229,7 @@
             $('.media-forms').hide();
             $('.dropdown-menu').toggle();
             $('#postAddModal').modal('show');
-        })
+        });
 
         $('.reply-click').click(function(event){
             event.preventDefault();
@@ -240,7 +240,7 @@
             $(".like-click").blur(); 
             $('#reply-post-input-id').val(reply_post_id);
             $('#postAddModal').modal('show');
-        })
+        });
         $('#close-post-btn').click(function(event){
             // do post cleanup
             $('.share-form').html('');
@@ -249,7 +249,7 @@
             $('#reply-post-input-id').val('');
             $('#addmedia').show();
             $('.media-forms').show();
-        })
+        });
         function y(){
             $.ajax({
                 url: location.href+'new-feed/'+$('.tweets .media').attr('postid'),
@@ -269,7 +269,7 @@
                     setTimeout(y, 10000)
                   },
             });
-        };
+        }
         function show_new_posts(){
         var data = response_data.data;
                         for(var i=response_data.data.length; i!=0;i--){
@@ -296,15 +296,14 @@
                             new_post.find('.dont-run').toggleClass('dont-run');
                         }
                         $('.show-more-btn').hide();
-                    };
-
+        }
         function updatetime(){
             $('.date_created_value').each(function(){
                         var time = $(this).attr('value');
                         $(this).find('.natural-date').not('.dont-run').text(moment(time).fromNow());
                         });
                         setTimeout(updatetime, 30000);
-                    };
+        }
         y();
         updatetime();
 
