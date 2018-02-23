@@ -97,7 +97,7 @@
                                 {% for post in posts %}
                                 <div class="container h-100 d-flex justify-content-center">
                                     <div class="row">
-                                    {% post_include post user%}
+                                        {% include 'posts/post.html' with post=post user=user %}
                                     </div>
                                 </div>
 
