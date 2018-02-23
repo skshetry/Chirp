@@ -14,7 +14,7 @@ class SignUpForm(UserCreationForm):
                 'class': 'form-control',
                 'placeholder': 'First name',
                 'required': 'required',
-                }
+            }
         ))
     last_name = forms.CharField(
         max_length=30, required=True,
@@ -23,23 +23,21 @@ class SignUpForm(UserCreationForm):
                 'class': 'form-control',
                 'placeholder': 'Last Name',
                 'required': 'required',
-                }
+            }
         ))
     email = forms.EmailField(
         max_length=254,
         widget=forms.TextInput(
             attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Email',
-                    'required': 'required',
-                    }
+                'class': 'form-control',
+                'placeholder': 'Email',
+                'required': 'required',
+            }
         ))
-
-   
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2',)
 
 
 class CustomUserAuthenticationForm(AuthenticationForm):
@@ -70,4 +68,4 @@ class CustomUserAuthenticationForm(AuthenticationForm):
     AuthenticationForm.error_messages['inactive'] = _(
         "The email has not been verified. Please check your email\
         for verification link."
-        )
+    )

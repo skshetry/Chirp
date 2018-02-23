@@ -7,6 +7,8 @@ from posts.forms import PostForm, PostMediaFormSet
 from .models import User_details
 
 User_model = get_user_model()
+
+
 @login_required
 def user_profile(request, username=None):
     """The User Profile page view."""
@@ -16,12 +18,13 @@ def user_profile(request, username=None):
     if User.objects.filter(username=username).exists():
         user = User.objects.select_related('user_details').prefetch_related('post_set').get(username=username)
         return render(request, "user_profile.html", {
-                "profile_user": user,
-                "mediaformset": media_form_set,
-                "post_form": post_form,
-            })
+            "profile_user": user,
+            "mediaformset": media_form_set,
+            "post_form": post_form,
+        })
     else:
-        return ("User not found")
+        return "User not found"
+
 
 @login_required
 def follow_user(request, username=None):

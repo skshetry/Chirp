@@ -11,8 +11,10 @@ from .models import User_details
 
 
 class UserForm(forms.ModelForm):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control border-input', 'placeholder': 'First Name'}))
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control border-input', 'placeholder': 'First Name'}))
+    first_name = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control border-input', 'placeholder': 'First Name'}))
+    last_name = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'form-control border-input', 'placeholder': 'First Name'}))
 
     class Meta:
         model = User
@@ -20,17 +22,20 @@ class UserForm(forms.ModelForm):
 
 
 class UserDetailsForm(forms.ModelForm):
-    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control textarea-limited border-input', 'rows': '3', 'maxlength': '140'}), required=False)
+    bio = forms.CharField(widget=forms.Textarea(
+        attrs={'class': 'form-control textarea-limited border-input', 'rows': '3', 'maxlength': '140'}), required=False)
     gender = forms.CharField(
         max_length=2,
         widget=forms.Select(choices=User_details.GENDER_CHOICES),
         required=False
     )
-    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'class': 'datetimepicker form-control'}), required=False)
+    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'class': 'datetimepicker form-control'}),
+                                    required=False)
+
     class Meta:
         model = User_details
         fields = ('bio', 'gender', 'date_of_birth')
-    
+
     def clean_image(self, photo_name):
         image_file = photo_name
         if not image_file.name.endswith('.jpg'):
@@ -51,11 +56,11 @@ class ProfilePhotoForm(forms.ModelForm):
     DIMENSIONS = (200, 200)
 
     class Meta:
-            model = User_details
-            fields = ('profile_photo', 'profile_x', 'profile_y', 'profile_height', 'profile_width')
-            widgets = {
-                'profile_photo': forms.FileInput(attrs={'accept': 'image/jpeg'})
-            }
+        model = User_details
+        fields = ('profile_photo', 'profile_x', 'profile_y', 'profile_height', 'profile_width')
+        widgets = {
+            'profile_photo': forms.FileInput(attrs={'accept': 'image/jpeg'})
+        }
 
     def save(self):
         photo = super(ProfilePhotoForm, self).save()
@@ -66,7 +71,7 @@ class ProfilePhotoForm(forms.ModelForm):
 
         clean_image_file = UserDetailsForm.clean_image(self, photo.profile_photo)
         image = Image.open(clean_image_file)
-        cropped_image = image.crop((x, y, w+x, h+y))
+        cropped_image = image.crop((x, y, w + x, h + y))
         resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
         new_image_io = BytesIO()
         resized_image.save(new_image_io, format='JPEG')
@@ -93,11 +98,11 @@ class CoverPhotoForm(forms.ModelForm):
     DIMENSIONS = (1357, 334)
 
     class Meta:
-            model = User_details
-            fields = ('cover_photo', 'cover_x', 'cover_y', 'cover_height', 'cover_width')
-            widgets = {
-                'cover_photo': forms.FileInput(attrs={'accept': 'image/jpeg'})
-            }
+        model = User_details
+        fields = ('cover_photo', 'cover_x', 'cover_y', 'cover_height', 'cover_width')
+        widgets = {
+            'cover_photo': forms.FileInput(attrs={'accept': 'image/jpeg'})
+        }
 
     def save(self):
         photo = super(CoverPhotoForm, self).save()
@@ -108,7 +113,7 @@ class CoverPhotoForm(forms.ModelForm):
 
         clean_image_file = UserDetailsForm.clean_image(self, photo.cover_photo)
         image = Image.open(clean_image_file)
-        cropped_image = image.crop((x, y, w+x, h+y))
+        cropped_image = image.crop((x, y, w + x, h + y))
         resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
         new_image_io = BytesIO()
         resized_image.save(new_image_io, format='JPEG')
