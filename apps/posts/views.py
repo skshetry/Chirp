@@ -1,7 +1,6 @@
-from django.shortcuts import render, reverse, redirect
-
-from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.shortcuts import render, reverse, redirect
 
 from .forms import PostForm, PostMediaFormSet
 from .models import Post

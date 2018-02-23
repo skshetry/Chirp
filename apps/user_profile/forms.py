@@ -1,12 +1,14 @@
-from PIL import Image
-from django import forms
-from django.core.files import File
-from django.contrib.auth.models import User
-from .models import User_details
-from django.core.files.storage import default_storage as storage
 from datetime import date
 from io import BytesIO
+
+from PIL import Image
+from django import forms
+from django.contrib.auth.models import User
+from django.core.files.storage import default_storage as storage
 from django.core.files.base import ContentFile
+
+from .models import User_details
+
 
 class UserForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control border-input', 'placeholder': 'First Name'}))

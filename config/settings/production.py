@@ -10,10 +10,6 @@ Production settings for test project.
 
 
 """
-import logging
-import os
-import raven
-
 
 from .common import *
 

@@ -1,10 +1,9 @@
 '''
 Tests for search app
 '''
-from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
-from django.http import HttpResponseBadRequest
 from django.core.urlresolvers import reverse
+from django.test import TestCase, Client
 
 
 # Create your tests here.

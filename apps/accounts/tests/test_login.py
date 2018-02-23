@@ -1,13 +1,12 @@
 """Tests for accounts app."""
-from django.test import TestCase
-from django.shortcuts import reverse
-from django.conf import settings
-from django.contrib import auth
-
-from django.contrib.auth.models import User
-
 from accounts.forms import CustomUserAuthenticationForm
 from accounts.forms import SignUpForm
+from django.conf import settings
+from django.contrib import auth
+from django.contrib.auth.models import User
+from django.shortcuts import reverse
+from django.test import TestCase
+
 
 # Create your tests here.
 

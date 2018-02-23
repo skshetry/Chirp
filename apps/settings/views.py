@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from user_profile.forms import UserDetailsForm, UserForm
 from django.contrib import messages
-from django.contrib.auth import forms
-from django.db import transaction
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db import transaction
+from django.shortcuts import render, redirect
 from user_profile.forms import ProfilePhotoForm, CoverPhotoForm
+from user_profile.forms import UserDetailsForm, UserForm
+
 
 def profile_photo_view(request):
     profile_photo_form = ProfilePhotoForm(request.POST, request.FILES, instance=request.user.user_details)

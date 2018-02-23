@@ -1,16 +1,14 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView
-
-from django.core import serializers
-from django.http import JsonResponse
-from django.core.serializers.json import DjangoJSONEncoder
 import json
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.serializers.json import DjangoJSONEncoder
+from django.db.models import F, Count
+from django.http import JsonResponse
+from django.views.generic import TemplateView
 from posts.forms import PostMediaFormSet, PostForm
 from posts.models import Post
-from django.db.models import F, Count
+
 
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'feed/home.html'
