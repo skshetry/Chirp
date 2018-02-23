@@ -1,10 +1,5 @@
 from django import template
 
-from django.contrib.auth.models import User
-
-from posts.models import Post
-
-
 register = template.Library()
 
 @register.filter(name='check_followed_user_already')

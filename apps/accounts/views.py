@@ -1,16 +1,14 @@
 """Views for :accounts: handling."""
-from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.views import LoginView
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import logout
 from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView
 from django.contrib.sites.shortcuts import get_current_site
-
-from django.http import HttpResponse
+from django.core.mail import EmailMessage
+from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from django.core.mail import EmailMessage
 
 from .forms import CustomUserAuthenticationForm as UserAuthenticationForm
 from .forms import SignUpForm

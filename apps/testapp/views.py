@@ -1,12 +1,12 @@
-from django.shortcuts import render
-from django.core.mail import send_mail
-from django.conf import settings
-from django.views.generic import TemplateView
-
 import logging
 import os
-from .models import Images, ImageUploadForm
+
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.shortcuts import render
+from django.views.generic import TemplateView
+
+from .models import Images, ImageUploadForm
 
 logger=logging.getLogger('raven')
 

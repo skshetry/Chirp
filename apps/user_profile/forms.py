@@ -1,10 +1,11 @@
+from datetime import date
+
 from PIL import Image
 from django import forms
-from django.core.files import File
 from django.contrib.auth.models import User
-from .models import User_details
 from django.core.files.storage import default_storage as storage
-from datetime import date
+
+from .models import User_details
 
 
 class UserForm(forms.ModelForm):

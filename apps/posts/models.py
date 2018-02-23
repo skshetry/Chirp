@@ -3,14 +3,11 @@ import random
 import re
 import uuid
 
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import signals, F
 from django.dispatch import receiver
-
 from django.utils import timezone
-
-from django.contrib.auth.models import User
-from django.utils.functional import cached_property
 
 from .model_validators import validate_file_extension_posts_media
 

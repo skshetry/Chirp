@@ -1,18 +1,11 @@
-import json
-
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.db.models import Count, Case, When, Value, BooleanField, Q, IntegerField
-
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
-
-
-from posts.models import Post
+from django.db.models import Count, Case, When, Value, BooleanField, Q, IntegerField
+from django.shortcuts import render, redirect
 from posts.forms import PostMediaFormSet, PostForm
-
-from .decorators import ajax_required
+from posts.models import Post
+from feed.templatetags.post_include import get_all_posts
 
 
 @login_required
@@ -33,8 +26,8 @@ def search(request):
         results['posts'] = Post.objects.none()
         queries = querystring.split()
         for query in queries:
-            results['posts'] = results['posts'] | (Post.objects.filter(
-                text__icontains=query))
+            results['posts'] = results['posts'] | get_all_posts().filter(
+                text__icontains=query)
             results['users'] = User.objects.filter(
                 Q(username__icontains=query) | Q(
                     first_name__icontains=query) | Q(
@@ -44,7 +37,7 @@ def search(request):
         query = SearchQuery(querystring)
         vector = SearchVector('text')
 
-        result_fulltext = Post.objects.annotate(
+        result_fulltext = get_all_posts().annotate(
             post_liked=Case(
                 When(likes=request.user, then=True),
                 default=Value(False),

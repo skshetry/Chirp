@@ -1,9 +1,7 @@
-from PIL import Image
-from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
-
+from django.shortcuts import render, redirect, get_object_or_404
 from posts.forms import PostForm, PostMediaFormSet
 
 from .models import User_details
