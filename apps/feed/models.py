@@ -17,18 +17,18 @@ def create_feed_for_following_users(sender, instance, created, **kwargs):
         # show my own posts
         Feed.objects.create(
             post=instance, user=instance.user
-            )
+        )
 
         # show post to all users that follow
         for user_details in instance.user.user_details.followed_by.all():
-            feed_post = Feed.objects.create(post=instance, user=user_details.user)
+            Feed.objects.create(post=instance, user=user_details.user)
 
         # show your post shared in feed
         if instance.shared_post:
             Feed.objects.create(
-                post = instance, user=instance.shared_post.user
+                post=instance, user=instance.shared_post.user
             )
-        #show replies on your own post
+        # show replies on your own post
         if instance.parent:
             Feed.objects.create(
                 post=instance, user=instance.parent.user,

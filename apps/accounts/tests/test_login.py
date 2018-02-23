@@ -84,7 +84,7 @@ class LoginPostTest(TestCase):
         self.assertTemplateUsed(response, 'base.html')
         self.assertTemplateUsed(response, 'accounts/login.html')
 
-        # Test that the redirect doesnot occur.
+        # Test that the redirect does not occur.
         # Redirect shouldn't occur after invalid login.
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(response.status_code, 302)
@@ -98,7 +98,7 @@ class LoginPostTest(TestCase):
         # Send post data to client.
         response = self.client.post(self.url, data)
 
-        # Test that the redirect doesnot occur.
+        # Test that the redirect does not occur.
         # Redirect occurs after successful login.
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(response.status_code, 302)
@@ -133,8 +133,8 @@ class LoginPostTest(TestCase):
         # Redirect occurs after successful login.
         self.assertRedirects(response, expected_url=reverse(
             settings.LOGIN_REDIRECT_URL
-            ), status_code=302
-                            )
+        ), status_code=302
+                             )
 
         # Test that the template is not used. Because, it must be a redirection.
         self.assertTemplateNotUsed(response, 'base.html')
@@ -156,7 +156,7 @@ class LoginPostTest(TestCase):
         }
 
         # Send post data to client.
-        response = self.client.post(self.url+'?next='+reverse('feeds:home'), data)
+        response = self.client.post(self.url + '?next=' + reverse('feeds:home'), data)
 
         # Test that the redirect doesnot occur.
         # Redirect occurs after successful login.
@@ -164,7 +164,7 @@ class LoginPostTest(TestCase):
             response,
             expected_url=reverse('feeds:home'),
             status_code=302
-            )
+        )
 
         # Test that the template isnot used. Because, it must be a redirection.
         self.assertTemplateNotUsed(response, 'base.html')
@@ -237,7 +237,7 @@ class UnverifiedEmailUsersLoginTest(TestCase):
             'mail@example.com',
             'bar',
             is_active=False
-            )
+        )
 
     def test_post_login(self):
         """Test login failure."""
@@ -277,12 +277,12 @@ class LogoutTest(TestCase):
             'hansolo',
             'hansolo@millienium.falcon',
             'princessleia'
-            )
+        )
         self.url = reverse('accounts:logout')
         self.client.login(
             username=self.user.username,
             password=self.user.password
-            )
+        )
         self.response = self.client.get(self.url)
 
     def test_logout_user_is_deauthenticated(self):
@@ -296,18 +296,16 @@ class LogoutTest(TestCase):
             self.response,
             expected_url=reverse('accounts:login'),
             status_code=302
-            )
+        )
+
 
 class SignupGetTest(TestCase):
-
     """Tests the signup view `GET`."""
 
     def setUp(self):
         """Set things up for testing signup functionality."""
         self.url = reverse('accounts:signup')
         self.response = self.client.get(self.url)
-
-
 
     def test_csrf(self):
         """Test for csrf token."""
@@ -328,11 +326,11 @@ class SignupGetTest(TestCase):
         self.assertTemplateUsed(self.response, 'base.html')
 
         # unable to link, need assistance
+
     def test_contains_login_link(self):
         """Test if it contains `signup` link."""
         url = reverse('accounts:login')
         self.assertContains(self.response, f'href="{url}"')
-
 
     def test_form_inputs(self):
         """The view must contain three inputs: csrf, username, first_name, last_name
@@ -340,8 +338,6 @@ class SignupGetTest(TestCase):
         self.assertContains(self.response, '<input', 7)
         self.assertContains(self.response, 'type="text"', 4)
         self.assertContains(self.response, 'type="password"', 2)
-
-
 
 
 class SignupPostTest(TestCase):
@@ -352,19 +348,19 @@ class SignupPostTest(TestCase):
         self.url = reverse('accounts:signup')
 
     def test_successfull_post_signup(self):
-        data  = {
-        'username': 'testusername',
-        'first_name': 'testfirstname',
-        'last_name': 'testlastname',
-        'email': 'testemail@gmail.com',
-        'password1': 'testpassword',
-        'password2': 'testpassword',
+        data = {
+            'username': 'testusername',
+            'first_name': 'testfirstname',
+            'last_name': 'testlastname',
+            'email': 'testemail@gmail.com',
+            'password1': 'testpassword',
+            'password2': 'testpassword',
 
         }
 
         response = self.client.post(self.url, data)
 
-        user = User.objects.get(username = data['username'])
+        user = User.objects.get(username=data['username'])
         self.assertEqual(user.first_name, data['first_name'])
         self.assertEqual(user.last_name, data['last_name'])
         self.assertEqual(user.email, data['email'])
@@ -376,15 +372,14 @@ class SignupPostTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_password_mismatch(self):
-
         data = {
-        'username': 'testusername1',
-        'first_name': 'testfirstname',
-        'last_name': 'testlastname',
-        'email': 'testemail@gmail.com',
-        'password1': 'testpassword1',
-        'password2': 'testpassword2',
-            }
+            'username': 'testusername1',
+            'first_name': 'testfirstname',
+            'last_name': 'testlastname',
+            'email': 'testemail@gmail.com',
+            'password1': 'testpassword1',
+            'password2': 'testpassword2',
+        }
 
         response = self.client.post(reverse('accounts:signup'), data)
 

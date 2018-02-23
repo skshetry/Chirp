@@ -26,7 +26,7 @@ class PostManager(models.Manager):
         if post.parent:
             shared_post_parent = post.parent
         if post.shared_post:
-            post=post.shared_post
+            post = post.shared_post
         shared_post = self.get_queryset().filter(
             user=user, parent=shared_post_parent
         ).filter(
@@ -47,9 +47,7 @@ class PostManager(models.Manager):
         )
         share_post.save()
 
-        print(share_post)
         return share_post
-
 
     def like(self, user, post):
         if user in post.likes.all():
@@ -82,10 +80,12 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, blank=True, related_name='liked')
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    shared_post = models.ForeignKey('self', blank=True, null=True, verbose_name='If shared only', related_name='post_shared')
+    shared_post = models.ForeignKey('self', blank=True, null=True,
+                                    verbose_name='If shared only',
+                                    related_name='post_shared')
 
     objects = PostManager()
-    
+
     class Meta:
         ordering = ['-created']
 
@@ -102,7 +102,7 @@ class Post(models.Model):
         self.objects.create(user=user, text=text, parent=parent)
 
     def get_parent(self):
-        x=self.parent if self.parent else None
+        x = self.parent if self.parent else None
         return x
 
     def get_childs(self):
@@ -116,6 +116,7 @@ class Post(models.Model):
         # Any expensive calculation on instance data
         # This returning value is cached and not calculated again
         return self.user.first_name + " " + self.user.last_name
+
 
 class Tag(models.Model):
     tag = models.CharField(max_length=140)
@@ -135,7 +136,7 @@ def create_tags(sender, instance, created, *args, **kwargs):
             for tag in tags:
                 _tag = Tag.objects.filter(tag__iexact=tag)
                 if _tag.exists():
-                    _tag.update(count=F('count')+1)
+                    _tag.update(count=F('count') + 1)
                 else:
                     Tag.objects.create(tag=tag)
 

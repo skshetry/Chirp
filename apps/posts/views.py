@@ -15,7 +15,7 @@ def posts_add(request):
             shared_post_id = request.POST.get('shared_post')
             parent_id = request.POST.get('parent')
             if not shared_post_id:
-                shared_post_id=None
+                shared_post_id = None
             if not parent_id:
                 parent_id = None
             post = post_form.save(request.user, shared_post_id, parent_id)
@@ -26,9 +26,10 @@ def posts_add(request):
         media_form_set = PostMediaFormSet()
 
     return render(request, 'posts/post_add.html', {
-            'mediaformset': media_form_set,
-            'post_form': post_form,
-            })
+        'mediaformset': media_form_set,
+        'post_form': post_form,
+    })
+
 
 @login_required
 def like_post(request, post_id):

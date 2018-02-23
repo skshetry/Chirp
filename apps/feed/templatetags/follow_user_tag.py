@@ -9,6 +9,6 @@ register = template.Library()
 def follow_user_tag(user):
     return User.objects.all().exclude(
         user_details__followed_by__user=user,
-        ).exclude(
-            user_details__user=user,
-            ).select_related('user_details').order_by('?')[:10]
+    ).exclude(
+        user_details__user=user,
+    ).select_related('user_details').order_by('?')[:10]

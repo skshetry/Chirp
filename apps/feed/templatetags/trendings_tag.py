@@ -2,8 +2,8 @@ from django import template
 
 from posts.models import Tag
 
-
 register = template.Library()
+
 
 @register.simple_tag
 def trendings_tag():

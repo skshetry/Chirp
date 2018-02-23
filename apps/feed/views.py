@@ -13,24 +13,27 @@ from posts.models import Post
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'feed/home.html'
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         context['mediaformset'] = PostMediaFormSet()
         context['post_form'] = PostForm()
-        return context
+        returnrn context
 
 
 @login_required
 def retrieve_new_post(request, post_id):
     created_on = Post.objects.filter(
         pk=post_id
-        ).values_list(
-            'created',
-            flat=True
-            )
+    ).values_list(
+        'created',
+        flat=True
+    )
     new_feed = Post.objects.filter(
         feed__user=request.user
-        ).order_by('-created').filter(created__gt=created_on).annotate(post_user=F('user__username'),userfname=F('user__first_name'), like_count=Count('likes'), userlname=F('user__last_name')).values()[:100]
-    print(new_feed)
+    ).order_by('-created').filter(created__gt=created_on).annotate(post_user=F('user__username'),
+                                                                   userfname=F('user__first_name'),
+                                                                   like_count=Count('likes'),
+                                                                   userlname=F('user__last_name')
+                                                                   ).values()[:100]
     serialized_response = json.dumps(list(new_feed), cls=DjangoJSONEncoder)
     return JsonResponse(serialized_response, safe=False)

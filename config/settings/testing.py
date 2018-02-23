@@ -6,7 +6,6 @@ Test settings for Chirpt project.
 
 from .common import *  # noqa
 
-
 # DEBUG
 # ------------------------------------------------------------------------------
 # Turn debug off so tests run faster
@@ -42,7 +41,6 @@ CACHES = {
 # ------------------------------------------------------------------------------
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-
 # PASSWORD HASHING
 # ------------------------------------------------------------------------------
 # Use fast password hasher so tests run faster
@@ -62,11 +60,11 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 
 DATABASES = {
     'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'ci',
-       'USER': 'postgres',
-       'PASSWORD': 'postgres',
-       'HOST': 'postgres',
-       'PORT': '5432',
-   },
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ci',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'postgres',
+        'PORT': '5432',
+    },
 }
