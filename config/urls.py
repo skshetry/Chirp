@@ -33,14 +33,15 @@ urlpatterns = [
     url(r'home/', include('feed.urls', namespace='feeds')),
 ]
 
-if 'debug_toolbar' in settings.INSTALLED_APPS:
-    import debug_toolbar
-    from django.conf.urls.static import  static
-    urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-    ]
 if settings.DEBUG:
+    if 'debug_toolbar' in settings.INSTALLED_APPS:
+        import debug_toolbar
+        urlpatterns += [
+            url(r'^__debug__/', include(debug_toolbar.urls)),
+        ]
+    from django.conf.urls.static import  static
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 handler404 = 'apps.errors.views.not_found'
 handler500 = 'apps.errors.views.server_error'
