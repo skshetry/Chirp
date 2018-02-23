@@ -5,7 +5,7 @@
 <!-- <p class="font-weight-normal">we found some!!! :)</p> -->
   <ul class="posts-results">
     {% for post in results %}
-    {% post_include post user %}
+    {% include 'posts/post.html' with post=post user=user %}
     {% endfor %}
   </ul>
 {% else %}

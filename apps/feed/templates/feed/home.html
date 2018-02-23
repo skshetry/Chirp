@@ -39,7 +39,7 @@
                                             <h3 class="text-muted">Empty feeds. Follow some users and get back here. :(</h3>
                                         {% endif %}
                                         {% for post in feed_posts %}
-                                            {% post_include post user%}
+                                            {% include 'posts/post.html' with post=post user=user %}
                                         {% endfor %}
                                         <div class="media __hidden__" postId="__prefix_post_id__" id="cloneme">
                                                 <div class="pull-left" href="{% url 'user_profile:user_profile' username='__prefix_username__' %}">

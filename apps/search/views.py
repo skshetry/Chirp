@@ -2,7 +2,7 @@ import json
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.db.models import Count, Case, When, Value, BooleanField, Q
+from django.db.models import Count, Case, When, Value, BooleanField, Q, IntegerField
 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -44,16 +44,24 @@ def search(request):
         query = SearchQuery(querystring)
         vector = SearchVector('text')
 
-        result_fulltext = Post.objects.annotate(post_liked=Case(
-                            When(likes__username__in=request.user.username, then=True),
-                            default=Value(False),
-                            output_field=BooleanField(),
-                            )).annotate(shared=Case(
-                                When(post_shared__user__username__in=request.user.username, then=True),
-                                When(shared_post__user__username__in=request.user.username, then=True),
-                                default=Value(False),
-                                output_field=BooleanField(),
-                                )).annotate(rank=SearchRank(vector, query)).filter(rank__gte=0.0001).order_by('-rank')
+        result_fulltext = Post.objects.annotate(
+            post_liked=Case(
+                When(likes=request.user, then=True),
+                default=Value(False),
+                output_field=BooleanField(),
+                )).annotate(
+                    shared=Case(
+                        When(post_shared__user=request.user, then=True),
+                        When(shared_post__user=request.user, then=True),
+                        default=Value(False),
+                        output_field=BooleanField(),
+                        )).annotate(
+                            shared_count=Case(
+                                When(shared_post__isnull=True, then=Count('post_shared')),
+                                output_field=IntegerField(),
+                                )).annotate(
+                                    rank=SearchRank(vector, query)
+                                    ).filter(rank__gte=0.0001).order_by('-rank')
 
         results['posts'] = result_fulltext | results['posts']
 
