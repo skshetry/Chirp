@@ -17,7 +17,7 @@ class HomeView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['mediaformset'] = PostMediaFormSet()
         context['post_form'] = PostForm()
-        returnrn context
+        return context
 
 
 @login_required
@@ -35,5 +35,6 @@ def retrieve_new_post(request, post_id):
                                                                    like_count=Count('likes'),
                                                                    userlname=F('user__last_name')
                                                                    ).values()[:100]
+
     serialized_response = json.dumps(list(new_feed), cls=DjangoJSONEncoder)
     return JsonResponse(serialized_response, safe=False)
