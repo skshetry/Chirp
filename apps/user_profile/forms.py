@@ -1,9 +1,11 @@
 from datetime import date
+from io import BytesIO
 
 from PIL import Image
 from django import forms
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage as storage
+from django.core.files.base import ContentFile
 
 from .models import User_details
 
@@ -47,7 +49,6 @@ class ProfilePhotoForm(forms.ModelForm):
     profile_width = forms.FloatField(widget=forms.HiddenInput())
     profile_height = forms.FloatField(widget=forms.HiddenInput())
     DIMENSIONS = (200, 200)
-    photo_name = 'profile_photo'
 
     class Meta:
             model = User_details
@@ -67,12 +68,21 @@ class ProfilePhotoForm(forms.ModelForm):
         image = Image.open(clean_image_file)
         cropped_image = image.crop((x, y, w+x, h+y))
         resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
-        fh = storage.open(photo.profile_photo.name, "w")
-        format = 'jpeg'
-        resized_image.save(fh, format)
-        fh.close()
+        new_image_io = BytesIO()
+        resized_image.save(new_image_io, format='JPEG')
+        temp_name = photo.profile_photo.name
+        photo.profile_photo.save(
+            temp_name,
+            content=ContentFile(new_image_io.getvalue()),
+            save=False
+        )
+        return super(ProfilePhotoForm, self).save()
+        # fh = storage.open(photo.profile_photo.name, "w")
+        # format = 'jpeg'
+        # resized_image.save(fh, format)
+        # fh.close()
 
-        return photo
+        # return resized_image
 
 
 class CoverPhotoForm(forms.ModelForm):
@@ -81,7 +91,6 @@ class CoverPhotoForm(forms.ModelForm):
     cover_width = forms.FloatField(widget=forms.HiddenInput())
     cover_height = forms.FloatField(widget=forms.HiddenInput())
     DIMENSIONS = (1357, 334)
-    photo_name = 'cover_photo'
 
     class Meta:
             model = User_details
@@ -101,9 +110,18 @@ class CoverPhotoForm(forms.ModelForm):
         image = Image.open(clean_image_file)
         cropped_image = image.crop((x, y, w+x, h+y))
         resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
-        fh = storage.open(photo.cover_photo.name, "w")
-        format = image.format
-        resized_image.save(fh, format)
-        fh.close()
+        new_image_io = BytesIO()
+        resized_image.save(new_image_io, format='JPEG')
+        temp_name = photo.cover_photo.name
+        photo.cover_photo.save(
+            temp_name,
+            content=ContentFile(new_image_io.getvalue()),
+            save=False
+        )
+        return super(CoverPhotoForm, self).save()
+        # fh = storage.open(photo.cover_photo.name, "w")
+        # format = image.format
+        # resized_image.save(fh, format)
+        # fh.close()
 
-        return photo
+        # return resized_image
