@@ -22,8 +22,7 @@ def search(request):
             search_type = 'posts'
         
         count = {}
-        results = {}
-        results['posts'] = Post.objects.none()
+        results = {'posts': Post.objects.none()}
         queries = querystring.split()
         for query in queries:
             results['posts'] = results['posts'] | get_all_posts().filter(

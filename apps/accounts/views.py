@@ -29,21 +29,18 @@ def signup(request):
             message = render_to_string('accounts/account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
-                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-                'token':account_activation_token.make_token(user),
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
             })
             to_email = form.cleaned_data.get('email')
             email = EmailMessage(
-                        mail_subject, message, to=[to_email]
+                mail_subject, message, to=[to_email]
             )
             email.send()
-            return render(request, 'accounts/email_sent.html', { 'email':user.email})
+            return render(request, 'accounts/email_sent.html', {'email': user.email})
     else:
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
-    
-
-
 
 
 def activate(request, uidb64, token):
@@ -59,7 +56,7 @@ def activate(request, uidb64, token):
         messages.success(request, ('Your account has been verified. Please login.'))
 
         return redirect('feeds:home')
-        
+
 
     else:
 

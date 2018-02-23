@@ -17,7 +17,6 @@ def profile_photo_view(request):
         messages.error(request, ('Cant update profile photo'))
 
 
-
 def cover_photo_view(request):
     cover_photo_form = CoverPhotoForm(request.POST, request.FILES, instance=request.user.user_details)
     if cover_photo_form.is_valid():
@@ -26,7 +25,6 @@ def cover_photo_view(request):
         return redirect(reverse('user_profile:user_profile', kwargs={'username': request.user.username}))
     else:
         messages.error(request, ('Cant update cover photo'))
-
 
 
 @login_required
@@ -63,9 +61,4 @@ def settings_view(request):
             'profile_photo_form': profile_photo_form,
             'cover_photo_form': cover_photo_form,
 
-
-            })
-
-
-
-
+        })

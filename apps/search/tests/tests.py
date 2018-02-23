@@ -11,6 +11,7 @@ class searchTest(TestCase):
     '''
     Includes seach test as much as possible
     '''
+
     def setUp(self):
         self.client = Client()
         self.other_client = Client()
@@ -34,8 +35,6 @@ class searchTest(TestCase):
         self.response = self.client.get(self.url)
         self.assertEqual(self.response.status_code, 200)
 
-        
-
 # class searchLink(searchTest):
 #     '''
 #     Includes the test for search redirection
@@ -43,9 +42,7 @@ class searchTest(TestCase):
 #     def setUp(self):
 #         self.url = reverse('search:search')
 #         self.response = self.client.get(self.url)
-        
+
 #     def test_response_status_code(self):
 #         """Tests for `OK` response."""
 #         self.assertEqual(self.response.status_code, 200)
-
-

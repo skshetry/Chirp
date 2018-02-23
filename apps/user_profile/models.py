@@ -69,11 +69,11 @@ class User_details(models.Model):
         if self.cover_photo and hasattr(self.cover_photo, 'url'):
             return self.cover_photo.url
 
-
     @property
     def profile_photo_url(self):
         if self.profile_photo and hasattr(self.profile_photo, 'url'):
             return self.profile_photo.url
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

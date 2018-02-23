@@ -37,6 +37,7 @@ class PasswordResetTests(TestCase):
         self.assertContains(self.response, '<input', 2)
         self.assertContains(self.response, 'type="email"', 1)
 
+
 class SuccessfulPasswordResetTests(TestCase):
     def setUp(self):
         email = 'john@doe.com'
@@ -53,6 +54,8 @@ class SuccessfulPasswordResetTests(TestCase):
 
     def test_send_password_reset_email(self):
         self.assertEqual(1, len(mail.outbox))
+
+
 class InvalidPasswordResetTests(TestCase):
     def setUp(self):
         url = reverse('accounts:password_reset')
@@ -68,6 +71,8 @@ class InvalidPasswordResetTests(TestCase):
 
     def test_no_reset_email_sent(self):
         self.assertEqual(0, len(mail.outbox))
+
+
 class PasswordResetDoneTests(TestCase):
     def setUp(self):
         url = reverse('accounts:password_reset_done')
@@ -82,6 +87,8 @@ class PasswordResetDoneTests(TestCase):
             view.func.view_class,
             auth_views.PasswordResetDoneView
         )
+
+
 class PasswordResetConfirmTests(TestCase):
     def setUp(self):
         user = User.objects.create_user(username='john', email='john@doe.com', password='123abcdef')
@@ -143,6 +150,8 @@ class InvalidPasswordResetConfirmTests(TestCase):
         self.assertContains(
             self.response, 'href="{0}"'.format(password_reset_url)
         )
+
+
 class PasswordResetCompleteTests(TestCase):
     def setUp(self):
         url = reverse('accounts:password_reset_complete')
