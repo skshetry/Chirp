@@ -47,6 +47,11 @@ def create_feed_for_following_users(sender, instance, created, **kwargs):
             for mention in mentions:
                 _user = User.objects.filter(username__iexact=mention)
                 if _user.exists():
+                    # show up to the user's post if mentioned
+                    Feed.objects.create(
+                        post=instance, user=_user.first(),
+                    )
+                    # show to all users that are following the user mentioned in the post
                     for user_details in _user.get().user_details.followed_by.all():
                         Feed.objects.create(
                             post=instance, user=user_details.user,
