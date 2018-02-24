@@ -249,7 +249,7 @@
             event.preventDefault();
             var clicked = $(this);
             var like_count = parseInt($(this, '.like-count').text());
-            if($(clicked).hasClass('btn-danger') != false){
+            if($(clicked).hasClass('btn-danger') == false){
                 $(clicked).find('.like-count').text(++like_count);
             }
             else{
@@ -280,7 +280,7 @@
             event.preventDefault();
             var clicked = $(this);
             var like_count = parseInt($(share_count_btn, '.like-count').text());
-            if($(clicked).hasClass('btn-danger') != false){
+            if($(clicked).hasClass('btn-danger') == false){
                 $(clicked).find('.like-count').text(++like_count);
             }
             else{
