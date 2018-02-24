@@ -60,7 +60,7 @@ class PostManager(models.Manager):
 
 
 class PostMedia(models.Model):
-    media = models.FileField(upload_to=upload_posts_media_to, validators=[validate_file_extension_posts_media])
+    media = models.ImageField(upload_to=upload_posts_media_to)
     media_type = models.CharField(default='image', max_length=6)
     post = models.ForeignKey('Post', related_name='posts_media')
     uploaded = models.DateTimeField(auto_now_add=True)
