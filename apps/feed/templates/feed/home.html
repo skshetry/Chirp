@@ -165,20 +165,26 @@
         $(".like-click").click(function(event){
             event.preventDefault();
             var clicked = $(this);
+            var like_count = parseInt($(this, '.like-count').text());
+            if($(clicked).hasClass('btn-danger') != false){
+                $(clicked).find('.like-count').text(++like_count);
+            }
+            else{
+                $(clicked).find('.like-count').text(--like_count);
+            }
             $(this).toggleClass('btn-danger');
             $(".like-click").blur(); 
-            var like_count = parseInt($(this, '.like-count').text());
             $.ajax({
                 url: $(this).attr('href'),
                 success: function(response){
                     if(response.done == true){
-                        $(clicked).find('.like-count').text(++like_count);
+                        $(clicked).find('.like-count').text(response.likes_count);
                         if($(this).hasClass('btn-danger') != false){
                             $(this).toggleClass('btn-danger');
                         }
                 }
                 else if(response.done == false){
-                    $(clicked).find('.like-count').text(--like_count);
+                    $(clicked).find('.like-count').text(response.likes_count);
                     if($(this).hasClass('btn-danger') == false){
                         $(this).toggleClass('btn-danger');
                     }
@@ -190,25 +196,27 @@
         $(".normal-share-click").click(function(event){
             event.preventDefault();
             var clicked = $(this);
-
+            var like_count = parseInt($(share_count_btn, '.like-count').text());
+            if($(clicked).hasClass('btn-danger') != false){
+                $(clicked).find('.like-count').text(++like_count);
+            }
+            else{
+                $(clicked).find('.like-count').text(--like_count);
+            }
             var share_count_btn = $(this).closest('.dropdown-menu').siblings();
             share_count_btn.toggleClass('btn-danger');
             $(share_count_btn).blur(); 
-            var like_count = parseInt($(share_count_btn, '.like-count').text());
-            console.log(like_count);
             $.ajax({
                 url: $(this).attr('href'),
                 success: function(response){
                     if(response.done == true && !isNaN(like_count)){
-                        $(share_count_btn).find('.like-count').text(++like_count);
-                        console.log('inside plus');
+                        $(share_count_btn).find('.like-count').text(response.shares_count);
                         if($(share_count_btn).hasClass('btn-danger') != false){
                             $(share_count_btn).addClass('btn-danger');
                         }
                 }
                 else if(response.done == false && !isNaN(like_count)){
-                    $(share_count_btn).find('.like-count').text(--like_count);
-                    console.log('inside minus');
+                    $(share_count_btn).find('.like-count').text(response.shares_count);
                     if($(share_count_btn).hasClass('btn-danger') == false){
                         $(share_count_btn).removeClass('btn-danger');
                     }
