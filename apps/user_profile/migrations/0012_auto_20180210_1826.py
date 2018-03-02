@@ -15,6 +15,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='user_details',
             name='gender',
-            field=models.CharField(choices=[(None, None), ('M', 'Male'), ('F', 'Female')], max_length=2, null=True),
+            field=models.CharField(
+                choices=[(None, None), ('M', 'Male'), ('F', 'Female')], max_length=2, null=True),
         ),
     ]

@@ -1,11 +1,11 @@
 from datetime import date
 from io import BytesIO
 
-from PIL import Image
 from django import forms
 from django.contrib.auth.models import User
-from django.core.files.storage import default_storage as storage
 from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage as storage
+from PIL import Image
 
 from .models import User_details
 
@@ -57,7 +57,8 @@ class ProfilePhotoForm(forms.ModelForm):
 
     class Meta:
         model = User_details
-        fields = ('profile_photo', 'profile_x', 'profile_y', 'profile_height', 'profile_width')
+        fields = ('profile_photo', 'profile_x', 'profile_y',
+                  'profile_height', 'profile_width')
         widgets = {
             'profile_photo': forms.FileInput(attrs={'accept': 'image/jpeg'})
         }
@@ -69,7 +70,8 @@ class ProfilePhotoForm(forms.ModelForm):
         w = self.cleaned_data.get('profile_width')
         h = self.cleaned_data.get('profile_height')
 
-        clean_image_file = UserDetailsForm.clean_image(self, photo.profile_photo)
+        clean_image_file = UserDetailsForm.clean_image(
+            self, photo.profile_photo)
         image = Image.open(clean_image_file)
         cropped_image = image.crop((x, y, w + x, h + y))
         resized_image = cropped_image.resize(self.DIMENSIONS, Image.ANTIALIAS)
@@ -99,7 +101,8 @@ class CoverPhotoForm(forms.ModelForm):
 
     class Meta:
         model = User_details
-        fields = ('cover_photo', 'cover_x', 'cover_y', 'cover_height', 'cover_width')
+        fields = ('cover_photo', 'cover_x', 'cover_y',
+                  'cover_height', 'cover_width')
         widgets = {
             'cover_photo': forms.FileInput(attrs={'accept': 'image/jpeg'})
         }

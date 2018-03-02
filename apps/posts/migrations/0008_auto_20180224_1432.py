@@ -16,6 +16,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='postmedia',
             name='media',
-            field=models.ImageField(upload_to=posts.models.upload_posts_media_to),
+            field=models.ImageField(
+                upload_to=posts.models.upload_posts_media_to),
         ),
     ]

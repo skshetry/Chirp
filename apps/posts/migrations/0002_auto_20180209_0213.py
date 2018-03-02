@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+
 import posts.model_validators
 import posts.models
 
@@ -17,6 +18,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='postmedia',
             name='media',
-            field=models.FileField(upload_to=posts.models.upload_posts_media_to, validators=[posts.model_validators.validate_file_extension_posts_media]),
+            field=models.FileField(upload_to=posts.models.upload_posts_media_to, validators=[
+                                   posts.model_validators.validate_file_extension_posts_media]),
         ),
     ]
