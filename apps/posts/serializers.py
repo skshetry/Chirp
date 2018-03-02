@@ -8,13 +8,9 @@ from .models import Post
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'username', 'profile')
+        fields = ('first_name', 'last_name', 'username')
 
-    profile = serializers.SerializerMethodField()
 
-    def get_profile(self, obj):
-        request = self.context.get('request')
-        return request.build_absolute_uri(reverse('user_profile:user_profile', kwargs={'username': obj.username}))
 
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
@@ -23,7 +19,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
         fields = (
             'id', 'text', 'user','parent', 'updated', 'created', 'likes',
             'shared_post', 'likes_count', 'liked', 'shared', 'shared_count',
-            'reply_count', 'posts_media', 'post_childs',
+            'reply_count', 'posts_media', 'post_childs', 'user_profile',
             )
 
     likes = serializers.HyperlinkedRelatedField(
@@ -31,6 +27,13 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
         lookup_field='username',
         many=True,
         read_only=True
+    )
+    user_profile = serializers.HyperlinkedRelatedField(
+        view_name='user_profile:user_profile',
+        lookup_field='username',
+        many=False,
+        read_only=True,
+        source='user',
     )
     posts_media = serializers.HyperlinkedRelatedField(
         view_name='posts:get_media',
