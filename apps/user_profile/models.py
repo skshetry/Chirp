@@ -46,7 +46,8 @@ class UserProfileManager(models.Manager):
 
 
 class User_details(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_details')
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='user_details')
     date_of_birth = models.DateField(null=True)
     bio = models.TextField(max_length=300, null=True)
     GENDER_CHOICES = (
@@ -59,9 +60,12 @@ class User_details(models.Model):
         choices=GENDER_CHOICES,
         null=True,
     )
-    follows = models.ManyToManyField('User_details', related_name='followed_by', blank=True)
-    profile_photo = models.ImageField(null=True, upload_to=upload_posts_media_to, default=None)
-    cover_photo = models.ImageField(null=True, upload_to=upload_posts_media_to, default=None)
+    follows = models.ManyToManyField(
+        'User_details', related_name='followed_by', blank=True)
+    profile_photo = models.ImageField(
+        null=True, upload_to=upload_posts_media_to, default=None)
+    cover_photo = models.ImageField(
+        null=True, upload_to=upload_posts_media_to, default=None)
     objects = UserProfileManager()
 
     @property
@@ -73,6 +77,10 @@ class User_details(models.Model):
     def profile_photo_url(self):
         if self.profile_photo and hasattr(self.profile_photo, 'url'):
             return self.profile_photo.url
+
+    def __str__(self):
+        return self.user.username
+
 
 
 @receiver(post_save, sender=User)

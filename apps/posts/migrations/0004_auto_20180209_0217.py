@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+
 import posts.model_validators
 
 
@@ -16,13 +17,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TestModel',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('media', models.FileField(upload_to='posts')),
             ],
         ),
         migrations.AlterField(
             model_name='postmedia',
             name='media',
-            field=models.FileField(default=None, upload_to='posts', validators=[posts.model_validators.validate_file_extension_posts_media]),
+            field=models.FileField(default=None, upload_to='posts', validators=[
+                                   posts.model_validators.validate_file_extension_posts_media]),
         ),
     ]

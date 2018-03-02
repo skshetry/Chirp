@@ -5,10 +5,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 from .forms import CustomUserAuthenticationForm as UserAuthenticationForm
 from .forms import SignUpForm
@@ -52,11 +52,12 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        messages.success(request, ('Your account has been verified. Please login.'))
-        messages.success(request, ('Your account has been verified. Please login.'))
+        messages.success(
+            request, ('Your account has been verified. Please login.'))
+        messages.success(
+            request, ('Your account has been verified. Please login.'))
 
         return redirect('feeds:home')
-
 
     else:
 

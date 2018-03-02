@@ -41,7 +41,7 @@
                        {% if media.media %}
 
                         <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                          <a href="{{media.media.url}}" itemprop="contentUrl" data-size="1024x1024">
+                          <a href="{{media.media.url}}" itemprop="contentUrl" data-size="{{media.media.width}}x{{media.media.height}}">
                               <img src="{{media.media.url}}" itemprop="thumbnail" alt="Image description" />
                           </a>
                           <figcaption itemprop="caption description">
@@ -62,7 +62,7 @@
     {% if media_post.media %}
 
     <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-      <a href="{{media_post.media.url}}" itemprop="contentUrl" data-size="1024x1024">
+      <a href="{{media_post.media.url}}" itemprop="contentUrl" data-size="{{media_post.media.width}}x{{media_post.media.height}}">
           <img src="{{media_post.media.url}}" itemprop="thumbnail" alt="Image description" />
       </a>
       <figcaption itemprop="caption description">
@@ -123,7 +123,7 @@
                  {% if media.media %}
 
                   <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                    <a href="{{media.media.url}}" itemprop="contentUrl" data-size="1024x1024">
+                    <a href="{{media.media.url}}" itemprop="contentUrl" data-size="{{media.media.width}}x{{media.media.height}}">
                         <img src="{{media.media.url}}" itemprop="thumbnail" alt="Image description" />
                     </a>
                     <figcaption itemprop="caption description">

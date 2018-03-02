@@ -3,7 +3,7 @@ Tests for search app
 '''
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
-from django.test import TestCase, Client
+from django.test import Client, TestCase
 
 
 # Create your tests here.

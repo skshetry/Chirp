@@ -1,6 +1,7 @@
 from django import template
+from django.db.models import (BooleanField, Case, Count, IntegerField, Value,
+                              When)
 
-from django.db.models import Count, Case, When, Value, BooleanField, IntegerField
 from posts.models import Post
 
 register = template.Library()

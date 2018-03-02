@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+
 import user_profile.models
 
 
@@ -16,11 +17,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='user_details',
             name='cover_photo',
-            field=models.ImageField(default=None, null=True, upload_to=user_profile.models.upload_posts_media_to),
+            field=models.ImageField(
+                default=None, null=True, upload_to=user_profile.models.upload_posts_media_to),
         ),
         migrations.AlterField(
             model_name='user_details',
             name='profile_photo',
-            field=models.ImageField(default=None, null=True, upload_to=user_profile.models.upload_posts_media_to),
+            field=models.ImageField(
+                default=None, null=True, upload_to=user_profile.models.upload_posts_media_to),
         ),
     ]

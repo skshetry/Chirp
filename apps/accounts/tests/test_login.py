@@ -1,12 +1,11 @@
 """Tests for accounts app."""
-from accounts.forms import CustomUserAuthenticationForm
-from accounts.forms import SignUpForm
 from django.conf import settings
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from django.test import TestCase
 
+from accounts.forms import CustomUserAuthenticationForm, SignUpForm
 
 # Create your tests here.
 
@@ -134,7 +133,7 @@ class LoginPostTest(TestCase):
         self.assertRedirects(response, expected_url=reverse(
             settings.LOGIN_REDIRECT_URL
         ), status_code=302
-                             )
+        )
 
         # Test that the template is not used. Because, it must be a redirection.
         self.assertTemplateNotUsed(response, 'base.html')
@@ -156,7 +155,8 @@ class LoginPostTest(TestCase):
         }
 
         # Send post data to client.
-        response = self.client.post(self.url + '?next=' + reverse('feeds:home'), data)
+        response = self.client.post(
+            self.url + '?next=' + reverse('feeds:home'), data)
 
         # Test that the redirect doesnot occur.
         # Redirect occurs after successful login.
@@ -385,7 +385,8 @@ class SignupPostTest(TestCase):
 
         error_messages = ["The two password fields didn't match."]
         self.assertFormError(response, 'form', 'password2', error_messages)
-        self.assertFalse(User.objects.filter(username=data['username']).exists())
+        self.assertFalse(User.objects.filter(
+            username=data['username']).exists())
 
         self.assertTemplateUsed(response, 'accounts/signup.html')
         self.assertTemplateUsed(response, 'base.html')

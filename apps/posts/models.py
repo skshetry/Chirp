@@ -5,7 +5,7 @@ import uuid
 
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import signals, F
+from django.db.models import F, signals
 from django.dispatch import receiver
 from django.utils import timezone
 
@@ -23,10 +23,16 @@ class PostManager(models.Manager):
     def share(self, user, post, quote_text=None):
         shared_post_parent = None
 
+        # set the new shared post's parent as same as original post parent
         if post.parent:
             shared_post_parent = post.parent
+
+        # if the post that is to be shared is also shared, go for the original post
+        # post -> shared_post -> shared_post__shared_post
         if post.shared_post:
             post = post.shared_post
+
+        # check if shared_post already exists
         shared_post = self.get_queryset().filter(
             user=user, parent=shared_post_parent
         ).filter(
@@ -35,10 +41,12 @@ class PostManager(models.Manager):
             created__day=timezone.now().day,
             shared_post__isnull=False,
         )
+        # if post has already been shared, delete that post, i.e. toggle share
         if shared_post.exists():
             shared_post.delete()
             return None
 
+        # save the new post
         share_post = self.model(
             parent=shared_post_parent,
             user=user,
@@ -60,7 +68,7 @@ class PostManager(models.Manager):
 
 
 class PostMedia(models.Model):
-    media = models.FileField(upload_to=upload_posts_media_to, validators=[validate_file_extension_posts_media])
+    media = models.ImageField(upload_to=upload_posts_media_to)
     media_type = models.CharField(default='image', max_length=6)
     post = models.ForeignKey('Post', related_name='posts_media')
     uploaded = models.DateTimeField(auto_now_add=True)
@@ -74,7 +82,8 @@ class PostsMetadata(models.Model):
 
 class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    parent = models.ForeignKey('self', blank=True, null=True, related_name='post_childs')
+    parent = models.ForeignKey(
+        'self', blank=True, null=True, related_name='post_childs')
     user = models.ForeignKey(User)
     text = models.CharField(max_length=500, null=True)
     likes = models.ManyToManyField(User, blank=True, related_name='liked')
@@ -104,6 +113,9 @@ class Post(models.Model):
     def get_parent(self):
         x = self.parent if self.parent else None
         return x
+
+    def like(self, user):
+        return self.objects.like(user=user, post=self)
 
     def get_childs(self):
         childs = Post.objects.filter(parent=self)

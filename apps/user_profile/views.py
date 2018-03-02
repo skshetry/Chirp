@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
+
 from posts.forms import PostForm, PostMediaFormSet
 
 from .models import User_details
@@ -16,7 +17,8 @@ def user_profile(request, username=None):
     post_form = PostForm()
 
     if User.objects.filter(username=username).exists():
-        user = User.objects.select_related('user_details').prefetch_related('post_set').get(username=username)
+        user = User.objects.select_related('user_details').prefetch_related(
+            'post_set').get(username=username)
         return render(request, "user_profile.html", {
             "profile_user": user,
             "mediaformset": media_form_set,
@@ -30,7 +32,8 @@ def user_profile(request, username=None):
 def follow_user(request, username=None):
     toggle_user = get_object_or_404(User_model, username__iexact=username)
     if request.user.is_authenticated():
-        is_following = User_details.objects.toggle_follow(request.user, toggle_user.user_details)
+        is_following = User_details.objects.toggle_follow(
+            request.user, toggle_user.user_details)
     return redirect('user_profile:user_profile', username=username)
 
 

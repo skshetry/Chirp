@@ -3,10 +3,11 @@ import json
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.serializers.json import DjangoJSONEncoder
-from django.db.models import F, Count
+from django.db.models import Count, F
 from django.http import JsonResponse
 from django.views.generic import TemplateView
-from posts.forms import PostMediaFormSet, PostForm
+
+from posts.forms import PostForm, PostMediaFormSet
 from posts.models import Post
 
 
@@ -31,9 +32,12 @@ def retrieve_new_post(request, post_id):
     new_feed = Post.objects.filter(
         feed__user=request.user
     ).order_by('-created').filter(created__gt=created_on).annotate(post_user=F('user__username'),
-                                                                   userfname=F('user__first_name'),
-                                                                   like_count=Count('likes'),
-                                                                   userlname=F('user__last_name')
+                                                                   userfname=F(
+                                                                       'user__first_name'),
+                                                                   like_count=Count(
+                                                                       'likes'),
+                                                                   userlname=F(
+                                                                       'user__last_name')
                                                                    ).values()[:100]
 
     serialized_response = json.dumps(list(new_feed), cls=DjangoJSONEncoder)

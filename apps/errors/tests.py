@@ -1,10 +1,10 @@
 """Tests for Status code Errors."""
 
 from django.shortcuts import render_to_response
-from django.test import TestCase, RequestFactory
+from django.test import RequestFactory, TestCase
 from django.urls import reverse
 
-from .views import server_error, not_found, permission_denied, bad_request
+from .views import bad_request, not_found, permission_denied, server_error
 
 
 class ErrorViewTestCase(object):

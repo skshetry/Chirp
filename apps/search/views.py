@@ -1,11 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
-from django.db.models import Count, Case, When, Value, BooleanField, Q, IntegerField
-from django.shortcuts import render, redirect
-from posts.forms import PostMediaFormSet, PostForm
-from posts.models import Post
+from django.contrib.postgres.search import (SearchQuery, SearchRank,
+                                            SearchVector)
+from django.db.models import (BooleanField, Case, Count, IntegerField, Q,
+                              Value, When)
+from django.shortcuts import redirect, render
+
 from feed.templatetags.post_include import get_all_posts
+from posts.forms import PostForm, PostMediaFormSet
+from posts.models import Post
 
 
 @login_required
@@ -20,7 +23,7 @@ def search(request):
                 search_type = 'posts'
         except Exception:
             search_type = 'posts'
-        
+
         count = {}
         results = {'posts': Post.objects.none()}
         queries = querystring.split()
@@ -41,19 +44,20 @@ def search(request):
                 When(likes=request.user, then=True),
                 default=Value(False),
                 output_field=BooleanField(),
-                )).annotate(
-                    shared=Case(
-                        When(post_shared__user=request.user, then=True),
-                        When(shared_post__user=request.user, then=True),
-                        default=Value(False),
-                        output_field=BooleanField(),
-                        )).annotate(
-                            shared_count=Case(
-                                When(shared_post__isnull=True, then=Count('post_shared')),
-                                output_field=IntegerField(),
-                                )).annotate(
-                                    rank=SearchRank(vector, query)
-                                    ).filter(rank__gte=0.0001).order_by('-rank')
+            )).annotate(
+            shared=Case(
+                When(post_shared__user=request.user, then=True),
+                When(shared_post__user=request.user, then=True),
+                default=Value(False),
+                output_field=BooleanField(),
+            )).annotate(
+            shared_count=Case(
+                When(shared_post__isnull=True,
+                     then=Count('post_shared')),
+                output_field=IntegerField(),
+            )).annotate(
+            rank=SearchRank(vector, query)
+        ).filter(rank__gte=0.0001).order_by('-rank')
 
         results['posts'] = result_fulltext | results['posts']
 
@@ -67,8 +71,7 @@ def search(request):
             'count': count,
             'results': results[search_type],
             'mediaformset': PostMediaFormSet(),
-            'post_form': PostForm(),       
+            'post_form': PostForm(),
         })
     else:
         return render(request, 'search/search.html', {'hide_search': True})
-

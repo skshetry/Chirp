@@ -15,7 +15,8 @@ class PasswordChangeTests(TestCase):
         """Contains the functions for the tests."""
         username = 'john'
         password = 'secret123'
-        user = User.objects.create_user(username=username, email='john@doe.com', password=password)
+        user = User.objects.create_user(
+            username=username, email='john@doe.com', password=password)
         url = reverse('settings:change_password')
         self.client.login(username=username, password=password)
         self.response = self.client.get(url)
@@ -61,8 +62,10 @@ class PasswordChangeTestCase(TestCase):
     Base test case for form processing
     accepts a `data` dict to POST to the view.
     """
+
     def setUp(self, data={}):
-        self.user = User.objects.create_user(username='john', email='john@doe.com', password='old_password')
+        self.user = User.objects.create_user(
+            username='john', email='john@doe.com', password='old_password')
         self.url = reverse('settings:change_password')
         self.client.login(username='john', password='old_password')
         self.response = self.client.post(self.url, data)
@@ -74,7 +77,7 @@ class SuccessfulPasswordChangeTests(PasswordChangeTestCase):
             'old_password': 'old_password',
             'new_password1': 'new_password',
             'new_password2': 'new_password',
-            })
+        })
 
     def test_redirection(self):
         """
