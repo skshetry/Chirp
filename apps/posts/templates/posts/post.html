@@ -35,9 +35,8 @@
                           {% if post.shared_post.text %}
                         <p>{{post.shared_post.text}}</p>
                       {% endif %}</a>
-                      {% media_posts post.shared_post as medias %}
                       <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-                       {% for media in medias %}
+                       {% for media in post.shared_post.posts_media.all %}
                        {% if media.media %}
 
                         <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
@@ -56,9 +55,8 @@
             </div>
 
         {% endif  %}
-          {% media_posts post as medias %}
   <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-    {% for media_post in medias %}
+    {% for media_post in post.posts_media.all %}
     {% if media_post.media %}
 
     <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
@@ -117,9 +115,8 @@
                     {% if child_post.text %}
                   <p>{{child_post.text}}</p>
                 {% endif %}</a>
-                {% media_posts child_post as medias %}
                 <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-                 {% for media in medias %}
+                 {% for media in child_post.posts_media.all %}
                  {% if media.media %}
 
                   <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">

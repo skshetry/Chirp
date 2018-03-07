@@ -85,45 +85,22 @@
                           </div>
                     <div class="tab-pane active text-center" id="posts_tab">
                             {% if user != profile_user %}
-                            <div class="media" postId="{{post.id}}"></div>
                             <div class="container h-100 d-flex justify-content-center">
                                 {% include 'posts/post_add.html' %}
-                        </div>
-                            {% with user=profile_user %}
+                            </div>
+                            {% endif %}
                                 {% if not profile_user.post_set.all %}
                                     <h3 class="text-muted">No tweets yet :(</h3>
                                 {% endif %}
-                                {% posts_from_users_profile profile_user as posts %}
+                                {% posts_from_users_profile user=profile_user viewer=user as posts %}
                                 {% for post in posts %}
                                 <div class="container h-100 d-flex justify-content-center">
                                     <div class="row">
                                         {% include 'posts/post.html' with post=post user=user %}
                                     </div>
                                 </div>
-
                                 {% endfor %}
-                                {% endwith %}
-                            {% else %}
-                            <div class="container h-100 d-flex justify-content-center">
-                                {% include 'posts/post_add.html' %}
-                        </div>
-                                {% if not user.post_set.all %}
-                                    <h3 class="text-muted">No tweets yet :(</h3>
-                                {% endif %}
-                                {% posts_from_users_profile profile_user as posts %}
-                                {% for post in posts %}
-                                <div class="container h-100 d-flex justify-content-center">
-
-                                    <div class="row">
-                                    {% post_include post user%}
-                                    </div>
-                                </div>
-
-                                {% endfor %}
-                                {% endif %}
-
-                            
-                        </div>
+                    </div>
                                 
                         <div class="tab-pane justify-content-center text-center" id="follows">
                             <div class="row justify-content-center">
