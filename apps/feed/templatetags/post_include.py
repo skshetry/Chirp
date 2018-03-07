@@ -55,13 +55,14 @@ def posts_from_feed(user):
         shared=Case(
             When(post_shared__user=user, then=True),
             When(shared_post__user=user, then=True),
+            When(shared_post__post_shared__user=user, then=True),
             default=Value(False),
             output_field=BooleanField(),
         )).annotate(
         shared_count=Case(
             When(shared_post__isnull=True, then=Count('post_shared')),
             output_field=IntegerField(),
-        )).order_by('-created')
+        )).order_by('-created')[:200]
 
 
 @register.simple_tag
@@ -70,22 +71,25 @@ def media_posts(post):
 
 
 @register.simple_tag
-def posts_from_users_profile(user):
+def posts_from_users_profile(user, viewer=None):
+    if viewer is None:
+        viewer = user
     return get_all_posts().filter(
         user=user
     ).annotate(
         post_liked=Case(
-            When(likes=user, then=True),
+            When(likes=viewer, then=True),
             default=Value(False),
             output_field=BooleanField(),
         )).annotate(
         shared=Case(
-            When(post_shared__user=user, then=True),
-            When(shared_post__user=user, then=True),
+            When(post_shared__user=viewer, then=True),
+            When(shared_post__user=viewer, then=True),
+            When(shared_post__post_shared__user=viewer, then=True),
             default=Value(False),
             output_field=BooleanField(),
         )).annotate(
         shared_count=Case(
             When(shared_post__isnull=True, then=Count('post_shared')),
             output_field=IntegerField(),
-        )).order_by('-created')
+        )).order_by('-created')[:200]
