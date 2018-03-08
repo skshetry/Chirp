@@ -15,30 +15,21 @@ class Feed(models.Model):
 @receiver(signals.post_save, sender=Post)
 def create_feed_for_following_users(sender, instance, created, **kwargs):
     if created:
-        # show my own posts
-        Feed.objects.create(
-            post=instance, user=instance.user
-        )
+        users = [instance.user.id]
+        users_qs = instance.user.user_details.followed_by.all() \
+                                             .values_list('user',
+                                                          flat=True)
 
-        # show post to all users that follow
-        for user_details in instance.user.user_details.followed_by.all():
-            Feed.objects.create(post=instance, user=user_details.user)
+        # show replies on your own post
+        if instance.parent:
+            users += [instance.parent.user.id]
+            users_qs |= instance.parent.user.user_details.followed_by.all() \
+                                                         .values_list('user',
+                                                                      flat=True)
 
         # show your post shared in feed
         if instance.shared_post:
-            Feed.objects.create(
-                post=instance, user=instance.shared_post.user
-            )
-        # show replies on your own post
-        if instance.parent:
-            Feed.objects.create(
-                post=instance, user=instance.parent.user,
-            )
-            # show replies to all users
-            for user_details in instance.parent.user.user_details.followed_by.all():
-                Feed.objects.create(
-                    post=instance, user=user_details.user,
-                )
+            users += [instance.shared_post.user.id]
 
         # if mentioned show that post to all
         import re
@@ -48,12 +39,17 @@ def create_feed_for_following_users(sender, instance, created, **kwargs):
             for mention in mentions:
                 _user = User.objects.filter(username__iexact=mention)
                 if _user.exists():
-                    # show up to the user's post if mentioned
-                    Feed.objects.create(
-                        post=instance, user=_user.first(),
-                    )
-                    # show to all users that are following the user mentioned in the post
-                    for user_details in _user.get().user_details.followed_by.all():
-                        Feed.objects.create(
-                            post=instance, user=user_details.user,
-                        )
+                    users += [_user.get().id]
+                    users_qs |= _user.get().user_details.followed_by.all() \
+                                                        .values_list('user',
+                                                                     flat=True)
+
+        # everytime `list()` is done, it will hit database
+        # i wanted it to hit only once. So, this
+        users = list(users_qs) + users
+
+        feed = [Feed(post=instance,
+                     user=User.objects.get(pk=user)
+                     ) for user in set(users)]
+
+        Feed.objects.bulk_create(feed)

@@ -31,7 +31,7 @@ def user_profile(request, username=None):
 @login_required
 def follow_user(request, username=None):
     toggle_user = get_object_or_404(User_model, username__iexact=username)
-    if request.user.is_authenticated():
+    if request.user != toggle_user:
         is_following = User_details.objects.toggle_follow(
             request.user, toggle_user.user_details)
     return redirect('user_profile:user_profile', username=username)
