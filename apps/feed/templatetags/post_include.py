@@ -61,6 +61,7 @@ def posts_from_feed(user):
         )).annotate(
         shared_count=Case(
             When(shared_post__isnull=True, then=Count('post_shared')),
+            default=Count('shared_post', distinct=True),
             output_field=IntegerField(),
         )).order_by('-created')[:200]
 
@@ -90,6 +91,7 @@ def posts_from_users_profile(user, viewer=None):
             output_field=BooleanField(),
         )).annotate(
         shared_count=Case(
-            When(shared_post__isnull=True, then=Count('post_shared')),
+            When(shared_post__isnull=False, then=Count('shared_post__post_shared')),
+            default=Count('shared_post'),
             output_field=IntegerField(),
         )).order_by('-created')[:200]

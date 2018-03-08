@@ -77,15 +77,9 @@
            <i class="fa fa-comment"></i>
       </a>
       <span class="dropdown">
-        {% if post.shared_post %}
-          <a href="" class="btn {%if post.shared %}btn-danger {% endif %} btn-link" data-toggle="dropdown">
-              <i class="fa fa-share-alt"></i> <i class="like-count"></i>
-         </a>
-         {% else %}
          <a href="" class="btn {%if post.shared %}btn-danger {% endif %} btn-link share-count" data-toggle="dropdown">
             <i class="fa fa-share-alt"></i> <i class="like-count">{{post.shared_count}}</i>
        </a>
-       {% endif %}
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" class="">
               <a class="dropdown-item btn {%if post.shared %}btn-danger {% endif %} btn-link normal-share-click" href="{% url 'posts:share' post.id %}">Share post</a>
               <a class="dropdown-item btn {%if post.shared %}btn-danger {% endif %} btn-link share-click" href="{% url 'posts:share' post.id %}">Share with quote</a>
