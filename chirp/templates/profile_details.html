@@ -7,19 +7,27 @@
         <div class="col-md-2 col-sm-4 col-6 ml-auto mr-auto text-center">
             <div class="avatar">
                 <img src="{% if profile_user.user_details.profile_photo %} {{ profile_user.user_details.profile_photo.url }}{%else%}{% static 'img/default_profile.jpg' %}{% endif %}" alt="Circle Image" class="img-circle img-responsive">
-                {% comment %} <div class="following">
-                    <btn class="btn btn-sm btn-info btn-just-icon" rel="tooltip" title="Follow"><i class="nc-icon nc-simple-add"></i></btn>
-                </div> {% endcomment %}
             </div>
             <div class="name">
 
-                <a href="{% url 'user_profile:user_profile' username=profile_user.username %}"><h5>{{profile_user.first_name}} {{profile_user.last_name}} <br /><small>@{{profile_user.username}}</small></h5></a>
+                <a href="{% url 'user_profile:user_profile' username=profile_user.username %}">
+                    <h5>{{profile_user.first_name}} {{profile_user.last_name}} <br />
+                        <small>@{{profile_user.username}}</small>
+                        <a href="{% url 'settings:settings' %}">
+                            <i class="fa fa-cog"></i>
+                        </a>
+                    </h5>
+                </a>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6 ml-auto mr-auto text-center">
-            <p>{% if profile_user.user_details.bio %}{{ profile_user.user_details.bio }}{% endif %}</p>
+            <p>
+                {% if profile_user.user_details.bio %}
+                    {{ profile_user.user_details.bio }}
+                {% endif %}
+            </p>
             <div class="description-details">
                 <ul class="list-unstyled">
                         <li>{% if profile_user.user_details.gender == 'M' %}
@@ -29,8 +37,12 @@
                             {% else %}
                             <i></i>
                             {% endif %}
-                        <li>{% if profile_user.user_details.date_of_birth %}<i class="fa fa-calendar"></i> Born {{ profile_user.user_details.date_of_birth }} {% else %}{% endif %}</li>
-
+                        <li>
+                            {% if profile_user.user_details.date_of_birth %}
+                                <i class="fa fa-calendar"></i>
+                                Born {{ profile_user.user_details.date_of_birth }}
+                            {% endif %}
+                        </li>
                 </ul>
             </div>
         </div>
@@ -43,17 +55,30 @@
                      {% if profile_user != user %}
                     <div class="following">
                         {% if user|check_followed_user_already:profile_user %}
-                        <a href="{% url 'user_profile:follow_user' username=profile_user.username %}"><btn class="btn btn-info btn-round" rel="tooltip" title="Follow"></i>Unfollow</btn></a>
+                            <a href="{% url 'user_profile:follow_user' username=profile_user.username %}">
+                                <btn class="btn btn-info btn-round" rel="tooltip" title="Follow">Unfollow</btn>
+                            </a>
                         {% else %}
-                        <a href="{% url 'user_profile:follow_user' username=profile_user.username %}"><btn class="btn btn-info btn-round" rel="tooltip" title="Follow"><i class="fa fa-user-plus"></i>Follow</btn></a>
+                            <a href="{% url 'user_profile:follow_user' username=profile_user.username %}">
+                                <btn class="btn btn-info btn-round" rel="tooltip" title="Follow">
+                                    <i class="fa fa-user-plus"></i>Follow
+                                </btn>
+                            </a>
                         {% endif %}
                     </div>
-
                     {% endif %}
                 </div>
                 <div class="name">
-    
-                     <a href="{% url 'user_profile:user_profile' username=profile_user.username %}"><h4>{{profile_user.first_name}} {{profile_user.last_name}} <br /><small>@{{profile_user.username}}</small></h4></a>
+                     <a href="{% url 'user_profile:user_profile' username=profile_user.username %}">
+                         <h4>{{profile_user.first_name}} {{profile_user.last_name}} <br />
+                            <small>@{{profile_user.username}}</small>
+                            {% if profile_user == user %}
+                                <a href="{% url 'settings:settings' %}">
+                                    <i class="fa fa-cog"></i>
+                                </a>
+                            {% endif %}
+                        </h4>
+                    </a>
                 </div>
             </div>
         </div>
@@ -67,13 +92,16 @@
                                 {% elif profile_user.user_details.gender == 'F' %}
                                     <i class="fa fa-female"></i>Female
                                 {% else %}
-                                <i></i>
+                                    <i></i>
                                 {% endif %}
-                            <li>{% if profile_user.user_details.date_of_birth %}<i class="fa fa-calendar"></i> Born {{ profile_user.user_details.date_of_birth }} {% else %}{% endif %}</li>
-    
+                            <li>
+                                {% if profile_user.user_details.date_of_birth %}
+                                    <i class="fa fa-calendar"></i>
+                                    Born {{ profile_user.user_details.date_of_birth }}
+                                {% endif %}
+                            </li>
                     </ul>
                 </div>
             </div>
         {% endif %}
     </div>
-    
