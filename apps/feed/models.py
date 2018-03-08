@@ -1,3 +1,5 @@
+import itertools
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import signals
@@ -15,21 +17,23 @@ class Feed(models.Model):
 @receiver(signals.post_save, sender=Post)
 def create_feed_for_following_users(sender, instance, created, **kwargs):
     if created:
-        users = [instance.user.id]
-        users_qs = instance.user.user_details.followed_by.all() \
-                                             .values_list('user',
+        users = itertools.chain(User.objects.filter(pk=instance.user.id).values_list('pk', flat=True))
+        users = itertools.chain(users, instance.user.user_details.followed_by.all() \
+                                             .values_list('user__id',
                                                           flat=True)
+        )
 
         # show replies on your own post
         if instance.parent:
-            users += [instance.parent.user.id]
-            users_qs |= instance.parent.user.user_details.followed_by.all() \
-                                                         .values_list('user',
+            users = itertools.chain(users, User.objects.filter(pk=instance.parent.user.id).values_list('pk', flat=True))
+            users = itertools.chain(users, instance.parent.user.user_details.followed_by.all() \
+                                                         .values_list('user__id',
                                                                       flat=True)
+            )
 
         # show your post shared in feed
         if instance.shared_post:
-            users += [instance.shared_post.user.id]
+            users = itertools.chain(users, User.objects.filter(pk=instance.shared_post.user.id).values_list('pk', flat=True))
 
         # if mentioned show that post to all
         import re
@@ -39,14 +43,11 @@ def create_feed_for_following_users(sender, instance, created, **kwargs):
             for mention in mentions:
                 _user = User.objects.filter(username__iexact=mention)
                 if _user.exists():
-                    users += [_user.get().id]
-                    users_qs |= _user.get().user_details.followed_by.all() \
-                                                        .values_list('user',
+                    users = itertools.chain(users, User.objects.filter(pk=_user.get().id).values_list('pk', flat=True))
+                    users = itertools.chain(users, _user.get().user_details.followed_by.all() \
+                                                        .values_list('user__id',
                                                                      flat=True)
-
-        # everytime `list()` is done, it will hit database
-        # i wanted it to hit only once. So, this
-        users = list(users_qs) + users
+                    )
 
         feed = [Feed(post=instance,
                      user=User.objects.get(pk=user)
