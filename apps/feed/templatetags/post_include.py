@@ -22,6 +22,10 @@ def get_all_posts():
     ).prefetch_related(
         'shared_post__user'
     ).prefetch_related(
+        'shared_post__posts_media'
+    ).prefetch_related(
+        'shared_post__user__user_details'
+    ).prefetch_related(
         'parent'
     ).prefetch_related(
         'parent__user'
