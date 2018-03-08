@@ -64,7 +64,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{% url 'posts:add'%}" autocomplete="off" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'posts:add'%}?next={{request.path}}" autocomplete="off" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" value="" name="parent" id="reply-post-input-id">
 

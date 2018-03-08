@@ -24,16 +24,18 @@ def posts_add(request):
                 parent_id = None
             post = post_form.save(request.user, shared_post_id, parent_id)
             media_form_set.save(post)
-            return redirect(reverse('feeds:home'))
-    elif request.method == 'GET':
-        post_form = PostForm()
-        media_form_set = PostMediaFormSet()
 
-    return render(request, 'posts/post_add.html', {
-        'mediaformset': media_form_set,
-        'post_form': post_form,
-    })
-
+            next_url = request.GET.get('next')
+            if next_url:
+                return redirect(next_url)
+            else:
+                return redirect(reverse('feeds:home'))
+        return render(request, 'posts/post_add.html', {
+            'mediaformset': media_form_set,
+            'post_form': post_form,
+        })
+    else:
+        return redirect(reverse('feeds:home'))
 
 @login_required
 def like_post(request, post_id):
