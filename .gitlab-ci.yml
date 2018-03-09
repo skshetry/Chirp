@@ -51,7 +51,7 @@ staging:
   type: deploy
   script:
   - apt-get update -qy
-  - apt-get install -y ruby ruby-dev rubygems-integration
+  - apt-get install -y ruby2.3 ruby2.3-dev rubygems-integration
   - gem install dpl
   - dpl --provider=heroku --app=projectchirp --api-key=$HEROKU_STAGING_API_KEY
   only:
