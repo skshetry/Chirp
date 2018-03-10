@@ -503,13 +503,12 @@ initPhotoSwipeFromDOM('.my-gallery');
         $(window).scrollTop(0);
         $('#postAddModal').modal('show');
     });
-    $(window).keypress(function(event) {
-        if (!(event.which == 102 && event.ctrlKey) && !(event.which == 19)){
+    $(document).on('keydown', function(e){
+        if(e.ctrlKey && e.which === 70){ // Check for the Ctrl key being pressed, and if the key = [S] (83)
+            e.preventDefault();
             $('#auto-search').focus();
-            return true;
+            return false;
         }
-        event.preventDefault();
-        return false;
     });
 </script>
 </html>
