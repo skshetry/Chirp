@@ -503,5 +503,13 @@ initPhotoSwipeFromDOM('.my-gallery');
         $(window).scrollTop(0);
         $('#postAddModal').modal('show');
     });
+    $(window).keypress(function(event) {
+        if (!(event.which == 102 && event.ctrlKey) && !(event.which == 19)){
+            $('#auto-search').focus();
+            return true;
+        }
+        event.preventDefault();
+        return false;
+    });
 </script>
 </html>
