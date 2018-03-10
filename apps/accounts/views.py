@@ -82,4 +82,4 @@ class UserLoginView(LoginView):
 def logout_view(request):
     """Logout the user."""
     logout(request)
-    return redirect('accounts:login')
+    return redirect('landing_page')

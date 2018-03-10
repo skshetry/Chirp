@@ -511,4 +511,9 @@ initPhotoSwipeFromDOM('.my-gallery');
         }
     });
 </script>
+<script>
+    $('#postAddModal').on('shown.bs.modal', function () {
+        $('#id_text').focus();
+    }) 
+</script>
 </html>
