@@ -186,7 +186,7 @@
                                                             <div class="unfollow" rel="tooltip" title="Unfollow">
                                                                 <div class="following">
                                                                     {% if user|check_followed_user_already:user_follows.user %}
-                                                                    <a href="{% url 'user_profile:follow_user' username=user_follows.user.username %}"><btn class="btn btn-sm btn-info btn-round" rel="tooltip" title="Follow"></i>Unfollow</btn></a>
+                                                                    <a href="{% url 'user_profile:follow_user' username=user_follows.user.username %}"><btn class="btn btn-sm btn-info btn-round" rel="tooltip" title="Follow"><i class="fa fa-user-times"></i>Unfollow</btn></a>
                                                                     {% else %}
                                                                     <a href="{% url 'user_profile:follow_user' username=user_follows.user.username %}"><btn class="btn btn-sm btn-info btn-round" rel="tooltip" title="Follow"><i class="fa fa-user-plus"></i>Follow</btn></a>
                                                                     {% endif %}
@@ -227,4 +227,22 @@
                 color: black;
             }
         </style>
+
+    <script>
+        $('[title=Follow]').click(function(event){
+            var clicked = $(this);
+            event.preventDefault();
+            $.ajax({
+                url: $(this).parent().attr('href'),
+                success: function(response){
+                    if(response.following == true){
+                        $(clicked).html('<i class="fa fa-user-times"></i>Unfollow');
+                    }
+                    else if(response.following == false){
+                        $(clicked).html('<i class="fa fa-user-plus"></i>Follow');
+                    }
+                }
+            })
+        });
+    </script>
 {% endblock post_add_js %}

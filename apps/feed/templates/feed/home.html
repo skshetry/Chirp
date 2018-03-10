@@ -363,7 +363,7 @@
                                                             </div>
         
                                                             <div class="col-md-2 follow">
-                                                                <a href="{% url 'user_profile:follow_user' username=follow_user.username %}"><i class="fa fa-user-plus"></i></a>
+                                                                <a href="{% url 'user_profile:follow_user' username=follow_user.username %}" class="follow-friends-btn"><i class="fa fa-user-plus"></i></a>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -496,7 +496,23 @@
             .__hidden__{
                 display: none;
             }
-
         </style>
+        <script>
+            $('.follow-friends-btn').click(function(event){
+                var clicked = $(this);
+                event.preventDefault();
+                $.ajax({
+                    url: $(this).attr('href'),
+                    success: function(response){
+                        if(response.following == true){
+                            $(clicked).html('<i class="fa fa-user-times"></i>');
+                        }
+                        else if(response.following == false){
+                            $(clicked).html('<i class="fa fa-user-plus"></i>');
+                        }
+                    }
+                })
+            });
+        </script>
 {% endblock post_add_js %}
     

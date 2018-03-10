@@ -56,7 +56,7 @@
                     <div class="following">
                         {% if user|check_followed_user_already:profile_user %}
                             <a href="{% url 'user_profile:follow_user' username=profile_user.username %}">
-                                <btn class="btn btn-info btn-round" rel="tooltip" title="Follow">Unfollow</btn>
+                                <btn class="btn btn-info btn-round" rel="tooltip" title="Follow"><i class="fa fa-user-times"></i>Unfollow</btn>
                             </a>
                         {% else %}
                             <a href="{% url 'user_profile:follow_user' username=profile_user.username %}">

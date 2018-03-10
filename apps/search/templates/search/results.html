@@ -74,6 +74,23 @@
         color: black;
     }
 </style>
+<script>
+    $('[title=Follow]').click(function(event){
+        var clicked = $(this);
+        event.preventDefault();
+        $.ajax({
+            url: $(this).parent().attr('href'),
+            success: function(response){
+                if(response.following == true){
+                    $(clicked).html('<i class="fa fa-user-times"></i>Unfollow');
+                }
+                else if(response.following == false){
+                    $(clicked).html('<i class="fa fa-user-plus"></i>Follow');
+                }
+            }
+        })
+    });
+</script>
 {% endblock post_add_js %}
 
 
