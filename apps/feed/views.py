@@ -14,6 +14,10 @@ from .models import Feed
 from .serializers import FeedSerializer
 
 
+class landing_view(TemplateView):
+    template_name = 'landing.html'
+
+
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'feed/home.html'
 
