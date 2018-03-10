@@ -504,4 +504,9 @@ initPhotoSwipeFromDOM('.my-gallery');
         $('#postAddModal').modal('show');
     });
 </script>
+<script>
+    $('#postAddModal').on('shown.bs.modal', function () {
+        $('#id_text').focus();
+    }) 
+</script>
 </html>
