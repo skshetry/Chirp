@@ -27,7 +27,7 @@ class UserProfileManager(models.Manager):
         return qs
 
     def toggle_follow(self, user, to_toggle_user):
-        user_profile, created = User_details.objects.get_or_create(user=user)
+        user_profile = User_details.objects.get(user=user)
         if to_toggle_user in user_profile.follows.all():
             user_profile.follows.remove(to_toggle_user)
             added = False
