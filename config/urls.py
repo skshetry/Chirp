@@ -18,12 +18,12 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.templatetags.static import static as static_tag
 from django.views.generic import RedirectView
-from feed.views import landing_view
+from feed.views import LandingView
 
 urlpatterns = [
     url(settings.ADMIN_URL, admin.site.urls),
     url(r'accounts/', include('accounts.urls', namespace='accounts')),
-    url(r'^$', landing_view.as_view(), name='landing_page'),
+    url(r'^$', LandingView.as_view(), name='landing_page'),
     url(r'^settings/', include('settings.urls', namespace='settings')),
     url(r'^user/', include('user_profile.urls', namespace='user_profile')),
     url(r'^', include('search.urls', namespace='search')),
