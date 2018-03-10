@@ -1,5 +1,5 @@
 import json
-
+from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.serializers.json import DjangoJSONEncoder
@@ -14,8 +14,13 @@ from .models import Feed
 from .serializers import FeedSerializer
 
 
-class landing_view(TemplateView):
+class LandingView(TemplateView):
     template_name = 'landing.html'
+
+    def get(self, request):
+        if request.user.is_authenticated():
+            return redirect('feeds:home')
+        return render(request, self.template_name)
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
