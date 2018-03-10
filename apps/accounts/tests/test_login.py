@@ -294,7 +294,7 @@ class LogoutTest(TestCase):
         """Test for redirection to login page."""
         self.assertRedirects(
             self.response,
-            expected_url=reverse('accounts:login'),
+            expected_url=reverse('landing_page'),
             status_code=302
         )
 
